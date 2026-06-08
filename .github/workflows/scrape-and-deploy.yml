@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  issues: write # allow the failure() step to open a tracking issue
 
 concurrency:
   group: scrape-and-deploy
@@ -24,9 +25,9 @@ jobs:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -61,3 +62,21 @@ jobs:
           vercel pull --yes --environment=production --token="$VERCEL_TOKEN" --cwd web
           vercel build --prod --token="$VERCEL_TOKEN" --cwd web
           vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --cwd web
+
+      # Visibility: if any step above failed, open a tracking issue with the run URL.
+      - name: Open issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh issue create \
+            --title "Daily scrape failed" \
+            --body "The scheduled \`scrape-and-deploy\` workflow failed on $(date -u +%FT%TZ).
+
+          **Run:** $RUN_URL
+          **Commit:** ${{ github.sha }}
+          **Trigger:** ${{ github.event_name }}
+
+          Check the run logs for the failing step (scrape / commit / deploy)." \
+          || echo "issue creation failed (non-blocking)"

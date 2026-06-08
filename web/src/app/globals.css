@@ -191,4 +191,26 @@
   [dir="rtl"] body {
     font-family: var(--font-arabic), var(--font-geist-sans), sans-serif;
   }
+  /* Always show a clear keyboard focus ring (WCAG 2.1 AA 2.4.7). The base
+     `outline-ring/50` on `*` sets the colour; this makes it visible and offset
+     for any element reached by keyboard without changing mouse/hover styles. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Respect the user's OS "reduce motion" setting (WCAG 2.1 AA 2.3.3): strip
+   animations and transitions instead of running them. Kept outside @layer base
+   so it always wins over component/utility animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
 }

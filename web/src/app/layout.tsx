@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Cairo } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import "@fontsource/cairo/400.css";
+import "@fontsource/cairo/700.css";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-const cairo = Cairo({ variable: "--font-arabic", subsets: ["arabic", "latin"] });
+// Self-hosted fonts only — Geist via geist/font (next/font/local under the hood)
+// and Cairo via @fontsource — so the production build never fetches Google Fonts.
+// GeistSans/GeistMono .variable set --font-geist-sans / --font-geist-mono; Cairo's
+// @font-face family is wired to --font-arabic on <html> below (see globals.css).
 
 export const metadata: Metadata = {
   title: {
@@ -26,7 +30,8 @@ export default function RootLayout({
       lang="en"
       dir="ltr"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} h-full antialiased`}
+      className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
+      style={{ ["--font-arabic" as string]: "'Cairo', sans-serif" }}
     >
       <body className="min-h-full">
         <TooltipProvider delay={200}>{children}</TooltipProvider>

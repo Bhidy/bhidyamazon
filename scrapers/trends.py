@@ -5,7 +5,12 @@ PRIMARY source: Amazon EG search autocomplete via the completion.amazon.co.uk ho
 (the .com host returns EMPTY for EG; .co.uk + mid=ARBP9OOSHTCHU returns real EG
 suggestions — validated by the pipeline research). Reliable, not rate-limited.
 OPTIONAL: Google Trends EG to tag rising terms (best-effort; skipped on 429).
-Honest output: RELATIVE interest (ordinal), never absolute search volume.
+
+Honest output: an ORDINAL autocomplete-prominence signal, NOT search volume or
+demand quantity. `demandScore` is purely a re-encoding of a term's POSITION in
+Amazon's autocomplete list (100 = top suggestion, lower = further down) — it
+measures how prominently Amazon SUGGESTS the term, never how many people search
+or buy. We do not invent magnitudes; the UI labels it as prominence/tier only.
 """
 from __future__ import annotations
 import datetime
@@ -84,6 +89,9 @@ def main() -> None:
             q = (q or "").strip()
             if not q:
                 continue
+            # Ordinal autocomplete-prominence score: a re-encoding of the term's
+            # POSITION in the suggestion list (pos 0 = top suggestion = 100), NOT
+            # a search-volume or demand magnitude. Top-of-list terms tie at 100.
             score = max(15, 100 - pos * 8)
             if q in kws:
                 kws[q]["appearances"] += 1
@@ -98,17 +106,22 @@ def main() -> None:
     if not kws:
         print("\n[SKIP] no keywords obtained — keeping existing keywords.json.", flush=True)
         return
+    # Sort by autocomplete prominence (ordinal), then by how many seed prefixes
+    # surfaced the term. demandScore stays the field name for schema stability,
+    # but it is an ordinal prominence rank — never a demand/volume magnitude.
     items = sorted(kws.values(), key=lambda x: (-x["demandScore"], -x["appearances"]))[:40]
     data = {
         "scraped_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
+        "signal": "autocomplete_prominence_ordinal",  # NOT search volume / demand quantity
         "keywords": items,
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "keywords.json").write_text(json.dumps(data, ensure_ascii=False, indent=2))
     print(f"\nDONE → {len(items)} real EG keywords → {OUT}/keywords.json", flush=True)
+    print("  (score = ordinal autocomplete prominence, NOT search volume)", flush=True)
     for k in items[:12]:
-        print(f"  {k['demandScore']:>3}  {k['trend']:<7} {k['query']}", flush=True)
+        print(f"  prom={k['demandScore']:>3}  {k['trend']:<7} {k['query']}", flush=True)
 
 
 if __name__ == "__main__":

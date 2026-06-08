@@ -30,6 +30,18 @@ import type { Period } from "@/lib/types";
 
 const PERIODS = ["daily", "weekly", "monthly"];
 
+/**
+ * Ordinal autocomplete-prominence tier for the Demand radar card. The keyword
+ * `demandScore` is a re-encoding of a term's POSITION in Amazon autocomplete,
+ * not a magnitude — so we surface a WORD (Top / High / Medium), never a 0–100
+ * number that could be misread as a demand quantity.
+ */
+function prominenceTier(score: number): { label: string; cls: string } {
+  if (score >= 100) return { label: "Top", cls: "text-confidence-low border-confidence-low/30 bg-confidence-low/10" };
+  if (score >= 84) return { label: "High", cls: "text-muted-foreground border-border bg-muted/40" };
+  return { label: "Medium", cls: "text-muted-foreground border-border bg-muted/40" };
+}
+
 export default async function DashboardPage({
   searchParams,
 }: {
@@ -116,40 +128,45 @@ export default async function DashboardPage({
             <div className="flex items-center gap-2">
               <Radar className="size-4 text-brand" />
               <CardTitle className="text-base">Demand radar</CardTitle>
-              <ConfidenceBadge confidence="low" note="Relative interest from search autocomplete — not true search volume." />
+              <ConfidenceBadge confidence="low" note="How prominently amazon.eg suggests the term in autocomplete — an ordinal signal, not search volume." />
             </div>
             <ButtonLink href="/keywords" variant="ghost" size="sm" className="text-muted-foreground">
               Full radar <ArrowRight className="size-3.5" />
             </ButtonLink>
           </div>
-          <CardDescription>Estimated demand (relative interest), not search volume.</CardDescription>
+          <CardDescription>Autocomplete prominence (how prominently Amazon suggests the term) — not search volume or demand quantity.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-2.5 sm:grid-cols-2">
-          {s.topKeywords.map((k) => (
-            <div key={k.query} className="flex items-center gap-3">
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="truncate text-sm font-medium" dir={k.lang === "ar" ? "rtl" : "ltr"}>
-                    {k.query}
-                  </span>
-                  <DemandTrendChip trend={k.trend} />
+          {s.topKeywords.map((k) => {
+            const tier = prominenceTier(k.demandScore);
+            return (
+              <div key={k.query} className="flex items-center gap-3">
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="truncate text-sm font-medium" dir={k.lang === "ar" ? "rtl" : "ltr"}>
+                      {k.query}
+                    </span>
+                    <DemandTrendChip trend={k.trend} />
+                  </div>
+                  <div
+                    className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-muted"
+                    role="meter"
+                    aria-valuenow={k.demandScore}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`Autocomplete prominence: ${tier.label} (rank signal, not search volume)`}
+                  >
+                    <div className="h-full rounded-full bg-confidence-low" style={{ width: `${k.demandScore}%` }} />
+                  </div>
                 </div>
-                <div
-                  className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-muted"
-                  role="meter"
-                  aria-valuenow={k.demandScore}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-label={`Relative demand ${k.demandScore} of 100`}
+                <span
+                  className={`inline-flex w-14 shrink-0 items-center justify-center rounded-full border px-1.5 py-0.5 text-[11px] font-medium leading-none ${tier.cls}`}
                 >
-                  <div className="h-full rounded-full bg-confidence-low" style={{ width: `${k.demandScore}%` }} />
-                </div>
+                  {tier.label}
+                </span>
               </div>
-              <span className="w-8 text-end text-xs font-semibold tabular-nums text-muted-foreground">
-                {k.demandScore}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </CardContent>
       </Card>
     </>

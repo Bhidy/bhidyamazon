@@ -55,7 +55,34 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
     return [Math.max(1, min - pad), max + pad];
   }, [data]);
 
+  // Non-visual summary: describe the BSR direction (start → end) and the price
+  // move so screen-reader users get the same takeaway as the chart line.
+  const summary = useMemo(() => {
+    const firstBsr = data.find((d) => d.bsr != null)?.bsr ?? null;
+    const lastBsr = [...data].reverse().find((d) => d.bsr != null)?.bsr ?? null;
+    const firstPrice = data.find((d) => d.price != null)?.price ?? null;
+    const lastPrice = [...data].reverse().find((d) => d.price != null)?.price ?? null;
+
+    // A lower BSR is a better rank, so a falling number is an improvement.
+    let rankPart = "Best Seller Rank history is unavailable.";
+    if (firstBsr != null && lastBsr != null) {
+      const direction =
+        lastBsr < firstBsr ? "improved" : lastBsr > firstBsr ? "declined" : "held steady";
+      rankPart = `Best Seller Rank ${direction} from ${formatRank(firstBsr)} to ${formatRank(lastBsr)}`;
+    }
+
+    let pricePart = "";
+    if (firstPrice != null && lastPrice != null) {
+      const direction =
+        lastPrice > firstPrice ? "rose" : lastPrice < firstPrice ? "fell" : "held";
+      pricePart = `; price ${direction} from ${formatEgp(firstPrice)} to ${formatEgp(lastPrice)}`;
+    }
+
+    return `Dual-axis history chart. ${rankPart}${pricePart}.`;
+  }, [data]);
+
   return (
+   <figure className="m-0" role="img" aria-label={summary}>
     <ChartContainer config={chartConfig} className="aspect-auto h-[300px] w-full">
       <ComposedChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 8 }}>
         <defs>
@@ -162,5 +189,30 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
         />
       </ComposedChart>
     </ChartContainer>
+
+    {/* Non-visual data table — the same series as the chart, exposed to
+        assistive tech and hidden from sighted users. */}
+    <figcaption className="sr-only">
+      <table>
+        <caption>{summary}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Best Seller Rank</th>
+            <th scope="col">Price (EGP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((point) => (
+            <tr key={point.date}>
+              <th scope="row">{shortDate(point.date)}</th>
+              <td>{point.bsr != null ? formatRank(point.bsr) : "No data"}</td>
+              <td>{point.price != null ? formatEgp(point.price) : "No data"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figcaption>
+   </figure>
   );
 }

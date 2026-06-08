@@ -25,6 +25,18 @@ import { LangFilter } from "./_components/lang-filter";
 const LANGS = ["all", "en", "ar"] as const;
 type LangScope = (typeof LANGS)[number];
 
+/**
+ * Ordinal prominence tier derived from how high the term sits in Amazon's
+ * autocomplete list (demandScore is a position re-encoding, NOT a magnitude).
+ * Top = appears at the very top of suggestions; lower tiers sit further down.
+ * Deliberately a WORD, so the value can never be read as a demand quantity.
+ */
+function prominenceTier(score: number): { label: string; cls: string } {
+  if (score >= 100) return { label: "Top", cls: "text-confidence-low border-confidence-low/30 bg-confidence-low/10" };
+  if (score >= 84) return { label: "High", cls: "text-muted-foreground border-border bg-muted/40" };
+  return { label: "Medium", cls: "text-muted-foreground border-border bg-muted/40" };
+}
+
 export default async function KeywordsPage({
   searchParams,
 }: {
@@ -40,7 +52,7 @@ export default async function KeywordsPage({
     <>
       <PageHeader
         title="Demand Radar"
-        description="Estimated demand from Amazon search autocomplete — relative interest, not true search volume."
+        description="How prominently amazon.eg suggests each term in search autocomplete — an ordinal prominence signal, not search volume or demand quantity."
       >
         <LangFilter value={lang} />
       </PageHeader>
@@ -48,16 +60,17 @@ export default async function KeywordsPage({
       <Alert className="border-confidence-low/30 bg-confidence-low/[0.07]">
         <Radar className="text-confidence-low" />
         <AlertTitle className="flex flex-wrap items-center gap-2">
-          This is a demand proxy, not search volume
+          Autocomplete prominence — not search volume or demand quantity
           <ConfidenceBadge
             confidence="low"
-            note="Sourced from Amazon search autocomplete prefixes — an ordinal popularity signal only."
+            note="Sourced from Amazon search autocomplete prefixes — an ordinal prominence signal only."
           />
         </AlertTitle>
         <AlertDescription>
-          {DISCLOSURE.demandProxyEn} The 0–100 score reflects how strongly a term
-          surfaces in autocomplete relative to others on amazon.eg — it is never
-          an exact number of searches and is not comparable to a true search-volume
+          {DISCLOSURE.demandProxyEn} The prominence tier reflects how high a term
+          sits in amazon.eg autocomplete suggestions relative to others — i.e. how
+          prominently Amazon suggests it. It is an ordinal ranking, never a count of
+          searches, units, or demand, and is not comparable to a true search-volume
           figure.
         </AlertDescription>
       </Alert>
@@ -79,8 +92,8 @@ export default async function KeywordsPage({
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="w-10 pl-4 text-end text-muted-foreground">#</TableHead>
                   <TableHead className="text-muted-foreground">Keyword</TableHead>
-                  <TableHead className="w-[34%] min-w-44 text-muted-foreground">
-                    Demand
+                  <TableHead className="w-[34%] min-w-52 text-muted-foreground">
+                    Autocomplete prominence
                   </TableHead>
                   <TableHead className="text-muted-foreground">Trend</TableHead>
                   <TableHead className="pr-4 text-end text-muted-foreground">
@@ -105,24 +118,31 @@ export default async function KeywordsPage({
                         </span>
                       </TableCell>
                       <TableCell>
-                        <div className="flex items-center gap-2.5">
-                          <div
-                            className="h-1.5 w-full max-w-40 overflow-hidden rounded-full bg-muted"
-                            role="meter"
-                            aria-valuenow={k.demandScore}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                            aria-label={`Relative demand ${k.demandScore} of 100`}
-                          >
-                            <div
-                              className="h-full rounded-full bg-confidence-low"
-                              style={{ width: `${k.demandScore}%` }}
-                            />
-                          </div>
-                          <span className="w-8 shrink-0 text-end text-xs font-semibold tabular-nums text-muted-foreground">
-                            {k.demandScore}
-                          </span>
-                        </div>
+                        {(() => {
+                          const tier = prominenceTier(k.demandScore);
+                          return (
+                            <div className="flex items-center gap-2.5">
+                              <div
+                                className="h-1.5 w-full max-w-32 overflow-hidden rounded-full bg-muted"
+                                role="meter"
+                                aria-valuenow={k.demandScore}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                                aria-label={`Autocomplete prominence: ${tier.label} (rank signal, not search volume)`}
+                              >
+                                <div
+                                  className="h-full rounded-full bg-confidence-low"
+                                  style={{ width: `${k.demandScore}%` }}
+                                />
+                              </div>
+                              <span
+                                className={`inline-flex w-16 shrink-0 items-center justify-center rounded-full border px-1.5 py-0.5 text-[11px] font-medium leading-none ${tier.cls}`}
+                              >
+                                {tier.label}
+                              </span>
+                            </div>
+                          );
+                        })()}
                       </TableCell>
                       <TableCell>
                         <DemandTrendChip trend={k.trend} />

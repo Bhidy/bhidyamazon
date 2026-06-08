@@ -229,7 +229,12 @@ export function sentimentSummary(asin: string): SentimentSummary {
   };
 }
 
-/** Real keywords from Google Trends EG (written by the trends worker). Null until present. */
+/**
+ * Real keywords from Amazon EG autocomplete (written by the trends worker).
+ * `demandScore` is an ORDINAL autocomplete-prominence rank (how high the term
+ * sits in Amazon's suggestion list), NOT search volume or demand quantity.
+ * Null until present.
+ */
 export function keywords(opts: { limit?: number; lang?: "en" | "ar" } = {}): Keyword[] | null {
   const kw: Any[] = store().kw?.keywords ?? [];
   if (!kw.length) return null;
@@ -241,7 +246,12 @@ export function keywords(opts: { limit?: number; lang?: "en" | "ar" } = {}): Key
       demandScore: k.demandScore ?? k.score ?? 0,
       trend: k.trend ?? "flat",
       appearances: k.appearances ?? 0,
-      provenance: prov("google_trends", "low", true, "Google Trends Egypt — relative interest, not search volume."),
+      provenance: prov(
+        "amazon_eg_autocomplete",
+        "low",
+        true,
+        "Amazon autocomplete prominence (ordinal) — how prominently amazon.eg suggests the term, not search volume.",
+      ),
     }))
     .sort((a, b) => b.demandScore - a.demandScore);
   return opts.limit ? list.slice(0, opts.limit) : list;

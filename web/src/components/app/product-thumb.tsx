@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { hashString } from "@/lib/seed";
 import type { Product } from "@/lib/types";
@@ -34,7 +37,9 @@ export function ProductThumb({
   className?: string;
 }) {
   const radius = "rounded-md";
-  if (product.imageUrl) {
+  // Real Amazon image URLs can fail to hotlink; fall back to the branded tile.
+  const [errored, setErrored] = useState(false);
+  if (product.imageUrl && !errored) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
@@ -45,6 +50,7 @@ export function ProductThumb({
         className={cn(radius, "border border-border object-contain bg-white", className)}
         style={{ width: size, height: size }}
         loading="lazy"
+        onError={() => setErrored(true)}
       />
     );
   }

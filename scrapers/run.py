@@ -47,6 +47,7 @@ def main() -> None:
     bestsellers: dict[str, list] = {}
     all_rows: list = []
     enrich: list[str] = []
+    health: dict[str, dict] = {}  # per-category fill-rate telemetry
 
     print("=== Best Sellers ===", flush=True)
     for slug, node in CATEGORIES:
@@ -78,6 +79,24 @@ def main() -> None:
         all_rows.extend(rows)
         enrich.extend(r["asin"] for r in rows[:ENRICH_PER_CAT])
         priced = sum(1 for r in rows if r["price_egp"] is not None)
+        titled = sum(1 for r in rows if r["title"])
+        parsed_count = len(rows)
+        title_fill = round(100 * titled / parsed_count, 1) if parsed_count else 0.0
+        price_fill = round(100 * priced / parsed_count, 1) if parsed_count else 0.0
+        degraded = title_fill < 90 or parsed_count < 10
+        health[node] = {
+            "parsed_count": parsed_count,
+            "title_fill": title_fill,
+            "price_fill": price_fill,
+            "degraded": degraded,
+        }
+        if degraded:
+            print(
+                f"  [WARN] {slug}: DEGRADED — parsed={parsed_count} "
+                f"title_fill={title_fill}% price_fill={price_fill}% "
+                f"(need title_fill >= 90% and parsed >= 10).",
+                flush=True,
+            )
         top = rows[0]
         print(
             f"  [OK] {slug}: {len(rows)} products ({priced} priced) · #1 "
@@ -114,6 +133,17 @@ def main() -> None:
             flush=True,
         )
         return
+    # Aggregate fill-rate health telemetry (reported alongside the data, never gates it).
+    degraded_cats = sorted(node for node, h in health.items() if h["degraded"])
+    title_fills = [h["title_fill"] for h in health.values()]
+    health_summary = {
+        "categories_ok": sum(1 for h in health.values() if not h["degraded"]),
+        "categories_degraded": degraded_cats,
+        "min_title_fill": round(min(title_fills), 1) if title_fills else 0.0,
+        "total_products": len(all_rows),
+        "per_category": health,
+    }
+
     _write_atomic("bestsellers.json", {"schema_version": SCHEMA_VERSION, "scraped_at": now, "categories": bestsellers, "all": all_rows})
     _write_atomic("products.json", {"schema_version": SCHEMA_VERSION, "scraped_at": now, "products": products})
     _write_atomic(
@@ -127,8 +157,13 @@ def main() -> None:
             "source": "amazon.eg via firecrawl"
             if os.environ.get("RASID_FETCH", "").lower() == "firecrawl"
             else "amazon.eg direct (residential)",
+            "health": health_summary,
         },
     )
+    if degraded_cats:
+        print(f"\n[WARN] health: {len(degraded_cats)} degraded categor"
+              f"{'y' if len(degraded_cats) == 1 else 'ies'}: {', '.join(degraded_cats)} "
+              f"(min_title_fill={health_summary['min_title_fill']}%).", flush=True)
     print(
         f"\nDONE → {len(all_rows)} real products across {len(bestsellers)} categories; "
         f"{len(products)} enriched with BSR/reviews.\nWrote: {OUT}",
