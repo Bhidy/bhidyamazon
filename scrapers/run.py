@@ -41,6 +41,39 @@ def _write_atomic(name: str, obj: dict) -> None:
     os.replace(tmp, path)
 
 
+SNAPSHOT_KEEP_DAYS = 120
+
+
+def _update_snapshots(all_rows: list, now: str) -> None:
+    """Append today's per-product best-seller rank + price to an APPEND-ONLY
+    time-series (snapshots.json). The file store overwrites bestsellers.json each
+    run, so without this the BSR-history chart and Movers would forever have one
+    point. One entry per ASIN per day (idempotent — a re-run replaces today),
+    pruned to the last SNAPSHOT_KEEP_DAYS days. This is what makes rank velocity
+    real as days accumulate, with no Supabase dependency."""
+    today = now[:10]
+    path = OUT / "snapshots.json"
+    try:
+        data = json.loads(path.read_text())
+        snaps = data.get("snapshots", {}) if isinstance(data, dict) else {}
+    except Exception:  # noqa: BLE001 — first run / unreadable → start fresh
+        snaps = {}
+    for r in all_rows:
+        asin = r.get("asin")
+        if not asin:
+            continue
+        series = [s for s in snaps.get(asin, []) if s.get("date") != today]
+        series.append(
+            {"date": today, "rank": r.get("rank"), "price": r.get("price_egp"), "category": r.get("category")}
+        )
+        series.sort(key=lambda s: s.get("date") or "")
+        snaps[asin] = series[-SNAPSHOT_KEEP_DAYS:]
+    _write_atomic(
+        "snapshots.json",
+        {"schema_version": 1, "updated_at": now, "keep_days": SNAPSHOT_KEEP_DAYS, "snapshots": snaps},
+    )
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     now = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -146,6 +179,7 @@ def main() -> None:
 
     _write_atomic("bestsellers.json", {"schema_version": SCHEMA_VERSION, "scraped_at": now, "categories": bestsellers, "all": all_rows})
     _write_atomic("products.json", {"schema_version": SCHEMA_VERSION, "scraped_at": now, "products": products})
+    _update_snapshots(all_rows, now)  # append-only rank/price time-series → real history + movers
     _write_atomic(
         "meta.json",
         {

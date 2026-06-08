@@ -35,11 +35,11 @@ function readJson(name: string): Any | null {
   }
 }
 
-// Cache keyed on the bestsellers file mtime so a fresh scrape is picked up live.
-let cache: { mtime: number; bs: Any | null; pr: Any | null; kw: Any | null } | null = null;
+// Cache keyed on the data files' mtime so a fresh scrape is picked up live.
+let cache: { mtime: number; bs: Any | null; pr: Any | null; kw: Any | null; sn: Any | null } | null = null;
 function store() {
   let mtime = 0;
-  for (const f of ["bestsellers.json", "products.json", "keywords.json"]) {
+  for (const f of ["bestsellers.json", "products.json", "keywords.json", "snapshots.json"]) {
     try {
       mtime += statSync(path.join(DIR, f)).mtimeMs; // any file change busts the cache
     } catch {
@@ -47,7 +47,13 @@ function store() {
     }
   }
   if (!cache || cache.mtime !== mtime) {
-    cache = { mtime, bs: readJson("bestsellers.json"), pr: readJson("products.json"), kw: readJson("keywords.json") };
+    cache = {
+      mtime,
+      bs: readJson("bestsellers.json"),
+      pr: readJson("products.json"),
+      kw: readJson("keywords.json"),
+      sn: readJson("snapshots.json"),
+    };
   }
   return cache;
 }
@@ -133,9 +139,49 @@ export function bestSellers(q: { categoryNode?: string; period?: Period; limit?:
   return q.limit ? out.slice(0, q.limit) : out;
 }
 
-/** Rising needs >= 2 daily snapshots; on day 1 there is no real velocity yet. */
-export function movers(_q: { categoryNode?: string; period?: Period; limit?: number } = {}): RankingRow[] {
-  return [];
+/**
+ * Rising = a product whose best-seller rank IMPROVED (number went down) over the
+ * period, computed from the append-only snapshot series the scraper writes daily.
+ * Honestly empty until >= 2 daily snapshots exist for an item (day-1 has no
+ * velocity). riseScore = ln(rankThen) - ln(rankNow) so a move from #9 → #3 ranks
+ * above #40 → #38, and gainPct is the rank-improvement ratio.
+ */
+export function movers(q: { categoryNode?: string; period?: Period; limit?: number } = {}): RankingRow[] {
+  const snaps: Any = store().sn?.snapshots ?? {};
+  const all: Any[] = store().bs?.all ?? [];
+  const byAsin = new Map<string, Any>(all.map((r) => [r.asin, r]));
+  const pos = posMap();
+  const windowDays = q.period === "weekly" ? 7 : q.period === "monthly" ? 30 : 1;
+
+  const risers: { asin: string; rise: number; row: Any }[] = [];
+  for (const asin of Object.keys(snaps)) {
+    const series: Any[] = snaps[asin] ?? [];
+    if (series.length < 2) continue; // need a baseline to measure velocity
+    const now = series[series.length - 1];
+    const then = series[Math.max(0, series.length - 1 - windowDays)];
+    if (now === then || now?.rank == null || then?.rank == null) continue;
+    const rise = Math.log(then.rank) - Math.log(now.rank); // rank decreased ⇒ positive
+    if (rise <= 0) continue;
+    const row = byAsin.get(asin);
+    if (!row) continue; // only surface products still on a live best-seller list
+    if (q.categoryNode && row.category !== q.categoryNode) continue;
+    risers.push({ asin, rise, row });
+  }
+  risers.sort((a, b) => b.rise - a.rise);
+
+  const out: RankingRow[] = risers.map((x, i) => {
+    const p = pos.get(x.asin);
+    return {
+      listType: "movers",
+      categoryNode: x.row.category,
+      rank: i + 1,
+      riseScore: Number(x.rise.toFixed(4)),
+      gainPct: Math.round((Math.exp(x.rise) - 1) * 100),
+      demandBand: p ? bandFromPos(p.idx, p.n) : "unknown",
+      product: rowToProduct(x.row),
+    };
+  });
+  return q.limit ? out.slice(0, q.limit) : out;
 }
 
 export function product(asin: string): Product | undefined {
@@ -165,6 +211,24 @@ export function search(query: string): Product[] {
 }
 
 export function bsrHistory(asin: string): BsrHistory {
+  // Prefer the append-only daily series (real history that grows each run).
+  const series: Any[] = store().sn?.snapshots?.[asin] ?? [];
+  if (series.length) {
+    return {
+      asin,
+      points: series.filter((s) => s.rank != null).map((s) => ({ date: s.date, value: s.rank })),
+      pricePoints: series.filter((s) => s.price != null).map((s) => ({ date: s.date, value: s.price })),
+      provenance: prov(
+        "amazon_html_bestsellers",
+        "medium",
+        false,
+        series.length >= 2
+          ? "Best-seller rank & price tracked across daily snapshots."
+          : "Tracking just started — one snapshot so far; history grows daily.",
+      ),
+    };
+  }
+  // Fallback: single current point before any snapshot series exists.
   const leaf = leafBsr(asin);
   const date = (scrapedAt() ?? "").slice(0, 10);
   const row = (store().bs?.all ?? []).find((r: Any) => r.asin === asin);
@@ -172,7 +236,7 @@ export function bsrHistory(asin: string): BsrHistory {
     asin,
     points: leaf ? [{ date, value: leaf.rank }] : [],
     pricePoints: row?.price_egp != null ? [{ date, value: row.price_egp }] : [],
-    provenance: prov("amazon_html_product", "medium", false, "Real BSR snapshot — history builds with each daily run."),
+    provenance: prov("amazon_html_product", "medium", false, "Real snapshot — history builds with each daily run."),
   };
 }
 
