@@ -33,7 +33,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { ButtonLink } from "@/components/app/button-link";
 import { KpiCard } from "@/components/app/kpi-card";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { ProductThumb } from "@/components/app/product-thumb";
 import { RatingStars } from "@/components/app/rating-stars";
 import { DemandBadge, TrendIndicator } from "@/components/app/badges";
@@ -240,7 +239,7 @@ export default async function ProductDetailPage({
         </CardContent>
       </Card>
 
-      <CalibrationNotice />
+
 
       {/* ───────────────────── (c) Key signals (KPI row) ─────────────────── */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

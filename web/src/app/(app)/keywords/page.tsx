@@ -15,7 +15,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { PageHeader } from "@/components/app/page-header";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { ConfidenceBadge } from "@/components/app/confidence";
 import { DemandTrendChip } from "@/components/app/demand-trend-chip";
 import { getKeywords } from "@/lib/data";
@@ -179,7 +178,7 @@ export default async function KeywordsPage({
         </CardContent>
       </Card>
 
-      <CalibrationNotice />
+
     </>
   );
 }

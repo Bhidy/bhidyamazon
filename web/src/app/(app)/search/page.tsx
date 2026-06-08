@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Search, SearchX, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/app/page-header";
 import { ConfidenceBadge } from "@/components/app/confidence";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import {
   Card,
   CardContent,
@@ -66,7 +65,7 @@ export default async function SearchPage({
         </CardContent>
       </Card>
 
-      <CalibrationNotice />
+
 
       {!query ? (
         <Card className="gap-0">

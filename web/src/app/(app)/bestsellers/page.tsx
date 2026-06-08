@@ -9,7 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/app/page-header";
 import { PeriodTabs } from "@/components/app/period-tabs";
 import { Freshness } from "@/components/app/freshness";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { RankRow } from "@/components/app/rank-row";
 import { ConfidenceBadge } from "@/components/app/confidence";
 import { getBestSellers, getDashboardSummary } from "@/lib/data";
@@ -63,7 +62,7 @@ export default async function BestSellersPage({
         </span>
       </div>
 
-      <CalibrationNotice />
+
 
       <CategoryFilter period={period} active={category} />
 

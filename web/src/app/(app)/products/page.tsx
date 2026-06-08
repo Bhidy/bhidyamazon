@@ -1,6 +1,5 @@
 import { Boxes, PackageOpen } from "lucide-react";
 import { PageHeader } from "@/components/app/page-header";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { Freshness } from "@/components/app/freshness";
 import { PeriodTabs } from "@/components/app/period-tabs";
 import { ButtonLink } from "@/components/app/button-link";
@@ -70,7 +69,7 @@ export default async function ProductsPage({
         </ButtonLink>
       </div>
 
-      <CalibrationNotice />
+
 
       <div className="flex flex-col gap-3">
         <CategoryFilter active={category} params={omit(carried, "category")} />

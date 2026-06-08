@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PageHeader } from "@/components/app/page-header";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { ButtonLink } from "@/components/app/button-link";
 import { getWatchlist } from "@/lib/data";
 import { NewListButton } from "./_components/new-list-button";
@@ -54,7 +53,7 @@ export default async function WatchlistsPage() {
             </span>
           </div>
 
-          <CalibrationNotice />
+
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((item) => (

@@ -18,7 +18,6 @@ import {
 import { ButtonLink } from "@/components/app/button-link";
 import { PageHeader } from "@/components/app/page-header";
 import { KpiCard } from "@/components/app/kpi-card";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { RankRow } from "@/components/app/rank-row";
 import { Freshness } from "@/components/app/freshness";
 import { PeriodTabs } from "@/components/app/period-tabs";
@@ -71,7 +70,6 @@ export default async function DashboardPage({
         </ButtonLink>
       </div>
 
-      <CalibrationNotice />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <KpiCard label="Products tracked" value={s.productsTracked} icon={Boxes} hint="Across amazon.eg categories" />

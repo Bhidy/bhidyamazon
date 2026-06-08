@@ -8,7 +8,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 function LocaleToggle() {
   const [locale, setLocale] = useState<"en" | "ar">("en");
@@ -57,10 +56,6 @@ export function TopBar() {
         />
       </form>
       <div className="ms-auto flex items-center gap-1.5">
-        <Badge variant="outline" className="hidden gap-1.5 font-normal sm:inline-flex">
-          <span className="size-1.5 rounded-full bg-confidence-medium" />
-          Free tier
-        </Badge>
         <LocaleToggle />
         <Button
           variant="ghost"

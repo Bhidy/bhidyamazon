@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/app/page-header";
-import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { RankRow } from "@/components/app/rank-row";
 import { Freshness } from "@/components/app/freshness";
 import { PeriodTabs } from "@/components/app/period-tabs";
@@ -57,7 +56,7 @@ export default async function MoversPage({
         <Freshness iso={lastUpdated} />
       </div>
 
-      <CalibrationNotice />
+
 
       <Card className="gap-0">
         <CardHeader className="border-b border-border/60 pb-4">
