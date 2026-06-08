@@ -105,9 +105,14 @@ def main() -> None:
             flush=True,
         )
 
-    # Durability guard: never destroy good data with an empty/blocked run.
-    if not all_rows:
-        print("\n[ABORT] 0 products scraped (blocked?) — KEEPING existing data; no destructive overwrite.", flush=True)
+    # Durability guard: never destroy good data with an empty / blocked / PARTIAL run.
+    min_cats = max(1, (len(CATEGORIES) * 3) // 4)
+    if not all_rows or len(bestsellers) < min_cats:
+        print(
+            f"\n[ABORT] degraded scrape ({len(all_rows)} products / {len(bestsellers)} of "
+            f"{len(CATEGORIES)} categories; need >= {min_cats}) — KEEPING existing data.",
+            flush=True,
+        )
         return
     _write_atomic("bestsellers.json", {"schema_version": SCHEMA_VERSION, "scraped_at": now, "categories": bestsellers, "all": all_rows})
     _write_atomic("products.json", {"schema_version": SCHEMA_VERSION, "scraped_at": now, "products": products})
@@ -119,7 +124,9 @@ def main() -> None:
             "categories": list(bestsellers.keys()),
             "product_count": len(all_rows),
             "enriched": len(products),
-            "source": "amazon.eg direct (residential)",
+            "source": "amazon.eg via firecrawl"
+            if os.environ.get("RASID_FETCH", "").lower() == "firecrawl"
+            else "amazon.eg direct (residential)",
         },
     )
     print(

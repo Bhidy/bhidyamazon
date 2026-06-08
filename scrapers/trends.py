@@ -34,6 +34,8 @@ def autocomplete(prefix: str, lop: str) -> list[str]:
     q = urllib.parse.urlencode({"mid": MID, "alias": "aps", "prefix": prefix, "lop": lop, "limit": 11})
     url = f"https://completion.amazon.co.uk/api/2017/suggestions?{q}"
     r = creq.get(url, headers={"User-Agent": UA, "Accept": "application/json"}, impersonate="chrome", timeout=15)
+    if r.status_code != 200:
+        raise RuntimeError(f"autocomplete HTTP {r.status_code}")
     data = r.json()
     return [s.get("value") for s in data.get("suggestions", []) if s.get("value")]
 

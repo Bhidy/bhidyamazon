@@ -328,7 +328,7 @@ export default async function ProductDetailPage({
               <CardTitle className="text-base">Review intelligence</CardTitle>
               <ConfidenceBadge
                 confidence="low"
-                note="Sentiment is modeled on a small, logged-out review sample and is not validated against amazon.eg text."
+                note={sentiment.provenance.note ?? "Sentiment is modeled on a logged-out review sample."}
               />
             </div>
             <CardDescription className="mt-1">

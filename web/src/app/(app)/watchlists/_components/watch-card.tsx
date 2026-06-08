@@ -11,25 +11,10 @@ import {
 } from "@/components/ui/card";
 import { ProductThumb } from "@/components/app/product-thumb";
 import { RatingStars } from "@/components/app/rating-stars";
-import { DemandBadge } from "@/components/app/badges";
-import { ConfidenceBadge } from "@/components/app/confidence";
 import { formatEgp, formatRank, formatDate } from "@/lib/format";
 import { DISCLOSURE } from "@/lib/constants";
-import type { DemandBand, WatchlistItem } from "@/lib/types";
+import type { WatchlistItem } from "@/lib/types";
 import { RemoveButton } from "./remove-button";
-
-/**
- * Within-category demand band from absolute BSR. Mirrors the thresholds in
- * `@/lib/data#demandBandFor` so a watched product reads the same band it shows
- * everywhere else. Always a relative indicator — never a unit count.
- */
-function demandBandFromBsr(bsr: number | undefined): DemandBand {
-  if (bsr == null) return "unknown";
-  if (bsr < 300) return "very-high";
-  if (bsr < 1000) return "high";
-  if (bsr < 3000) return "moderate";
-  return "low";
-}
 
 /** One tracked product, rendered as a card. Removable (optimistic, client-only). */
 export function WatchCard({ item }: { item: WatchlistItem }) {
@@ -37,8 +22,6 @@ export function WatchCard({ item }: { item: WatchlistItem }) {
   const p = item.product;
 
   if (removed) return null;
-
-  const band = demandBandFromBsr(p.bsr);
 
   return (
     <Card className="gap-0">
@@ -69,13 +52,7 @@ export function WatchCard({ item }: { item: WatchlistItem }) {
       </CardHeader>
 
       <CardContent className="space-y-3 py-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <RatingStars rating={p.rating} count={p.reviewCount} size={13} />
-          <div className="flex items-center gap-1.5">
-            <DemandBadge band={band} />
-            <ConfidenceBadge confidence="low" note={DISCLOSURE.demandProxyEn} />
-          </div>
-        </div>
+        <RatingStars rating={p.rating} count={p.reviewCount} size={13} />
 
         <div className="flex items-center justify-between text-xs">
           <span className="text-muted-foreground">BSR</span>

@@ -59,6 +59,12 @@ def _is_blocked(status: int, html: str) -> bool:
     return any(m in low for m in _MARKERS)
 
 
+def _is_eg_page(html: str) -> bool:
+    """Positive identity assertion: a genuine amazon.eg page carries the EG
+    marketplace id; a challenge/interstitial/wrong-marketplace page does not."""
+    return "ARBP9OOSHTCHU" in html or "amazon.eg" in html.lower()
+
+
 def _throttle(min_s: float = 10.0, max_s: float = 18.0) -> None:
     """Full-jitter delay between requests; never < 8s, serial, 1 connection."""
     elapsed = time.time() - _last_request[0]
@@ -102,8 +108,8 @@ def fetch(path: str, *, throttle: bool = True, lang: str = "en") -> str:
         _throttle()
     if FETCH_BACKEND == "firecrawl":
         html = _fetch_firecrawl(url, lang)
-        if _is_blocked(200, html):
-            raise Blocked(f"BLOCKED (firecrawl content) url={url}")
+        if _is_blocked(200, html) or not _is_eg_page(html):
+            raise Blocked(f"BLOCKED/invalid (firecrawl content) url={url}")
         return html
     headers = dict(HEADERS)
     jar = _JAR
@@ -118,6 +124,6 @@ def fetch(path: str, *, throttle: bool = True, lang: str = "en") -> str:
         except Exception:
             pass
     html = r.text or ""
-    if _is_blocked(r.status_code, html):
-        raise Blocked(f"BLOCKED status={r.status_code} url={url}")
+    if _is_blocked(r.status_code, html) or not _is_eg_page(html):
+        raise Blocked(f"BLOCKED/invalid status={r.status_code} url={url}")
     return html
