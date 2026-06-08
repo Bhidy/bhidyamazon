@@ -1,5 +1,6 @@
 {
-  "scraped_at": "2026-06-08T08:36:59.455799+00:00",
+  "schema_version": 2,
+  "scraped_at": "2026-06-08T09:32:55.251153+00:00",
   "categories": {
     "electronics": [
       {
@@ -11,7 +12,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 333,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51KqcqqScRL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51KqcqqScRL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CPC8JMCW",
         "title_ar": "كابل من جويروم بطول 1.2 متر نوع USB متوافق مع الهواتف المحمولة"
       },
@@ -24,7 +25,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 1058,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51CGD8KYEUL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51CGD8KYEUL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09C7BWVX7",
         "title_ar": "كابل بيانات للشحن السريع بقوة 2.4 أمبير من لدنيو، موديل LS441، طول 1 متر، لون رمادي"
       },
@@ -37,7 +38,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 735,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61TPFfrwSFL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61TPFfrwSFL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DRDPSKQH",
         "title_ar": "بطاريات زنك-كربون ايه ايه ايه من كميليون شديدة لتحامل R03 - طاقة أقتصادية (صندوق من 12 قطعة)"
       },
@@ -50,7 +51,7 @@
         "currency": "EGP",
         "rating": 4.7,
         "reviews": 3559,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61BALBWHw3L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61BALBWHw3L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09Y37BSM9",
         "title_ar": "محول قابس السفر من اي لوك"
       },
@@ -63,7 +64,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 816,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PTz7lj6EL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PTz7lj6EL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DRDQZBC5",
         "title_ar": "بطاريات ايه ايه من الزنك والكربون شديد التحمل من كاميليون – بطارية اقتصادية لتوفير الطاقة (عبوة تحتوي على 12 قطعة)، موديل R6"
       },
@@ -76,7 +77,7 @@
         "currency": "EGP",
         "rating": 3.0,
         "reviews": 3570,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61kFEpdcS9L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61kFEpdcS9L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0D9W85D2N",
         "title_ar": "جراب موبايل لاصق من ستيكي جريبي، ملحق هاتف لاصق من السيليكون لايفون واندرويد، لعبة فيدجيت بدون استخدام اليدين، حامل موبايل للاستحمام ومقاطع فيديو تيك توك وصور السيلفي (بابل غم وردي)"
       },
@@ -89,7 +90,7 @@
         "currency": "EGP",
         "rating": 3.9,
         "reviews": 7388,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fRwSb0z0L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fRwSb0z0L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08D11MN1M",
         "title_ar": "حامل لاب توب ألومنيوم محمول قابل للتعديل والطي جيد التهوية لتبريد ورفع أجهزة آبل ماك بوك برو / اير واتش بي وسوني وديل والأجهزة مقاس 10-15.6 بوصة"
       },
@@ -102,7 +103,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 7116,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61aJwjV4NaL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61aJwjV4NaL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BYD5H31D",
         "title_ar": "ماوس بلوتوث لاسلكي بإضاءة ليد محمول مزدوج الوضع قابل لإعادة الشحن (بلوتوث 5.2 ومستقبل USB) من كانمابي، للاب توب/سطح المكتب/التابلت (أسود)"
       },
@@ -115,7 +116,7 @@
         "currency": "EGP",
         "rating": 4.8,
         "reviews": 2933,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NmJeGoz7L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NmJeGoz7L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CLKQKFL3",
         "title_ar": "مشترك كهرباء صغير من اي لوك (3 متر، لون أصفر)"
       },
@@ -128,7 +129,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 1409,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71emV43XswL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71emV43XswL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CXJC1YL9",
         "title_ar": "بطاريات زنك وكربون شديدة التحمل من نوع AAA كاميليون - 4 قطع + قطعتان مجانيتان، 1.5 فولت"
       },
@@ -141,7 +142,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 98,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61ShpwOCWeL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61ShpwOCWeL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0GCNZJCF8",
         "title_ar": "موبايل شاومي ريدمي نوت 15 الذكي (6+128 جيجابايت) - تصميم رفيع للغاية، حماية من الماء IP64، كاميرا 108 ميجابكسل، شاشة 6.75 بوصة FHD+ ، لون أسود"
       },
@@ -154,7 +155,7 @@
         "currency": "EGP",
         "rating": 4.7,
         "reviews": 1148,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71ZNVWh1odL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71ZNVWh1odL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DH575N5P",
         "title_ar": "مشترك كهربائي من اي لوك، 5 منافذ مع مفتاح، بجهد 3500 وات، (لون أسود، 1.5 متر)"
       },
@@ -167,7 +168,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 147791,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41a5w8F1xGL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41a5w8F1xGL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07XLML2YS",
         "title_ar": "كاميرا ذكية c200 من تابو بزاوية 360 درجة بخاصية الواي فاي والإمالة بدقة 1080 بكسل - أبيض، لاسلكي"
       },
@@ -180,7 +181,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 678,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41E4kEpByfL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41E4kEpByfL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DXLBNG6K",
         "title_ar": "شاحن من أنكر بتقنية راسUSB Type-C، متوافق مع الأجهزة اللوحية وآيفون وسامسونج وبيكسل، بمنفذ واحد"
       },
@@ -192,8 +193,8 @@
         "price_egp": 498.98,
         "currency": "EGP",
         "rating": 4.5,
-        "reviews": 1262,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71aFU2aySQL._AC_UL300_SR300,200_.jpg",
+        "reviews": 1263,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71aFU2aySQL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FD16QM6Y",
         "title_ar": "بطاقة ذاكرة ميكرو اس دي كانفاس سيليكت بلس 64 جيجابايت من كينجستون، بطاقة ميكرو اس دي اكس سي الجيل الثالث 100 ميجابت/ثانية، بطاقة A1 + محول، موديل SDCS3/64GB"
       }
@@ -221,7 +222,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 1494,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vNz88eP0L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vNz88eP0L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0B74JS567",
         "title_ar": "كيس ماسك للشعر بخلاصة الألوفيرا وبروتينات الحرير من الو ايفا، 250 جرام"
       },
@@ -234,7 +235,7 @@
         "currency": "EGP",
         "rating": 3.9,
         "reviews": 1170,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yXiUz49XL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yXiUz49XL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07NP92L9P",
         "title_ar": "4 ماكينات حلاقة من لورد كوين للاستخدام مرة واحدة - ثلاثية الشفرة"
       },
@@ -247,7 +248,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 2363,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61SRoM-MhWL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61SRoM-MhWL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08WJL45KJ",
         "title_ar": "صابونة حمض الساليسليك من خمس خمسات، 50 جم"
       },
@@ -259,8 +260,8 @@
         "price_egp": 85.37,
         "currency": "EGP",
         "rating": 4.4,
-        "reviews": 201,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61J7+0xDOYL._AC_UL300_SR300,200_.jpg",
+        "reviews": 202,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61J7+0xDOYL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0G2JJMG83",
         "title_ar": "كريم كارباميد توينتي من هيبتا، كريم مرطب عميق مع 20% يوريا للبشرة الجافة والخشنة للغاية، بوزن 50 جم"
       },
@@ -273,7 +274,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 7575,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51G1d+VuaIL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51G1d+VuaIL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07MMFCTCX",
         "title_ar": "ماء تنظيف سكين اكتيف ميسيلار كلاسيك من غارنييه، 100 مل"
       },
@@ -286,7 +287,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 1469,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/5116ive7noL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/5116ive7noL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B00XAH0406",
         "title_ar": "غسول الجسم دوف المغذي بعمق، 500 مل"
       },
@@ -295,11 +296,11 @@
         "rank": 8,
         "asin": "B0FM8CRZHN",
         "title": "Hepta Panthenol Pink Cream – Whitening & Moisturizing Cream for Sensitive Areas 50g | Panthenol, Vitamin C&E, Alpha Arbutin, Niacinamide, Moisturizing & Softening for Sensitive Skin",
-        "price_egp": 103.0,
+        "price_egp": 101.0,
         "currency": "EGP",
         "rating": 4.1,
         "reviews": 296,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61qBBW2GRIL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61qBBW2GRIL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FM8CRZHN",
         "title_ar": "كريم بانثينول الوردي لتفتيح وترطيب للمناطق الحساسة، تركيبة تحتوي على بانثينول وفيتامين سي واي وألفا أربوتين ونياسيناميد، للترطيب والتنعيم وتحسين مظهر البشرة الحساسة من هيبتا، 50 جرام"
       },
@@ -308,7 +309,7 @@
         "rank": 9,
         "asin": "B096CPFRD5",
         "title": "Kolagra sun screen-50 ml",
-        "price_egp": 120.0,
+        "price_egp": 118.45,
         "currency": "EGP",
         "rating": 4.1,
         "reviews": 1229,
@@ -325,7 +326,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 1654,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61bpfxKkmuL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61bpfxKkmuL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BTX9YFGZ",
         "title_ar": "منظف الوجه للبشرة المعرضة لحب الشباب من ستارفيل، 400 مل"
       },
@@ -338,7 +339,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 969,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71dzVJ2NvjL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71dzVJ2NvjL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08ZYCXGWN",
         "title_ar": "شامبو ألو إيفا لتقوية الشعر بالصبار وزيت الأرجان المغربي - 230 مل"
       },
@@ -351,7 +352,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 746,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51y9NevBdXL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51y9NevBdXL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0976FWQDX",
         "title_ar": "كريم ترطيب مويست- 1 - 100 مل، من بوركس"
       },
@@ -364,7 +365,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 2596,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Rl6XVemdL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Rl6XVemdL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B092312R94",
         "title_ar": "ماكينة حلاقة شعر قابلة للشحن للرجال من في جي ار، موديل فضي ودهبي V-071"
       },
@@ -377,7 +378,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 1197,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61yHLWusTrL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61yHLWusTrL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B099GGJW15",
         "title_ar": "قالب صابون كلاسيك 110 جم من دوش - عبوة من 4 قطع - قد يختلف اللون والرائحة"
       },
@@ -405,7 +406,7 @@
         "currency": "EGP",
         "rating": 3.8,
         "reviews": 3429,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51p-u4WAnYL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51p-u4WAnYL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08P5MP4YC",
         "title_ar": "ميزان مطبخ رقمي عالي الدقة 10 كجم - ميزان إلكتروني أبيض - ميزان مطبخ محمول بشاشة ال سي دي من بورتال"
       },
@@ -418,7 +419,7 @@
         "currency": "EGP",
         "rating": 4.1,
         "reviews": 1184,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71UZ-pIp8UL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71UZ-pIp8UL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0B9KWZGG8",
         "title_ar": "اكياس تخزين للطعام الطازج، مرنة ومصنوعة من البلاستيك، مكونة من 50 قطعة"
       },
@@ -431,7 +432,7 @@
         "currency": "EGP",
         "rating": 3.6,
         "reviews": 1793,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/715bUlsWMGL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/715bUlsWMGL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08BLJ473G",
         "title_ar": "أداة خفق اللبن قابلة لإعادة الشحن وتعمل بـ3 سرعات قابلة للتعديل - لصنع القهوة واللاتيه والكابتشينو مع مضرب إضافي للبيض"
       },
@@ -444,7 +445,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 3843,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61E6OSLBJML._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61E6OSLBJML._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09H6LZR7Y",
         "title_ar": "أكياس حفظ الطعام طازجا، أغطية بولات قابلة لإعادة الاستخدام، أغطية قابلة للتمدد لعلب الطعام، تخزين مرن لتحضير الوجبات والأطباق بسهولة، مناسبة للنزهات العائلية في الهواء الطلق، شفافة"
       },
@@ -457,7 +458,7 @@
         "currency": "EGP",
         "rating": 3.5,
         "reviews": 566,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713zK2b-M6L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713zK2b-M6L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B091MDSKTQ",
         "title_ar": "أىغطية استك لتخزين الطعام (100 غطاء) - أغطية بلاستيكية قابلة للتمدد قابلة لإعادة الاستخدام – تحول الأطباق أو علب الالومنيوم أو حلل الطهي إلى علب لتخزين الطعام"
       },
@@ -470,7 +471,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 3829,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51Gbmr3fVwL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51Gbmr3fVwL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0848Y82N8",
         "title_ar": "خرطوشة برو مع مؤقت رقمي من تانك - 6 وظائف تنقية مضغوطة بتقنية باكتيبان"
       },
@@ -483,7 +484,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 2169,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71pbijuH9ML._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71pbijuH9ML._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0C6FKFHVB",
         "title_ar": "أقمشة تنظيف من المايكروفايبر من ليروي، متعددة الألوان، 20.1 × 20.1 سم، عبوة من 20 قطعة، منخفضة الوبر وسريعة الجفاف وفائقة الامتصاص."
       },
@@ -496,7 +497,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 2484,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71i4m+Nn7nL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71i4m+Nn7nL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0B1N5SZSV",
         "title_ar": "بطانات مقلاة هوائية مقاومة للماء وقابلة لاعادة الاستخدام من او 9 او-ناين، بطانات ورقية مربعة للخبز والاطعمة المقلية والميكروويف، 7.8 انش 20 سم، 100 قطعة"
       },
@@ -509,7 +510,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 772,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EHFbwsi4L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EHFbwsi4L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B01KZO8Y2Q",
         "title_ar": "مروحة ستاند شبح 20 بوصة من فريش"
       },
@@ -521,8 +522,8 @@
         "price_egp": 38.0,
         "currency": "EGP",
         "rating": 3.3,
-        "reviews": 22527,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61lFtznEdcL._AC_UL300_SR300,200_.jpg",
+        "reviews": 22526,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61lFtznEdcL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08BFD54YW",
         "title_ar": "بخاخ زيت للطبخ من بوزموج، بخاخ زيت الزيتون، زجاجة بخاخ زيت الزيتون، بخاخ زيت الزيتون للسلطة والشواء والخبز في المطبخ والتحميص"
       },
@@ -535,7 +536,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 22513,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Nciv7yfPL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Nciv7yfPL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07CZW9V7W",
         "title_ar": "ماصات شرب معدنية من الستانلس ستيل قابلة لاعادة الاستخدام من فيهي - 10.5 انش طويلة للغاية 4 + 1 - مع فرشاة تنظيف لاكواب ييتي RTIC SIC اوزارك تريل (2 مستقيمة | 2 مثنية | 1 فرشاة)"
       },
@@ -548,7 +549,7 @@
         "currency": "EGP",
         "rating": 3.8,
         "reviews": 1874,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61btPUHeQDL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61btPUHeQDL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0B5XF8FLX",
         "title_ar": "10 × براغي لاصقة للتعليق على الحائط من ميسو، مسامير للتعليق على الحائط للمطبخ والحمام وغرفة النوم وغرفة المعيشة"
       },
@@ -561,7 +562,7 @@
         "currency": "EGP",
         "rating": 3.4,
         "reviews": 894,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/611xJZiD8jL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/611xJZiD8jL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0B7G3HBYV",
         "title_ar": "(كوب زجاجي مع شفاطة سيليكون وغطاء كوب مع حافظة جلدية _ زجاجة أساسية للسفر الصيفية مزدوجة الاستخدام من كيلفي، سعة 360 مل، (لون عشوائى"
       },
@@ -574,7 +575,7 @@
         "currency": "EGP",
         "rating": 3.0,
         "reviews": 296,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PxQcaMHmL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PxQcaMHmL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0B53JPGCB",
         "title_ar": "عاكس تكييف الهواء قابل للسحب من ريشلين، عاكس اتجاه الهواء لمكيف الهواء لمنع التدفق المباشر، مقاس 84 × 23 × 0.5 سم"
       },
@@ -587,7 +588,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 17964,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HNcSeh8CL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HNcSeh8CL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B086P6PX96",
         "title_ar": "قفازات للاستعمال مرة واحدة من الفينيل شفافة وخالية من اللاتكس للاستخدام المنزلي وتحضير الطعام وأعمال المختبرات والمزيد من اوكياس، مقاس متوسط، 100 قطعة/ عبوة"
       }
@@ -602,7 +603,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 7867,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71OQsOVeHIL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71OQsOVeHIL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B098TYYKV6",
         "title_ar": "بوكسر رجالي متعدد الألوان - 5 قطع، من دايس"
       },
@@ -615,7 +616,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 259,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/610Dpxlk1bL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/610Dpxlk1bL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0C2CYJWY2",
         "title_ar": "فرش متعددة الوظائف مزودة بموزع للصابون بشعيرات ناعمة لتنظيف الأحذية وغسيل الملابس وتنظيف البلاط وللأعمال المنزلية للحمام والمطبخ من جيكووت، قطعة واحدة"
       },
@@ -628,7 +629,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 589,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61zLZ1W+esL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61zLZ1W+esL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CH5GF552",
         "title_ar": "تيشرت سادة بأكمام قصيرة ورقبة دائرية للرجال من اسطنبول موديل، عبوة من 1 قطعة واحدة، تيشرت كلاسيك، 95% قطن و5% ليكرا (سباندكس)"
       },
@@ -641,7 +642,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 102,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51GxrjCfj4L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51GxrjCfj4L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FTXTCJ9Z",
         "title_ar": "شرابات دي اس ام ميني سوكيت للرجال من دايس (عبوة من 4 قطع)"
       },
@@ -653,8 +654,8 @@
         "price_egp": 69.5,
         "currency": "EGP",
         "rating": 3.8,
-        "reviews": 4380,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/618LvYlljQL._AC_UL300_SR300,200_.jpg",
+        "reviews": 4381,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/618LvYlljQL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09MFLRNLG",
         "title_ar": "صندوق مجوهرات صغير محمول من الجلد لتنظيم خواتم المجوهرات وصندوق هدايا للفتيات والنساء (متعدد الألوان)"
       },
@@ -667,7 +668,7 @@
         "currency": "EGP",
         "rating": 4.0,
         "reviews": 2277,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71T8OzvE0SL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71T8OzvE0SL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BXJL1SM9",
         "title_ar": "طقم شرابات ليكرا للرجال سادة من دايس، 3 أزواج"
       },
@@ -680,7 +681,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 1309,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61rqG5ipTsL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61rqG5ipTsL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BVRQ3FSJ",
         "title_ar": "شورت طويل للنساء من دايس، 1 قطعة"
       },
@@ -693,7 +694,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 840,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51QRKFZJ8sL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51QRKFZJ8sL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BX71KXJ6",
         "title_ar": "Mobaco Men Regular Fit Polo Shirt SO100"
       },
@@ -706,7 +707,7 @@
         "currency": "EGP",
         "rating": 3.9,
         "reviews": 301,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81XJx6+Sq9L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81XJx6+Sq9L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0D6C1PXKV",
         "title_ar": "شورت سباحة وشنطة مطابقة للرجال من وايت ايجل، البوليستر"
       },
@@ -719,7 +720,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 441,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71g5PITAGzL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71g5PITAGzL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FKBYJ64T",
         "title_ar": "فرش طبي ميموري فوم لتخفيف الضغط على القدمين - نعل داخلي سيليكون طبي مزود بوسائد تدليك ومسام تهوية - مناسب للرجال والنساء ولجميع أنواع الأحذية (أسود&أسود, 41-46)"
       },
@@ -732,7 +733,7 @@
         "currency": "EGP",
         "rating": 3.9,
         "reviews": 985,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71bF+-HuotL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71bF+-HuotL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CSC1THJX",
         "title_ar": "قميص كلاسيكي للرجال من وايت ايجل"
       },
@@ -745,7 +746,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 141,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/511i8fkoUqL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/511i8fkoUqL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FTXSSZNC",
         "title_ar": "شرابات DSM-H-P للرجال من دايس (عبوة من 5 قطع)"
       },
@@ -758,7 +759,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 85,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41TvMFr87QL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41TvMFr87QL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0GDS42Q14",
         "title_ar": "باندانا بدون خيط للنساء من لو فوال – باندانا قطنية – باندانا أساسية أنيقة تحت الحجاب"
       },
@@ -770,8 +771,8 @@
         "price_egp": null,
         "currency": "EGP",
         "rating": 4.4,
-        "reviews": 74,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UkGZBb1QL._AC_UL300_SR300,200_.jpg",
+        "reviews": 75,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UkGZBb1QL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FQ2YL6LJ",
         "title_ar": "مظلة واقية من الشمس والمطر . قابلة للطي . UV ونظام فتح وغلق تلقائي . لون داخلى اسود لنتيجة عزل افضل"
       },
@@ -784,7 +785,7 @@
         "currency": "EGP",
         "rating": 2.9,
         "reviews": 350,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41xMbVYmgiL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41xMbVYmgiL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DK5YGWFG",
         "title_ar": "ساعة ذكية رقمية مقاومة للماء بسوار LED للاطفال، هدية عيد ميلاد، ألعاب، شخصية كرتونية ملونة سوبر هيرو للاولاد والبنات من سن 2 الى 12 سنة، متعددة الالوان (بينك)"
       }
@@ -799,7 +800,7 @@
         "currency": "EGP",
         "rating": 3.5,
         "reviews": 618,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HqFGroRsL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HqFGroRsL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DFLKYMG6",
         "title_ar": "لعبة شطرنج مغناطيسية مع 20 قطعة حجر لعدد 2 إلى 4 لاعبين ممتعة للأسرة ومناسبة كهدية للأطفال والبالغين من الجنسين"
       },
@@ -812,7 +813,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 8865,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71U06Q9P9YL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71U06Q9P9YL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B094D42LRN",
         "title_ar": "ألعاب مونتيسوري للأولاد والبنات من سن 1 - 3 سنوات، ألعاب خشبية للفرز والتركيب للأطفال في مرحلة ما قبل المدرسة، ألعاب تعليمية، ألعاب تركيب للتعرف على الألوان، هدية أحجية تعليمية خشب"
       },
@@ -825,7 +826,7 @@
         "currency": "EGP",
         "rating": 4.1,
         "reviews": 571,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41sD5i-YxkL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41sD5i-YxkL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CDHKJM39",
         "title_ar": "صلصال سحري يجف بالهواء من ريزنور، صلصال ناعم وخفيف مع أدوات نحت، اكسسوارات تزيين الحيوانات، الحرف الفنية للأطفال، أفضل هدية للأولاد والبنات من سن 3-12 سنة، عبوة من 12 قطعة"
       },
@@ -838,7 +839,7 @@
         "currency": "EGP",
         "rating": 3.7,
         "reviews": 321,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71SpB2aOfpL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71SpB2aOfpL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B081VFXQZN",
         "title_ar": "ألعاب كرات المحيط البلاستيكية الناعمة - 50 قطعة"
       },
@@ -851,7 +852,7 @@
         "currency": "EGP",
         "rating": 4.1,
         "reviews": 170,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fj+3R3qxL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fj+3R3qxL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DD8CSRFH",
         "title_ar": "دفتر تلوين ،24رسمة احترافية مناسب للكبار والاطفال الموهوبين متعدد الأشكال (اورنج)"
       },
@@ -864,7 +865,7 @@
         "currency": "EGP",
         "rating": 3.8,
         "reviews": 294,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61cf8XLk4AL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61cf8XLk4AL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DVS1G5SM",
         "title_ar": "مجموعة من 4/10 قطع من كيدزون على شكل زرافة مزودة بكوب شفط تلسكوبي باضاءة LED، العاب فدجيت تلسكوبية متغيرة الشكل، انابيب بوب العاب حسية للبنات والاولاد هدية للاطفال (مجموعة من 4 قطع)"
       },
@@ -873,11 +874,11 @@
         "rank": 7,
         "asin": "B0DXFZXW24",
         "title": "KIDSZONE Montessori Toys for 1 2 3 Years Old, Wooden Sorting & Stacking Toys for Toddlers 1-3, Education Preschool Toddler Puzzles,Best Gift. (4 shapes)",
-        "price_egp": 58.5,
+        "price_egp": 60.0,
         "currency": "EGP",
         "rating": 3.9,
         "reviews": 92,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/512oEVz7GGL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/512oEVz7GGL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DXFZXW24",
         "title_ar": "ألعاب مونتيسوري مضحكة للأطفال بعمر سنة إلى 3 سنوات من كيدززون، ألعاب خشبية للفرز والتكديس للأطفال الصغار من سن 1-3 سنوات، بازل تعليمي للأطفال في مرحلة ما قبل المدرسة (4 أشكال)"
       },
@@ -886,11 +887,11 @@
         "rank": 8,
         "asin": "B0DPXPVTPH",
         "title": "KIDSZONE Pop Up Kids Play Tent Ball Pit for Kids, Boys, Girls, Babies and Toddlers, Indoor/Outdoor Playhouse, Birthday Gifts, NO BALLS INCLUDED (Red Dotted)",
-        "price_egp": 244.0,
+        "price_egp": 205.0,
         "currency": "EGP",
         "rating": 3.8,
         "reviews": 159,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51oKSKWn69L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51oKSKWn69L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DPXPVTPH",
         "title_ar": "خيمة لعب منبثقة للأطفال الأولاد والبنات والرضع والأطفال الصغار من كيدز زون، بيت لعب للأماكن الداخلية والخارجية، هدايا عيد الميلاد، لا تتضمن كرات، لون أحمر منقط"
       },
@@ -903,7 +904,7 @@
         "currency": "EGP",
         "rating": 4.1,
         "reviews": 298,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71gLiRsN5TL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71gLiRsN5TL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09BZ53D4C",
         "title_ar": "لعبة تعليمية للاطفال من توب كولور، بطاقات فلاش مسموعة للاستماع وتعلم القراءة والكتابة للاطفال بعمر 1 2 3 4 5 6 سنوات، جهاز بطاقات تعليمية مع 112 بطاقة مزدوجة الجوانب 224 كلمة، قارئ زهري"
       },
@@ -916,7 +917,7 @@
         "currency": "EGP",
         "rating": 3.2,
         "reviews": 36,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81O7-DJzXGL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81O7-DJzXGL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0GKX5JJNK",
         "title_ar": "جوانتي إطلاق شبكة العنكبوت قابل للتفعيل بالحركة للأطفال، مجموعة ألعاب قاذف سبايدر مان الواقعية للعب والحفلات التنكرية من كيدز زون"
       },
@@ -929,7 +930,7 @@
         "currency": "EGP",
         "rating": 3.6,
         "reviews": 796,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61W3yu9wAcL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61W3yu9wAcL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B091CZJK32",
         "title_ar": "لعبة كريتيف للاطفال بتصميم فك واسنان التمساح الذي يعض الاصبع لعبة مسلية"
       },
@@ -942,7 +943,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 88,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51a3kr9TvLL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51a3kr9TvLL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DRTPG4VN",
         "title_ar": "سكوتر قابل للطي بثلاث عجلات للأطفال مع عجلات مضيئة وارتفاع قابل للتعديل بنظام توجيه بالإمالة آمن ومتين من ابو الجوخ"
       },
@@ -955,7 +956,7 @@
         "currency": "EGP",
         "rating": 3.6,
         "reviews": 633,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61QcpyGG6zL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61QcpyGG6zL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BN76V6R2",
         "title_ar": "اسبورة سحرية للأطفال مقاس 8.5 بوصة جينيريك، تابلت تفاعلي LCD للكتابة والرسم مع زر مسح فوري، العاب تعليمية للبنات والاولاد، (احمر وازرق)لوحة رسم الكترونية"
       },
@@ -968,7 +969,7 @@
         "currency": "EGP",
         "rating": 3.8,
         "reviews": 86,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UydA+azLL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UydA+azLL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0D3M661RR",
         "title_ar": "عوامة أطفال بشمسية متحركة ودروكسيون وكلاكس، مادة عالية بشكل متميز وألوان زاهية، تناسب الأطفال من 6 أشهر إلى 4 سنوات للأولاد والبنات"
       },
@@ -981,7 +982,7 @@
         "currency": "EGP",
         "rating": 3.9,
         "reviews": 340,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/7128pXLh3QL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/7128pXLh3QL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CPQ65KQS",
         "title_ar": "لعبة قول أو اعمل - جيب من قول أميم"
       }
@@ -996,7 +997,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 2663,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/712t3O9xoaL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/712t3O9xoaL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CVW9DPCB",
         "title_ar": "حليب كرتون كامل الدسم من جهينة عبوة متعددة 1 لتر الترا ايدج - 6 عبوات، وفر 10 جنيه"
       },
@@ -1021,8 +1022,8 @@
         "price_egp": 119.99,
         "currency": "EGP",
         "rating": 4.0,
-        "reviews": 2516,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61WgLa-0U6L._AC_UL300_SR300,200_.jpg",
+        "reviews": 2517,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61WgLa-0U6L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08WJND94N",
         "title_ar": "زجاجة مياه من ايلانو، 12 قطعة - 1.50 لتر، قد يختلف تصميم العبوة"
       },
@@ -1035,7 +1036,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 498,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Lj8VhEgiL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Lj8VhEgiL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0842HKTMQ",
         "title_ar": "المراعي لبن كامل الدسم 1 لتر بلاستيك"
       },
@@ -1061,7 +1062,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 2195,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71tfw2qfwUL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71tfw2qfwUL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08YY2YCRR",
         "title_ar": "زيت زهرة دوار الشمس من كريستال - 2.2 لتر"
       },
@@ -1087,7 +1088,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 944,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Bvh0sGVWL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Bvh0sGVWL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0893KRNGQ",
         "title_ar": "حليب المراعي كامل الدسم - 1 لتر"
       },
@@ -1113,7 +1114,7 @@
         "currency": "EGP",
         "rating": 4.7,
         "reviews": 33,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71FfjE4j3AL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71FfjE4j3AL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07PDTP1TP",
         "title_ar": "خبز توست بران من ريتش بيك 500 جرام"
       },
@@ -1126,7 +1127,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 1813,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81oKs2KY29L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81oKs2KY29L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0B34QF2S2",
         "title_ar": "ارز ابيض مصري من الساعة - 1 كجم"
       },
@@ -1151,8 +1152,8 @@
         "price_egp": 118.99,
         "currency": "EGP",
         "rating": 4.1,
-        "reviews": 955,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71jfsVEvAYL._AC_UL300_SR300,200_.jpg",
+        "reviews": 956,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71jfsVEvAYL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B00UJO9UEY",
         "title_ar": "مجموعة علب مياه بيور لايف من نستله مكونة من 20 زجاجة × 0.60 لتر - قد تختلف العبوة"
       },
@@ -1165,7 +1166,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 3566,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yP+jDJ+UL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yP+jDJ+UL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07G86SNYJ",
         "title_ar": "زجاجة زيت مختلطة من حلوة، 4.5 لتر"
       },
@@ -1178,7 +1179,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 941,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61T3CRvSuOL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61T3CRvSuOL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0856Y5GJS",
         "title_ar": "قهوة نسكافيه 3 في 1 سعة 18 جرام، عبوة من 24 كيس"
       }
@@ -1193,7 +1194,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 4070,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81asxTK-mjL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81asxTK-mjL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BF5C2S2Y",
         "title_ar": "حفاضات أطفال من بامبرز، 84 قطعة، مقاس 3 (6-10 كجم)، بريميوم إكسترا كير مع لوشن الصبار"
       },
@@ -1206,7 +1207,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 1267,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71CjsVEv6hL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71CjsVEv6hL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0976ZF83N",
         "title_ar": "حفاضات أطفال من بامبرز، 70 قطعة، مقاس 5 (12-18 كجم)، مع لوشن بزيت الزيتون"
       },
@@ -1219,7 +1220,7 @@
         "currency": "EGP",
         "rating": 4.3,
         "reviews": 1069,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EOcXELmuL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EOcXELmuL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07FPJTGSY",
         "title_ar": "حفاضات أطفال من بامبرز، 36 قطعة، مقاس 6 كبير جداً (16+ كجم)"
       },
@@ -1241,11 +1242,11 @@
         "rank": 5,
         "asin": "B07F3QHP22",
         "title": "JOHNSON'S Baby Bedtime Oil For Babies, Soothes And Moisturizes Skin, Clinically Proven Gentle Formula Ideal For Sensitive Skin, Helps Your Baby Sleep 200ML",
-        "price_egp": 139.52,
+        "price_egp": 94.95,
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 1212,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/616TcodHNXL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/616TcodHNXL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07F3QHP22",
         "title_ar": "زيت وقت النوم للأطفال من جونسون، يهدئ ويرطب البشرة، تركيبة لطيفة مثبتة سريريا مثالية للبشرة الحساسة، يساعد طفلك على النوم، 200 مل"
       },
@@ -1258,7 +1259,7 @@
         "currency": "EGP",
         "rating": 2.4,
         "reviews": 37,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NybsVfMfL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NybsVfMfL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FTXRL9VD",
         "title_ar": "حفاضات شورت للأطفال مقاس 5، عبوة كبيرة من 66 قطعة من مولفيكس"
       },
@@ -1271,7 +1272,7 @@
         "currency": "EGP",
         "rating": 2.8,
         "reviews": 29,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71S-wlSom4L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71S-wlSom4L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0FTXP7JDX",
         "title_ar": "حفاضات شورت للأطفال من مولفيكس مقاس 4، عبوة ميجا توفير من 76 قطعة"
       },
@@ -1284,7 +1285,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 353,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YldOSwgnL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YldOSwgnL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CCSK85XZ",
         "title_ar": "حفاضات للاطفال من موفليكس، عبوة كبيرة مكونة من 70 قطعة مقاس 5"
       },
@@ -1296,7 +1297,7 @@
         "price_egp": 108.99,
         "currency": "EGP",
         "rating": 4.6,
-        "reviews": 1066,
+        "reviews": 1067,
         "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61pXJIFZKQL._AC_UL300_SR300,200_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B07F3M8CZ2",
         "title_ar": "جونسون بيبي زيت للأطفال 200 مل، أثبت معمليًا أنه معتدل ، زيت أطفال مغذي لطيف ومرطب ، تدليك لطيف للحظات الترابط مع طفلك ، لا يسبب الحساسية وخالي من المكونات القاسية على الأطفال"
@@ -1310,7 +1311,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 389,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51TsK2coKgL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51TsK2coKgL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BL3YYSVG",
         "title_ar": "شامبو وبلسم وغسول للجسم 3 في 1 سعة 200 مل من بلانكي"
       },
@@ -1323,7 +1324,7 @@
         "currency": "EGP",
         "rating": 4.1,
         "reviews": 712,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rzuyr61iL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rzuyr61iL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BH51J7YP",
         "title_ar": "حفاضات اطفال مقاس 5 ماكسي (11-18 كجم) 76 قطعة - فاين بيبي مع حواجز التسرب المزدوجة الجديدة والمحسنة!"
       },
@@ -1336,7 +1337,7 @@
         "currency": "EGP",
         "rating": 3.9,
         "reviews": 857,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/819s34kssAL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/819s34kssAL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BSXTWVVF",
         "title_ar": "حفاضات أطفال من بيبيم ناتشورال، 80 قطعة، مقاس 4 ماكسي"
       },
@@ -1349,7 +1350,7 @@
         "currency": "EGP",
         "rating": 3.7,
         "reviews": 540,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YBvoBA1rL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YBvoBA1rL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0F2NBWKP1",
         "title_ar": "سجادة مائية قابلة للنفخ لوقت الحبو للأطفال من كيدز زون- ألعاب حسية للرضع والأطفال الصغار لأنشطة التطور المبكر | مناسبة لعمر 3 إلى 12 شهر (70 × 51)"
       },
@@ -1362,7 +1363,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 641,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61YjArUZNFL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61YjArUZNFL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09V1CZZ5C",
         "title_ar": "مناديل مبللة من اكسترا هايجين، بالكيوي، 60 منديل × 3 علب"
       },
@@ -1375,7 +1376,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 476,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61hl5+ZmY6L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61hl5+ZmY6L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09NTRK9Z5",
         "title_ar": "مناديل مبللة للاطفال 120 منديل من رونزا- رطبة -تحتوي ع فيتامين E"
       }
@@ -1390,7 +1391,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 3398,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YCecXjzVL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YCecXjzVL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DM9M1ZLX",
         "title_ar": "مناديل وجه برستيج من فاين، 500 منديل من 3 طبقات، عبوة من 6 قطع"
       },
@@ -1403,7 +1404,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 2308,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vCkrk1ttL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vCkrk1ttL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0D49ZSBFV",
         "title_ar": "مسحوق غسيل اوتوماتيك تاتش اوف داوني من اريال - 8 كجم"
       },
@@ -1415,8 +1416,8 @@
         "price_egp": 112.48,
         "currency": "EGP",
         "rating": 4.5,
-        "reviews": 3269,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yk8YDTa0L._AC_UL300_SR300,200_.jpg",
+        "reviews": 3270,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yk8YDTa0L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09BMJGS9C",
         "title_ar": "مناديل تواليت فاخرة من فاين - 3 طبقات - 12 لفة"
       },
@@ -1429,7 +1430,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 2838,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71-wBdzboyL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71-wBdzboyL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DR8H372W",
         "title_ar": "مسحوق غسيل جل للغسالات الأوتوماتيك بلمسة داوني من تايد - 3.6 كيلوجرام"
       },
@@ -1442,7 +1443,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 4745,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71qZp1XZyyL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71qZp1XZyyL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0DPWVMNXM",
         "title_ar": "ايريال سائل جل منظف اوتوماتيك بلمسة داوني من ايريال - 3.6 كجم"
       },
@@ -1455,7 +1456,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 2143,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81WyC1suaoL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81WyC1suaoL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CTMTVCW7",
         "title_ar": "مناديل ورقية للمطبخ من فاين ديل، طبقتين، 6 بكرات"
       },
@@ -1468,7 +1469,7 @@
         "currency": "EGP",
         "rating": 4.2,
         "reviews": 1432,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/513SjCBBgYL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/513SjCBBgYL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08YNPFM71",
         "title_ar": "خيط تنظيف الاسنان وخيط تنظيف الاسنان واللثة والعناية بها، 30 قطعة"
       },
@@ -1493,8 +1494,8 @@
         "price_egp": 149.0,
         "currency": "EGP",
         "rating": 4.7,
-        "reviews": 2210,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/714vtkoLtyL._AC_UL300_SR300,200_.jpg",
+        "reviews": 2211,
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/714vtkoLtyL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08WJJMXQ1",
         "title_ar": "مناديل بابيا - ورق تواليت - 3 طبقات - 12 لفة"
       },
@@ -1507,7 +1508,7 @@
         "currency": "EGP",
         "rating": 4.4,
         "reviews": 1471,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51jiT1bIb3L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51jiT1bIb3L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0CR1FR4CT",
         "title_ar": "رول أكياس قمامة من زي باك (70× 90 سم) - وزن 1 كيلو"
       },
@@ -1520,7 +1521,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 2566,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713t6FC5blL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713t6FC5blL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08FTZNBSJ",
         "title_ar": "منظف منزلي من فريدا، برائحة النظافة، 480 ملليلتر"
       },
@@ -1533,7 +1534,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 2070,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51ywutvuxkL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51ywutvuxkL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09NDY755K",
         "title_ar": "زيت السمك اوميجا 3 من ليميتليس ناتشورالز (2000 مجم، 30 كبسولة)"
       },
@@ -1546,7 +1547,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 1422,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41PSRDCpjrL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41PSRDCpjrL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B09Z33Q7YV",
         "title_ar": "منظف زجاجات وحلمات بيبي ستار 380 مل"
       },
@@ -1559,7 +1560,7 @@
         "currency": "EGP",
         "rating": 4.5,
         "reviews": 1318,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rhCKfEV6L._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rhCKfEV6L._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B08F7H8P96",
         "title_ar": "مسحوق للغسالات الأوتوماتيك تاتش اوف داوني معطر من تايد، 8 كجم، أبيض، قماش"
       },
@@ -1572,7 +1573,7 @@
         "currency": "EGP",
         "rating": 4.6,
         "reviews": 3461,
-        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71WZKFPSUoL._AC_UL300_SR300,200_.jpg",
+        "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71WZKFPSUoL._AC_UL600_SR600,400_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0BSY117ZR",
         "title_ar": "فاميليا مناديل سحب عبوة متعددة 3 طبقات 500X6"
       }
@@ -1588,7 +1589,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 333,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51KqcqqScRL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51KqcqqScRL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CPC8JMCW",
       "title_ar": "كابل من جويروم بطول 1.2 متر نوع USB متوافق مع الهواتف المحمولة"
     },
@@ -1601,7 +1602,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 1058,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51CGD8KYEUL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51CGD8KYEUL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09C7BWVX7",
       "title_ar": "كابل بيانات للشحن السريع بقوة 2.4 أمبير من لدنيو، موديل LS441، طول 1 متر، لون رمادي"
     },
@@ -1614,7 +1615,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 735,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61TPFfrwSFL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61TPFfrwSFL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DRDPSKQH",
       "title_ar": "بطاريات زنك-كربون ايه ايه ايه من كميليون شديدة لتحامل R03 - طاقة أقتصادية (صندوق من 12 قطعة)"
     },
@@ -1627,7 +1628,7 @@
       "currency": "EGP",
       "rating": 4.7,
       "reviews": 3559,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61BALBWHw3L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61BALBWHw3L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09Y37BSM9",
       "title_ar": "محول قابس السفر من اي لوك"
     },
@@ -1640,7 +1641,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 816,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PTz7lj6EL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PTz7lj6EL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DRDQZBC5",
       "title_ar": "بطاريات ايه ايه من الزنك والكربون شديد التحمل من كاميليون – بطارية اقتصادية لتوفير الطاقة (عبوة تحتوي على 12 قطعة)، موديل R6"
     },
@@ -1653,7 +1654,7 @@
       "currency": "EGP",
       "rating": 3.0,
       "reviews": 3570,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61kFEpdcS9L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61kFEpdcS9L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0D9W85D2N",
       "title_ar": "جراب موبايل لاصق من ستيكي جريبي، ملحق هاتف لاصق من السيليكون لايفون واندرويد، لعبة فيدجيت بدون استخدام اليدين، حامل موبايل للاستحمام ومقاطع فيديو تيك توك وصور السيلفي (بابل غم وردي)"
     },
@@ -1666,7 +1667,7 @@
       "currency": "EGP",
       "rating": 3.9,
       "reviews": 7388,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fRwSb0z0L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fRwSb0z0L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08D11MN1M",
       "title_ar": "حامل لاب توب ألومنيوم محمول قابل للتعديل والطي جيد التهوية لتبريد ورفع أجهزة آبل ماك بوك برو / اير واتش بي وسوني وديل والأجهزة مقاس 10-15.6 بوصة"
     },
@@ -1679,7 +1680,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 7116,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61aJwjV4NaL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61aJwjV4NaL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BYD5H31D",
       "title_ar": "ماوس بلوتوث لاسلكي بإضاءة ليد محمول مزدوج الوضع قابل لإعادة الشحن (بلوتوث 5.2 ومستقبل USB) من كانمابي، للاب توب/سطح المكتب/التابلت (أسود)"
     },
@@ -1692,7 +1693,7 @@
       "currency": "EGP",
       "rating": 4.8,
       "reviews": 2933,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NmJeGoz7L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NmJeGoz7L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CLKQKFL3",
       "title_ar": "مشترك كهرباء صغير من اي لوك (3 متر، لون أصفر)"
     },
@@ -1705,7 +1706,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 1409,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71emV43XswL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71emV43XswL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CXJC1YL9",
       "title_ar": "بطاريات زنك وكربون شديدة التحمل من نوع AAA كاميليون - 4 قطع + قطعتان مجانيتان، 1.5 فولت"
     },
@@ -1718,7 +1719,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 98,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61ShpwOCWeL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61ShpwOCWeL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0GCNZJCF8",
       "title_ar": "موبايل شاومي ريدمي نوت 15 الذكي (6+128 جيجابايت) - تصميم رفيع للغاية، حماية من الماء IP64، كاميرا 108 ميجابكسل، شاشة 6.75 بوصة FHD+ ، لون أسود"
     },
@@ -1731,7 +1732,7 @@
       "currency": "EGP",
       "rating": 4.7,
       "reviews": 1148,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71ZNVWh1odL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71ZNVWh1odL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DH575N5P",
       "title_ar": "مشترك كهربائي من اي لوك، 5 منافذ مع مفتاح، بجهد 3500 وات، (لون أسود، 1.5 متر)"
     },
@@ -1744,7 +1745,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 147791,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41a5w8F1xGL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41a5w8F1xGL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07XLML2YS",
       "title_ar": "كاميرا ذكية c200 من تابو بزاوية 360 درجة بخاصية الواي فاي والإمالة بدقة 1080 بكسل - أبيض، لاسلكي"
     },
@@ -1757,7 +1758,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 678,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41E4kEpByfL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41E4kEpByfL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DXLBNG6K",
       "title_ar": "شاحن من أنكر بتقنية راسUSB Type-C، متوافق مع الأجهزة اللوحية وآيفون وسامسونج وبيكسل، بمنفذ واحد"
     },
@@ -1769,8 +1770,8 @@
       "price_egp": 498.98,
       "currency": "EGP",
       "rating": 4.5,
-      "reviews": 1262,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71aFU2aySQL._AC_UL300_SR300,200_.jpg",
+      "reviews": 1263,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71aFU2aySQL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FD16QM6Y",
       "title_ar": "بطاقة ذاكرة ميكرو اس دي كانفاس سيليكت بلس 64 جيجابايت من كينجستون، بطاقة ميكرو اس دي اكس سي الجيل الثالث 100 ميجابت/ثانية، بطاقة A1 + محول، موديل SDCS3/64GB"
     },
@@ -1796,7 +1797,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 1494,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vNz88eP0L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vNz88eP0L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0B74JS567",
       "title_ar": "كيس ماسك للشعر بخلاصة الألوفيرا وبروتينات الحرير من الو ايفا، 250 جرام"
     },
@@ -1809,7 +1810,7 @@
       "currency": "EGP",
       "rating": 3.9,
       "reviews": 1170,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yXiUz49XL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yXiUz49XL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07NP92L9P",
       "title_ar": "4 ماكينات حلاقة من لورد كوين للاستخدام مرة واحدة - ثلاثية الشفرة"
     },
@@ -1822,7 +1823,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 2363,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61SRoM-MhWL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61SRoM-MhWL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08WJL45KJ",
       "title_ar": "صابونة حمض الساليسليك من خمس خمسات، 50 جم"
     },
@@ -1834,8 +1835,8 @@
       "price_egp": 85.37,
       "currency": "EGP",
       "rating": 4.4,
-      "reviews": 201,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61J7+0xDOYL._AC_UL300_SR300,200_.jpg",
+      "reviews": 202,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61J7+0xDOYL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0G2JJMG83",
       "title_ar": "كريم كارباميد توينتي من هيبتا، كريم مرطب عميق مع 20% يوريا للبشرة الجافة والخشنة للغاية، بوزن 50 جم"
     },
@@ -1848,7 +1849,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 7575,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51G1d+VuaIL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51G1d+VuaIL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07MMFCTCX",
       "title_ar": "ماء تنظيف سكين اكتيف ميسيلار كلاسيك من غارنييه، 100 مل"
     },
@@ -1861,7 +1862,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 1469,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/5116ive7noL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/5116ive7noL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B00XAH0406",
       "title_ar": "غسول الجسم دوف المغذي بعمق، 500 مل"
     },
@@ -1870,11 +1871,11 @@
       "rank": 8,
       "asin": "B0FM8CRZHN",
       "title": "Hepta Panthenol Pink Cream – Whitening & Moisturizing Cream for Sensitive Areas 50g | Panthenol, Vitamin C&E, Alpha Arbutin, Niacinamide, Moisturizing & Softening for Sensitive Skin",
-      "price_egp": 103.0,
+      "price_egp": 101.0,
       "currency": "EGP",
       "rating": 4.1,
       "reviews": 296,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61qBBW2GRIL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61qBBW2GRIL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FM8CRZHN",
       "title_ar": "كريم بانثينول الوردي لتفتيح وترطيب للمناطق الحساسة، تركيبة تحتوي على بانثينول وفيتامين سي واي وألفا أربوتين ونياسيناميد، للترطيب والتنعيم وتحسين مظهر البشرة الحساسة من هيبتا، 50 جرام"
     },
@@ -1883,7 +1884,7 @@
       "rank": 9,
       "asin": "B096CPFRD5",
       "title": "Kolagra sun screen-50 ml",
-      "price_egp": 120.0,
+      "price_egp": 118.45,
       "currency": "EGP",
       "rating": 4.1,
       "reviews": 1229,
@@ -1900,7 +1901,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 1654,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61bpfxKkmuL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61bpfxKkmuL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BTX9YFGZ",
       "title_ar": "منظف الوجه للبشرة المعرضة لحب الشباب من ستارفيل، 400 مل"
     },
@@ -1913,7 +1914,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 969,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71dzVJ2NvjL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71dzVJ2NvjL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08ZYCXGWN",
       "title_ar": "شامبو ألو إيفا لتقوية الشعر بالصبار وزيت الأرجان المغربي - 230 مل"
     },
@@ -1926,7 +1927,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 746,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51y9NevBdXL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51y9NevBdXL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0976FWQDX",
       "title_ar": "كريم ترطيب مويست- 1 - 100 مل، من بوركس"
     },
@@ -1939,7 +1940,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 2596,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Rl6XVemdL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Rl6XVemdL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B092312R94",
       "title_ar": "ماكينة حلاقة شعر قابلة للشحن للرجال من في جي ار، موديل فضي ودهبي V-071"
     },
@@ -1952,7 +1953,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 1197,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61yHLWusTrL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61yHLWusTrL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B099GGJW15",
       "title_ar": "قالب صابون كلاسيك 110 جم من دوش - عبوة من 4 قطع - قد يختلف اللون والرائحة"
     },
@@ -1978,7 +1979,7 @@
       "currency": "EGP",
       "rating": 3.8,
       "reviews": 3429,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51p-u4WAnYL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51p-u4WAnYL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08P5MP4YC",
       "title_ar": "ميزان مطبخ رقمي عالي الدقة 10 كجم - ميزان إلكتروني أبيض - ميزان مطبخ محمول بشاشة ال سي دي من بورتال"
     },
@@ -1991,7 +1992,7 @@
       "currency": "EGP",
       "rating": 4.1,
       "reviews": 1184,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71UZ-pIp8UL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71UZ-pIp8UL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0B9KWZGG8",
       "title_ar": "اكياس تخزين للطعام الطازج، مرنة ومصنوعة من البلاستيك، مكونة من 50 قطعة"
     },
@@ -2004,7 +2005,7 @@
       "currency": "EGP",
       "rating": 3.6,
       "reviews": 1793,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/715bUlsWMGL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/715bUlsWMGL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08BLJ473G",
       "title_ar": "أداة خفق اللبن قابلة لإعادة الشحن وتعمل بـ3 سرعات قابلة للتعديل - لصنع القهوة واللاتيه والكابتشينو مع مضرب إضافي للبيض"
     },
@@ -2017,7 +2018,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 3843,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61E6OSLBJML._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61E6OSLBJML._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09H6LZR7Y",
       "title_ar": "أكياس حفظ الطعام طازجا، أغطية بولات قابلة لإعادة الاستخدام، أغطية قابلة للتمدد لعلب الطعام، تخزين مرن لتحضير الوجبات والأطباق بسهولة، مناسبة للنزهات العائلية في الهواء الطلق، شفافة"
     },
@@ -2030,7 +2031,7 @@
       "currency": "EGP",
       "rating": 3.5,
       "reviews": 566,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713zK2b-M6L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713zK2b-M6L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B091MDSKTQ",
       "title_ar": "أىغطية استك لتخزين الطعام (100 غطاء) - أغطية بلاستيكية قابلة للتمدد قابلة لإعادة الاستخدام – تحول الأطباق أو علب الالومنيوم أو حلل الطهي إلى علب لتخزين الطعام"
     },
@@ -2043,7 +2044,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 3829,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51Gbmr3fVwL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51Gbmr3fVwL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0848Y82N8",
       "title_ar": "خرطوشة برو مع مؤقت رقمي من تانك - 6 وظائف تنقية مضغوطة بتقنية باكتيبان"
     },
@@ -2056,7 +2057,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 2169,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71pbijuH9ML._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71pbijuH9ML._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0C6FKFHVB",
       "title_ar": "أقمشة تنظيف من المايكروفايبر من ليروي، متعددة الألوان، 20.1 × 20.1 سم، عبوة من 20 قطعة، منخفضة الوبر وسريعة الجفاف وفائقة الامتصاص."
     },
@@ -2069,7 +2070,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 2484,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71i4m+Nn7nL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71i4m+Nn7nL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0B1N5SZSV",
       "title_ar": "بطانات مقلاة هوائية مقاومة للماء وقابلة لاعادة الاستخدام من او 9 او-ناين، بطانات ورقية مربعة للخبز والاطعمة المقلية والميكروويف، 7.8 انش 20 سم، 100 قطعة"
     },
@@ -2082,7 +2083,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 772,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EHFbwsi4L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EHFbwsi4L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B01KZO8Y2Q",
       "title_ar": "مروحة ستاند شبح 20 بوصة من فريش"
     },
@@ -2094,8 +2095,8 @@
       "price_egp": 38.0,
       "currency": "EGP",
       "rating": 3.3,
-      "reviews": 22527,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61lFtznEdcL._AC_UL300_SR300,200_.jpg",
+      "reviews": 22526,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61lFtznEdcL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08BFD54YW",
       "title_ar": "بخاخ زيت للطبخ من بوزموج، بخاخ زيت الزيتون، زجاجة بخاخ زيت الزيتون، بخاخ زيت الزيتون للسلطة والشواء والخبز في المطبخ والتحميص"
     },
@@ -2108,7 +2109,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 22513,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Nciv7yfPL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Nciv7yfPL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07CZW9V7W",
       "title_ar": "ماصات شرب معدنية من الستانلس ستيل قابلة لاعادة الاستخدام من فيهي - 10.5 انش طويلة للغاية 4 + 1 - مع فرشاة تنظيف لاكواب ييتي RTIC SIC اوزارك تريل (2 مستقيمة | 2 مثنية | 1 فرشاة)"
     },
@@ -2121,7 +2122,7 @@
       "currency": "EGP",
       "rating": 3.8,
       "reviews": 1874,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61btPUHeQDL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61btPUHeQDL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0B5XF8FLX",
       "title_ar": "10 × براغي لاصقة للتعليق على الحائط من ميسو، مسامير للتعليق على الحائط للمطبخ والحمام وغرفة النوم وغرفة المعيشة"
     },
@@ -2134,7 +2135,7 @@
       "currency": "EGP",
       "rating": 3.4,
       "reviews": 894,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/611xJZiD8jL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/611xJZiD8jL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0B7G3HBYV",
       "title_ar": "(كوب زجاجي مع شفاطة سيليكون وغطاء كوب مع حافظة جلدية _ زجاجة أساسية للسفر الصيفية مزدوجة الاستخدام من كيلفي، سعة 360 مل، (لون عشوائى"
     },
@@ -2147,7 +2148,7 @@
       "currency": "EGP",
       "rating": 3.0,
       "reviews": 296,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PxQcaMHmL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61PxQcaMHmL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0B53JPGCB",
       "title_ar": "عاكس تكييف الهواء قابل للسحب من ريشلين، عاكس اتجاه الهواء لمكيف الهواء لمنع التدفق المباشر، مقاس 84 × 23 × 0.5 سم"
     },
@@ -2160,7 +2161,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 17964,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HNcSeh8CL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HNcSeh8CL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B086P6PX96",
       "title_ar": "قفازات للاستعمال مرة واحدة من الفينيل شفافة وخالية من اللاتكس للاستخدام المنزلي وتحضير الطعام وأعمال المختبرات والمزيد من اوكياس، مقاس متوسط، 100 قطعة/ عبوة"
     },
@@ -2173,7 +2174,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 7867,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71OQsOVeHIL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71OQsOVeHIL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B098TYYKV6",
       "title_ar": "بوكسر رجالي متعدد الألوان - 5 قطع، من دايس"
     },
@@ -2186,7 +2187,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 259,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/610Dpxlk1bL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/610Dpxlk1bL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0C2CYJWY2",
       "title_ar": "فرش متعددة الوظائف مزودة بموزع للصابون بشعيرات ناعمة لتنظيف الأحذية وغسيل الملابس وتنظيف البلاط وللأعمال المنزلية للحمام والمطبخ من جيكووت، قطعة واحدة"
     },
@@ -2199,7 +2200,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 589,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61zLZ1W+esL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61zLZ1W+esL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CH5GF552",
       "title_ar": "تيشرت سادة بأكمام قصيرة ورقبة دائرية للرجال من اسطنبول موديل، عبوة من 1 قطعة واحدة، تيشرت كلاسيك، 95% قطن و5% ليكرا (سباندكس)"
     },
@@ -2212,7 +2213,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 102,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51GxrjCfj4L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51GxrjCfj4L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FTXTCJ9Z",
       "title_ar": "شرابات دي اس ام ميني سوكيت للرجال من دايس (عبوة من 4 قطع)"
     },
@@ -2224,8 +2225,8 @@
       "price_egp": 69.5,
       "currency": "EGP",
       "rating": 3.8,
-      "reviews": 4380,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/618LvYlljQL._AC_UL300_SR300,200_.jpg",
+      "reviews": 4381,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/618LvYlljQL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09MFLRNLG",
       "title_ar": "صندوق مجوهرات صغير محمول من الجلد لتنظيم خواتم المجوهرات وصندوق هدايا للفتيات والنساء (متعدد الألوان)"
     },
@@ -2238,7 +2239,7 @@
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 2277,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71T8OzvE0SL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71T8OzvE0SL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BXJL1SM9",
       "title_ar": "طقم شرابات ليكرا للرجال سادة من دايس، 3 أزواج"
     },
@@ -2251,7 +2252,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 1309,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61rqG5ipTsL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61rqG5ipTsL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BVRQ3FSJ",
       "title_ar": "شورت طويل للنساء من دايس، 1 قطعة"
     },
@@ -2264,7 +2265,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 840,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51QRKFZJ8sL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51QRKFZJ8sL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BX71KXJ6",
       "title_ar": "Mobaco Men Regular Fit Polo Shirt SO100"
     },
@@ -2277,7 +2278,7 @@
       "currency": "EGP",
       "rating": 3.9,
       "reviews": 301,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81XJx6+Sq9L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81XJx6+Sq9L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0D6C1PXKV",
       "title_ar": "شورت سباحة وشنطة مطابقة للرجال من وايت ايجل، البوليستر"
     },
@@ -2290,7 +2291,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 441,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71g5PITAGzL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71g5PITAGzL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FKBYJ64T",
       "title_ar": "فرش طبي ميموري فوم لتخفيف الضغط على القدمين - نعل داخلي سيليكون طبي مزود بوسائد تدليك ومسام تهوية - مناسب للرجال والنساء ولجميع أنواع الأحذية (أسود&أسود, 41-46)"
     },
@@ -2303,7 +2304,7 @@
       "currency": "EGP",
       "rating": 3.9,
       "reviews": 985,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71bF+-HuotL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71bF+-HuotL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CSC1THJX",
       "title_ar": "قميص كلاسيكي للرجال من وايت ايجل"
     },
@@ -2316,7 +2317,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 141,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/511i8fkoUqL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/511i8fkoUqL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FTXSSZNC",
       "title_ar": "شرابات DSM-H-P للرجال من دايس (عبوة من 5 قطع)"
     },
@@ -2329,7 +2330,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 85,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41TvMFr87QL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41TvMFr87QL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0GDS42Q14",
       "title_ar": "باندانا بدون خيط للنساء من لو فوال – باندانا قطنية – باندانا أساسية أنيقة تحت الحجاب"
     },
@@ -2341,8 +2342,8 @@
       "price_egp": null,
       "currency": "EGP",
       "rating": 4.4,
-      "reviews": 74,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UkGZBb1QL._AC_UL300_SR300,200_.jpg",
+      "reviews": 75,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UkGZBb1QL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FQ2YL6LJ",
       "title_ar": "مظلة واقية من الشمس والمطر . قابلة للطي . UV ونظام فتح وغلق تلقائي . لون داخلى اسود لنتيجة عزل افضل"
     },
@@ -2355,7 +2356,7 @@
       "currency": "EGP",
       "rating": 2.9,
       "reviews": 350,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41xMbVYmgiL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41xMbVYmgiL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DK5YGWFG",
       "title_ar": "ساعة ذكية رقمية مقاومة للماء بسوار LED للاطفال، هدية عيد ميلاد، ألعاب، شخصية كرتونية ملونة سوبر هيرو للاولاد والبنات من سن 2 الى 12 سنة، متعددة الالوان (بينك)"
     },
@@ -2368,7 +2369,7 @@
       "currency": "EGP",
       "rating": 3.5,
       "reviews": 618,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HqFGroRsL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71HqFGroRsL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DFLKYMG6",
       "title_ar": "لعبة شطرنج مغناطيسية مع 20 قطعة حجر لعدد 2 إلى 4 لاعبين ممتعة للأسرة ومناسبة كهدية للأطفال والبالغين من الجنسين"
     },
@@ -2381,7 +2382,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 8865,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71U06Q9P9YL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71U06Q9P9YL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B094D42LRN",
       "title_ar": "ألعاب مونتيسوري للأولاد والبنات من سن 1 - 3 سنوات، ألعاب خشبية للفرز والتركيب للأطفال في مرحلة ما قبل المدرسة، ألعاب تعليمية، ألعاب تركيب للتعرف على الألوان، هدية أحجية تعليمية خشب"
     },
@@ -2394,7 +2395,7 @@
       "currency": "EGP",
       "rating": 4.1,
       "reviews": 571,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41sD5i-YxkL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41sD5i-YxkL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CDHKJM39",
       "title_ar": "صلصال سحري يجف بالهواء من ريزنور، صلصال ناعم وخفيف مع أدوات نحت، اكسسوارات تزيين الحيوانات، الحرف الفنية للأطفال، أفضل هدية للأولاد والبنات من سن 3-12 سنة، عبوة من 12 قطعة"
     },
@@ -2407,7 +2408,7 @@
       "currency": "EGP",
       "rating": 3.7,
       "reviews": 321,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71SpB2aOfpL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71SpB2aOfpL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B081VFXQZN",
       "title_ar": "ألعاب كرات المحيط البلاستيكية الناعمة - 50 قطعة"
     },
@@ -2420,7 +2421,7 @@
       "currency": "EGP",
       "rating": 4.1,
       "reviews": 170,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fj+3R3qxL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61fj+3R3qxL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DD8CSRFH",
       "title_ar": "دفتر تلوين ،24رسمة احترافية مناسب للكبار والاطفال الموهوبين متعدد الأشكال (اورنج)"
     },
@@ -2433,7 +2434,7 @@
       "currency": "EGP",
       "rating": 3.8,
       "reviews": 294,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61cf8XLk4AL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61cf8XLk4AL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DVS1G5SM",
       "title_ar": "مجموعة من 4/10 قطع من كيدزون على شكل زرافة مزودة بكوب شفط تلسكوبي باضاءة LED، العاب فدجيت تلسكوبية متغيرة الشكل، انابيب بوب العاب حسية للبنات والاولاد هدية للاطفال (مجموعة من 4 قطع)"
     },
@@ -2442,11 +2443,11 @@
       "rank": 7,
       "asin": "B0DXFZXW24",
       "title": "KIDSZONE Montessori Toys for 1 2 3 Years Old, Wooden Sorting & Stacking Toys for Toddlers 1-3, Education Preschool Toddler Puzzles,Best Gift. (4 shapes)",
-      "price_egp": 58.5,
+      "price_egp": 60.0,
       "currency": "EGP",
       "rating": 3.9,
       "reviews": 92,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/512oEVz7GGL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/512oEVz7GGL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DXFZXW24",
       "title_ar": "ألعاب مونتيسوري مضحكة للأطفال بعمر سنة إلى 3 سنوات من كيدززون، ألعاب خشبية للفرز والتكديس للأطفال الصغار من سن 1-3 سنوات، بازل تعليمي للأطفال في مرحلة ما قبل المدرسة (4 أشكال)"
     },
@@ -2455,11 +2456,11 @@
       "rank": 8,
       "asin": "B0DPXPVTPH",
       "title": "KIDSZONE Pop Up Kids Play Tent Ball Pit for Kids, Boys, Girls, Babies and Toddlers, Indoor/Outdoor Playhouse, Birthday Gifts, NO BALLS INCLUDED (Red Dotted)",
-      "price_egp": 244.0,
+      "price_egp": 205.0,
       "currency": "EGP",
       "rating": 3.8,
       "reviews": 159,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51oKSKWn69L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51oKSKWn69L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DPXPVTPH",
       "title_ar": "خيمة لعب منبثقة للأطفال الأولاد والبنات والرضع والأطفال الصغار من كيدز زون، بيت لعب للأماكن الداخلية والخارجية، هدايا عيد الميلاد، لا تتضمن كرات، لون أحمر منقط"
     },
@@ -2472,7 +2473,7 @@
       "currency": "EGP",
       "rating": 4.1,
       "reviews": 298,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71gLiRsN5TL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71gLiRsN5TL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09BZ53D4C",
       "title_ar": "لعبة تعليمية للاطفال من توب كولور، بطاقات فلاش مسموعة للاستماع وتعلم القراءة والكتابة للاطفال بعمر 1 2 3 4 5 6 سنوات، جهاز بطاقات تعليمية مع 112 بطاقة مزدوجة الجوانب 224 كلمة، قارئ زهري"
     },
@@ -2485,7 +2486,7 @@
       "currency": "EGP",
       "rating": 3.2,
       "reviews": 36,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81O7-DJzXGL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81O7-DJzXGL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0GKX5JJNK",
       "title_ar": "جوانتي إطلاق شبكة العنكبوت قابل للتفعيل بالحركة للأطفال، مجموعة ألعاب قاذف سبايدر مان الواقعية للعب والحفلات التنكرية من كيدز زون"
     },
@@ -2498,7 +2499,7 @@
       "currency": "EGP",
       "rating": 3.6,
       "reviews": 796,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61W3yu9wAcL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61W3yu9wAcL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B091CZJK32",
       "title_ar": "لعبة كريتيف للاطفال بتصميم فك واسنان التمساح الذي يعض الاصبع لعبة مسلية"
     },
@@ -2511,7 +2512,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 88,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51a3kr9TvLL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51a3kr9TvLL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DRTPG4VN",
       "title_ar": "سكوتر قابل للطي بثلاث عجلات للأطفال مع عجلات مضيئة وارتفاع قابل للتعديل بنظام توجيه بالإمالة آمن ومتين من ابو الجوخ"
     },
@@ -2524,7 +2525,7 @@
       "currency": "EGP",
       "rating": 3.6,
       "reviews": 633,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61QcpyGG6zL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61QcpyGG6zL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BN76V6R2",
       "title_ar": "اسبورة سحرية للأطفال مقاس 8.5 بوصة جينيريك، تابلت تفاعلي LCD للكتابة والرسم مع زر مسح فوري، العاب تعليمية للبنات والاولاد، (احمر وازرق)لوحة رسم الكترونية"
     },
@@ -2537,7 +2538,7 @@
       "currency": "EGP",
       "rating": 3.8,
       "reviews": 86,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UydA+azLL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61UydA+azLL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0D3M661RR",
       "title_ar": "عوامة أطفال بشمسية متحركة ودروكسيون وكلاكس، مادة عالية بشكل متميز وألوان زاهية، تناسب الأطفال من 6 أشهر إلى 4 سنوات للأولاد والبنات"
     },
@@ -2550,7 +2551,7 @@
       "currency": "EGP",
       "rating": 3.9,
       "reviews": 340,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/7128pXLh3QL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/7128pXLh3QL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CPQ65KQS",
       "title_ar": "لعبة قول أو اعمل - جيب من قول أميم"
     },
@@ -2563,7 +2564,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 2663,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/712t3O9xoaL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/712t3O9xoaL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CVW9DPCB",
       "title_ar": "حليب كرتون كامل الدسم من جهينة عبوة متعددة 1 لتر الترا ايدج - 6 عبوات، وفر 10 جنيه"
     },
@@ -2588,8 +2589,8 @@
       "price_egp": 119.99,
       "currency": "EGP",
       "rating": 4.0,
-      "reviews": 2516,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61WgLa-0U6L._AC_UL300_SR300,200_.jpg",
+      "reviews": 2517,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61WgLa-0U6L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08WJND94N",
       "title_ar": "زجاجة مياه من ايلانو، 12 قطعة - 1.50 لتر، قد يختلف تصميم العبوة"
     },
@@ -2602,7 +2603,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 498,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Lj8VhEgiL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61Lj8VhEgiL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0842HKTMQ",
       "title_ar": "المراعي لبن كامل الدسم 1 لتر بلاستيك"
     },
@@ -2628,7 +2629,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 2195,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71tfw2qfwUL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71tfw2qfwUL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08YY2YCRR",
       "title_ar": "زيت زهرة دوار الشمس من كريستال - 2.2 لتر"
     },
@@ -2654,7 +2655,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 944,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Bvh0sGVWL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71Bvh0sGVWL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0893KRNGQ",
       "title_ar": "حليب المراعي كامل الدسم - 1 لتر"
     },
@@ -2680,7 +2681,7 @@
       "currency": "EGP",
       "rating": 4.7,
       "reviews": 33,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71FfjE4j3AL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71FfjE4j3AL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07PDTP1TP",
       "title_ar": "خبز توست بران من ريتش بيك 500 جرام"
     },
@@ -2693,7 +2694,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 1813,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81oKs2KY29L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81oKs2KY29L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0B34QF2S2",
       "title_ar": "ارز ابيض مصري من الساعة - 1 كجم"
     },
@@ -2718,8 +2719,8 @@
       "price_egp": 118.99,
       "currency": "EGP",
       "rating": 4.1,
-      "reviews": 955,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71jfsVEvAYL._AC_UL300_SR300,200_.jpg",
+      "reviews": 956,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71jfsVEvAYL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B00UJO9UEY",
       "title_ar": "مجموعة علب مياه بيور لايف من نستله مكونة من 20 زجاجة × 0.60 لتر - قد تختلف العبوة"
     },
@@ -2732,7 +2733,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 3566,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yP+jDJ+UL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yP+jDJ+UL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07G86SNYJ",
       "title_ar": "زجاجة زيت مختلطة من حلوة، 4.5 لتر"
     },
@@ -2745,7 +2746,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 941,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61T3CRvSuOL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61T3CRvSuOL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0856Y5GJS",
       "title_ar": "قهوة نسكافيه 3 في 1 سعة 18 جرام، عبوة من 24 كيس"
     },
@@ -2758,7 +2759,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 4070,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81asxTK-mjL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81asxTK-mjL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BF5C2S2Y",
       "title_ar": "حفاضات أطفال من بامبرز، 84 قطعة، مقاس 3 (6-10 كجم)، بريميوم إكسترا كير مع لوشن الصبار"
     },
@@ -2771,7 +2772,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 1267,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71CjsVEv6hL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71CjsVEv6hL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0976ZF83N",
       "title_ar": "حفاضات أطفال من بامبرز، 70 قطعة، مقاس 5 (12-18 كجم)، مع لوشن بزيت الزيتون"
     },
@@ -2784,7 +2785,7 @@
       "currency": "EGP",
       "rating": 4.3,
       "reviews": 1069,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EOcXELmuL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61EOcXELmuL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07FPJTGSY",
       "title_ar": "حفاضات أطفال من بامبرز، 36 قطعة، مقاس 6 كبير جداً (16+ كجم)"
     },
@@ -2806,11 +2807,11 @@
       "rank": 5,
       "asin": "B07F3QHP22",
       "title": "JOHNSON'S Baby Bedtime Oil For Babies, Soothes And Moisturizes Skin, Clinically Proven Gentle Formula Ideal For Sensitive Skin, Helps Your Baby Sleep 200ML",
-      "price_egp": 139.52,
+      "price_egp": 94.95,
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 1212,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/616TcodHNXL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/616TcodHNXL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07F3QHP22",
       "title_ar": "زيت وقت النوم للأطفال من جونسون، يهدئ ويرطب البشرة، تركيبة لطيفة مثبتة سريريا مثالية للبشرة الحساسة، يساعد طفلك على النوم، 200 مل"
     },
@@ -2823,7 +2824,7 @@
       "currency": "EGP",
       "rating": 2.4,
       "reviews": 37,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NybsVfMfL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61NybsVfMfL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FTXRL9VD",
       "title_ar": "حفاضات شورت للأطفال مقاس 5، عبوة كبيرة من 66 قطعة من مولفيكس"
     },
@@ -2836,7 +2837,7 @@
       "currency": "EGP",
       "rating": 2.8,
       "reviews": 29,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71S-wlSom4L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71S-wlSom4L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0FTXP7JDX",
       "title_ar": "حفاضات شورت للأطفال من مولفيكس مقاس 4، عبوة ميجا توفير من 76 قطعة"
     },
@@ -2849,7 +2850,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 353,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YldOSwgnL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YldOSwgnL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CCSK85XZ",
       "title_ar": "حفاضات للاطفال من موفليكس، عبوة كبيرة مكونة من 70 قطعة مقاس 5"
     },
@@ -2861,7 +2862,7 @@
       "price_egp": 108.99,
       "currency": "EGP",
       "rating": 4.6,
-      "reviews": 1066,
+      "reviews": 1067,
       "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61pXJIFZKQL._AC_UL300_SR300,200_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B07F3M8CZ2",
       "title_ar": "جونسون بيبي زيت للأطفال 200 مل، أثبت معمليًا أنه معتدل ، زيت أطفال مغذي لطيف ومرطب ، تدليك لطيف للحظات الترابط مع طفلك ، لا يسبب الحساسية وخالي من المكونات القاسية على الأطفال"
@@ -2875,7 +2876,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 389,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51TsK2coKgL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51TsK2coKgL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BL3YYSVG",
       "title_ar": "شامبو وبلسم وغسول للجسم 3 في 1 سعة 200 مل من بلانكي"
     },
@@ -2888,7 +2889,7 @@
       "currency": "EGP",
       "rating": 4.1,
       "reviews": 712,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rzuyr61iL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rzuyr61iL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BH51J7YP",
       "title_ar": "حفاضات اطفال مقاس 5 ماكسي (11-18 كجم) 76 قطعة - فاين بيبي مع حواجز التسرب المزدوجة الجديدة والمحسنة!"
     },
@@ -2901,7 +2902,7 @@
       "currency": "EGP",
       "rating": 3.9,
       "reviews": 857,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/819s34kssAL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/819s34kssAL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BSXTWVVF",
       "title_ar": "حفاضات أطفال من بيبيم ناتشورال، 80 قطعة، مقاس 4 ماكسي"
     },
@@ -2914,7 +2915,7 @@
       "currency": "EGP",
       "rating": 3.7,
       "reviews": 540,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YBvoBA1rL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YBvoBA1rL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0F2NBWKP1",
       "title_ar": "سجادة مائية قابلة للنفخ لوقت الحبو للأطفال من كيدز زون- ألعاب حسية للرضع والأطفال الصغار لأنشطة التطور المبكر | مناسبة لعمر 3 إلى 12 شهر (70 × 51)"
     },
@@ -2927,7 +2928,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 641,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61YjArUZNFL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61YjArUZNFL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09V1CZZ5C",
       "title_ar": "مناديل مبللة من اكسترا هايجين، بالكيوي، 60 منديل × 3 علب"
     },
@@ -2940,7 +2941,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 476,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61hl5+ZmY6L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/61hl5+ZmY6L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09NTRK9Z5",
       "title_ar": "مناديل مبللة للاطفال 120 منديل من رونزا- رطبة -تحتوي ع فيتامين E"
     },
@@ -2953,7 +2954,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 3398,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YCecXjzVL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81YCecXjzVL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DM9M1ZLX",
       "title_ar": "مناديل وجه برستيج من فاين، 500 منديل من 3 طبقات، عبوة من 6 قطع"
     },
@@ -2966,7 +2967,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 2308,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vCkrk1ttL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71vCkrk1ttL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0D49ZSBFV",
       "title_ar": "مسحوق غسيل اوتوماتيك تاتش اوف داوني من اريال - 8 كجم"
     },
@@ -2978,8 +2979,8 @@
       "price_egp": 112.48,
       "currency": "EGP",
       "rating": 4.5,
-      "reviews": 3269,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yk8YDTa0L._AC_UL300_SR300,200_.jpg",
+      "reviews": 3270,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71yk8YDTa0L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09BMJGS9C",
       "title_ar": "مناديل تواليت فاخرة من فاين - 3 طبقات - 12 لفة"
     },
@@ -2992,7 +2993,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 2838,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71-wBdzboyL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71-wBdzboyL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DR8H372W",
       "title_ar": "مسحوق غسيل جل للغسالات الأوتوماتيك بلمسة داوني من تايد - 3.6 كيلوجرام"
     },
@@ -3005,7 +3006,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 4745,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71qZp1XZyyL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71qZp1XZyyL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0DPWVMNXM",
       "title_ar": "ايريال سائل جل منظف اوتوماتيك بلمسة داوني من ايريال - 3.6 كجم"
     },
@@ -3018,7 +3019,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 2143,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81WyC1suaoL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/81WyC1suaoL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CTMTVCW7",
       "title_ar": "مناديل ورقية للمطبخ من فاين ديل، طبقتين، 6 بكرات"
     },
@@ -3031,7 +3032,7 @@
       "currency": "EGP",
       "rating": 4.2,
       "reviews": 1432,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/513SjCBBgYL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/513SjCBBgYL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08YNPFM71",
       "title_ar": "خيط تنظيف الاسنان وخيط تنظيف الاسنان واللثة والعناية بها، 30 قطعة"
     },
@@ -3056,8 +3057,8 @@
       "price_egp": 149.0,
       "currency": "EGP",
       "rating": 4.7,
-      "reviews": 2210,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/714vtkoLtyL._AC_UL300_SR300,200_.jpg",
+      "reviews": 2211,
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/714vtkoLtyL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08WJJMXQ1",
       "title_ar": "مناديل بابيا - ورق تواليت - 3 طبقات - 12 لفة"
     },
@@ -3070,7 +3071,7 @@
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 1471,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51jiT1bIb3L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51jiT1bIb3L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0CR1FR4CT",
       "title_ar": "رول أكياس قمامة من زي باك (70× 90 سم) - وزن 1 كيلو"
     },
@@ -3083,7 +3084,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 2566,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713t6FC5blL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/713t6FC5blL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08FTZNBSJ",
       "title_ar": "منظف منزلي من فريدا، برائحة النظافة، 480 ملليلتر"
     },
@@ -3096,7 +3097,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 2070,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51ywutvuxkL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51ywutvuxkL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09NDY755K",
       "title_ar": "زيت السمك اوميجا 3 من ليميتليس ناتشورالز (2000 مجم، 30 كبسولة)"
     },
@@ -3109,7 +3110,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 1422,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41PSRDCpjrL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/41PSRDCpjrL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B09Z33Q7YV",
       "title_ar": "منظف زجاجات وحلمات بيبي ستار 380 مل"
     },
@@ -3122,7 +3123,7 @@
       "currency": "EGP",
       "rating": 4.5,
       "reviews": 1318,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rhCKfEV6L._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71rhCKfEV6L._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B08F7H8P96",
       "title_ar": "مسحوق للغسالات الأوتوماتيك تاتش اوف داوني معطر من تايد، 8 كجم، أبيض، قماش"
     },
@@ -3135,7 +3136,7 @@
       "currency": "EGP",
       "rating": 4.6,
       "reviews": 3461,
-      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71WZKFPSUoL._AC_UL300_SR300,200_.jpg",
+      "image_url": "https://images-eu.ssl-images-amazon.com/images/I/71WZKFPSUoL._AC_UL600_SR600,400_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0BSY117ZR",
       "title_ar": "فاميليا مناديل سحب عبوة متعددة 3 طبقات 500X6"
     }

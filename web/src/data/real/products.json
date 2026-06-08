@@ -1,5 +1,6 @@
 {
-  "scraped_at": "2026-06-08T08:36:59.455799+00:00",
+  "schema_version": 2,
+  "scraped_at": "2026-06-08T09:32:55.251153+00:00",
   "products": {
     "B0CPC8JMCW": {
       "asin": "B0CPC8JMCW",
@@ -396,12 +397,12 @@
           "lang": "en"
         },
         {
-          "review_id": "RLXD46RVPVU6G",
+          "review_id": "RFYBNP1JMFA71",
           "rating": 5.0,
-          "title": "جميل",
-          "body": "ترطيب عالي",
+          "title": "روعة بيطري الشعر",
+          "body": "ماسك بالالوفيرا",
           "author": null,
-          "date": "Reviewed in Egypt on 15 May 2026",
+          "date": "Reviewed in Egypt on 5 June 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
@@ -418,12 +419,12 @@
           "lang": "ar"
         },
         {
-          "review_id": "R23CG4ZM7AHA5E",
+          "review_id": "RLXD46RVPVU6G",
           "rating": 5.0,
-          "title": "بيطرى الشعر أوى",
-          "body": "حلو جدا جدا",
+          "title": "جميل",
+          "body": "ترطيب عالي",
           "author": null,
-          "date": "Reviewed in Egypt on 9 May 2026",
+          "date": "Reviewed in Egypt on 15 May 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
