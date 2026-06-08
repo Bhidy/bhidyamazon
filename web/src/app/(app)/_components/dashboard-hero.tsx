@@ -49,7 +49,7 @@ export function DashboardHero({ summary: s }: { summary: DashboardSummary }) {
           <dl className="flex flex-wrap items-center gap-2">
             {topRiser && (
               <HeroChip icon={Trophy} label="Top riser">
-                <span className="max-w-[14rem] truncate">{topRiser.titleEn}</span>
+                <span>{(topRiser.titleEn ?? "").slice(0, 20).trimEnd()}{(topRiser.titleEn?.length ?? 0) > 20 ? "…" : ""}</span>
               </HeroChip>
             )}
             <HeroChip icon={Star} label="Avg rating">
