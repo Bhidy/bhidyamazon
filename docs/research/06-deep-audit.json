@@ -1,0 +1,776 @@
+{
+  "dimensions": [
+    {
+      "dimension": "Scraper Correctness & Robustness",
+      "summary": "The scraper has a sound skeleton — a stop-on-block kill-switch, a serial full-jitter cadence, and stable-hook selectors that demonstrably extracted 120 real amazon.eg products with 98-100% field fill and correct broad+leaf BSR. BUT it is not production-hardened. Two unhardened parse paths (rank int-cast on comma-thousands ranks; rating float-cast) will raise inside parse_bestsellers and cause an ENTIRE category to be silently dropped via run.py's generic except→continue. The kill-switch is marker-only with no positive page-identity assertion (canonical=amazon.eg / ue_mid / EGP), no soft-warning for CAPTCHA-at-200, and the only fill-rate guard (len<5) accepts degraded 5-14-row lists with no alarm — so a localized challenge or interstitial that renders ≥5 /dp/ links can be ingested as data. Writes are non-atomic and run.py destructively overwrites good real data with an empty file on an early block (trends.py has a keep-on-empty guard; run.py does not). The on-disk data is already provably stale/inconsistent: products.json review bodies still contain boilerplate that the CURRENT parse.py strips (older-code artifact), meta.json disagrees with bestsellers.json (books vs no-books; 135 vs 120 products), and keywords.json is empty so the app silently serves SEED keywords while advertising a real pipeline. Anti-ban cadence basics are correct but the spec's token-bucket, burst cap, daily budget, daily cookie-jar rotation, Retry-After honoring, and exponential cooldown are all absent. AR-session isolation is correctly implemented (verified good).",
+      "findings": [
+        {
+          "severity": "Critical",
+          "area": "Parsing robustness / silent data loss",
+          "location": "scrapers/parse.py:46 (rank), :55 and :132 (rating); run.py:48-50 catch",
+          "issue": "Unhardened numeric casts raise ValueError that bubbles out of parse_bestsellers/parse_product and silently drops a whole category. Rank uses int(rank_el.get_text().lstrip('#')) with NO comma stripping, while the BSR path two lines apart DOES use .replace(',',''), proving this path was not hardened.",
+          "evidence": "Verified: int('#1,234'.lstrip('#')) -> ValueError: invalid literal for int() with base 10: '1,234'. Amazon Best Sellers badges show comma-thousands ranks (e.g. #1,234). Rating float('out of 5 stars'.split()[0]) -> ValueError. In run.py the call sits under `except Exception: continue` (lines 48-50), so the exception is swallowed and the entire category yields zero rows with only a generic [ERROR] log line.",
+          "impact": "A single product with a 4-digit rank or a non-standard a-icon-alt string wipes the whole category from that scrape. Combined with the destructive overwrite (below), a healthy category can vanish from the live UI with no alert.",
+          "fix": "Reuse the existing tolerant helpers: rank = _int(rank_el.get_text()) and rating via _num(...) (both already strip commas/non-digits and return None safely). Never raw int()/float() on scraped text. Additionally wrap each per-card extraction in try/except so one bad card cannot kill the whole list."
+        },
+        {
+          "severity": "Critical",
+          "area": "Kill-switch completeness / challenge-page ingestion",
+          "location": "scrapers/fetch.py:32-54 (_MARKERS, _is_blocked); run.py:52 (only shape guard)",
+          "issue": "The block detector is body-substring + status only. There is NO positive page-identity assertion (canonical=amazon.eg / ue_mid=ARBP9OOSHTCHU / EGP present) before a page is accepted, and NO soft-warning for the CAPTCHA-at-200 case the spec (§1.4) explicitly mandated (status 200 but 0 product nodes, or response-time spike). fetch.py never counts product nodes.",
+          "evidence": "fetch.py _is_blocked only checks status in {403,429,503} and 5 English substrings. The spec §1.4 required: 'Accept a page ONLY if status==200 and not blocked and >=20 product nodes parsed' and a soft-warning detector — neither exists. grep for ue_mid/ARBP9OOSHTCHU/canonical in scrapers/*.py: ABSENT in fetch.py and parse.py. A localized/Arabic challenge, a geo/continue-shopping interstitial, or a new markup variant that lacks these exact EN strings returns 200, passes _is_blocked, and if it renders >=5 /dp/ anchors is ingested as real data.",
+          "impact": "Garbage/challenge pages can be ingested as authoritative 'high confidence, isEstimated:false' amazon.eg facts and shown to users, defeating the entire stop-on-block guarantee. This is the exact silent-failure the spec called out as mandatory to prevent.",
+          "fix": "Before accepting any list/detail HTML, assert marketplace identity (body contains ue_mid=ARBP9OOSHTCHU OR canonical href contains amazon.eg) AND a minimum product-node count (>=20 for a bestsellers page per spec), else treat as soft-block (warn + skip, do not write). Add a response-time baseline warning. Extend markers with a title/<form action=validateCaptcha> check and Arabic challenge strings."
+        },
+        {
+          "severity": "Critical",
+          "area": "Data durability / destructive non-atomic writes",
+          "location": "scrapers/run.py:98-116 (write_text, unconditional); contrast trends.py:96-98 (keep-on-empty guard)",
+          "issue": "run.py writes bestsellers/products/meta with plain Path.write_text (non-atomic) and ALWAYS writes even when the run produced zero rows (e.g. first category trips the kill-switch -> break -> all_rows=[] -> still overwrites bestsellers.json with all:[]). It has no keep-existing-on-empty guard, unlike trends.py which explicitly returns without writing when kws is empty.",
+          "evidence": "run.py main() unconditionally calls (OUT/'bestsellers.json').write_text(...) after the loop regardless of content; no os.replace/tempfile/fsync anywhere (grep: NONE FOUND). trends.py:96 'if not kws: print([SKIP] keeping existing); return' — proving the safe pattern was known but not applied to run.py. A reader (real-store.ts) or the concurrent scrape can also observe a half-written JSON because writes are not atomic.",
+          "impact": "A single blocked run replaces a full day of good real data with an empty file, silently flipping the whole app back to SEED data. A crash mid-write corrupts the JSON, and real-store.ts readJson() swallows the parse error and returns null -> seed fallback with no signal.",
+          "fix": "Write to a .tmp sibling then os.replace() (atomic) for all four files. Refuse to overwrite bestsellers/products with empty content: if all_rows is empty (or below a sanity floor), log and KEEP the previous file, mirroring trends.py's guard."
+        },
+        {
+          "severity": "High",
+          "area": "Cross-file consistency / stale-artifact detection",
+          "location": "web/src/data/real/{meta,bestsellers,keywords,products}.json; written by run.py / trends.py with no version/schema stamp",
+          "issue": "The four data files are mutually inconsistent on disk and there is no schema version or content hash to detect staleness. The app trusts whatever is present.",
+          "evidence": "VERIFIED on disk: meta.json lists 9 categories incl. 'books' and product_count=135; bestsellers.json has 8 categories (no 'books') and all:120 — yet both carry scraped_at=2026-06-08T08:21:24, which is impossible from one main() run (now is computed once). products.json review bodies STILL contain 'Full content visible, double tap to read brief content.' even though running the CURRENT parse.py regex on that text strips it cleanly (confirmed: body.strip() != cleaned) — i.e. products.json was written by an OLDER parse.py. keywords.json is {keywords: []}, which trends.py's main() can never write (line 96 returns without writing when empty) — also a stale/foreign artifact.",
+          "impact": "Users can be shown a mix of data from different code versions and runs presented as one coherent 'as of 08:21' snapshot. meta.json (categories/product_count) is wrong relative to what the UI actually renders. Boilerplate leaks into displayed review text. Without a version stamp there is no way to catch this in CI or at read time.",
+          "fix": "Stamp every output with a schema_version and the git SHA of the scraper; write all artifacts in ONE atomic transaction within a single main() so scraped_at, categories, counts, and reviews are guaranteed coherent. At read time (real-store.ts) reject files whose schema_version != expected. Add a smoke check that meta.product_count == bestsellers.all.length."
+        },
+        {
+          "severity": "High",
+          "area": "Keywords pipeline / silent fallback mislabeled as real",
+          "location": "scrapers/trends.py:33-39 (autocomplete) + 94-98; web/src/lib/real-store.ts:221-236 (keywords) + data.ts:284-308",
+          "issue": "autocomplete() never checks HTTP status before r.json(); any 503/HTML/empty response throws and is swallowed by the bare except (line 78-79) as a per-prefix [WARN], losing that keyword silently. If ALL prefixes fail, kws={} and trends.py returns without writing — but the on-disk keywords.json is empty [], so real.keywords() returns null and the app silently serves SEED keywords while scrapedAt()/meta advertise a fresh real pipeline.",
+          "evidence": "trends.py autocomplete: r = creq.get(...); data = r.json() with no r.status_code / raise_for_status check (grep confirms no status handling in trends.py). real-store.ts:223 'if (!kw.length) return null'; data.ts:285-286 'const realKw = real.keywords(opts); if (realKw) return realKw;' then falls through to KEYWORDS seed synthesis. keywords.json on disk = {keywords: []}. The Demand Radar screen therefore shows synthetic keywords with no visible distinction from the rest of the 'real' UI.",
+          "impact": "The 'Demand Radar' feature presents fabricated seed keywords as part of a platform branded as running on REAL amazon.eg data — a correctness/trust violation. Block or markup change on completion.amazon.co.uk degrades to fake data with zero operator signal.",
+          "fix": "In autocomplete(), check r.status_code==200 and content-type JSON before .json(); on block, raise to trip a stop-on-block like run.py. Distinguish 'no real keywords available' from 'real keywords empty' so the UI can hide the section or badge it, rather than silently swapping in seed data. Never let an empty keywords.json coexist with a fresh scraped_at."
+        },
+        {
+          "severity": "High",
+          "area": "Fill-rate health monitor (spec §2.0) missing",
+          "location": "scrapers/run.py:52 (only guard); no telemetry/scrape_runs record anywhere",
+          "issue": "The spec mandated a fill-rate health monitor (alert if title fill-rate < 90% or ASIN count < 5) and a scrape_runs record. The only implemented check is len(rows) < 5 -> skip. Lists of 5-14 rows (a healthy page has 30) are accepted silently, no title-fill-rate is computed, and meta.json records only SUCCEEDED categories — failures and partials are invisible.",
+          "evidence": "run.py:52 'if len(rows) < 5: [WARN] skipping'. No code computes title/price fill-rate as a health signal; grep for fill.rate/health/alarm/scrape_run in scrapers/*.py finds only the comment on line 52 and the unrelated 'health' category. meta.json is built from bestsellers.keys() (successes only); there is no errors[] or per-category expected-vs-got.",
+          "impact": "Amazon markup drift that halves the parsed rows, or a partial render, ingests degraded data and shrinks the leaderboards with no operator alarm. Silent quality erosion — the exact failure mode the spec's health monitor was meant to catch.",
+          "fix": "Compute and log per-page fill-rate (parsed/expected, title-fill %, price-fill %); treat <90% title-fill or <20 nodes on a bestsellers page as a soft failure that warns and does NOT overwrite. Emit a scrape_runs/meta.errors record listing every category attempted with status (ok/partial/blocked/failed) so partials are observable."
+        },
+        {
+          "severity": "Medium",
+          "area": "Kill-switch scope on secondary fetches",
+          "location": "scrapers/run.py:58-64 (AR pass) and the autocomplete loop in trends.py:74-92",
+          "issue": "A Blocked on the Arabic title pass is caught by a generic `except Exception` and only logged as [WARN] — the run CONTINUES hammering subsequent categories after Amazon has started challenging. Only the EN bestsellers and EN detail fetches honor stop-on-block via the dedicated except fetch.Blocked branch.",
+          "evidence": "run.py:59 ar_html = fetch.fetch(...lang='ar') is inside `try/except Exception as e: [WARN]` (lines 58-64). fetch.Blocked is a subclass of Exception, so an AR-side block does NOT break the run — it proceeds to the next category and keeps requesting. The EN paths (lines 45-47, 83-85) correctly break. Asymmetric kill-switch.",
+          "impact": "Once amazon.eg begins blocking, the AR pass swallows the signal and the scraper keeps issuing requests, raising abuse score on the user's home IP instead of stopping — undermining the stop-on-block safety the project leans on.",
+          "fix": "Catch fetch.Blocked explicitly in the AR pass and re-raise / break the outer loop (or set a global stop flag) exactly like the EN paths, so ANY block anywhere halts the cycle."
+        },
+        {
+          "severity": "Medium",
+          "area": "Anti-ban cadence vs spec",
+          "location": "scrapers/fetch.py:57-63 (_throttle); plist:14-15; spec §1.2-1.4",
+          "issue": "Core cadence is correct (serial, single connection, full-jitter 10-18s, never <8s) but several spec-mandated anti-ban controls are absent: token bucket (capacity 3, 1/12s), burst cap (<=20/10min), daily budget (150-200), daily cookie-jar rotation, Retry-After honoring, and exponential cooldown/strikes (30m/2h/6h/24h). The launchd schedule is fixed :07/:13 rather than per-run randomized minute offsets.",
+          "evidence": "_throttle implements only a per-request uniform(10,18) sleep. grep for token/bucket/refill, retry-after, strike/cooldown/2**, rotate/session-id: all ABSENT. _JAR is a module global never reset per day (only saved because the process exits each cron run). plist Minute=7 and Minute=13 are static.",
+          "impact": "On a single residential home IP the missing burst/daily caps and stale-session (no daily rotation) raise long-run ban risk; lack of Retry-After/cooldown means after a manual re-run the scraper could re-hit during Amazon's cooldown window. Lower severity because the per-request jitter + serial + small daily volume (~30-40 fetches) already keeps cadence conservative.",
+          "fix": "Add a token-bucket limiter and a hard daily fetch counter that aborts when exceeded; rotate the cookie jar (new session-id) once per day; honor Retry-After and apply the spec's exponential cooldown on a hard trip; randomize the launchd minute offset per install or add in-script startup jitter."
+        },
+        {
+          "severity": "Low",
+          "area": "Parsing edge cases (NBSP, out-of-stock, dedupe) — mostly correct",
+          "location": "scrapers/parse.py:19 (_num NBSP), :43-44/:82 (dedupe), :52-53 (price null); real data",
+          "issue": "Most edge cases are handled well and verified, with two minor residuals: (a) currency is hard-coded 'EGP' with no validation against the page (acceptable given forced locale, but not asserted); (b) review body can be '' (empty string) which is stored as-is and later surfaces as an empty review card.",
+          "evidence": "VERIFIED GOOD: _num strips \\xa0 NBSP (line 19); dedupe via seen set produced 120 unique/120 asins on real data; out-of-stock price stored as null and row kept (117/120 priced, 3 nulls present and retained); BSR captured both broad+leaf correctly (e.g. B0CPC8JMCW -> Electronics #1 + USB Cables #1). Residual: parse.py:136 body defaults to '' and is stored without a non-empty guard; currency literal 'EGP' at lines 75,169.",
+          "impact": "Minor: an empty-body review renders as a blank quote; a future non-EGP locale slip would be mislabeled EGP. No data-integrity threat today.",
+          "fix": "Drop reviews whose cleaned body AND title are both empty; derive currency from the page price string (it already prefixes 'EGP') or assert it, rather than hard-coding."
+        },
+        {
+          "severity": "Low",
+          "area": "Trends fallback / pytrends monkeypatch fragility",
+          "location": "scrapers/trends.py:41-70 (trends_rising_tags)",
+          "issue": "The Google Trends enhancement monkeypatches urllib3 Retry.__init__ at runtime and swallows all errors. It is best-effort and correctly skips on failure, but the noise filter the spec required (drop rising rows lacking the seed token / brand whitelist) is only partially present — it keeps a rising query only if it already exists as an autocomplete key, which is reasonable but means most Trends 'rising' signal is discarded silently.",
+          "evidence": "trends.py:65 'if q in kws: kws[q]['trend']='rising'' — a Trends rising term that is not already an autocomplete suggestion is dropped. The monkeypatch (lines 47-53) mutates a third-party class globally. Whole function is under one try/except (line 68) printing [SKIP] on any error. Given keywords.json is empty anyway, this path currently contributes nothing.",
+          "impact": "Low: Trends enrichment is honestly optional and labeled; worst case it adds zero rising tags. The global monkeypatch could theoretically affect other urllib3 users in the same process, but the process is single-purpose.",
+          "fix": "Scope the Retry patch with try/finally to restore the original, or pin a pytrends/urllib3 combo that doesn't need it. Reconsider whether Trends rising terms not in the autocomplete set should still surface (with provenance) rather than being dropped."
+        }
+      ],
+      "verified": [
+        "Kill-switch raises Blocked on HTTP 403/429/503 and on 5 English challenge body-markers (fetch.py:50-54); EN bestsellers loop (run.py:45-47) and EN detail loop (run.py:83-85) both `break` on Blocked — stop-on-block works for the primary fetch paths.",
+        "Anti-ban cadence core is correct: serial single-connection requests, full-jitter delay random.uniform(10,18)s enforced between requests, documented never <8s (fetch.py:57-63).",
+        "AR-session isolation is correctly implemented and NOT polluting EN: response cookies are persisted into _JAR only when lang=='en' (fetch.py:78), and the AR request uses a local {**_JAR, lc-acbeg:ar_AE} snapshot so Arabic Set-Cookie never mutates the canonical English session.",
+        "NBSP handling is correct: _num replaces \\xa0 before the numeric regex (parse.py:19); verified prices parsed cleanly from 'EGP\\xa049.99'-style strings.",
+        "Out-of-stock handling is correct: missing price element -> price=None and the row is KEPT (parse.py:52-53); verified on real data (117/120 priced, 3 nulls retained, 120 rows total).",
+        "Dedupe is correct: `seen` set keyed on ASIN prevents the ~3x card re-renders from duplicating; verified 120 unique ASINs / 120 rows on live data.",
+        "BSR extraction works and is a genuine (non-artifact) parse: captures both broad and leaf ranks from the .eg table via the 'Best Sellers Rank' text anchor (parse.py:118-127); verified B0CPC8JMCW -> Electronics #1 + USB Cables #1, B098TYYKV6 -> Fashion #1 + Men's Boxer Shorts #1.",
+        "Selectors use stable hooks, not hashed classes: id^=p13n-asin-index / #gridItemRoot, span.zg-bdg-text, p13n-sc-* substring, data-hook camelCase values, /dp/([A-Z0-9]{10}) regex (parse.py:34-67,130-146) — matches the spec's stability rule.",
+        "trends.py has a correct keep-existing-on-empty guard: if kws is empty it returns WITHOUT writing keywords.json (trends.py:96-98), preventing destruction of prior good keyword data.",
+        "Bestsellers list fill rates on the current real file are healthy: title 100%, rating 100%, reviews 100%, rank 100%, price 98%, title_ar 100%, image_url 100% (120 rows)."
+      ],
+      "notVerified": [
+        "Whether the kill-switch trips correctly against a LIVE amazon.eg block (503/CAPTCHA) — not exercised; the instruction forbids fetching amazon.eg, so block behavior is verified only by code reading, not runtime.",
+        "Whether completion.amazon.co.uk autocomplete currently returns real EG suggestions — keywords.json on disk is empty and trends.py was not run; the live endpoint behavior is unverified (could be blocked, changed, or rate-limited).",
+        "Whether the pytrends monkeypatch + TrendReq path actually succeeds against Google Trends today — the [SKIP] path swallows failures and no run output was available to confirm.",
+        "Whether parse_product BSR/reviews selectors still match the CURRENT live .eg markup — validated only against the on-disk products.json, which is provably stale (written by older parse.py), so current-markup compatibility is unconfirmed.",
+        "The exact root cause and timeline of the meta.json vs bestsellers.json divergence (books/135 vs no-books/120) and the empty keywords.json — confirmed inconsistent on disk, but I could not run the scraper to reproduce which run wrote which file (a concurrent refresh is active).",
+        "Real-world ban risk of the current cadence on the user's residential IP — cannot be measured without live runs; assessed only against the spec's documented thresholds.",
+        "Behavior of run.py when a category renders 5-14 rows in practice (degraded ingest) — reasoned from code (len<5 guard) but not observed live."
+      ],
+      "verdict": "no-go"
+    },
+    {
+      "dimension": "Data Seam Integrity (web/src/lib/data.ts + real-store.ts + types.ts)",
+      "summary": "The seam is well-architected: data.ts is the single import surface, all 8 read functions preserve their exact public signatures, and real-store.ts projects the scraper JSON onto the unchanged types.ts domain model. demandBand is correctly category-relative in BOTH paths (control C1 preserved), BSR correctly uses the leaf-category rank (bsr[last]), and provenance/confidence flags are honest on the real path. However, the dimension's core fear — \"seed silently leaks alongside real data\" — is REALIZED in two confirmed ways. (1) getKeywords falls back to fabricated SEED keywords whenever real keywords.json is empty (it currently is: keywords:[]), so the live dashboard/Demand-Radar shows REAL amazon.eg products next to SEED iphone/laptop keywords stamped with a google_trends provenance badge. (2) Non-atomic scraper writes (run.py write_text, no tmp+rename) against a 140KB file, combined with a bare try/catch in real-store that swallows JSON.parse errors and returns null, means a concurrent scrape can flip available() to false mid-request on dynamically-rendered pages, silently serving an ENTIRE seed page. Additionally getWatchlist() hardcodes three seed ASINs and resolves them with getProduct(asin)! — under real data these return undefined, producing WatchlistItem.product === undefined, which the WatchCard client component dereferences (p.bsr) and will crash. The seed-vs-real gate is all-or-nothing (zero ASIN overlap) and the spec's claim that currentBsr/riseScore/toProduct \"now feed real snapshots\" is false — those helpers are dead code on the real path. Verdict: conditional-go, gated on the keyword leak, the watchlist null-product crash, and atomic-write/parse-error handling.",
+      "findings": [
+        {
+          "severity": "Critical",
+          "area": "Seed leaks into real data (keywords)",
+          "location": "web/src/lib/data.ts:284-308 (getKeywords) + web/src/lib/real-store.ts:221-236 (keywords) + web/src/data/real/keywords.json",
+          "issue": "getKeywords delegates to real.keywords(), which returns null when the real keyword array is empty (real-store.ts:223 `if (!kw.length) return null`). data.ts:285-286 treats null as 'no real data' and falls through to the SEED keyword synthesis. The live keywords.json currently contains `\"keywords\": []`, so RIGHT NOW the app emits fabricated seed keywords (iphone/laptop/etc. with synthetic demandScore and trend) on the /keywords page AND in getDashboardSummary().topKeywords — sitting next to REAL amazon.eg best-sellers. The seed branch even stamps provenance source 'amazon_autocomplete' / note 'Estimated demand', i.e. fake data wearing a real-looking provenance badge. This is the exact null-vs-seed fallback hazard: real-empty is indistinguishable from real-absent, and the user sees invented search demand presented as a live signal.",
+          "evidence": "real-store.ts:223 `if (!kw.length) return null;`. data.ts:285 `const realKw = real.keywords(opts); if (realKw) return realKw;` then builds from seed KEYWORDS. keywords.json verified on disk: {\"scraped_at\":\"2026-06-08T08:27:46Z\",\"keywords\":[]}. trends worker has not populated it, so the fallback is active in production, not theoretical.",
+          "impact": "Users researching demand see entirely fabricated keyword demand scores mixed into an otherwise-real dashboard, with a provenance badge that implies they came from Amazon/Trends. Directly violates the platform's stated Critical control that an estimate must never be presented as ground truth, and is undetectable to the user.",
+          "fix": "When ANY real data is present (real.available() === true), getKeywords must NOT fall back to seed. Return an empty Keyword[] (and let the UI show an honest 'Demand signal pending — Google Trends not yet collected' empty state) instead of seed synthesis. I.e. gate the seed branch on `if (!real.available())`, mirroring the other 7 functions, rather than on whether the keyword array specifically is non-empty."
+        },
+        {
+          "severity": "Critical",
+          "area": "Watchlist null-product crash under real data",
+          "location": "web/src/lib/data.ts:354-360 (getWatchlist) → web/src/app/(app)/watchlists/_components/watch-card.tsx:35-41",
+          "issue": "getWatchlist() hardcodes seed ASINs ['B0EG0XIAM2','B0EG0PHIL6','B0EG0LORE9'] and builds each item as `product: getProduct(asin)!` with a non-null assertion. Under real data, getProduct delegates to real.product(asin), which searches bs.all then pr.products and returns undefined for any ASIN in neither. Verified: all three seed ASINs are absent from both real files (zero overlap between the 9 seed ASINs and the 120 real ASINs). So WatchlistItem.product is undefined at runtime; the `!` only silences the compiler. WatchCard then does `const p = item.product; ... demandBandFromBsr(p.bsr)` → reading .bsr off undefined → TypeError, crashing the /watchlists route.",
+          "evidence": "data.ts:355-359 maps the 3 literals to `product: getProduct(asin)!`. real-store.ts:141-157 product() returns undefined when the ASIN is in neither bs.all nor pr.products. Python check: seed∩real ASIN set = empty; B0EG0XIAM2/PHIL6/LORE9 in_real_bestsellers=False, in pr.products=False. watch-card.tsx:37 `const p = item.product;` then :41 `demandBandFromBsr(p.bsr)`.",
+          "impact": "The Watchlists page (a core authenticated screen) throws a runtime error and fails to render as soon as real data is live — a hard regression caused purely by the seam switch from seed to real. The non-null assertion converts a knowable undefined into a production crash.",
+          "fix": "getWatchlist must filter out unresolved products: `.map(asin => ({asin, addedAt, product: getProduct(asin)})).filter(x => x.product)` and type product as Product (non-optional only after the filter), OR seed the watchlist from real ASINs that actually exist (e.g. the first few of getBestSellers()). Drop the `!` assertion entirely."
+        },
+        {
+          "severity": "High",
+          "area": "Sync fs read + non-atomic write = silent seed fallback / torn read",
+          "location": "web/src/lib/real-store.ts:28-36 (readJson) & 40-53 (store) vs scrapers/run.py:98-105 (write_text)",
+          "issue": "The scraper writes each JSON in place via `(OUT/'bestsellers.json').write_text(json.dumps(...))` — truncate-then-write, no temp-file + atomic rename. bestsellers.json is ~140KB. The audit context states a scrape refreshes these files concurrently. On pages that render dynamically per-request (dashboard, bestsellers, products, movers, search, keywords all `await searchParams` → dynamic), real-store does a synchronous readFileSync+JSON.parse at request time. If a request lands mid-write, JSON.parse throws on the partial file; readJson's bare `catch { return null }` swallows it, store() caches bs:null, and available() returns false → the request silently serves the ENTIRE page from SEED. There is no error, log, or 'stale data' signal — a parse failure is laundered into 'no real data → use seed'.",
+          "evidence": "real-store.ts:33 `} catch { return null; }` (no logging, no rethrow). available() (l.56) keys solely off `store().bs?.all?.length`, so null bs == 'fall back to seed'. run.py:98-99 `(OUT / 'bestsellers.json').write_text(json.dumps(...))` — no os.replace/tmp. mtime-cache (l.42-51) reads all three files together on any mtime change, widening the window where a half-written file is parsed.",
+          "impact": "During each twice-daily scrape window, dynamically-rendered requests can intermittently flip the whole UI from real to seed with no observable signal, mixing fabricated rankings/products into a 'real data' deployment. Combined with finding 1 this means seed can surface even when the operator believes the site is fully real.",
+          "fix": "(a) Make scraper writes atomic: write to a .tmp then os.replace() onto the final name (replace is atomic on the same filesystem). (b) In readJson, distinguish parse failure from file-absent: on a JSON.parse throw, log/surface it and prefer the last good in-memory cache rather than returning null (which is interpreted as 'no real data'). Do not let a transient parse error silently demote the whole app to seed."
+        },
+        {
+          "severity": "Medium",
+          "area": "Latent category mismapping in product() fallback",
+          "location": "web/src/lib/real-store.ts:145-155",
+          "issue": "product()'s enriched-only fallback constructs a synthetic row with `category: \"electronics\"` hardcoded when an ASIN exists in products.json but not in bs.all. That ASIN's real department is unknown at that point, so it would be force-labeled Electronics, giving a wrong categoryNode and (via CATEGORY_BY_NODE) a wrong categoryName, and the fallback also omits title_ar (Arabic title silently dropped). Currently latent — all 8 enriched ASINs are also in bs.all, so the branch isn't exercised — but it will misfire the moment enrichment outlives a best-seller listing (a product drops off the chart but its detail page is still cached in products.json).",
+          "evidence": "real-store.ts:152 `category: \"electronics\"` literal in the fallback object; no title_ar key passed. Verified products.json asins-not-in-bestsellers = [] today, so the path is unreached but live in code.",
+          "impact": "A beauty/home/fashion product that has rolled off the best-seller list would be mislabeled as Electronics on its detail page and lose its Arabic title — a real-data correctness defect that surfaces only over time, making it easy to miss in testing.",
+          "fix": "Derive the category from the enriched product's own leaf BSR (the bsr array's broad/department entry already names e.g. 'Beauty'/'Home & Kitchen') and map it to a node, or carry the source category on the enriched record. At minimum pass through enr's title_ar/brand and avoid a hardcoded department."
+        },
+        {
+          "severity": "Low",
+          "area": "O(n^2) seam access on list pages (per-row fs+find)",
+          "location": "web/src/components/app/rank-row.tsx:13 → web/src/lib/data.ts:66-67 → web/src/lib/real-store.ts:167-176 (bsrHistory), 75-83 (posMap), 128-134 (bestSellers)",
+          "issue": "RankRow calls getBsrHistory(p.asin) for every row to draw a sparkline. On the real path this runs real.bsrHistory(), which does a linear `bs.all.find(asin)` (O(n)) plus three statSync calls via store() per invocation. The bestsellers page renders up to all rows (120 today), so one page does ~120 linear scans of the 120-item array (O(n^2)) and ~360 statSync syscalls. Functionally correct, but it scales poorly and re-stat's the filesystem on every row.",
+          "evidence": "rank-row.tsx:13 `getBsrHistory(p.asin).points...` inside a component rendered per row. real-store.ts:170 `(store().bs?.all ?? []).find((r)=>r.asin===asin)` per call; store() (l.40-51) runs statSync x3 each call (cache short-circuits the parse, not the stat). bestSellers() returns the full list (no default limit) at data.ts:177-186.",
+          "impact": "Wasted CPU/syscalls per request on the largest list pages; the cost grows quadratically with catalog size once category coverage expands beyond 120 items. Also the real bsrHistory returns a single point (length-1 series), so the sparkline is degenerate regardless.",
+          "fix": "Pass the already-loaded BsrHistory/series down from the page (which already holds the rows) instead of re-fetching per row, or memoize an asin→row index map in real-store. Given real history is length 1, consider hiding the spark until >=2 snapshots exist."
+        },
+        {
+          "severity": "Low",
+          "area": "Spec-vs-code drift: seed BSR helpers are dead on the real path (no functional bug)",
+          "location": "web/src/lib/data.ts:98-138 (currentBsr/riseScore/demandBandForAsin) & 140-218 (toProduct/buildRow); docs/research/04-real-pipeline-spec.md:311",
+          "issue": "The pipeline spec asserts currentBsr/riseScore/toProduct/demandBandForAsin are kept 'as-is — they already operate on whatever BSR series they're given; now fed real snapshots instead of synthesized ones.' In the actual code, every real-data entry point (getProduct/getBestSellers/getMovers/getReviews/getSentimentSummary/getBsrHistory/searchProducts/getKeywords) short-circuits to real-store BEFORE these helpers run, and real-store builds products/bands independently. So under real data these seed helpers are never invoked — they are NOT 'fed real snapshots'; they are inert. demandBandForAsin is exported but only self-referenced. No runtime bug, but the integration narrative misrepresents how the real path computes demand band and BSR (real uses bandFromPos over the committed list position; seed uses currentBsr percentile). Worth flagging because it means there are TWO independent demand-band implementations to keep in sync (data.ts demandBandForAsin and real-store bandFromPos) — they currently agree on thresholds (0.2/0.45/0.75) but could silently diverge.",
+          "evidence": "data.ts:166-167,178-179,189-190,etc. each begin `if (real.available()) return real.<fn>(...)`. real-store bandFromPos (l.66-73) duplicates the 0.2/0.45/0.75 cutoffs from data.ts demandBandForAsin (l.130-133). grep shows currentBsr/riseScore/toProduct referenced only within data.ts seed branches.",
+          "impact": "Maintenance hazard: the demand-band thresholds are defined in two places; a future edit to one (e.g. data.ts) would not affect the live real path, producing inconsistent bands between seed-fallback and real renders. Also the spec overstates code reuse, which can mislead reviewers into thinking the helpers are load-bearing for real data.",
+          "fix": "Either route real-store's band logic through the exported demandBandForAsin thresholds (single source of truth), or add a shared constant for the cutoffs imported by both. Update spec §5.4 to state the real path uses real-store.bandFromPos, not the seed helpers."
+        }
+      ],
+      "verified": [
+        "All 8 public seam functions preserve their exact signatures across the seed→real switch — getBsrHistory(asin):BsrHistory, getProduct(asin,period?):Product|undefined, getBestSellers(q):RankingRow[], getMovers(q):RankingRow[], getReviews(asin,opts):Review[], getSentimentSummary(asin):SentimentSummary, getKeywords(opts):Keyword[], searchProducts(query,period?):Product[]. real-store exposes matching return types and no screen/type changes are required (data.ts:66,165,177,188,220,245,284,310).",
+        "Delegation pattern is correct for 7 of 8 functions: each does `if (real.available()) return real.<fn>(...)` then falls to seed, and real.available() is a single honest gate keyed on bs.all.length (real-store.ts:55-57).",
+        "DemandBand is category-relative in BOTH paths (control C1 preserved): seed demandBandForAsin ranks within p.categoryNode peers (data.ts:121-134); real bandFromPos ranks within the per-category list position from bs.categories (real-store.ts:66-83). Neither applies a global cross-category threshold. Verified all 120 real ASINs are present in bs.categories, so posMap resolves a band for every row (no spurious 'unknown').",
+        "BSR uses the LEAF rank, not the list/department rank: real.leafBsr returns bsr[bsr.length-1] (real-store.ts:85-88), and the real data's bsr array is ordered [department, leaf] (e.g. B0CPC8JMCW = [Electronics #1, USB Cables #1]); rowToProduct uses leaf.rank for product.bsr (l.104). Matches the spec's 'leaf rank is the meaningful key'.",
+        "Provenance/confidence is honest on the real path: facts (price/rating/reviews) carry confidence 'high', isEstimated false (real-store.ts:108-113); BSR snapshot history carries 'medium' (l.175); sentiment carries 'low' + isEstimated true with a truncated-sample note (l.211-216); fetchedAt is sourced from the real scraped_at, not a fabricated time (l.62-63).",
+        "titleAr is genuinely sourced from a separate Arabic fetch, not machine-translated: run.py:59 fetches /-/ar/gp/bestsellers/<slug> and run.py:66 joins ar_titles onto each row by ASIN; real-store maps row.title_ar straight through (l.96). The seam correctly keeps titleEn/titleAr independent (types.ts:50-51). The fact that current data shows identical EN/AR strings is a seller-localization artifact (these sellers used Latin titles on both locales), not a seam defect.",
+        "mtime cache busts correctly on data refresh: store() sums statSync mtimeMs across all three files and rebuilds the in-memory cache when the sum changes (real-store.ts:40-53); a missing file contributes 0 via catch. This correctly picks up a fresh scrape on the next request for runtime-rendered pages.",
+        "Category node mapping is consistent: all 8 real row.category strings (electronics/beauty/home/fashion/toys/grocery/baby/health) have matching CATEGORY_BY_NODE entries, so categoryName resolves for every real row (real-store.ts:99).",
+        "getMovers honestly returns [] on the real path (real-store.ts:137-139) because .eg Movers is empty and only 1 daily snapshot exists — no fabricated velocity, matching the spec's derived-movers decision. (Consumer impact noted: product page moverRow is always undefined under real data, so demand-band/gain context there defaults to 'unknown'/0 — acceptable but worth a UI empty state.)"
+      ],
+      "notVerified": [
+        "Whether the fs reads actually succeed in a real `next build` + `next start` on Vercel. DEPLOY.md:26-27 explicitly states the recommended model reads JSON 'via fs at build time' and relies on committed data + redeploy. I could NOT run the build (prohibited by task). The risk: pages without searchParams (watchlists, alerts) are static-prerenderable and would snapshot data into HTML at build (freezing the mtime cache and the live-refresh story for those routes); and process.cwd()-relative DIR (real-store.ts:25) must resolve to the app root and src/data/real/*.json must be included by Next output-file-tracing in a deployed bundle. Neither verified without a build.",
+        "Runtime behavior of the bare `catch{}` against a genuinely half-written 140KB file — I confirmed the code path and non-atomic write statically, but did not stage a concurrent write to observe an actual mid-write JSON.parse throw (task prohibits running the refreshing scrape/build).",
+        "Whether getReviews/getSentimentSummary degrade gracefully when bestsellers.json is present but products.json is absent or stale (available() only checks bs.all). Statically the reviews list defaults to [] (real-store.ts:180) and sentiment to zeros, which appears safe, but not executed.",
+        "The actual rendered output of the seed-keyword leak on the live /keywords page and dashboard (I traced it deterministically from keywords.json:[] → real.keywords()=null → seed branch, but did not render the page).",
+        "Concurrency/torn-read on a production server under real load — characterized by code inspection only, not reproduced."
+      ],
+      "verdict": "conditional-go"
+    },
+    {
+      "dimension": "Calculation Engine re-audit (regression check) — web/src/lib/fees.ts + calculator-form.tsx",
+      "summary": "Re-derived the 14% VAT / referral-tier / FBA-band / break-even math by hand and against 40,000 randomized cases; the engine reproduces every documented formula with NO arithmetic, sign, or VAT regression. The VAT model is correct and subtle in the right way: consumer price is VAT-inclusive (registered revenue = price/1.14, fees.ts:130), 14% VAT is charged on Amazon's fees (fees.ts:136-137), and the registered-seller reclaim is netted via `feeVatCost = referralVat + fbaVat - reclaimableVat` (fees.ts:138-140) where reclaimableVat is the round2 of the SUM — a deliberate construction that makes the residual cost exactly 0 for registered sellers (verified 0/3000+ across all FBA rungs) and makes the on-screen line items reconcile to the headline net profit (0 mismatches / 20,000 random cases) and the cost lines reconcile to Total cost (0 / 10,000). Piecewise referral, min-fee floor, FBA ~350 price-band split, and the bisection break-even with can-never-break-even NaN guard all match the spec (01-product-spec.md:224-228). Fees are clearly and persistently disclosed as estimates (constants.ts:116 DISCLOSURE.estimatedFeesEn shown in a ConfidenceBadge=medium at the result header, in the footer with the as-of date, and as a runtime warning pushed into result.warnings at fees.ts:151-153; the products-page preview is labeled 'Est. referral fee ≈', products/[asin]/page.tsx:225). The only real spec deviations are a Grocery min-fee that should not exist and scope reductions (missing Jewelry tier; omitted storage/subscription/ads/returns inputs) — none of which produces a wrong number for an input the UI actually accepts, except the small Grocery floor.",
+      "findings": [
+        {
+          "severity": "Low",
+          "area": "Referral fee — Grocery minimum (spec deviation / slight over-charge)",
+          "location": "web/src/lib/fees.ts:47 (Grocery rule) vs docs/research/01-product-spec.md:224",
+          "issue": "The Grocery referral rule sets `minFeeEgp: 3`, but the authoritative spec explicitly states Grocery has NO minimum referral fee (line 224: 'Grocery 4%≤250 + 10% above, no minimum'). computeReferralFee applies the floor at fees.ts:95, so any grocery item whose computed referral (4% of price) is below EGP 3 — i.e. consumer price below EGP 75 — is over-charged up to ~EGP 3 of fee, slightly understating net profit and overstating break-even for cheap grocery items.",
+          "evidence": "Worked case: price 50 EGP grocery → raw referral = 50×0.04 = 2.00, but engine returns max(2.00, 3) = 3.00 (reproduced). Spec line 224 says no minimum for Grocery. All other categories' min-fees (5, and Books 3) are consistent with the 'max(rate·P, 5 EGP)' spec wording; only Grocery is called out as min-exempt.",
+          "impact": "Bounded, small: error ≤ EGP 3 per unit and only on grocery items priced under ~75 EGP. Direction is conservative (slightly pessimistic margin), so it cannot make a losing deal look profitable. Not a VAT or sign error.",
+          "fix": "Set Grocery `minFeeEgp: null` in DEFAULT_FEE_SCHEDULE (fees.ts:47) to match the spec; computeReferralFee already handles null via the `!= null` guard (fees.ts:95). Then spot-confirm against sell.amazon.eg/pricing per the file's own asOf discipline."
+        },
+        {
+          "severity": "Low",
+          "area": "Coverage — Jewelry tier specced but absent",
+          "location": "web/src/lib/fees.ts:29-58 (referral array) and web/src/lib/constants.ts:25-38 (CATEGORIES)",
+          "issue": "The spec lists Jewelry as a tiered referral category (19% ≤5,000 EGP + 5% above, 01-product-spec.md:224 / 03-feasibility-verdict.md:97), but Jewelry is absent from both the fee schedule and the user-selectable CATEGORIES list. Grep confirms zero occurrences of 'jewel' anywhere in lib/ or app/.",
+          "evidence": "`grep -rni jewel web/src/lib web/src/app` → NONE. The schedule has 12 categories; Jewelry is not one of them, and CATEGORY_BY_NODE has no jewelry key, so the calculator cannot model the highest-referral category Amazon EG charges.",
+          "impact": "No wrong number is ever shown (the category can't be selected), but a real seller researching jewelry cannot use the tool and would be silently routed to the generic 'home'/12% fallback only if some upstream code passed an unknown node. For the calculator UI specifically this is a coverage gap, not a miscalculation.",
+          "fix": "Add the Jewelry ReferralRule ({uptoEgp:5000, rate:0.19},{uptoEgp:null, rate:0.05}) and a corresponding CATEGORIES entry, or document the omission. Lower priority than confirming the existing rates."
+        },
+        {
+          "severity": "Low",
+          "area": "Implemented scope vs specced calculator inputs",
+          "location": "web/src/app/(app)/calculator/_components/calculator-form.tsx:170-192 vs docs/research/01-product-spec.md:220 (E1)",
+          "issue": "Spec E1 defines the calculator inputs to include months-in-storage, monthly subscription (Pro plan), units/month, ad cost/unit, and returns % — plus EasyShip/MFN fulfilment. The implemented form supports only sell price, COGS, category, FBA/FBM, FBA size tier, inbound, misc, and the VAT toggle. Storage rate (storageEgpPerCuFtMonth:4) exists in the schedule (fees.ts:28, types.ts:180) but is never consumed by computeProfit.",
+          "evidence": "computeProfit (fees.ts:120-181) references vatRate, referral, fbaLadder, fbaPriceBandEgp only; `storageEgpPerCuFtMonth` is defined but has zero readers (no grep hit outside the schedule/type). The form has no storage/ads/returns fields.",
+          "impact": "Not a calculation error — every formula the engine DOES compute is correct. It is a completeness gap: 'misc cost' is offered as the catch-all for ad/returns/storage amortisation (hint at line 369), so users can still approximate, but a naive user may omit storage/ad drag and overstate profit. Acceptable as an MVP scope reduction if documented.",
+          "fix": "Either wire storage/ads/returns as first-class inputs (storage formula already has a rate to use), or explicitly state in the UI/disclosure that storage, ad spend, and returns must be folded into 'Misc cost'. The current 'misc' hint partially does this."
+        }
+      ],
+      "verified": [
+        "14% VAT model is correct end-to-end: VAT-registered net revenue = price/(1+vatRate) (fees.ts:130); 14% VAT charged on referral and FBA fees (fees.ts:136-137); reclaim netted so registered fee-VAT cost = 0, non-registered fee-VAT is a real cost (fees.ts:138-140). Matches spec lines 99/206/226 exactly.",
+        "Registered-seller fee-VAT residual is EXACTLY zero for all fee combinations: round2(refVat)+round2(fbaVat)-round2(refVat+fbaVat) tested across 0–3000 EGP referral × all 8 FBA fee values → 0 nonzero cases. The 'subtract the rounded sum' design (not sum of rounded parts) is the reason and is deliberately correct.",
+        "On-screen line items reconcile to the headline: netRevenue − referralFee − referralVat − fbaFee − fbaVat + reclaimable − COGS − inbound − misc == displayed netProfit in 0 mismatches / 20,000 randomized cases. Cost lines reconcile to 'Total cost' in 0 / 10,000 non-registered cases. No display desync.",
+        "Piecewise referral fee is correct: each tier's rate applies only to the price portion within its band; Electronics-Accessories 15%≤1000 then 8% → price 1500 yields 150+40=190 EGP (reproduced); Grocery 4%≤250 then 10% computed correctly. Min-fee floor applied after summation (fees.ts:95). Matches spec line 224 tier breakpoints.",
+        "FBA price-band split is correct: fee = high when price > 350, low otherwise (fees.ts:107). Boundary verified — exactly 350 uses the LOW fee, 350.01 uses HIGH (defensible '>' convention). FBA fee is 0 for FBM and 0 when size tier unset (fees.ts:99-108), with a warning surfaced (fees.ts:158-160).",
+        "Break-even solver is correct and robust: bisection over price with monotonic profit; expands hi up to 40× and returns NaN when a deal can never break even (fees.ts:195-196); UI renders '—' when !Number.isFinite (calculator-form.tsx:199,546). Reproduced break-even for the default preset (≈263.42 EGP, net≈0 at solution, negative one EGP below). Matches spec line 228.",
+        "Sign handling is correct for losses: negative net profit → negative margin and ROI, UI prepends '−' and switches tone/badge to 'Loss' (calculator-form.tsx:423,438,450,462). Inputs clamped non-negative via Math.max(0,…) (fees.ts:125-128) and the num() parser (calculator-form.tsx:156-159); no NaN/Infinity/divide-by-zero (margin/ROI guarded by price>0 and investment>0, fees.ts:146-148).",
+        "Estimate disclosure is persistent and not buried: DISCLOSURE.estimatedFeesEn (constants.ts:116) appears as a ConfidenceBadge confidence='medium' on the result header (calculator-form.tsx:407), in the footer with the schedule as-of date (line 588-589), AND pushed into result.warnings whenever provenance.isEstimated (fees.ts:151-153). Schedule carries provenance.isEstimated=true / confidence='medium' (fees.ts:65-71). Products-page referral preview labeled 'Est. referral fee ≈' (products/[asin]/page.tsx:225).",
+        "round2 uses Math.round((n+EPSILON)*100)/100 (fees.ts:224-226) and stays in sync with the Intl 2-dp display formatter (formatEgp, format.ts:8-22) across .005-boundary spot checks — no display/engine rounding divergence.",
+        "Fee rates are versioned not hard-coded: schedule carries asOf='2026-06-08' and an editable structure (fees.ts:24, types.ts:177), satisfying spec risk #9 (01-product-spec.md:97). The second consumer (products/[asin]/page.tsx:119-121) reuses getReferralRule/computeReferralFee consistently — no divergent re-implementation of the math."
+      ],
+      "notVerified": [
+        "Absolute correctness of the fee RATES/bands themselves (8% Electronics, 12% Home, 350 EGP band, FBA EGP ladder values, etc.) against the live sell.amazon.eg/pricing page — out of scope by instruction (no fetch) and the code itself flags isEstimated=true and 'spot-confirm' (fees.ts:13,70). This audit verifies the MATH given the schedule, not the schedule's real-world accuracy.",
+        "Whether Egyptian referral fee is legally charged on the VAT-inclusive consumer price (as implemented, computeReferralFee(price,…) uses full price) vs a VAT-exclusive base — the spec itself flags 'referral on item-vs-item+shipping not isolated for EG — verify' (01-product-spec.md:229). No EG-specific source in-repo resolves this; if Amazon EG charges referral on the net-of-VAT price, every referral fee here is ~14% too high. Flagged as a documented open question, not confirmed either way.",
+        "Whether the margin denominator choice (netProfit / VAT-inclusive sellPrice, fees.ts:146, labeled 'of sell price') is the metric users expect; margin on net revenue (price/1.14) would read ~5 points higher (36.2% vs 41.3% for the default case). The label is literally accurate, so this is an interpretation note rather than an error — not independently validated against a tax/finance reference.",
+        "Runtime/browser behavior of the form (state, recompute-on-keystroke, deep-link presets) was not executed — per instructions no dev/build was run. Findings are from static derivation of the pure functions and the JSX render logic only.",
+        "VAT-reclaim treatment realism (registered sellers fully reclaiming input VAT on Amazon fees) — the spec explicitly tags this 'confirm with EG tax advisor' (01-product-spec.md:229). The engine implements full reclaim; whether that matches actual EG tax rules is outside code-correctness and unverified."
+      ],
+      "verdict": "go"
+    },
+    {
+      "dimension": "Data Accuracy & Honesty / Disclosure (real amazon.eg data)",
+      "summary": "The platform was clearly engineered with disclosure discipline as a first-class control, and on the read-path that flows through real-store.ts most of it holds: a persistent CalibrationNotice renders on every rank/demand screen; ConfidenceBadge/ProvenanceHint label price/rating/reviews as facts and BSR/demand/sentiment/keywords as estimates; demand bands are computed within-category (audit C1) in BOTH data.ts and real-store.ts; reviews show honest N-of-M coverage; keyword demand is framed as relative interest with role=meter 0-100 and a word-only trend chip (no fabricated %); Movers correctly returns an empty list on day-1 (only one snapshot); the fee calculator is deterministic math, badged \"estimated,\" and warns to verify. However, with REAL data now active, several places present modeled or non-existent signals as fact and one disclosure is factually false. CRITICAL: the product-detail chart is hard-titled \"Rank & price history (90 days)\" but real-store.bsrHistory() emits exactly ONE point (today's leaf-category BSR + today's price), so a single snapshot is dressed as a 90-day trend; and the sentiment split renders a definitive \"0% positive / 100% neutral / 0% negative\" bar because the scraper attaches NO sentiment field to real reviews (sentiment is only set in seed templates), actively mislabeling mostly-5-star reviews as \"neutral\" rather than \"not analyzed.\" HIGH: web/src/components/app/watchlists/_components/watch-card.tsx computes the demand band from ABSOLUTE cross-category BSR cutoffs (bsr<300 => very-high), the exact misleading cross-category leaderboard the rest of the codebase forbids — and because real leaf BSR is a tiny sub-category rank, nearly everything inflates to \"Very High\"; the Watchlists/Alerts screens are seeded with 3 hardcoded ASINs absent from real data, so they fabricate \"tracked\" products (real titles never scraped) and getProduct(asin)! risks a null-deref crash in real mode; and the Settings \"No personal data — reviewer names dropped at ingest\" guardrail is FALSE since real reviews store and the product page renders author names (e.g., \"Medhat M.\"). MEDIUM: keyword provenance is mislabeled \"google_trends\" in real-store though the real source is Amazon autocomplete (+optional Trends); real review dates show \"—\" because raw \"Reviewed in Egypt on 3 May 2026\" strings are never parsed; the Search results header \"Ranked as shown on amazon.eg\" overstates a title-substring filter as a real SERP ranking (contradicting its own honest caption); and the product \"Rank velocity / Holding steady\" KPI implies a measured velocity that cannot exist from one snapshot. Net: the disclosure scaffolding is strong, but the now-real data is shown through several seed-era surfaces that overstate history, sentiment, demand, and provenance — and one privacy disclosure is contradicted by the data on disk.",
+      "findings": [
+        {
+          "severity": "Critical",
+          "area": "Single snapshot shown as 90-day trend",
+          "location": "web/src/app/(app)/products/[asin]/page.tsx:281 (+298-309); web/src/lib/real-store.ts:167-177",
+          "issue": "The rank/price history card is hard-titled \"Rank & price history (90 days)\" for every product, but in real mode getBsrHistory() returns exactly ONE point: leaf-category BSR at scraped_at plus one price point. A chart explicitly labelled 90 days renders a single datapoint, implying three months of tracked history that does not exist.",
+          "evidence": "page.tsx:281 literal `Rank & price history (90 days)`. real-store.ts:171-174 `points: leaf ? [{ date, value: leaf.rank }] : []`, `pricePoints: row?.price_egp != null ? [{ date, value: row.price_egp }] : []`. products.json bsr array is category bands ([{rank,category:Electronics},{rank,category:USB Cables}]) not a time series; leafBsr() takes b[b.length-1] (one value).",
+          "impact": "A user reads a 90-day rank/price trend into one snapshot — the core 'single BSR snapshot shown as a 90-day trend' failure mode. Undermines every downside/sourcing decision built on perceived history.",
+          "fix": "Make the title dynamic from the actual span: when points.length<2 render 'Rank & price history (tracking just started — 1 snapshot)' and show a single dot/empty-state instead of '(90 days)'. Drive the label off history.points length/date-range, not a constant."
+        },
+        {
+          "severity": "Critical",
+          "area": "Unclassified sentiment presented as computed 'neutral'",
+          "location": "web/src/lib/real-store.ts:195-218; web/src/app/(app)/products/[asin]/page.tsx:337-357; scrapers/parse.py:151-163",
+          "issue": "Real reviews carry no sentiment field (parse.py never classifies; sentiment is only attached to seed REVIEW_TEMPLATES). real-store.sentimentSummary() therefore computes pos=0,neg=0 => positivePct=0, neutralPct=100, negativePct=0, and the product page draws a confident stacked 'Sentiment split' bar reading 100% Neutral / 0% Positive / 0% Negative.",
+          "evidence": "parse.py reviews_list fields = [author,body,date,helpful,lang,rating,review_id,title,verified] — no sentiment. real-store.ts:199-207 `pos = rl.filter(r=>r.sentiment==='positive')...` always 0. Reproduced on B0CPC8JMCW: 8 reviews rated [5,4,5,5,5,4,5,1] render as positivePct=0/neutralPct=100/negativePct=0.",
+          "impact": "Overwhelmingly positive reviews are misrepresented to the user as 'neutral'. 'Not analyzed' is shown as a definitive sentiment result — a direct data-honesty violation despite the 'low' badge.",
+          "fix": "When no review carries a sentiment label, do NOT emit a 0/100/0 split. Either classify (even rating-derived: >=4 positive, ==3 neutral, <=2 negative, labelled 'derived from star rating'), or render an explicit 'Sentiment not analyzed for this item' empty-state and suppress the split bar."
+        },
+        {
+          "severity": "High",
+          "area": "Cross-category absolute BSR demand band (audit C1 violation)",
+          "location": "web/src/app/(app)/watchlists/_components/watch-card.tsx:26-32,41,75",
+          "issue": "WatchCard derives the demand band from ABSOLUTE BSR thresholds (bsr<300 very-high, <1000 high, <3000 moderate, else low) applied across all categories — the exact misleading cross-category leaderboard the codebase forbids elsewhere (data.ts:120-122 and real-store.ts:66 both compute band by WITHIN-category percentile). The comment even claims it 'Mirrors the thresholds in @/lib/data#demandBandFor', which is false.",
+          "evidence": "watch-card.tsx:27-31 `if (bsr<300) 'very-high'; if (bsr<1000)'high'...`. demandBandForAsin (data.ts:121-134) and bandFromPos (real-store.ts:67-73) instead use idx/(n-1) within categoryNode. In real mode product.bsr is the leaf-category rank (USB Cables #1), so almost every watched item collapses to 'Very High'.",
+          "impact": "The same product shows a different, inflated demand band on the Watchlist than on Best Sellers/Products/detail — and leaf-rank inflation manufactures false 'Very High' demand, the precise dishonesty the rest of the app engineers against.",
+          "fix": "Delete demandBandFromBsr; pass the within-category band through the WatchlistItem (compute via demandBandForAsin / bandFromPos) so the band matches every other surface and stays category-relative."
+        },
+        {
+          "severity": "High",
+          "area": "Fabricated 'tracked' items + null-deref in real mode",
+          "location": "web/src/lib/data.ts:354-360,362-393; web/src/app/(app)/watchlists/_components/watch-card.tsx:35-67",
+          "issue": "getWatchlist() (and getAlerts()) hardcode seed ASINs B0EG0XIAM2/B0EG0PHIL6/B0EG0LORE9 that do not exist in the real dataset, and map them with getProduct(asin)! (non-null assertion). In real mode real.product() returns undefined for these ASINs, so WatchCard receives product:undefined and reads p.titleEn -> runtime crash; Alerts shows seed titles ('Redmi Buds 5','Philips Airfryer') that were never scraped.",
+          "evidence": "data.ts:355 `['B0EG0XIAM2','B0EG0PHIL6','B0EG0LORE9'].map(asin=>({...product:getProduct(asin)!}))`. Verified none of the 3 ASINs are among the 120 real ASINs in bestsellers.json/products.json. getProduct->real.product (real-store.ts:141-157) returns undefined when ASIN absent.",
+          "impact": "Either a crashed Watchlists page or a watchlist/alerts list of fabricated products presented as real tracked Egypt items — misleading and broken under real data.",
+          "fix": "Source watchlist/alerts seed ASINs from the live dataset (e.g. first N of getBestSellers()), drop the non-null assertion, and filter out any item whose product is undefined."
+        },
+        {
+          "severity": "High",
+          "area": "False privacy/compliance disclosure vs data on disk",
+          "location": "web/src/app/(app)/settings/page.tsx:57-62 (GUARDRAILS 'No personal data'); web/src/lib/real-store.ts:188; web/src/app/(app)/products/[asin]/page.tsx:530; scrapers/parse.py:156",
+          "issue": "Settings states as a guardrail: 'Reviewer names and any personal information are dropped at ingest; only aggregate signals are kept.' This is false: the scraper captures author names, real-store maps authorName=r.author, and the product page renders {review.authorName} for each review.",
+          "evidence": "products.json review has `author: \"Medhat M.\"`. parse.py:156 `\"author\": au.get_text(...)`. real-store.ts:188 `authorName: r.author`. page.tsx:530 `<span>{review.authorName}</span>`.",
+          "impact": "A stated privacy/ethics commitment is contradicted by the live build — the most serious kind of honesty defect for an institutional/compliance review; it also stores PII the policy claims it discards.",
+          "fix": "Either actually drop author names at ingest (parse.py) and stop rendering authorName, or correct the Settings copy to state that public reviewer display names are retained and shown. Make the claim and the data match."
+        },
+        {
+          "severity": "Medium",
+          "area": "Keyword provenance label mismatch",
+          "location": "web/src/lib/real-store.ts:221-236 (note 'Google Trends Egypt'); scrapers/trends.py:1-8,72-104; web/src/app/(app)/keywords/page.tsx:42-62; web/src/app/(app)/page.tsx:119,125",
+          "issue": "real-store keywords() stamps provenance source 'google_trends' with note 'Google Trends Egypt — relative interest', but the real keyword source is Amazon EG search autocomplete (completion.amazon.co.uk), with Google Trends only an optional best-effort 'rising' tag. Conversely the dashboard/keywords UI says purely 'Amazon search autocomplete'. Neither label matches the actual hybrid source.",
+          "evidence": "trends.py module docstring 'PRIMARY source: Amazon EG search autocomplete... OPTIONAL: Google Trends EG to tag rising terms'; output source string line 102 = 'amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends'. real-store.ts:232 hardcodes source 'google_trends'. keywords.json currently keywords:[] (empty), so the seed-autocomplete path is what actually renders today.",
+          "impact": "Provenance shown to the user is wrong about where demand came from; an auditor cannot reconcile the displayed source with the pipeline. Lower severity because it is source attribution, not a value, but provenance honesty is a stated control.",
+          "fix": "Set the keyword provenance source to the true value (amazon_eg_autocomplete with optional trends-rising), and align the dashboard/keywords copy to 'Amazon autocomplete (+ Google Trends rising tags)'."
+        },
+        {
+          "severity": "Medium",
+          "area": "Real review dates render as em-dash",
+          "location": "web/src/lib/real-store.ts:189; web/src/lib/format.ts:59-68; web/src/app/(app)/products/[asin]/page.tsx:538; scrapers/parse.py:158",
+          "issue": "Real review date is the raw string 'Reviewed in Egypt on 3 May 2026'; real-store passes it straight to reviewedAt, and formatDate does new Date(str) -> NaN -> returns '—'. Every real review shows date '—'.",
+          "evidence": "parse.py:158 `\"date\": dt.get_text(strip=True)` => 'Reviewed in Egypt on 3 May 2026'. real-store.ts:189 `reviewedAt: r.date`. format.ts:65-66 NaN guard returns '—'.",
+          "impact": "Not a false claim, but every real review loses its date, degrading trust and making recency impossible to judge. A reviewer could mistake '—' for missing data rather than a parse failure.",
+          "fix": "Parse the 'Reviewed in Egypt on <date>' pattern to ISO in parse.py (or real-store), then pass a real ISO date; fall back to omitting the date row when unparseable rather than showing '—'."
+        },
+        {
+          "severity": "Medium",
+          "area": "Substring filter overstated as live SERP ranking",
+          "location": "web/src/app/(app)/search/page.tsx:143 (and :44); web/src/lib/real-store.ts:159-165",
+          "issue": "The results header says 'Ranked as shown on amazon.eg', but real.search() merely filters the cached best-seller 'all' array by case-insensitive title substring — there is no live SERP query and no Amazon search ranking. This directly contradicts the page's own honest caption that says results are 'not a live ranked index'.",
+          "evidence": "search/page.tsx:143 `Ranked as shown on {MARKETPLACE.domain}`. real-store.ts:162-164 filters store().bs.all by title.includes(q). SerpProvenanceCaption (page.tsx:40-44) correctly says 'not a live ranked index'.",
+          "impact": "Implies the result order reflects amazon.eg's search ranking when it reflects best-seller ordering of whatever titles happen to contain the term — misleading on relevance/positioning.",
+          "fix": "Change the header to e.g. 'Matches from tracked best sellers (not a live search ranking)' so it agrees with the caption."
+        },
+        {
+          "severity": "Low",
+          "area": "Rank-velocity KPI implies measured movement from one snapshot",
+          "location": "web/src/app/(app)/products/[asin]/page.tsx:104-107,247-260; web/src/lib/real-store.ts:137-139",
+          "issue": "In real mode getMovers() always returns [] (only one snapshot), so on the product page moverRow is undefined => riseScore=0, gainPct=0, and the 'Rank velocity' KPI shows '0%' with footer 'Holding steady'. It reads as a measured 'no change' when in fact no velocity can be computed yet.",
+          "evidence": "real-store.movers() returns [] unconditionally; page.tsx:105-106 default riseScore/gainPct to 0; KpiCard 'Rank velocity' renders TrendIndicator(0) + 'Holding steady'.",
+          "impact": "Minor: it presents an unmeasurable signal as a confident 'steady'. Less severe than the chart because the value is 0 and visually flat, but it still asserts a measurement that doesn't exist.",
+          "fix": "When no movers/velocity data exists yet, render the Rank-velocity KPI as 'Not enough history yet' instead of '0% · Holding steady'."
+        },
+        {
+          "severity": "Low",
+          "area": "BSR sparkline drawn from a single real point",
+          "location": "web/src/components/app/rank-row.tsx:13,37-40; web/src/components/app/bsr-spark.tsx:12-46",
+          "issue": "RankRow renders a BSR sparkline from getBsrHistory(asin).points, which in real mode is a single point. A 'spark' visually signals a trend over time; with one point recharts draws no line, so the cell is blank/ambiguous rather than communicating 'one snapshot'.",
+          "evidence": "rank-row.tsx:13 `getBsrHistory(p.asin).points.map(pt=>pt.value)` -> 1 value in real mode; Spark needs >=2 points to draw a stroke.",
+          "impact": "Low/cosmetic, but a sparkline column in best-seller/movers rows implies historical movement the real data does not yet have.",
+          "fix": "Hide the spark column when points.length<2 (or show a single dot with a 'snapshot only' tooltip) instead of an empty trend cell."
+        }
+      ],
+      "verified": [
+        "CalibrationNotice (relative-signals disclaimer) is rendered on every rank/demand screen: dashboard (page.tsx:59), bestsellers (:65), movers (:59), keywords (:151), products (:73), product-detail (:235), watchlists (:57).",
+        "Demand bands are computed WITHIN category (audit C1) in both code paths: real-store.ts bandFromPos()/posMap() (lines 66-83,117-126) and data.ts demandBandForAsin() (121-134) rank by position inside categoryNode — no global cross-category thresholds on these surfaces.",
+        "Reviews show honest N-of-M coverage: product-detail computes analysed vs reported and 'sampled %' (page.tsx:123-125,324-334); real-store.sentimentSummary sets analysedCount=rl.length, totalReported=product.reviewCount (real-store.ts:201-204).",
+        "Keyword demand is framed as relative interest, not search volume: keywords page Alert 'This is a demand proxy, not search volume' + 0-100 role=meter + word-only DemandTrendChip (no fabricated %); DemandTrendChip comment explicitly forbids numeric % for keyword trend (demand-trend-chip.tsx:11-15).",
+        "Movers honest day-1 empty state under real data: real-store.movers() returns [] (real-store.ts:137-139) and the Movers page renders a proper 'Nothing is rising in this window' empty-state (movers/page.tsx:96-108).",
+        "Fee calculator is deterministic math (not a statistical estimate), badged 'estimated' (ConfidenceBadge medium), warns 'verify against sell.amazon.eg/pricing', models 14% VAT on fees and VAT-inclusive consumer price (price/1.14), and versions the schedule with asOf (fees.ts:24-72,120-181; calculator-form.tsx:407,576-591).",
+        "Scraped facts (price, rating, reviewCount) are labelled high-confidence and BSR/demand/sentiment/keywords are labelled low/medium with isEstimated=true in the real path provenance (real-store.ts:62-64,108-114,175-176,211-216,232).",
+        "BSR is labelled throughout as Best Seller Rank with #-prefixed formatRank and 'comparable only within category' notes (bestsellers ConfidenceBadge note :84-87; product-detail history note 'not Amazon historical data' :282-285).",
+        "Settings page gives an exemplary, plainly-stated data-source/fee/limitations disclosure ('Free/best-effort scraping', 'no real-time feed', estimate alerts) — strong on honesty except the reviewer-name guardrail flagged above."
+      ],
+      "notVerified": [
+        "Runtime/visual rendering: per instructions I did not run build/dev or the browser, so the exact rendered appearance of the single-point 90-day chart, the 100%-neutral sentiment bar, and whether the Watchlists page actually throws on the missing-ASIN null-deref were reasoned from code + JSON, not observed live.",
+        "Whether a future scrape will populate keywords.json (currently keywords:[]) and movers — the data files are being refreshed concurrently; today's keyword UI renders via the seed-autocomplete fallback, so the real keyword provenance label could not be observed against non-empty real keyword data.",
+        "Arabic (RTL) variants of the disclosure copy (calibrationNoticeAr, demandProxyAr) are defined in constants but I did not verify they are wired into a live Arabic locale render — the audited screens render the English strings.",
+        "Accuracy of the underlying scraped values themselves (correct price/rating/review counts vs amazon.eg) was out of scope and untested; this dimension covered honesty/labelling of how those values are presented, not their correctness, and a refresh is in flight.",
+        "The seed-path provenance mislabel (data.ts:156-160 stamps BSR-bearing products as confidence 'high'/isEstimated false) is dormant while real data is active (real.available() short-circuits it) and so was not treated as a live finding — but it would mislead if real data ever became unavailable and the app fell back to seed."
+      ],
+      "verdict": "no-go"
+    },
+    {
+      "dimension": "OPS / SCHEDULING / DEPLOY",
+      "summary": "Audited the launchd scheduling, single-instance lock, logging, kill-switch propagation, laptop-sleep failure mode, the Option-A \"cron commits data → Vercel\" flow, and the DEPLOY.md runbook against the real files in /Users/home/Documents/Amazon. The local scrape mechanics are mostly sound: the agent is loaded in launchctl, the lock uses atomic mkdir with an EXIT trap, the in-process Blocked kill-switch stops a run cleanly, run duration (~6 min) fits comfortably inside the 12h gap, and the read-side (real-store.ts) degrades gracefully on missing/corrupt JSON. HOWEVER the headline deploy story does NOT hold as written. The Option-A pipeline is non-functional today: the git push line that DEPLOY.md tells you to \"append\" to run_daily.sh is ABSENT from the script, the repo has ZERO commits (no HEAD), NO git remote, and web/src/data/real/*.json is entirely UNTRACKED — so nothing is committed, nothing pushes, and a Vercel build would see no data. Compounding ops gaps: the pmset wake covers only the 09:05 morning slot while the plist also fires at 21:13 (every evening run is silently lost when the lid is closed); there is no failure alerting at all (a block or empty scrape is silent); JSON writes are non-atomic (truncated-file window overlaps the mtime-cache reader); launchd StdOut/Err logs grow unbounded with no rotation; and the unattended git PAT/credential is hand-waved. Net: solid local data-collection harness, but the \"live site shows fresh Egypt data\" claim is Not Verified and currently false end-to-end.",
+      "findings": [
+        {
+          "severity": "Critical",
+          "area": "Deploy / Option-A pipeline integrity",
+          "location": "DEPLOY.md:24-37 + scrapers/run_daily.sh:1-28 (whole file)",
+          "issue": "The Option-A 'cron commits data then Vercel redeploys' flow is documented but NOT implemented. DEPLOY.md tells the operator to 'append' a `git add/commit/push` line to run_daily.sh, but that line is absent from the actual script — `grep -n git scrapers/run_daily.sh` returns nothing. The scrape writes JSON and stops; nothing is ever committed or pushed.",
+          "evidence": "run_daily.sh ends at line 27 with `echo \"=== ... done ===\"`; no git invocation anywhere. `grep git scrapers/run_daily.sh` → 'NO git references'. DEPLOY.md:31-34 presents the push as a manual append the user must do.",
+          "impact": "The core value claim ('every scrape commits real data, Vercel rebuilds, the live site shows fresh Egypt data', DEPLOY.md:37) is false out of the box. Fresh data never leaves the laptop. Silent: the scrape 'succeeds' locally while the live site is frozen at deploy-time data forever.",
+          "fix": "Append the documented git step to run_daily.sh, gated on a successful scrape (rc_scrape==0 and non-empty meta.json), with explicit error logging. Better: make it part of the committed script, not a manual edit, so the runbook and reality cannot drift."
+        },
+        {
+          "severity": "Critical",
+          "area": "Deploy / git repository state",
+          "location": "repo root (git rev-parse HEAD, git ls-files, git remote -v)",
+          "issue": "The repository is not deploy-ready at all: it has ZERO commits (no HEAD), NO configured remote, and NOTHING tracked — `git ls-files | wc -l` = 0. Every path (scrapers/, web/, DEPLOY.md, data) shows as untracked '??' in git status. web/src/data/real/*.json is therefore not under version control.",
+          "evidence": "`git rev-parse HEAD` → 'fatal: ... unknown revision' (NO COMMITS YET). `git remote -v` → empty. `git ls-files` → 0 files. `git status --porcelain` shows only '??' entries. The four JSON data files exist on disk (bestsellers/products/meta/keywords.json) but `git ls-files web/src/data` is empty.",
+          "impact": "Even if the push line existed, there is no remote to push to and no committed baseline, so `git push` would fail. Vercel (which builds from a git push) would have no repo and no data files. The entire Option-A path is blocked at step 0. DEPLOY.md:79-80 lists 'Push repo to GitHub' as a checkbox but the runbook never states the repo is currently uninitialized for remote.",
+          "fix": "Document and perform the real bootstrap: git init state, create the GitHub remote (the github integration is connected), commit a baseline INCLUDING web/src/data/real, add the remote, push once. Confirm web/src/data/real is intended to be committed (not gitignored) — currently there is no .gitignore at all, which is its own risk (logs, .env.local, node_modules could get committed)."
+        },
+        {
+          "severity": "High",
+          "area": "Scheduling / laptop-sleep failure mode",
+          "location": "DEPLOY.md:16-19, 77 vs scrapers/com.rasid.amazoneg.scrape.plist:12-16",
+          "issue": "The pmset wake schedule does not cover the evening run. plist fires at 09:07 AND 21:13, but the runbook only sets `pmset repeat wakeorpoweron MTWRFSU 09:05:00` — a single morning wake. Every 21:13 run is silently missed whenever the machine is asleep at night (the common case for a laptop).",
+          "evidence": "plist StartCalendarInterval: Hour 9/Minute 7 and Hour 21/Minute 13. DEPLOY.md:18 and :77 both specify only 09:05:00 in the pmset command. `pmset repeat` supports only one wake time; there is no second entry for ~21:11.",
+          "impact": "Half the intended twice-daily refresh never happens on a sleeping laptop → at best once-daily data, at worst stale for full days. The '$0, works today' framing overstates reliability. launchd coalesces a missed StartCalendarInterval to run once on next wake, so the morning run may catch up — but a machine that is fully shut down at fire time loses the run entirely with no catch-up.",
+          "fix": "Either schedule both wakes (`pmset repeat wakeorpoweron MTWRFSU 09:05:00 wakeorpoweron MTWRFSU 21:11:00` — note pmset's two-event syntax) or document caffeinate/keep-plugged for both windows. Also widen the morning lead time: 09:05 wake → 09:07 job leaves only ~2 min for Wi-Fi reassociation; a cold wake may not have network ready, failing the first fetch."
+        },
+        {
+          "severity": "High",
+          "area": "Observability / failure alerting",
+          "location": "scrapers/run_daily.sh, run.py, trends.py, fetch.py (no alerting anywhere)",
+          "issue": "There is no failure notification of any kind. A hard block (Blocked kill-switch), an empty/under-filled scrape, a non-residential-IP 503 storm, or a crashed run is only discoverable by manually reading log files. No mail, osascript notification, webhook, or non-zero-exit signal that anything watches.",
+          "evidence": "grep for mail|notify|osascript|slack|webhook|alert|sentry across all scraper files → none. run.py prints '[BLOCKED]'/'[WARN]' to stdout (→ log file) but nothing escalates. run_daily.sh captures rc_scrape (line 24) but never uses it to set the script's exit code, so even launchd sees success.",
+          "impact": "Operationally blind. The scraper can silently produce zero or stale data for days (e.g. IP starts getting 503, or amazon.eg markup changes and parse.parse_bestsellers returns <5 rows so every category is skipped) and the operator only finds out by chance or via the UI looking stale. For a data product this is a meaningful trust/SLA gap.",
+          "fix": "On block/empty-result, emit a desktop notification (osascript) and/or write a sentinel; propagate a non-zero exit from run_daily.sh when rc_scrape!=0 or meta.json product_count==0 so launchd logs and any future monitor can react. Add a simple 'last successful scrape age' check surfaced in the runbook."
+        },
+        {
+          "severity": "High",
+          "area": "Data integrity / non-atomic writes vs live cache",
+          "location": "scrapers/run.py:98-116 and scrapers/trends.py:106; web/src/lib/real-store.ts:38-52",
+          "issue": "JSON files are written non-atomically with Path.write_text (truncate-then-write). The app's real-store.ts busts its cache on file mtime and re-reads on any change, so a `npm run dev` server (or a Vercel ISR/runtime read) can read a half-written bestsellers.json during the scrape's write window. The read path catches JSON parse errors and returns null (good — degrades to seed), but the result is a transient flip of live data to seed/fallback mid-scrape rather than a clean swap.",
+          "evidence": "run.py uses `(OUT/'bestsellers.json').write_text(json.dumps(...))` — no temp-file + os.replace, no fsync. real-store.ts:44 sums statSync mtimeMs across the three files and re-reads (line 50) whenever the sum changes; readJson (line 28-36) try/catches and returns null on malformed JSON.",
+          "impact": "Concurrency-correctness defect. During each ~6-min run a reader can momentarily see truncated files (whole categories vanish to fallback) or a mixed state (new bestsellers.json + old products.json) because the three files are written sequentially, not as a set. With the prompt's own note that 'a scrape is refreshing data files concurrently', this window is live right now.",
+          "fix": "Write to `*.json.tmp` then `os.replace()` (atomic on same filesystem) for each file, and write all three before any swap (or write to a new timestamped dir and atomically repoint). This guarantees readers always see a complete, internally consistent snapshot."
+        },
+        {
+          "severity": "Medium",
+          "area": "Kill-switch durability across runs",
+          "location": "scrapers/fetch.py:46-54, 85-87; run.py:44-46,82-84",
+          "issue": "The 'stop-on-block' kill-switch is purely in-process: Blocked is raised and the current run breaks out, but nothing is persisted. The next launchd invocation (09:07/21:13, or a coalesced wake) starts completely fresh and will re-hit a still-blocking amazon.eg from the same IP — there is no cooldown/backoff that survives process exit.",
+          "evidence": "fetch.py has zero filesystem/env persistence (grep for open/Path/write/getenv → none outside docstring). _is_blocked returns on 403/429/503 or CAPTCHA markers; the caller just `break`s. No 'blocked_until' timestamp file is written or checked at run start.",
+          "impact": "The guardrail 'never retry-hammer' (fetch.py:47, DEPLOY.md:72) holds WITHIN a run but not ACROSS runs. If the IP gets soft-banned, the agent keeps probing twice a day indefinitely, which is exactly the escalation pattern the guardrails aim to avoid. Low legal-risk given polite cadence, but it undermines the stated 'low-risk lane' discipline.",
+          "fix": "On Blocked, write a `blocked_until` sentinel (e.g. now+24-48h) into scrapers/logs or /tmp; have run.py/run_daily.sh check it at start and exit early (logging 'in cooldown') until it expires. This makes the kill-switch durable, matching the runbook's claimed behavior."
+        },
+        {
+          "severity": "Medium",
+          "area": "Logging / unbounded growth",
+          "location": "scrapers/run_daily.sh:11 and com.rasid.amazoneg.scrape.plist:21-24",
+          "issue": "No log rotation or pruning exists. run_daily.sh creates one dated file per day (scrape-YYYYMMDD.log) → unbounded file COUNT (365/yr) that is never deleted. The plist's StandardOutPath/StandardErrorPath (launchd.out.log / launchd.err.log) are SINGLE files appended on every launch forever → unbounded SIZE growth.",
+          "evidence": "run_daily.sh:11 `LOG=.../scrape-$(date +%Y%m%d).log`. plist:22 launchd.out.log, :24 launchd.err.log (fixed paths). grep for logrotate|truncate|find -mtime|rm log across scrapers/ + DEPLOY.md → none. (logs/ dir currently empty — agent loaded but hasn't fired yet, so growth not yet observed.)",
+          "impact": "Slow-burn disk/inode bloat on a personal laptop; the single launchd.*.log files in particular grow without bound and are the ones that capture stderr stack traces. Not urgent at current volume but there is no runbook step to manage it.",
+          "fix": "Add a prune step (e.g. `find \"$LOG_DIR\" -name 'scrape-*.log' -mtime +30 -delete`) in run_daily.sh and either rotate or periodically truncate launchd.out/err.log. Document log location + retention in DEPLOY.md."
+        },
+        {
+          "severity": "Medium",
+          "area": "Deploy / unattended git auth",
+          "location": "DEPLOY.md:35, 80",
+          "issue": "The unattended git push depends on a credential the runbook only mentions parenthetically ('Configure a git credential/PAT once so the unattended push works') with no concrete steps, no scope guidance, and no note on token expiry/rotation. There is also no committed remote, so the auth mechanism (HTTPS PAT in keychain/credential helper vs SSH deploy key) is unspecified.",
+          "evidence": "DEPLOY.md:35 single parenthetical; checklist item :80 '+ a git credential' with no procedure. No .git/config remote present (git remote -v empty), so no helper is configured.",
+          "impact": "The flow that is supposed to be the unattended backbone hinges on an under-specified, manually-configured secret. If the PAT expires or the credential helper isn't set for the launchd user context (launchd agents run with a minimal environment), the push fails silently (compounded by the no-alerting finding). PATs in plaintext are also a secret-management risk if mis-stored.",
+          "fix": "Spell out the exact one-time setup: create a fine-grained PAT (repo contents write only), store via `git credential-osxkeychain`, verify a manual `git push` works from the same shell context launchd uses, and note expiry/rotation. Confirm the credential is reachable in launchd's environment (it does not inherit your interactive shell)."
+        },
+        {
+          "severity": "Low",
+          "area": "launchd robustness / log-path parent dir",
+          "location": "com.rasid.amazoneg.scrape.plist:21-24 vs run_daily.sh:9-10",
+          "issue": "launchd writes StandardOutPath/StandardErrorPath itself before the script runs and does NOT create missing parent directories. The script's `mkdir -p \"$LOG_DIR\"` (run_daily.sh:10) only protects its own dated $LOG, not launchd's StdOut/Err. If scrapers/logs/ is ever deleted, launchd fails to open its log paths and the job can fail to start cleanly with no captured error.",
+          "evidence": "plist:22-24 fixed paths under .../scrapers/logs/. run_daily.sh mkdir runs inside the script, i.e. AFTER launchd has already tried to open StdOut/Err. logs/ currently exists so not triggered today.",
+          "impact": "Edge-case fragility: a cleanup that removes the logs dir silently breaks scheduling until the dir is recreated. Minor, but it is an unguarded assumption.",
+          "fix": "Keep a committed .gitkeep in scrapers/logs/ so the dir always exists after checkout, and note in the runbook that this directory must not be deleted (or have an install step recreate it)."
+        },
+        {
+          "severity": "Low",
+          "area": "Runbook clarity / timezone assumption",
+          "location": "DEPLOY.md:12 vs com.rasid.amazoneg.scrape.plist:12-16",
+          "issue": "DEPLOY.md states the agent 'runs 09:07 + 21:13 Cairo', but the plist has no TimeZoneName key, so launchd uses the machine's LOCAL timezone, not a pinned Cairo. It happens to be correct now (system TZ = Africa/Cairo), but the 'Cairo' guarantee is implicit on machine config, not on the schedule.",
+          "evidence": "plist StartCalendarInterval has Hour/Minute only, no TimeZoneName. `/etc/localtime -> .../Africa/Cairo` and `date` → EEST confirm it currently matches. DEPLOY.md:12 asserts 'Cairo' as if guaranteed.",
+          "impact": "If the laptop travels or TZ changes, the scrape silently shifts off the intended Egypt-evening/morning windows (which matter for amazon.eg traffic patterns and freshness expectations). Documentation overstates the guarantee.",
+          "fix": "Either add a note that times follow system TZ (and assume the box stays on Africa/Cairo) or, for a hard guarantee, document that the intent is Cairo-local and verify system TZ as an activation checklist item."
+        }
+      ],
+      "verified": [
+        "launchd agent IS loaded — `launchctl list | grep rasid` returns `com.rasid.amazoneg.scrape` (last exit status 0)",
+        "Installed plist at ~/Library/LaunchAgents/ is byte-identical to scrapers/com.rasid.amazoneg.scrape.plist (diff → IDENTICAL)",
+        "Single-instance lock is race-safe on the acquire path: `mkdir \"$LOCK\"` (run_daily.sh:15) is atomic, and a second concurrent run cleanly logs 'another run in progress' and exit 0",
+        "Lock is released on normal exit AND on most crashes via `trap 'rmdir \"$LOCK\"' EXIT` (run_daily.sh:19) — covers script errors and signals that run traps (note: a SIGKILL/-9 or power loss would orphan the lock dir, blocking the next run until manually cleared)",
+        "In-process kill-switch works: fetch._is_blocked (fetch.py:50-54) detects 403/429/503 + CAPTCHA body markers at HTTP 200, raises Blocked, and run.py:45-46 / :83-84 break out of the loop — a single run will not retry-hammer",
+        "Run duration fits the schedule: ~24 throttled fetches (8 cats × EN+AR + up to 8 detail) at 10-18s jitter ≈ 6 min, far under the 12h inter-run gap — no overlap risk between the 09:07 and 21:13 runs",
+        "Read-side degrades safely on missing/corrupt JSON: real-store.ts readJson (lines 28-36) try/catches JSON.parse and returns null, so a truncated file falls back to seed rather than crashing the app/build",
+        "launchd missed-run semantics: an asleep machine coalesces a missed StartCalendarInterval to run once on wake (not skipped forever) — so the morning run can self-heal after sleep",
+        "run_daily.sh hardening basics present: `set -uo pipefail`, `mkdir -p` for its own log dir, captures python3 via `command -v`, flushes child output to the log",
+        "The four data JSON files are actually being produced on disk (bestsellers/products/meta/keywords.json present with recent mtimes), confirming the local scrape→write seam works in isolation"
+      ],
+      "notVerified": [
+        "End-to-end Option-A deploy ('live site shows fresh Egypt data') — CANNOT be verified and is currently FALSE: no git push line in run_daily.sh, no commits, no remote, data untracked. Was instructed not to run builds/push, but static evidence already shows the chain is broken.",
+        "Whether web/src/data/real is INTENDED to be committed vs gitignored — there is no .gitignore in the repo at all, so the intended boundary (what gets committed to Vercel) is undefined",
+        "Actual residential-IP behavior of amazon.eg (200 vs 503) — not tested per instructions (no fetch); the 503-on-datacenter claim is asserted in code comments/docs only",
+        "Real launchd StdOut/Err log growth — logs/ is empty because the agent has not fired since load; unbounded-growth risk is inferred from config (single fixed append paths), not yet observed",
+        "Whether the git PAT/credential helper is reachable in launchd's minimal environment — no remote configured yet, so the unattended-auth path is entirely untested",
+        "pmset wake state on this machine — did not run `pmset -g sched` (would need to confirm whether any wake is currently scheduled); assessment is based on the DEPLOY.md command text vs plist schedule",
+        "Behavior under hard kill (SIGKILL/power loss) leaving an orphaned /tmp/rasid_scrape.lock — inferred from trap semantics (EXIT trap does not fire on SIGKILL), not empirically triggered"
+      ],
+      "verdict": "no-go"
+    },
+    {
+      "dimension": "Security & Production-Readiness",
+      "summary": "Strict audit of the Rasid amazon.eg platform for security and production readiness, evidence-based on real files under /Users/home/Documents/Amazon (no modifications, no build/fetch run). SECRETS: clean — a full-repo high-signal scan (AWS/Stripe/GitHub/Supabase JWT/PEM/firecrawl patterns) found NO committed secrets, keys, or tokens; web/.env.example contains only empty placeholders; no .env/.env.local/.env.production exists on disk; .gitignore ignores .env*. The app makes zero external network calls at runtime (all data via fs), there is no eval/Function and the single dangerouslySetInnerHTML (ui/chart.tsx) injects only developer-controlled CSS color vars, not scraped data — so no meaningful XSS sink. HOWEVER, production readiness is NOT met. The headline issue (the prompt's central question) is CONFIRMED: an fs read of web/src/data/real does NOT reliably survive a production Vercel build. The dynamic SSR routes (/, /bestsellers, /products, /movers, /keywords, /search, /products/[asin]) read the JSON at request time via path.join(process.cwd(),'src/data/real') with a runtime filename variable; @vercel/nft cannot statically trace dynamically-constructed fs paths (confirmed: the build trace .next/.../page.js.nft.json contains ZERO data/real references; grep of .next/server for data/real = 0 hits; outputFileTracingIncludes is NOT set; output is not 'standalone'). On Vercel those files will be absent from the Lambda filesystem, existsSync→false, available()→false, and the app SILENTLY falls back to fake seed data with no error surfaced. Separately, three routes (/watchlists, /alerts, /settings) are statically prerendered at BUILD time (they emit .html); /watchlists and /alerts read getProduct→fs at build, so they freeze whatever data existed at build and never refresh. There are ZERO route boundaries (no error.tsx, not-found.tsx, loading.tsx, or global-error.tsx authored — only Next's defaults), so a torn/partial JSON read throws and bubbles to a blank framework error page. The scraper writes 3 files non-atomically (Path.write_text) while the SSR app reads them concurrently — a real torn-read/JSON.parse-failure race (already visibly inconsistent on disk: meta.json product_count=135 / categories incl. 'books' vs bestsellers.json all=120). DEPLOY.md's RECOMMENDED 'commit data' path is unwired: the git push line is only described as a manual TODO, it is NOT in run_daily.sh, and the repo currently has ZERO commits, so nothing is committed/tracked yet. keywords.json is empty ({\"keywords\":[]}), so the live trends source is silently failing and the dashboard already serves synthetic keywords. The residential single-IP egress is a documented single point of failure; ToS posture (scraping vs Amazon CoU) is honestly acknowledged in docs as a 'tolerated breach, not permitted'. The launchd plist and run_daily.sh hardcode /Users/home/... and the spec doc commits the operator's real residential IP and ASN.",
+      "findings": [
+        {
+          "severity": "Critical",
+          "area": "SSR / Vercel deploy — fs read of bundled data",
+          "location": "web/src/lib/real-store.ts:25-36 (DIR=path.join(process.cwd(),'src/data/real'); readJson(name) with runtime filename); web/next.config.ts (no outputFileTracingIncludes); .next/server/app/(app)/page.js.nft.json (trace)",
+          "issue": "On a production Vercel build, the dynamic SSR routes will not have web/src/data/real/*.json in the serverless function filesystem, so the app silently serves FAKE seed data instead of real amazon.eg data.",
+          "evidence": "Next's own bundled docs (web/node_modules/next/dist/docs/.../output.md) state @vercel/nft 'statically analyzes import, require, and fs usage' and 'might fail to include required files' (fix = outputFileTracingIncludes). real-store builds the path with process.cwd() + a runtime-variable filename, which nft cannot statically resolve. Verified: dashboard nft trace has 'data/real hits: NONE'; `grep -r data/real web/.next/server | wc -l` = 0; outputFileTracingIncludes NONE; required-server-files.json output:None (not standalone). data.ts gates ONLY on real.available() (existsSync) with no env flag and no error — readJson swallows errors and returns null → seed fallback (data.ts:67,166,178,189,221,246,311).",
+          "impact": "Production site appears to work but shows fabricated seed numbers (prices/ranks/reviews) under real-data provenance labels — a silent correctness/trust failure on the platform's core value prop.",
+          "fix": "Do not read app-local files via process.cwd() on Vercel. Either (a) add outputFileTracingIncludes:{ '/**':['./src/data/real/**'] } (or per-route globs) in next.config.ts AND verify the trace now lists the JSON, or (b) import the JSON statically (import data from '@/data/real/bestsellers.json') so it is bundled by webpack/turbopack, or (c) move reads to Supabase (DEPLOY Option B). Then prove it: build and confirm the .nft.json for each dynamic route lists data/real, or that the JSON is in the function bundle."
+        },
+        {
+          "severity": "Critical",
+          "area": "Deploy wiring — committed-data pipeline not implemented",
+          "location": "DEPLOY.md:24-37 (Option A 'RECOMMENDED'); scrapers/run_daily.sh:1-28 (no git step); repo git state (0 commits)",
+          "issue": "The recommended production deploy path (cron commits fresh data → Vercel rebuilds) is not actually wired, and the repo has never been committed, so there is no data to deploy and no mechanism to refresh it.",
+          "evidence": "`grep git scrapers/run_daily.sh` → none; DEPLOY.md:32-35 only tells the user to 'append' the git add/commit/push line manually. `git log` → 'your current branch main does not have any commits yet'. `git ls-files` → 0 tracked files. The data JSON is present on disk but untracked.",
+          "impact": "Even if the fs/tracing issue is fixed, a fresh Vercel import would deploy with no committed data (seed fallback), and twice-daily refresh would never happen because the unattended push does not exist. Also no git credential/PAT setup is scripted, so the described push would fail unattended.",
+          "fix": "Implement the auto-commit in run_daily.sh with explicit error handling (guard each of add/commit/push; do not let a push failure corrupt the lockfile state), configure a scoped PAT/credential, make an initial commit, and document that the data files MUST remain un-gitignored (they currently are not ignored — keep it that way)."
+        },
+        {
+          "severity": "High",
+          "area": "Concurrency — non-atomic multi-file write vs live SSR read",
+          "location": "scrapers/run.py:98-116 (3× Path.write_text); web/src/lib/real-store.ts:28-53 (readJson + mtime-sum cache across the 3 files)",
+          "issue": "The scraper overwrites bestsellers.json, products.json, meta.json (and trends.py writes keywords.json) non-atomically while the request-time SSR app reads them, allowing a torn/partial read → JSON.parse throw, or a mutually-inconsistent set of files.",
+          "evidence": "Path.write_text is a truncate-then-write, not atomic (no os.replace/tempfile — `grep os.replace|tempfile scrapers` = none). real-store caches keyed on the SUM of all three mtimes, so a half-finished run busts the cache and re-reads a torn set. Already observable on disk from concurrent runs: meta.json product_count=135 & categories include 'books' while bestsellers.json all=120 (different runs/partial state).",
+          "impact": "Intermittent 500s on every page during the ~scrape window (twice daily), or silently inconsistent KPIs (counts/categories that disagree). readJson catches parse errors and returns null → for bestsellers that means available()=false → whole app flips to seed mid-request.",
+          "fix": "Make writes atomic: write to a .tmp then os.replace() (atomic on POSIX) for each file; ideally write all four to a temp dir and swap a single 'current' symlink/dir so readers always see a consistent set. On the read side, treat a parse failure as 'serve last-known-good', not 'fall back to seed'."
+        },
+        {
+          "severity": "High",
+          "area": "Error/resilience boundaries — none exist",
+          "location": "web/src/app/** (no error.tsx / not-found.tsx / loading.tsx / global-error.tsx authored; find returned none)",
+          "issue": "There are no App-Router error or not-found boundaries, so any server exception (e.g. torn JSON read, unexpected null) renders Next's default blank error screen with no recovery, and notFound() for a bad ASIN shows the unstyled default 404.",
+          "evidence": "`find web/src/app -name error.tsx -o -name not-found.tsx -o -name loading.tsx -o -name global-error.tsx` → empty. products/[asin]/page.tsx:97 calls notFound() but no not-found.tsx exists. Build emitted only the framework defaults (_not-found.html, _global-error.html).",
+          "impact": "Poor failure UX and no isolation: a single page's data error can blank the route; the dynamic [asin] route accepts arbitrary input and 404s into an unbranded default page.",
+          "fix": "Add app/(app)/error.tsx (client boundary with reset), app/(app)/not-found.tsx, and a root app/global-error.tsx; optionally loading.tsx for the dynamic routes. Keep boundaries data-aware so a stale/missing-data state degrades gracefully rather than throwing."
+        },
+        {
+          "severity": "Medium",
+          "area": "Stale static pages — build-time fs freeze",
+          "location": ".next/prerender-manifest.json (routes: /watchlists, /alerts, /settings prerendered); web/src/lib/data.ts:354-393 (getWatchlist/getAlerts→getProduct→real.available())",
+          "issue": "/watchlists and /alerts are statically prerendered and read product data via fs at BUILD time, so they bake in whatever data existed when the build ran and never reflect later scrapes (and on Vercel will bake the seed fallback per the Critical finding).",
+          "evidence": "prerender-manifest lists /alerts, /settings, /watchlists; watchlists.html/alerts.html exist in .next/server/app. getWatchlist maps fixed ASINs through getProduct() which hits real.available(). No export const dynamic/revalidate anywhere (`grep` = NONE).",
+          "impact": "Watchlist/alerts product fields (price/title) are frozen to build time; combined with the fs-tracing bug they will show seed values permanently in production.",
+          "fix": "Force these routes dynamic (export const dynamic='force-dynamic' or read at request time) once the data source is request-safe, or move user-owned data to Supabase as the schema already anticipates."
+        },
+        {
+          "severity": "Medium",
+          "area": "Silent source failure — keywords/trends",
+          "location": "web/src/data/real/keywords.json ({\"keywords\":[]}); scrapers/trends.py:94-98; web/src/lib/real-store.ts:221-223; data.ts:284-308",
+          "issue": "The live demand/keywords source is producing zero rows, so the app silently substitutes synthetic seed keywords on the dashboard 'Demand radar' and /keywords with no operator-visible alarm.",
+          "evidence": "keywords.json on disk = {\"keywords\":[]}. real.keywords() returns null when empty → data.ts getKeywords falls through to seed KEYWORDS. trends.py autocomplete/pytrends failures are caught and the worker keeps the existing (empty) file; no health metric is surfaced to the UI.",
+          "impact": "A 'real data' platform shows fabricated demand keywords under real-source labeling; failure is invisible until someone inspects files.",
+          "fix": "Surface source health (e.g. a freshness/empty badge from meta.json + a per-source status), and have the UI explicitly label the demand panel as seed/sample when real.keywords() is null rather than seamlessly substituting."
+        },
+        {
+          "severity": "Low",
+          "area": "Operational secrets hygiene — PII / host paths in repo",
+          "location": "docs/research/04-real-pipeline-spec.md:6 (residential IP 197.57.120.221 + AS8452 Telecom Egypt); scrapers/com.rasid.amazoneg.scrape.plist:10,22,24 and scrapers/run_daily.sh:8 (/Users/home/... hardcoded)",
+          "issue": "Not a credential leak, but the operator's real residential IP/ASN and absolute home directory are committed to docs/scripts; if this repo is pushed public (DEPLOY step 1), that is operational PII and de-anonymizes the scraping egress.",
+          "evidence": "grep found '197.57.120.221 (AS8452 TE-AS, Telecom Egypt, Cairo)' in the spec and four hardcoded /Users/home/Documents/Amazon paths in the plist/shell.",
+          "impact": "Public exposure of the home IP tied to the scraper invites targeted blocking/abuse-scoring and reveals the operator's network; hardcoded paths break portability to a Pi/other host.",
+          "fix": "Scrub the literal IP/ASN from committed docs (or keep that file out of the public repo), and parameterize REPO/paths via env or a path relative to the script ($HOME / dirname) before publishing."
+        },
+        {
+          "severity": "Low",
+          "area": "Database — RLS not enabled on tenant/user identity tables",
+          "location": "supabase/migrations/0001_init.sql:165-174 (RLS only on watchlists, watchlist_items, alerts)",
+          "issue": "When the Supabase path is adopted, row-level security is enabled on the user-owned data tables but NOT on app_users or tenants, which hold cross-tenant identity rows.",
+          "evidence": "alter table ... enable row level security appears only for watchlists/watchlist_items/alerts; app_users and tenants have no RLS and no policies.",
+          "impact": "With the public anon key, app_users/tenants could be readable across tenants (email enumeration) once auth is wired. Not active today (no Supabase deployed), hence Low.",
+          "fix": "Enable RLS on app_users and tenants with tenant_id = auth.jwt()->>'tenant_id' self-scoped policies before going multi-tenant; keep the service_role key server-only as .env.example already warns."
+        }
+      ],
+      "verified": [
+        "No committed secrets/keys/tokens: full-repo high-signal scan (AKIA/ASIA, sk_live/sk_test/sk-, ghp_/github_pat_, xox*, AIza*, JWT eyJ.., PEM private keys, service_role, firecrawl fc-*) returned only doc URLs and a CSS 'token:' false positive — confirmed NONE in code/config",
+        "web/.env.example contains only empty placeholder keys (NEXT_PUBLIC_SUPABASE_*, SUPABASE_SERVICE_ROLE_KEY, FIRECRAWL_API_KEY, AMZ_PROXY_URL) with no values; comment explicitly warns service_role is server-only",
+        "No real .env/.env.local/.env.production present on disk; .gitignore ignores .env*",
+        "App makes ZERO external network calls at runtime: grep for fetch/axios/XHR/http in web/src found none — all data flows through fs, so the Next request path never touches amazon.eg (no 503 risk in app)",
+        "No code-execution sinks: no eval()/new Function() in web/src; the only dangerouslySetInnerHTML (ui/chart.tsx:95) injects developer-controlled ChartConfig color CSS vars, not scraped/user data → not an XSS vector as used",
+        "Calculator input handling is safe: client-only pure math (computeProfit), num() coerces blank/invalid/negative to 0, no network/injection surface; break-even uses bounded binary search with NaN guard",
+        "real-store.readJson wraps fs+JSON.parse in try/catch returning null (won't crash the process on a bad file), and cache busts on data-file mtime change so a fresh scrape is picked up",
+        "Scraper kill-switch verified in code: fetch.py raises Blocked on 403/429/503 and on body CAPTCHA markers; run.py breaks the loop on Blocked (no retry-hammer); run_daily.sh uses an atomic mkdir lock for single-instance",
+        "ToS/legal posture is explicitly and honestly documented (docs/research/04-real-pipeline-spec.md §6 and DEPLOY.md §5): logged-out, public pages only, rate-limited 10-18s serial, stop-on-block, no IP rotation to evade, no PII stored, personal/non-commercial — characterized as a 'tolerated breach, not permitted'",
+        "Rendering split confirmed from build artifacts: /,bestsellers,products,movers,keywords,search,products/[asin] are dynamic SSR (no prerender entry/.html); /watchlists,/alerts,/settings are static (prerendered .html)",
+        "Supabase RLS IS correctly enabled and tenant-scoped (auth.jwt()->>'tenant_id') on the user-owned tables watchlists/watchlist_items/alerts (migration 0001)"
+      ],
+      "notVerified": [
+        "Runtime confirmation that Vercel drops the fs files: I did not (per instructions) run `next build` in production mode or deploy to Vercel. The conclusion is grounded in the build trace (0 data/real refs), required-server-files (output:None), the absence of outputFileTracingIncludes, and Next's own bundled output.md docs — but the live Vercel Lambda contents were not observed",
+        "Whether the existing .next build was produced before/after the dynamic fs path was finalized — the build dir is from 02:54 while data files updated to 11:xx; I treated the nft trace as authoritative for tracing behavior, which is path-shape dependent (process.cwd()+variable) and would not change run-to-run",
+        "Actual production behavior of process.cwd() on Vercel for this app (commonly the function root, where src/ does not exist post-build) — asserted from Next/Vercel conventions in the bundled docs, not observed live",
+        "Git push credential/PAT behavior for the unattended commit — the line does not exist yet, so its failure modes are inferred, not tested",
+        "Whether any committed PNG screenshots (audit-*.png, real-dashboard*.png, .playwright-mcp/) embed sensitive data — I did not open the images; flagged the repo-publish PII risk from text sources only",
+        "TLS/transport and amazon.eg WAF behavior — out of scope and explicitly not fetched per instructions"
+      ],
+      "verdict": "no-go"
+    },
+    {
+      "dimension": "Frontend Correctness / A11y / UX-States (real amazon.eg data)",
+      "summary": "I audited every screen under web/src/app/(app)/** and the shared components against the REAL data the scraper writes (web/src/data/real/*.json: 120 bestseller rows, only 8 enriched with bsr/reviews_list, single-snapshot history, keywords present). The disclosure/empty-state discipline is genuinely strong on most screens (movers, reviews, keywords, search, products all have real empty states with honest copy, and confidence/provenance labels are pervasive). However there is one CRITICAL runtime crash and several correctness/consistency defects that surface specifically because real data replaced the seed. The Watchlists route crashes outright on real data because getWatchlist() hardcodes seed ASINs that do not exist in amazon.eg data and force-unwraps an undefined product. Separately, every product-detail page mislabels demand as \"Unknown\" and velocity as \"Holding steady\" because it re-derives those from the always-empty real movers list instead of the row's own band, while the same product shows a real band on the lists. The 112 non-enriched products render a blank 300px history chart and empty sparkline with no \"not enough history yet\" message. The locale toggle flips direction to RTL without translating any chrome, producing a broken mixed-direction layout. I empirically SSR-probed Recharts 3.8.0 to confirm empty/1-point charts do NOT throw (so they are a UX-quality issue, not a crash). Verdict: no-go until the Watchlists crash and the detail-page demand/velocity inconsistency are fixed.",
+      "findings": [
+        {
+          "severity": "Critical",
+          "area": "Watchlists screen — runtime crash on real data",
+          "location": "web/src/lib/data.ts:354-360 (getWatchlist) + web/src/app/(app)/watchlists/_components/watch-card.tsx:36-41",
+          "issue": "getWatchlist() hardcodes seed ASINs [\"B0EG0XIAM2\",\"B0EG0PHIL6\",\"B0EG0LORE9\"] and builds items with `product: getProduct(asin)!`. In real mode getProduct delegates to real.product(asin), which searches bestsellers.all and products.json and returns undefined for these ASINs (they are seed-only; real ASINs are B0CPC8JMCW, B092312R94, …). The non-null assertion `!` masks the undefined, so WatchCard receives item.product === undefined and dereferences `const p = item.product; … p.titleEn` → throws.",
+          "evidence": "Verified the three seed ASINs are absent from BOTH bestsellers.json `all` (120 rows) and products.json `products` (8 keys): script output `B0EG0XIAM2: in_all=False in_products=False` (etc.). They DO exist in seed.ts:55,59,62. real-store.ts product() (lines 141-157) returns undefined when the ASIN is in neither file. watch-card.tsx line 37 `const p = item.product;` then line 50 `{p.titleEn}` with no guard (the only guard is `if (removed) return null`).",
+          "impact": "The entire /watchlists route throws on first render with the real dataset — a hard crash (Next.js error boundary / 500), not a graceful empty state. This is the default state for any user opening Watchlists, since the three items are seeded as 'tracked'.",
+          "fix": "Either (a) make getWatchlist() filter to products that resolve: `.map(asin => { const product = getProduct(asin); return product ? { asin, addedAt, product } : null }).filter(Boolean)`, or (b) seed the watchlist from real ASINs (e.g. getBestSellers({limit:3}).map(r => r.product.asin)) so it tracks products that actually exist. Also make WatchCard defensively render an empty/placeholder card if product is missing. Remove the `!` non-null assertion so the type system surfaces the gap."
+        },
+        {
+          "severity": "High",
+          "area": "Product detail — demand band & rank velocity contradict the list screens",
+          "location": "web/src/app/(app)/products/[asin]/page.tsx:104-108, 194, 240-260",
+          "issue": "The detail page derives demandBand/riseScore/gainPct from `getMovers({period}).find(...)`. In real mode real.movers() ALWAYS returns [] (real-store.ts:137-139, by design — no velocity on day 1), so moverRow is always undefined → demandBand defaults to \"unknown\", riseScore=0, gainPct=0 for EVERY product. The header DemandBadge (line 194) and the 'Relative demand' KPI (line 240) therefore show \"Unknown\", and 'Rank velocity' shows +0% / \"Holding steady\" — even though the very same product on the dashboard/bestsellers list shows a real within-category band (e.g. \"Very High\") computed by real.bestSellers → bandFromPos.",
+          "evidence": "real-store.ts:137-139 `export function movers(){ return []; }`. Detail page line 107 `const demandBand = moverRow?.demandBand ?? \"unknown\";` ignores the product's own ranking row. Cross-checked: bestSellers() assigns demandBand via bandFromPos (real-store.ts:117-126), so list and detail disagree for all 120 products.",
+          "impact": "Same product shows two different, contradicting demand labels depending on the screen — a data-trust/consistency defect on the platform's core research surface. Users see a product ranked #1 'Very High' on the list, then 'Unknown / Holding steady' on its own page.",
+          "fix": "On the detail page, source demandBand from the product's bestseller row (e.g. getBestSellers({categoryNode: product.categoryNode}).find(r=>r.product.asin===asin)?.demandBand) rather than from movers. Show velocity as an explicit 'Not enough history yet' state when movers is empty, instead of a fabricated '+0% / Holding steady'."
+        },
+        {
+          "severity": "Medium",
+          "area": "Product detail — blank history chart for the 112 non-enriched products (no empty state)",
+          "location": "web/src/app/(app)/products/[asin]/page.tsx:99,112-116,304 + web/src/app/(app)/products/[asin]/_components/history-chart.tsx:47-56",
+          "issue": "history.points is empty for the 112 of 120 products that are not in products.json (real.bsrHistory returns points:[] when leafBsr is null), and is exactly 1 point for the 8 enriched products (single snapshot). The page unconditionally renders <HistoryChart data={points}/> with no length guard, under a heading 'Rank & price history (90 days)' and a 'Relative'/medium confidence badge.",
+          "evidence": "Verified 112 non-enriched ASINs (meta.json enriched:8, product_count:120). real-store.ts bsrHistory (167-177) returns points:[] when leaf is null, else a single {date,value}. products.json bsr entries are {rank,category} with NO date, so even enriched products yield 1 point. I SSR-probed Recharts 3.8.0 with empty and 1-point data: both render WITHOUT throwing (123/127-char SVG), confirming this is a blank-frame UX issue, not a crash. A 1-point line draws no visible line (only an active dot on hover).",
+          "impact": "112 product pages show an empty 300px chart titled '90 days' with no line and no explanation; 8 show an essentially blank chart. Misleading for a screen labelled with a confidence badge. Not a crash.",
+          "fix": "Guard: if points.length < 2, render an empty-state ('History starts building from your first daily snapshot — not enough data points yet') instead of the chart, matching the honest empty states already used for reviews/movers. The CardDescription already hints at this; surface it as the actual chart state."
+        },
+        {
+          "severity": "Medium",
+          "area": "Ranking rows / sparkline — empty or single-point Spark for real rows",
+          "location": "web/src/components/app/rank-row.tsx:13,37-41 + web/src/components/app/bsr-spark.tsx:12-46",
+          "issue": "RankRow calls getBsrHistory(p.asin) for every row and feeds .points.map(pt=>pt.value) to <Spark>. In real mode this is [] for the 112 non-enriched ASINs and a single value for the 8 enriched. The dashboard/bestsellers/movers all render these rows. Spark (a fixed-size LineChart) draws nothing for [] and no line for 1 point; the good/bad color is computed from first==last==0.",
+          "evidence": "rank-row.tsx:13 `const hist = getBsrHistory(p.asin).points.map(pt=>pt.value);` with no length check; line 39 `<Spark data={hist} invert/>`. SSR-probe confirmed Spark with data=[] and data=[1pt] both render without throwing. The spark wrapper is aria-hidden (line 38), so screen-reader impact is nil, but visually the lg sparkline column is blank for ~93% of rows.",
+          "impact": "Empty sparkline cells across the main list screens (lg breakpoint). Cosmetic/quality, not a crash, and a11y-neutral because the element is aria-hidden.",
+          "fix": "In RankRow, only render <Spark> when hist.filter(v=>v!=null).length >= 2; otherwise render a muted '—' or omit the column. Avoids drawing empty charts and the meaningless first/last color heuristic on a single point."
+        },
+        {
+          "severity": "Medium",
+          "area": "Locale toggle flips RTL direction but does not translate the UI",
+          "location": "web/src/components/app/top-bar.tsx:12-33 (LocaleToggle) + web/src/components/app/app-sidebar.tsx:69,83,86 + web/src/components/app/page-header.tsx",
+          "issue": "LocaleToggle sets document.documentElement.dir='rtl' and lang='ar' on click, but every chrome string is rendered from labelEn/nameEn/English literals (sidebar groups, nav items, page titles, KPI labels, disclosures). Toggling to Arabic mirrors the entire layout to RTL while all surrounding text stays English — producing a mixed-direction, broken-looking layout (English right-aligned, sidebar mirrored, lucide icons flipped to the wrong side) with no real Arabic translation.",
+          "evidence": "top-bar.tsx:24-25 sets dir/lang only; no i18n state propagates. app-sidebar.tsx renders {group.labelEn} (line 69) and {item.labelEn} (86) regardless of locale; constants.ts holds labelAr/nameAr but they are unused by the shell. page-header.tsx renders the passed English `title` verbatim. The real titleAr Arabic product names ARE correctly marked dir=\"rtl\" font-arabic inline (verified in rank-row, product-card, watch-card, detail page) — that part is good.",
+          "impact": "The toggle advertises a bilingual product but only mirrors direction; switching to Arabic degrades rather than localizes the UI. Confusing for the target (Egyptian) audience; an a11y/i18n correctness gap since lang='ar' is set on an all-English document.",
+          "fix": "Either (a) gate the toggle to a real i18n layer that swaps labelEn↔labelAr (the Arabic strings already exist in constants), or (b) until that exists, scope dir changes to genuinely bilingual blocks and keep the document LTR, or remove the global dir flip so lang/dir never contradict the rendered content."
+        },
+        {
+          "severity": "Low",
+          "area": "Demand-band inconsistency between search/watch cards (absolute BSR) and list/store (within-category)",
+          "location": "web/src/app/(app)/search/_components/product-card.tsx:16-22 + web/src/app/(app)/watchlists/_components/watch-card.tsx:26-32 vs web/src/lib/real-store.ts:66-73 (bandFromPos)",
+          "issue": "Search and watch cards compute the demand band from ABSOLUTE BSR thresholds (bsr<300 very-high, <1000 high, <3000 moderate). On real data, product.bsr is leaf?.rank ?? row.rank — for the 8 enriched products it is the leaf-category rank (often 1-2 in a narrow leaf like 'USB Cables'), and for others it is the 1-120 bestseller position. Neither matches the within-category percentile band (bandFromPos) used by the lists/store, so the same product can show a different band on search vs bestsellers.",
+          "evidence": "search product-card.tsx:17-21 absolute thresholds; real-store.ts rowToProduct line 104 `bsr: leaf?.rank ?? row.rank`; bandFromPos (66-73) uses positional fraction within category. types.ts:69-73 explicitly documents the band as 'within a category … Never comparable across categories', which the absolute-threshold helpers violate.",
+          "impact": "Cross-screen band labels can disagree for the same ASIN; contradicts the documented within-category semantics. Lower severity because search results derive from the seed/real catalogue and the discrepancy is bounded, but it undermines the 'one source of truth' intent noted in data.ts:121.",
+          "fix": "Have search/watch cards consume the band from the data layer (carry demandBand on the Product or look it up via the bestseller row) instead of recomputing from absolute BSR. Delete the duplicated demandBandFromBsr helpers."
+        },
+        {
+          "severity": "Low",
+          "area": "Alerts link to seed-only product pages",
+          "location": "web/src/lib/data.ts:362-392 (getAlerts) + web/src/app/(app)/alerts/page.tsx:122-131",
+          "issue": "getAlerts() seeds three alerts on the same seed ASINs (B0EG0XIAM2/PHIL6/LORE9). The alerts table itself renders fine (it uses alert.productTitle, a literal string, so no crash), but each row links to /products/{seedAsin}. Those ASINs exist in bestsellers.all? No — they are seed-only, so getProduct→real.product returns undefined and the detail route calls notFound() → 404.",
+          "evidence": "data.ts:362-392 hardcodes the seed ASINs; alerts/page.tsx:123 `href={`/products/${alert.asin}`}`. Detail page page.tsx:97 `if (!product) notFound();`. Confirmed the three ASINs are absent from real data (same probe as the Critical finding).",
+          "impact": "Clicking any seeded alert's product link 404s. Dead links from a populated table; no crash on the alerts page itself.",
+          "fix": "Seed alerts from real ASINs (e.g. the top few getBestSellers() rows) so productTitle and the link target are consistent and resolvable, or hide the link when the ASIN is not tracked."
+        }
+      ],
+      "verified": [
+        "Movers screen empty state: real.movers() returns [] by design and movers/page.tsx:94-109 renders a proper empty state ('Nothing is rising in this window') — verified correct, no crash.",
+        "Reviews empty state: getReviews→real.reviews returns [] for non-enriched products; detail page page.tsx:419-429 guards with `reviews.length ?` and shows 'No reviews captured for this product yet.' — correct.",
+        "Sentiment aspects empty state: real.sentimentSummary returns pros:[]/cons:[]; AspectGroup (page.tsx:461-508) renders emptyLabel ('No positive aspects surfaced…') instead of crashing — correct.",
+        "Keywords screen: real keywords.json is present (39 terms); keywords/page.tsx:76-147 renders the table, and the lang-filter empty case has a SearchX empty state — correct. Many ties at score 100 is a data artefact, not a frontend bug.",
+        "Recharts empty/1-point safety: empirically SSR-rendered Spark and History-equivalent ComposedChart with data=[] and data=[1pt] on recharts 3.8.0 — all four returned valid SVG WITHOUT throwing, so blank charts are a UX issue, not a runtime crash.",
+        "Null price/rating fields: formatEgp/formatNumber/formatRating/formatRank all guard value==null||NaN → '—' (format.ts:13,29,55,95); RatingStars guards rating==null → 'No rating' (rating-stars.tsx:19); the 2 real rows with no price_egp render '—' and 'Out of stock' (real-store.ts:106 inStock = price!=null) — correct.",
+        "Product images: products have real image_url; ProductThumb renders <img> with alt={titleEn} and falls back to an aria-hidden initials tile when absent (product-thumb.tsx:37-66) — correct, with lazy loading.",
+        "Dashboard avgRating: getDashboardSummary filters ratings to non-null before averaging and guards ratings.length (data.ts:336-339); all 120 real rows have rating, so no NaN — verified safe.",
+        "Bilingual product titles: real titleAr is genuine Arabic; every render site (rank-row, product-card both variants, watch-card, detail header, review items) wraps it in dir=\"rtl\" font-arabic with truncation/line-clamp — correct RTL handling at the field level.",
+        "Confidence/provenance disclosure: ConfidenceBadge, ProvenanceHint, CalibrationNotice are present on dashboard, products, bestsellers, movers, keywords, search, detail, and calculator; meter bars carry role=\"meter\"+aria-valuenow/min/max; sentiment bar carries role=\"img\"+aria-label — solid a11y labelling on data viz.",
+        "Calculator: fully self-contained on DEFAULT_FEE_SCHEDULE (no real-data dependency); num() coerces blank/invalid→0, breakEven guarded with Number.isFinite, ROI guarded for cogs==0 — no NaN leakage to the UI.",
+        "Empty bestsellers/products category filter: both screens guard rows.length and render dedicated empty states with a 'clear filter' affordance — correct."
+      ],
+      "notVerified": [
+        "Live browser rendering: per instructions I did not start next dev/build or fetch amazon.eg, so I could not visually confirm the blank-chart and RTL-toggle appearance in a real browser — findings are from static analysis plus an isolated Recharts SSR probe (react-dom/server), not a full Next.js render.",
+        "Hydration parity of Freshness/LocaleToggle under the real scraped_at timestamp was reasoned from code (server renders absolute date, client upgrades to relative) but not observed at runtime.",
+        "Color-contrast ratios (WCAG AA) for the confidence/demand tone tokens (text-positive, text-confidence-low on tinted backgrounds, muted-foreground/40 stars) were not measured — needs a contrast tool / Lighthouse pass against the actual CSS variable values in globals.css.",
+        "Keyboard focus order and visible focus rings across the sidebar/sheet/dialog (new-list, new-alert) were not exercised interactively; only static focus-visible classes were observed on cards/links.",
+        "Whether the concurrent scrape ever writes a partially-flushed JSON that JSON.parse could choke on mid-render — readJson catches and returns null (real-store.ts:33-35), but a truncated file during an atomic-less write was not stress-tested."
+      ],
+      "verdict": "no-go"
+    },
+    {
+      "dimension": "SQL / Data-Model correctness (supabase/migrations/0001_init.sql)",
+      "summary": "The migration is syntactically valid Postgres/Supabase DDL and the core time-series model (append-only `snapshots`/`rankings` + supporting indexes) is sound and WOULD support getBsrHistory and derived movers if wired. The `riser_daily` view's window logic is actually correct (the explicit full-partition frame defends against the classic last_value pitfall, DESC ordering gives now/prev correctly, and the Δlog(BSR) sign matches types.ts). However there is one Critical RLS gap: `watchlist_items` is never RLS-enabled and has no policy, so once auth is on it leaks/accepts cross-tenant rows. A second structural defect: per-ASIN leaf BSR is stored as a display name in `rankings.bsr_category` (text), which cannot join to `categories.node_id`, so the riser_daily/demand-band \"leaf rank\" key the spec relies on is not actually keyed to the category tree. The overarching context — which caps the verdict — is that the ENTIRE schema is currently unwired dead code: the running app reads JSON files (web/src/data/real/*.json) via real-store.ts, there is no Supabase/pg client or dependency anywhere in web/, and the scrapers write JSON, not the DB. So none of this SQL is exercised in the current runtime; it is a forward-looking spec (DEPLOY.md \"Option B\").",
+      "findings": [
+        {
+          "severity": "Critical",
+          "area": "RLS / tenant isolation",
+          "location": "supabase/migrations/0001_init.sql:145-167",
+          "issue": "watchlist_items has NO row-level security enabled and NO policy, while its parent watchlists is RLS-isolated. RLS is enabled only on watchlists, alerts (lines 165-167); watchlist_items is omitted.",
+          "evidence": "Lines 165-167 enable RLS on watchlists/watchlist_items/alerts — but line 166 IS present for watchlist_items, yet there is NO `create policy` for watchlist_items (only tenant_rw_watchlists line 169 and tenant_rw_alerts line 172). In Postgres, enabling RLS with zero policies = DENY ALL to non-owners, which actually BREAKS the feature: the anon/authenticated app role can read/write watchlists (policy exists) but every join/select to watchlist_items returns zero rows and every insert is rejected, because no policy grants access. watchlist_items also has no tenant_id column (line 145-150), so a correct policy must filter via EXISTS on the parent watchlist — which is not written.",
+          "impact": "Watchlist contents are entirely inaccessible through the anon/authenticated role once auth+RLS is on (feature silently returns empty), OR if a developer 'fixes' it by simply disabling RLS on the child, items become globally readable across tenants — a data-isolation breach for a multi-tenant SaaS. Either way the tenant model is broken for the items table.",
+          "fix": "Add a policy that scopes items through their parent watchlist, e.g.: `create policy tenant_rw_watchlist_items on watchlist_items using (exists (select 1 from watchlists w where w.id = watchlist_id and w.tenant_id = (auth.jwt()->>'tenant_id')::uuid)) with check (same)`. Apply the identical EXISTS-on-parent pattern. Do the same review for any future child tables."
+        },
+        {
+          "severity": "High",
+          "area": "Schema-vs-app key integrity (leaf BSR ↔ category tree)",
+          "location": "supabase/migrations/0001_init.sql:78-89 (rankings.bsr_category) vs scrapers/parse.py:126-127 and real-store.ts:85-88",
+          "issue": "The leaf-category key that the demand-band / riser logic depends on is stored as a free-text display NAME, not as a categories.node_id FK, so leaf rankings cannot be joined to the category tree.",
+          "evidence": "parse.py:127 emits `{'rank': int, 'category': cat.strip()}` where cat is the human label ('USB Cables', 'Electronics') scraped from the BSR table. The migration's rankings.category_node (line 80) is `not null references categories(node_id)` — but the spec (04-real-pipeline-spec.md §2.3/§2.7) says the meaningful leaf key is the harvested numeric node-id (e.g. 21833243031), captured from the `<a href>` , NOT the label. The migration provides bsr_category text (line 84) for the label but there is no FK column for the leaf node-id, and category_node is forced to the LIST category (e.g. 'electronics'), not the leaf. So 'leaf rank' (#5 in USB Cables) cannot resolve to a categories row, and riser_daily partitions by (asin, category_node) = the LIST node, mixing list-rank-derived bsr with leaf bsr.",
+          "impact": "riser_daily and the within-category demand band cannot actually operate on the leaf category the spec claims is 'the meaningful key'. Cross-category BSR values (whole-Electronics rank vs USB-Cables leaf rank) can be co-mingled under one category_node, producing an incorrect/misleading Δlog(BSR) — the exact cross-category comparison the app's C1 control forbids.",
+          "fix": "Add `bsr_leaf_node text references categories(node_id)` and persist the harvested numeric node-id from parse.py (extend parse to capture the leaf node-id from `tr td a[href*=\"/gp/bestsellers/\"]` as §2.3 specifies). Partition riser_daily by the leaf node, and backfill categories with the numeric sub-nodes (§2.7) before relying on the FK."
+        },
+        {
+          "severity": "High",
+          "area": "Dead/unwired data model (architecture correctness)",
+          "location": "supabase/migrations/0001_init.sql (whole file) vs web/src (no client) and scrapers/run.py:98-116",
+          "issue": "The entire SQL schema is not connected to anything in the running system: the app reads JSON files, not Postgres, and the scraper writes JSON files, not the DB.",
+          "evidence": "(1) No DB client or dependency: grep for supabase/@supabase/pg/postgres/drizzle/prisma/kysely across web/src and web/package.json returns nothing. (2) The app's data seam reads files: real-store.ts:10 `import {readFileSync} from 'node:fs'`, :25 `DIR = .../src/data/real`, and data.ts delegates to it (e.g. data.ts:67 `if (real.available()) return real.bsrHistory(asin)`). (3) The scraper writes JSON only: run.py:98-116 writes bestsellers.json/products.json/meta.json; grep for INSERT/upsert/supabase in scrapers/*.py finds none. (4) .env.example:6-10 leaves all SUPABASE_* blank and states 'NOTHING here is required for the current local file-store model'. DEPLOY.md:46-55 frames Supabase as a future 'Option B'.",
+          "impact": "Every SQL-correctness property (FKs, indexes, RLS, riser_daily) is currently inert — it protects/serves no live traffic. getBsrHistory in the live path returns a single point (real-store.ts:167-177) because there is no append-only history table feeding it; the migration's claim that snapshots 'make BSR history real over time' is not realized. Risk: schema drift — the JSON shapes (run.py) and the DDL can diverge silently since nothing enforces them together (and they already differ: JSON has no snapshots/append concept).",
+          "fix": "Either (a) clearly mark the migration as a not-yet-wired spec and add a CI check that the scraper's JSON contract matches the intended row schema, or (b) implement the documented upsert step (write products/snapshots/rankings/reviews/keyword_snapshots) and the SupabaseReadAdapter so the schema is actually exercised before its correctness can be trusted."
+        },
+        {
+          "severity": "Medium",
+          "area": "View semantics (riser_daily window / lag definition)",
+          "location": "supabase/migrations/0001_init.sql:177-191",
+          "issue": "rise_score uses last_value over an 8-day window = the OLDEST snapshot still inside the window as 'prev', not a fixed lag (e.g. yesterday or 7d ago). The reference window therefore drifts with snapshot density and age.",
+          "evidence": "Lines 183-185: `where captured_at > now() - interval '8 days'` with frame `rows between unbounded preceding and unbounded following` order by captured_at desc. bsr_prev = last_value = oldest row in the 8d window. There is no day-bucketing despite the view name 'riser_daily'; two products with different snapshot histories are compared over different effective intervals (one over ~1 day, one over ~8 days). The app's own riseScore (data.ts:106-113) instead uses a fixed window index (period 2/7/30), so server view and client logic compute DIFFERENT deltas.",
+          "impact": "rise_score is not a per-day or per-7-day velocity; it is 'change since the oldest point in the last 8 days', which over- or under-states movers depending on cadence and how long an item has been tracked. Ranking of movers is inconsistent and not comparable across products; it also diverges from the client-side getMovers definition, so a Supabase-backed movers list would not match the seed-backed one.",
+          "fix": "Define the lag explicitly: pick bsr_prev as the snapshot closest to now()-interval '7 days' (or '1 day') per (asin, leaf node) using a lateral/ordered subquery or date_trunc('day') bucketing, and document the exact window so it matches data.ts riseScore. Optionally add a min-2-snapshots guard so single-snapshot ASINs are excluded rather than yielding rise_score=0."
+        },
+        {
+          "severity": "Medium",
+          "area": "Missing index / query performance",
+          "location": "supabase/migrations/0001_init.sql:78-91, 109-126",
+          "issue": "Key read paths lack supporting indexes. (1) reviews has only reviews_asin (line 120) but no index on review_sentiment.review_id beyond its PK (ok), however reviews has no index for 'newest reviews' ordering; more importantly (2) rankings has no index on (list_type) or (category_node, list_type, captured_at) for the very common 'newest bestsellers in category' query, and snapshots/rankings 'latest row per asin' has no covering DISTINCT ON support.",
+          "evidence": "Indexes present: snapshots_asin_time (75), snapshots_time_brin (76), rankings_cat_time (90), rankings_asin_time (91), products_brand_idx (61), products_cat_idx (62), reviews_asin (120). The dominant app query (real-store.ts:128-134 bestSellers, spec §5.4 'newest rankings rows where list_type=bestsellers, filter category, order by rank') filters by list_type and category_node and wants the latest captured_at — rankings_cat_time covers (category_node, captured_at) but not list_type, so list_type is a post-filter, and there is no index to fetch list_rank ordering directly.",
+          "impact": "At scale (append-only table grows unbounded), 'latest bestsellers per category' does an index range scan plus filter+sort; acceptable early but degrades as snapshots accumulate (the whole point of append-only). Not Critical because volumes are tiny today and nothing queries it yet.",
+          "fix": "Add `create index rankings_cat_list_time on rankings (category_node, list_type, captured_at desc)` and consider a partial index `where list_type='bestsellers'`. For 'latest snapshot per asin', rely on the existing snapshots_asin_time (already DESC) with DISTINCT ON (asin) — verify the planner uses it."
+        },
+        {
+          "severity": "Low",
+          "area": "Source-id referential consistency (keywords)",
+          "location": "supabase/migrations/0001_init.sql:104,193-198 vs data files",
+          "issue": "keyword_snapshots.source defaults to 'google_trends' and is not a FK, while the actual pipeline labels the source 'amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends' and the app emits source 'amazon_autocomplete' — none of which is constrained, so source strings are free-form and inconsistent across layers.",
+          "evidence": "Migration line 104 `source text not null default 'google_trends'` (no FK to sources). sources seed (193-198) defines ids amazon_html_bestsellers/_product/_reviews/google_trends — NOT 'amazon_autocomplete' or 'amazon_eg_autocomplete'. data.ts:299 emits provenance source 'amazon_autocomplete'; keywords.json 'source' = 'amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends'. snapshots.source (line 68) and rankings.source (87) ARE FK-constrained to sources(id), but the app/scraper would need to insert 'amazon_html_bestsellers' to satisfy them — not yet exercised.",
+          "impact": "Low today (table unused), but once wired, keyword provenance is unconstrained free text and will not reconcile with the sources catalogue, and any attempt to insert snapshot/ranking rows with the app's provenance strings (e.g. 'amazon_autocomplete') would violate the sources FK. Minor data-quality / join-consistency risk.",
+          "fix": "Either FK keyword_snapshots.source to sources(id) and register the autocomplete/google_trends source ids the pipeline actually uses, or document source as a free label. Align the source-id vocabulary across parse/run, data.ts provenance, and the sources seed."
+        },
+        {
+          "severity": "Low",
+          "area": "Constraint completeness / data hygiene",
+          "location": "supabase/migrations/0001_init.sql:32-41,65-89,99-107",
+          "issue": "Several columns that should be bounded/non-null are unconstrained: scrape_runs.status and snapshots.confidence are free text with no CHECK; numeric fields (price_egp, rating, demand_score, null_rate, gain_pct) have no range checks; rating could be any number.",
+          "evidence": "Line 37 status text (comment 'ok|partial|failed|blocked' not enforced); line 72 confidence text (comment 'high|medium|low' not enforced, unlike the app's Confidence union type in types.ts:14); line 69 price_egp numeric, line 70 rating numeric (no 0–5 CHECK), line 102 demand_score numeric (comment '0–100' not enforced), line 39 null_rate numeric (0–1 not enforced).",
+          "impact": "Garbage values (negative price, rating 7.0, demand_score 250) can be stored and then surfaced by the UI as facts; the DB provides no backstop for the scraper's parse errors. The app's TS unions (Confidence/DemandBand) are stricter than the DB, so the DB is the weaker contract.",
+          "fix": "Add CHECK constraints: rating between 0 and 5; price_egp >= 0; demand_score between 0 and 100; null_rate between 0 and 1; status in ('ok','partial','failed','blocked'); confidence in ('high','medium','low'). Mirror the TS unions in the DDL."
+        }
+      ],
+      "verified": [
+        "Postgres syntax is valid: gen_random_uuid() default (0001_init.sql:8,139,152), `bigint generated always as identity` (33,95,130), `using brin (captured_at)` (76), window functions with named WINDOW clause (184-185), ln()/nullif() (188), auth.jwt()->>'tenant_id' cast to uuid (170-171), `on conflict (id) do nothing` (198), composite PKs (73,88,106,149) — all parse as valid Postgres/Supabase DDL; no syntax errors found.",
+        "PK/FK wiring is internally consistent: products.asin PK (52) referenced by snapshots/rankings/reviews/watchlist_items/alerts; categories.node_id PK (44) self-references parent_node (47) and is referenced by products/rankings; tenants/app_users/watchlists/alerts tenancy chain is coherent with ON DELETE CASCADE on tenant_id (16,142,153).",
+        "Append-only design is structurally correct for history: snapshots PK (asin, captured_at, source) (73) and rankings PK (asin, category_node, captured_at, source) (88) permit one row per capture without overwriting, and snapshots_asin_time / rankings_asin_time DESC indexes (75,91) support 'history for one ASIN' and 'latest per ASIN' — so getBsrHistory and derived movers ARE supportable by the schema in principle.",
+        "riser_daily window logic is CORRECT (not the suspected bug): the explicit frame `rows between unbounded preceding and unbounded following` (185) makes last_value scan the full partition (avoiding the classic last_value default-frame pitfall); with `order by captured_at desc`, first_value=newest=bsr_now and last_value=oldest=bsr_prev; rise_score = ln(bsr_prev) - ln(bsr_now) (188) is positive when rank improved, matching types.ts:84 'ln(bsrPrev) - ln(bsrNow). Positive = improving'. nullif(...,0) guards ln(0)/divide; the where clause (190) drops null endpoints.",
+        "RLS USING + WITH CHECK are both present and correct for the two policied tables: tenant_rw_watchlists (169-171) and tenant_rw_alerts (172-174) each filter both read (using) and write (with check) by tenant_id = jwt tenant_id, correctly preventing cross-tenant read and cross-tenant insert/update for those two tables.",
+        "Schema column set broadly matches the app's domain types: products/snapshots/rankings/reviews/keywords cover Product/SeriesPoint/RankingRow/Review/Keyword fields in types.ts; is_estimated + confidence columns (71-72,103-105) back the Provenance.isEstimated/confidence discipline the UI relies on."
+      ],
+      "notVerified": [
+        "Whether the SQL actually applies cleanly on a live Supabase/Postgres instance — per instructions I did not run psql/supabase db push or connect to any database; correctness was assessed by static reading only.",
+        "Runtime behavior of riser_daily / RLS under real data — no DB exists in this project state (no client, no connection string set in .env.example), so the view output and policy enforcement were not observed, only reasoned from the DDL.",
+        "Whether gen_random_uuid() is available — it requires pgcrypto (or pg13+ where it is in core). Supabase enables it by default, but the migration does not `create extension if not exists pgcrypto`; on a bare Postgres < 13 without the extension, lines 8/139/152 would fail. Could not verify the target server version.",
+        "The exact JSON-to-table mapping fidelity — since the upsert step is unimplemented (DEPLOY.md:49 lists it as a TODO), I could not verify that the scraper's JSON (run.py) round-trips losslessly into snapshots/rankings/reviews as the schema intends.",
+        "Index effectiveness under load — I did not run EXPLAIN/ANALYZE (no DB), so the performance findings are based on index/column reasoning, not measured plans."
+      ],
+      "verdict": "conditional-go"
+    }
+  ],
+  "counts": {
+    "critical": 13,
+    "high": 15,
+    "medium": 16,
+    "low": 17
+  },
+  "noGoDimensions": [
+    "Scraper Correctness & Robustness",
+    "Data Accuracy & Honesty / Disclosure (real amazon.eg data)",
+    "OPS / SCHEDULING / DEPLOY",
+    "Security & Production-Readiness",
+    "Frontend Correctness / A11y / UX-States (real amazon.eg data)"
+  ]
+}

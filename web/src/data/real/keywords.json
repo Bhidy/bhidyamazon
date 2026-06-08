@@ -1,0 +1,286 @@
+{
+  "scraped_at": "2026-06-08T08:43:03.244772+00:00",
+  "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
+  "keywords": [
+    {
+      "query": "earbuds",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "wireless charger",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "power bank",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "laptop",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "air fryer",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "smart watches for men",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "headphones",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "usb cable",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "phone case",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "bluetooth speaker",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "baby",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "perfume",
+      "lang": "en",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "شاحن انكر",
+      "lang": "ar",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "سماعات بلوتوث",
+      "lang": "ar",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "لاب توب",
+      "lang": "ar",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "ساعة ذكية",
+      "lang": "ar",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "قلاية هوائية",
+      "lang": "ar",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "فواحه عطريه للمنزل",
+      "lang": "ar",
+      "demandScore": 100,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "oraimo earbuds",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "wireless charger iphone",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "power bank 20000mah",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "laptop stand",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "air fryer paper",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "smart watch for women",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "headphones wireless",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "usb cable type c",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "rhode phone case",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "bluetooth speaker with mic",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "baby oil",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "perfume for men",
+      "lang": "en",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "شاحن سامسونج اصلي",
+      "lang": "ar",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "سماعات",
+      "lang": "ar",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "حامل لابتوب",
+      "lang": "ar",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "ساعة ذكية للأطفال",
+      "lang": "ar",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "قلاية زيت كهربائية",
+      "lang": "ar",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "عطر رجالي",
+      "lang": "ar",
+      "demandScore": 92,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "soundcore earbuds",
+      "lang": "en",
+      "demandScore": 84,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "wireless charger samsung",
+      "lang": "en",
+      "demandScore": 84,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "power bank anker",
+      "lang": "en",
+      "demandScore": 84,
+      "trend": "flat",
+      "appearances": 1
+    },
+    {
+      "query": "laptop bag",
+      "lang": "en",
+      "demandScore": 84,
+      "trend": "flat",
+      "appearances": 1
+    }
+  ]
+}

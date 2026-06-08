@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.rasid.amazoneg.scrape</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/home/Documents/Amazon/scrapers/run_daily.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>7</integer></dict>
+    <dict><key>Hour</key><integer>21</integer><key>Minute</key><integer>13</integer></dict>
+  </array>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>/Users/home/Documents/Amazon/scrapers/logs/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/home/Documents/Amazon/scrapers/logs/launchd.err.log</string>
+</dict>
+</plist>

@@ -1,0 +1,28 @@
+# dependencies / build output
+node_modules/
+.next/
+out/
+dist/
+
+# scraper runtime
+scrapers/logs/
+**/__pycache__/
+*.pyc
+
+# vercel
+.vercel/
+
+# env / secrets
+.env
+.env*.local
+
+# local screenshots & playwright artifacts (root only)
+/*.png
+.playwright-mcp/
+
+# os / tmp
+.DS_Store
+*.tmp
+
+# NOTE: web/src/data/real/*.json IS committed on purpose — it is the real
+# amazon.eg data the deployed app reads (bundled via outputFileTracingIncludes).
