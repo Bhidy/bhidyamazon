@@ -10,19 +10,19 @@ import type { Confidence, Provenance } from "@/lib/types";
 const META: Record<Confidence, { label: string; cls: string; dot: string; help: string }> = {
   high: {
     label: "Verified",
-    cls: "text-confidence-high border-confidence-high/30 bg-confidence-high/10",
+    cls: "text-confidence-high bg-confidence-high/12",
     dot: "bg-confidence-high",
     help: "Scraped fact — directly observed on amazon.eg.",
   },
   medium: {
     label: "Relative",
-    cls: "text-confidence-medium border-confidence-medium/30 bg-confidence-medium/10",
+    cls: "text-confidence-medium bg-confidence-medium/15",
     dot: "bg-confidence-medium",
     help: "Ordinal / relative signal — comparable only within a category.",
   },
   low: {
     label: "Estimated",
-    cls: "text-confidence-low border-confidence-low/30 bg-confidence-low/10",
+    cls: "text-confidence-low bg-confidence-low/15",
     dot: "bg-confidence-low",
     help: "Modeled estimate — a rough indicator, not a fact.",
   },
@@ -45,7 +45,7 @@ export function ConfidenceBadge({
         render={
           <span
             className={cn(
-              "inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[10px] font-medium leading-none",
+              "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold leading-none",
               m.cls,
               className,
             )}

@@ -6,6 +6,21 @@ import type { TooltipValueType } from "recharts"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Canonical Fynix chart recipe (two-tone green) — shared by every Recharts surface
+ * (this container/tooltip/legend, app/bsr-spark.tsx, and the product rank&price
+ * history chart) so they stay visually consistent:
+ *   - Series colors come from the green chart tokens: `--chart-1` forest (primary
+ *     "income"/rank line), `--chart-2` lime (the signature accent / "light" series),
+ *     and `--chart-3..5` (mid green, pale green, gray) for supporting series.
+ *   - Bars: rounded tops `radius={[6, 6, 0, 0]}`, forest + lime two-tone.
+ *   - Lines/sparklines: lime (`--chart-2`) stroke over a soft area gradient fading
+ *     lime → transparent.
+ *   - Grid: subtle, `stroke var(--border)`.
+ *   - Tooltip: white (`bg-card`), `rounded-xl`, hairline `border-border`, soft
+ *     `shadow-card`.
+ */
+
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
 
@@ -65,7 +80,7 @@ function ChartContainer({
         data-slot="chart"
         data-chart={chartId}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className
         )}
         {...props}
@@ -191,7 +206,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
+        "grid min-w-32 items-start gap-1.5 rounded-xl border border-border bg-card px-2.5 py-1.5 text-xs shadow-card",
         className
       )}
     >

@@ -17,15 +17,15 @@ export function ProductCard({ row }: { row: RankingRow }) {
     <Link
       href={`/products/${p.asin}`}
       className={cn(
-        "group flex h-full flex-col gap-3 rounded-xl border bg-card p-4 transition-colors",
-        "hover:border-brand/40 hover:bg-muted/40",
+        "card-hover group flex h-full flex-col gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-card",
+        "hover:border-brand/40",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
       )}
     >
       <div className="flex items-start gap-3">
         <ProductThumb product={p} size={64} />
         <div className="min-w-0 flex-1">
-          <h3 className="line-clamp-2 text-sm font-medium leading-snug text-foreground group-hover:underline">
+          <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-foreground decoration-brand/60 underline-offset-2 group-hover:underline">
             {p.titleEn}
           </h3>
           {p.titleAr && (
@@ -44,11 +44,11 @@ export function ProductCard({ row }: { row: RankingRow }) {
         <DemandBadge band={row.demandBand} />
       </div>
 
-      <div className="mt-auto flex items-end justify-between gap-2 border-t pt-3">
-        <span className="text-base font-semibold tabular-nums text-foreground">
+      <div className="mt-auto flex items-end justify-between gap-2 border-t border-border/60 pt-4">
+        <span className="text-lg font-bold tabular-nums text-primary">
           {formatEgp(p.priceEgp)}
         </span>
-        <span className="text-xs tabular-nums text-muted-foreground">
+        <span className="inline-flex items-center rounded-full bg-muted/60 px-2 py-0.5 text-xs font-medium tabular-nums text-muted-foreground">
           BSR {formatRank(p.bsr)}
         </span>
       </div>

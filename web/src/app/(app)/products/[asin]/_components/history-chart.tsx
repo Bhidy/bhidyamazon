@@ -26,7 +26,7 @@ export interface HistoryPoint {
 
 const chartConfig = {
   bsr: { label: "Best Seller Rank", color: "var(--chart-1)" },
-  price: { label: "Price (EGP)", color: "var(--chart-3)" },
+  price: { label: "Price (EGP)", color: "var(--chart-2)" },
 } satisfies ChartConfig;
 
 /** Short axis date label, e.g. "8 Jun". */
@@ -87,12 +87,13 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
       <ComposedChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 8 }}>
         <defs>
           <linearGradient id="rasid-price-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-price)" stopOpacity={0.28} />
+            <stop offset="0%" stopColor="var(--color-price)" stopOpacity={0.5} />
+            <stop offset="55%" stopColor="var(--color-price)" stopOpacity={0.16} />
             <stop offset="100%" stopColor="var(--color-price)" stopOpacity={0.02} />
           </linearGradient>
         </defs>
 
-        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+        <CartesianGrid vertical={false} stroke="var(--border)" strokeDasharray="3 3" />
 
         <XAxis
           dataKey="date"

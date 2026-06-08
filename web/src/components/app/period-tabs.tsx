@@ -27,7 +27,7 @@ export function PeriodTabs({
     return `${pathname}?${sp.toString()}`;
   };
   return (
-    <div className="inline-flex rounded-lg border bg-muted/50 p-0.5" role="tablist">
+    <div className="inline-flex rounded-full bg-muted/60 p-1" role="tablist">
       {PERIODS.map((p) => (
         <Link
           key={p.k}
@@ -35,9 +35,9 @@ export function PeriodTabs({
           role="tab"
           aria-selected={value === p.k}
           className={cn(
-            "rounded-md px-3 py-1 text-xs font-medium transition-colors",
+            "rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
             value === p.k
-              ? "bg-background text-foreground shadow-sm"
+              ? "bg-primary text-primary-foreground shadow-sm"
               : "text-muted-foreground hover:text-foreground",
           )}
         >

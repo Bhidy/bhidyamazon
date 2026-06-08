@@ -24,7 +24,7 @@ export function WatchCard({ item }: { item: WatchlistItem }) {
   if (removed) return null;
 
   return (
-    <Card className="gap-0">
+    <Card className="card-hover gap-0">
       <CardHeader className="flex-row items-start gap-3 border-b pb-4">
         <ProductThumb product={p} size={56} />
         <div className="min-w-0 flex-1 space-y-1">
@@ -47,7 +47,7 @@ export function WatchCard({ item }: { item: WatchlistItem }) {
           </div>
         </div>
         <div className="shrink-0 text-end">
-          <div className="text-sm font-semibold tabular-nums text-foreground">{formatEgp(p.priceEgp)}</div>
+          <div className="text-base font-bold tabular-nums text-foreground">{formatEgp(p.priceEgp)}</div>
         </div>
       </CardHeader>
 

@@ -36,7 +36,7 @@ export function ProductThumb({
   size?: number;
   className?: string;
 }) {
-  const radius = "rounded-md";
+  const radius = "rounded-xl";
   // Real Amazon image URLs can fail to hotlink; fall back to the branded tile.
   const [errored, setErrored] = useState(false);
   if (product.imageUrl && !errored) {
@@ -47,7 +47,7 @@ export function ProductThumb({
         alt={product.titleEn}
         width={size}
         height={size}
-        className={cn(radius, "border border-border object-contain bg-white", className)}
+        className={cn(radius, "border border-border/70 bg-card object-contain", className)}
         style={{ width: size, height: size }}
         loading="lazy"
         onError={() => setErrored(true)}
@@ -59,7 +59,7 @@ export function ProductThumb({
     <div
       aria-hidden
       className={cn(
-        "flex shrink-0 items-center justify-center border border-border bg-gradient-to-br font-semibold",
+        "flex shrink-0 items-center justify-center border border-border/70 bg-gradient-to-br font-semibold",
         radius,
         g,
         className,

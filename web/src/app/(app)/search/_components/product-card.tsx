@@ -16,11 +16,11 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Card
       size="sm"
-      className="group/card gap-0 py-0 ring-foreground/10 transition-colors hover:ring-foreground/20"
+      className="group/card card-hover gap-0 py-0"
     >
       <Link
         href={`/products/${p.asin}`}
-        className="flex h-full flex-col gap-3 p-3 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
+        className="flex h-full flex-col gap-3 rounded-2xl p-3 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
       >
         <div className="flex items-start gap-3">
           <ProductThumb product={p} size={56} />
@@ -46,9 +46,9 @@ export function ProductCard({ product }: { product: Product }) {
 
         <RatingStars rating={p.rating} count={p.reviewCount} size={13} />
 
-        <div className="mt-auto flex items-end justify-between gap-2 border-t pt-3">
+        <div className="mt-auto flex items-end justify-between gap-2 border-t border-border/60 pt-3">
           <div>
-            <div className="text-base font-semibold tabular-nums text-foreground">
+            <div className="text-lg font-bold tabular-nums text-foreground">
               {formatEgp(p.priceEgp)}
             </div>
             <div className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">

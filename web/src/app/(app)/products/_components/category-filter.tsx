@@ -32,10 +32,10 @@ export function CategoryFilter({
 
   const chip = (selected: boolean) =>
     cn(
-      "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium whitespace-nowrap transition-colors",
+      "inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
       selected
-        ? "border-brand/40 bg-brand/10 text-brand"
-        : "border-border bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground",
+        ? "border-transparent bg-accent text-brand-foreground shadow-card"
+        : "border-border bg-card text-muted-foreground hover:bg-muted hover:text-foreground",
     );
 
   return (

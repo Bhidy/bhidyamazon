@@ -4,6 +4,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -31,10 +32,12 @@ type LangScope = (typeof LANGS)[number];
  * Top = appears at the very top of suggestions; lower tiers sit further down.
  * Deliberately a WORD, so the value can never be read as a demand quantity.
  */
-function prominenceTier(score: number): { label: string; cls: string } {
-  if (score >= 100) return { label: "Top", cls: "text-confidence-low border-confidence-low/30 bg-confidence-low/10" };
-  if (score >= 84) return { label: "High", cls: "text-muted-foreground border-border bg-muted/40" };
-  return { label: "Medium", cls: "text-muted-foreground border-border bg-muted/40" };
+function prominenceTier(
+  score: number,
+): { label: string; variant: "brand" | "secondary" } {
+  if (score >= 100) return { label: "Top", variant: "brand" };
+  if (score >= 84) return { label: "High", variant: "secondary" };
+  return { label: "Medium", variant: "secondary" };
 }
 
 export default async function KeywordsPage({
@@ -77,8 +80,10 @@ export default async function KeywordsPage({
 
       <Card className="gap-0">
         <CardHeader className="flex-row items-center justify-between border-b pb-4">
-          <div className="flex items-center gap-2">
-            <Radar className="size-4 text-brand" />
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent text-brand-foreground">
+              <Radar className="size-4" />
+            </span>
             <CardTitle className="text-base">Tracked keywords</CardTitle>
           </div>
           <span className="text-xs text-muted-foreground tabular-nums">
@@ -89,14 +94,14 @@ export default async function KeywordsPage({
           {keywords.length ? (
             <Table>
               <TableHeader>
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="w-10 pl-4 text-end text-muted-foreground">#</TableHead>
-                  <TableHead className="text-muted-foreground">Keyword</TableHead>
-                  <TableHead className="w-[34%] min-w-52 text-muted-foreground">
+                <TableRow className="border-b hover:bg-transparent [&>th]:h-9 [&>th]:text-[0.6875rem] [&>th]:font-medium [&>th]:uppercase [&>th]:tracking-wide [&>th]:text-muted-foreground">
+                  <TableHead className="w-10 pl-4 text-end">#</TableHead>
+                  <TableHead>Keyword</TableHead>
+                  <TableHead className="w-[34%] min-w-52">
                     Autocomplete prominence
                   </TableHead>
-                  <TableHead className="text-muted-foreground">Trend</TableHead>
-                  <TableHead className="pr-4 text-end text-muted-foreground">
+                  <TableHead>Trend</TableHead>
+                  <TableHead className="pr-4 text-end">
                     Appearances
                   </TableHead>
                 </TableRow>
@@ -105,7 +110,10 @@ export default async function KeywordsPage({
                 {keywords.map((k, i) => {
                   const isAr = k.lang === "ar";
                   return (
-                    <TableRow key={k.query}>
+                    <TableRow
+                      key={k.query}
+                      className="border-border/60 transition-colors hover:bg-muted/40"
+                    >
                       <TableCell className="pl-4 text-end text-xs font-medium tabular-nums text-muted-foreground">
                         {i + 1}
                       </TableCell>
@@ -123,7 +131,7 @@ export default async function KeywordsPage({
                           return (
                             <div className="flex items-center gap-2.5">
                               <div
-                                className="h-1.5 w-full max-w-32 overflow-hidden rounded-full bg-muted"
+                                className="h-2 w-full max-w-32 overflow-hidden rounded-full bg-muted"
                                 role="meter"
                                 aria-valuenow={k.demandScore}
                                 aria-valuemin={0}
@@ -131,15 +139,16 @@ export default async function KeywordsPage({
                                 aria-label={`Autocomplete prominence: ${tier.label} (rank signal, not search volume)`}
                               >
                                 <div
-                                  className="h-full rounded-full bg-confidence-low"
+                                  className="h-full rounded-full bg-brand"
                                   style={{ width: `${k.demandScore}%` }}
                                 />
                               </div>
-                              <span
-                                className={`inline-flex w-16 shrink-0 items-center justify-center rounded-full border px-1.5 py-0.5 text-[11px] font-medium leading-none ${tier.cls}`}
+                              <Badge
+                                variant={tier.variant}
+                                className="w-16 justify-center"
                               >
                                 {tier.label}
-                              </span>
+                              </Badge>
                             </div>
                           );
                         })()}
@@ -156,8 +165,10 @@ export default async function KeywordsPage({
               </TableBody>
             </Table>
           ) : (
-            <div className="flex flex-col items-center justify-center gap-2 px-4 py-14 text-center">
-              <SearchX className="size-6 text-muted-foreground" />
+            <div className="flex flex-col items-center justify-center gap-3 px-4 py-14 text-center">
+              <span className="flex size-11 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                <SearchX className="size-5" />
+              </span>
               <p className="text-sm font-medium">No keywords in this language</p>
               <p className="max-w-sm text-xs text-muted-foreground">
                 No autocomplete terms surfaced for the selected language scope. Try

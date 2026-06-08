@@ -27,6 +27,7 @@ import { DemandTrendChip } from "@/components/app/demand-trend-chip";
 import { getDashboardSummary } from "@/lib/data";
 import { formatRating } from "@/lib/format";
 import type { Period } from "@/lib/types";
+import { DashboardHero } from "./_components/dashboard-hero";
 
 const PERIODS = ["daily", "weekly", "monthly"];
 
@@ -37,7 +38,7 @@ const PERIODS = ["daily", "weekly", "monthly"];
  * number that could be misread as a demand quantity.
  */
 function prominenceTier(score: number): { label: string; cls: string } {
-  if (score >= 100) return { label: "Top", cls: "text-confidence-low border-confidence-low/30 bg-confidence-low/10" };
+  if (score >= 100) return { label: "Top", cls: "text-brand-foreground border-brand/30 bg-brand/20" };
   if (score >= 84) return { label: "High", cls: "text-muted-foreground border-border bg-muted/40" };
   return { label: "Medium", cls: "text-muted-foreground border-border bg-muted/40" };
 }
@@ -59,6 +60,8 @@ export default async function DashboardPage({
       >
         <PeriodTabs value={period} />
       </PageHeader>
+
+      <DashboardHero summary={s} />
 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <Freshness iso={s.lastUpdated} />
@@ -156,7 +159,7 @@ export default async function DashboardPage({
                     aria-valuemax={100}
                     aria-label={`Autocomplete prominence: ${tier.label} (rank signal, not search volume)`}
                   >
-                    <div className="h-full rounded-full bg-confidence-low" style={{ width: `${k.demandScore}%` }} />
+                    <div className="h-full rounded-full bg-brand" style={{ width: `${k.demandScore}%` }} />
                   </div>
                 </div>
                 <span

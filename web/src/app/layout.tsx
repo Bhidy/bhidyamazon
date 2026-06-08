@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import "@fontsource-variable/plus-jakarta-sans"; // primary UI/display face (self-hosted)
 import "@fontsource/cairo/400.css";
 import "@fontsource/cairo/700.css";
 import "./globals.css";

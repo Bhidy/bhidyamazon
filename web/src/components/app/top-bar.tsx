@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Languages, Search } from "lucide-react";
+import { Languages, Search, Settings } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
@@ -36,7 +37,7 @@ export function TopBar() {
   const router = useRouter();
   const [q, setQ] = useState("");
   return (
-    <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b bg-background/80 px-3 backdrop-blur-sm md:px-4">
+    <header className="sticky top-0 z-20 flex h-16 items-center gap-2 border-b border-border/60 bg-background/80 px-3 backdrop-blur-md md:px-4">
       <SidebarTrigger />
       <Separator orientation="vertical" className="mx-1 hidden h-5 sm:block" />
       <form
@@ -46,12 +47,12 @@ export function TopBar() {
         }}
         className="relative w-full max-w-md"
       >
-        <Search className="pointer-events-none absolute start-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="pointer-events-none absolute start-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search any amazon.eg product…"
-          className="h-9 ps-8"
+          className="h-10 rounded-full border-transparent bg-muted/60 ps-9.5 shadow-none focus-visible:bg-card"
           aria-label="Search products"
         />
       </form>
@@ -61,6 +62,19 @@ export function TopBar() {
           Free tier
         </Badge>
         <LocaleToggle />
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          nativeButton={false}
+          render={<Link href="/settings" />}
+          aria-label="Settings"
+        >
+          <Settings className="size-4" />
+        </Button>
+        <div
+          className="ms-0.5 hidden size-9 shrink-0 rounded-full bg-hero-lime ring-1 ring-border/60 sm:block"
+          aria-hidden="true"
+        />
       </div>
     </header>
   );

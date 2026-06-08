@@ -98,9 +98,14 @@ export default async function ProductsPage({
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed py-16 text-center">
-          <PackageOpen className="size-7 text-muted-foreground" />
-          <p className="text-sm font-medium text-foreground">No products tracked here yet</p>
+        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-border/70 bg-card py-16 text-center shadow-card">
+          <span
+            aria-hidden
+            className="grid size-12 place-items-center rounded-2xl bg-accent text-brand-foreground"
+          >
+            <PackageOpen className="size-6" />
+          </span>
+          <p className="text-sm font-semibold text-foreground">No products tracked here yet</p>
           <p className="max-w-sm text-sm text-muted-foreground">
             {categoryName
               ? `Rasid isn't tracking anything in ${categoryName} on amazon.eg right now.`

@@ -5,6 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/app/page-header";
 import { PeriodTabs } from "@/components/app/period-tabs";
 import { Freshness } from "@/components/app/freshness";
@@ -55,7 +56,7 @@ export default async function BestSellersPage({
         <PeriodTabs value={period} params={category ? { category } : {}} />
       </PageHeader>
 
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/60 bg-card px-4 py-2.5 shadow-card">
         <Freshness iso={freshnessIso} />
         <span className="text-xs text-muted-foreground">
           Ranked best sellers across {scopeLabel} · {PERIOD_LABEL[period]}
@@ -67,10 +68,15 @@ export default async function BestSellersPage({
       <CategoryFilter period={period} active={category} />
 
       <Card className="gap-0">
-        <CardHeader className="flex-row items-center justify-between border-b pb-4">
-          <div className="flex min-w-0 items-center gap-2">
-            <Trophy className="size-4 shrink-0 text-confidence-medium" />
-            <CardTitle className="truncate text-base">
+        <CardHeader className="flex-row items-center justify-between border-b border-border/60 pb-4">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <span
+              aria-hidden
+              className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent text-brand-foreground"
+            >
+              <Trophy className="size-4.5" />
+            </span>
+            <CardTitle className="truncate text-base font-semibold">
               {activeCategory ? activeCategory.nameEn : "All categories"}
             </CardTitle>
             {activeCategory && (
@@ -86,20 +92,25 @@ export default async function BestSellersPage({
               note="Rank is comparable only within the same category on amazon.eg."
             />
           </div>
-          <span className="shrink-0 text-xs font-medium tabular-nums text-muted-foreground">
+          <Badge variant="secondary" className="shrink-0 tabular-nums">
             {formatNumber(rows.length)} {rows.length === 1 ? "product" : "products"}
-          </span>
+          </Badge>
         </CardHeader>
         <CardContent className="p-2">
           {rows.length ? (
             rows.map((row) => <RankRow key={row.product.asin} row={row} />)
           ) : (
-            <div className="px-2 py-12 text-center">
-              <Trophy className="mx-auto size-6 text-muted-foreground/50" />
-              <p className="mt-3 text-sm font-medium text-foreground">
+            <div className="px-6 py-14 text-center">
+              <span
+                aria-hidden
+                className="mx-auto grid size-12 place-items-center rounded-2xl bg-accent text-brand-foreground"
+              >
+                <Trophy className="size-6" />
+              </span>
+              <p className="mt-4 text-sm font-semibold text-foreground">
                 No best sellers in {scopeLabel}
               </p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">
                 We have not tracked ranked products for this category yet. Try
                 another category or switch the period.
               </p>

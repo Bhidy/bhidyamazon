@@ -18,6 +18,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -95,9 +96,9 @@ function MoneyField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="pr-12 tabular-nums"
+          className="h-10 rounded-xl pe-12 tabular-nums"
         />
-        <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground">
+        <span className="pointer-events-none absolute inset-y-0 end-2.5 flex items-center text-xs font-medium text-muted-foreground">
           EGP
         </span>
       </div>
@@ -204,13 +205,26 @@ export function CalculatorForm({
       ? "text-negative"
       : "text-foreground";
 
+  // Tonal surface for the headline result: lime highlight when profitable,
+  // negative tint on a loss, neutral at break-even.
+  const headlineSurface = profitable
+    ? "border-brand/40 bg-accent shadow-brand/40"
+    : result.netProfitEgp < 0
+      ? "border-negative/30 bg-negative/[0.06]"
+      : "border-border/70 bg-muted/40";
+
   return (
     <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
       {/* ───────────────────────── Inputs column ──────────────────────────── */}
       <Card className="gap-0">
         <CardHeader className="border-b pb-4">
-          <div className="flex items-center gap-2">
-            <Coins className="size-4 text-brand" />
+          <div className="flex items-center gap-2.5">
+            <span
+              aria-hidden
+              className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent text-brand-foreground"
+            >
+              <Coins className="size-4.5" />
+            </span>
             <CardTitle className="text-base">Deal inputs</CardTitle>
           </div>
           <CardDescription>
@@ -245,7 +259,11 @@ export function CalculatorForm({
               value={categoryNode}
               onValueChange={(next) => setCategoryNode(next ?? CATEGORIES[0].nodeId)}
             >
-              <SelectTrigger id="category" className="w-full" aria-label="Product category">
+              <SelectTrigger
+                id="category"
+                className="h-10 w-full rounded-xl"
+                aria-label="Product category"
+              >
                 <SelectValue>
                   {(v: string | null) => {
                     const c = CATEGORY_BY_NODE[v ?? categoryNode];
@@ -291,12 +309,18 @@ export function CalculatorForm({
               value={fulfillment}
               onValueChange={(v) => setFulfillment((v as FulfillmentMethod) ?? "fba")}
             >
-              <TabsList className="w-full">
-                <TabsTrigger value="fba" className="flex-1">
+              <TabsList className="h-10 w-full rounded-full bg-muted p-1">
+                <TabsTrigger
+                  value="fba"
+                  className="flex-1 rounded-full data-active:bg-brand data-active:text-brand-foreground data-active:shadow-sm"
+                >
                   <Package className="size-3.5" />
                   FBA
                 </TabsTrigger>
-                <TabsTrigger value="fbm" className="flex-1">
+                <TabsTrigger
+                  value="fbm"
+                  className="flex-1 rounded-full data-active:bg-brand data-active:text-brand-foreground data-active:shadow-sm"
+                >
                   <Wallet className="size-3.5" />
                   FBM
                 </TabsTrigger>
@@ -319,7 +343,11 @@ export function CalculatorForm({
                   setFbaSizeTier(next ?? DEFAULT_FEE_SCHEDULE.fbaLadder[0].sizeTier)
                 }
               >
-                <SelectTrigger id="fba-tier" className="w-full" aria-label="FBA size tier">
+                <SelectTrigger
+                  id="fba-tier"
+                  className="h-10 w-full rounded-xl"
+                  aria-label="FBA size tier"
+                >
                   <SelectValue>
                     {(v: string | null) =>
                       DEFAULT_FEE_SCHEDULE.fbaLadder.find((r) => r.sizeTier === (v ?? fbaSizeTier))
@@ -373,7 +401,7 @@ export function CalculatorForm({
           <Separator />
 
           {/* VAT registration */}
-          <div className="flex items-start justify-between gap-4 rounded-lg border bg-muted/30 px-3 py-2.5">
+          <div className="flex items-start justify-between gap-4 rounded-xl border border-border/70 bg-muted/40 px-3.5 py-3">
             <div className="space-y-0.5">
               <Label htmlFor="vat-registered" className="cursor-pointer">
                 VAT-registered seller
@@ -400,8 +428,13 @@ export function CalculatorForm({
         <Card className="gap-0">
           <CardHeader className="border-b pb-4">
             <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <ReceiptText className="size-4 text-brand" />
+              <div className="flex items-center gap-2.5">
+                <span
+                  aria-hidden
+                  className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent text-brand-foreground"
+                >
+                  <ReceiptText className="size-4.5" />
+                </span>
                 <CardTitle className="text-base">Per-unit result</CardTitle>
               </div>
               <ConfidenceBadge confidence="medium" note={DISCLOSURE.estimatedFeesEn} />
@@ -413,35 +446,27 @@ export function CalculatorForm({
 
           <CardContent className="space-y-5 pt-5">
             {/* Headline numbers */}
-            <div className="rounded-lg border bg-muted/30 p-4">
+            <div className={cn("rounded-2xl border p-4 transition-colors", headlineSurface)}>
               <div className="flex items-end justify-between gap-3">
                 <div>
                   <div className="text-xs font-medium text-muted-foreground">
                     Net profit / unit
                   </div>
-                  <div className={cn("mt-0.5 text-3xl font-semibold tracking-tight tabular-nums", profitTone)}>
+                  <div className={cn("mt-0.5 text-4xl font-bold tracking-tight tabular-nums", profitTone)}>
                     {result.netProfitEgp < 0 ? "−" : ""}
                     {formatEgp(Math.abs(result.netProfitEgp))}
                   </div>
                 </div>
-                <div className="text-right">
-                  <span
-                    className={cn(
-                      "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
-                      profitable
-                        ? "border-positive/30 bg-positive/10 text-positive"
-                        : result.netProfitEgp < 0
-                          ? "border-negative/30 bg-negative/10 text-negative"
-                          : "border-border bg-muted text-muted-foreground",
-                    )}
-                  >
-                    {profitable ? "Profitable" : result.netProfitEgp < 0 ? "Loss" : "Break-even"}
-                  </span>
-                </div>
+                <Badge
+                  variant={profitable ? "brand" : result.netProfitEgp < 0 ? "destructive" : "outline"}
+                  className="h-6 px-2.5"
+                >
+                  {profitable ? "Profitable" : result.netProfitEgp < 0 ? "Loss" : "Break-even"}
+                </Badge>
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="rounded-md border bg-card px-3 py-2">
+                <div className="rounded-xl border border-border/70 bg-card px-3 py-2.5 shadow-card">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Scale className="size-3.5" />
                     Margin
@@ -451,7 +476,7 @@ export function CalculatorForm({
                   </div>
                   <div className="text-[11px] text-muted-foreground">of sell price</div>
                 </div>
-                <div className="rounded-md border bg-card px-3 py-2">
+                <div className="rounded-xl border border-border/70 bg-card px-3 py-2.5 shadow-card">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Coins className="size-3.5" />
                     ROI
@@ -476,7 +501,7 @@ export function CalculatorForm({
                   <span className="text-[11px] text-muted-foreground">Not VAT-registered</span>
                 )}
               </div>
-              <div className="rounded-lg border px-3 py-1 divide-y divide-border/60">
+              <div className="rounded-xl border border-border/70 px-3 py-1 divide-y divide-border/60">
                 <LineItem
                   label="Net revenue"
                   sub={vatRegistered ? `price ÷ ${(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}` : "price (no VAT strip)"}

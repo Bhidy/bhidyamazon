@@ -37,7 +37,7 @@ export function SearchBox({
     >
       <div className="relative flex-1">
         <Search
-          className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute start-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
           aria-hidden
         />
         <Input
@@ -48,20 +48,20 @@ export function SearchBox({
           placeholder="Search products on amazon.eg…"
           aria-label="Search products on amazon.eg"
           autoComplete="off"
-          className="h-9 pl-8 [&::-webkit-search-cancel-button]:appearance-none"
+          className="h-11 rounded-full bg-muted/60 ps-10 pe-9 shadow-none [&::-webkit-search-cancel-button]:appearance-none"
         />
         {value && (
           <button
             type="button"
             onClick={() => setValue("")}
             aria-label="Clear search"
-            className="absolute right-2 top-1/2 inline-flex -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+            className="absolute end-3 top-1/2 inline-flex -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full"
           >
             <X className="size-4" />
           </button>
         )}
       </div>
-      <Button type="submit" size="sm" className="h-9 shrink-0">
+      <Button type="submit" variant="brand" size="lg" className="shrink-0">
         <Search className="size-4" />
         Search
       </Button>

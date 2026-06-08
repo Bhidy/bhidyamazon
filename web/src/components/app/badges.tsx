@@ -3,11 +3,12 @@ import { cn } from "@/lib/utils";
 import { DEMAND_BAND_META } from "@/lib/constants";
 import type { DemandBand } from "@/lib/types";
 
+// Tonal fills aligned to the Badge recipe (success / warning / brand / secondary).
 const TONE_CLS: Record<string, string> = {
-  high: "text-positive border-positive/30 bg-positive/10",
-  medium: "text-confidence-medium border-confidence-medium/30 bg-confidence-medium/10",
-  low: "text-muted-foreground border-border bg-muted",
-  muted: "text-muted-foreground border-border bg-muted",
+  high: "text-positive bg-positive/12",
+  medium: "text-confidence-medium bg-confidence-medium/15",
+  low: "text-muted-foreground bg-secondary",
+  muted: "text-muted-foreground bg-secondary",
 };
 
 /** Relative-demand pill (within-category only — never a unit count). */
@@ -16,7 +17,7 @@ export function DemandBadge({ band, className }: { band: DemandBand; className?:
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
+        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold",
         TONE_CLS[meta.tone],
         className,
       )}
@@ -48,7 +49,7 @@ export function TrendIndicator({
     ? "text-muted-foreground"
     : good
       ? "text-positive"
-      : "text-negative";
+      : "text-falling";
   return (
     <span className={cn("inline-flex items-center gap-1 text-xs font-medium tabular-nums", tone, className)}>
       <Icon className="size-3.5" />

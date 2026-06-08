@@ -33,15 +33,18 @@ export function CategoryFilter({
 
   const chipClass = (isActive: boolean) =>
     cn(
-      "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+      "inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
       isActive
-        ? "border-brand/30 bg-brand/10 text-brand"
-        : "border-border bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground",
+        ? "bg-primary text-primary-foreground shadow-sm"
+        : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground",
     );
 
   return (
-    <nav aria-label="Filter best sellers by category">
-      <ul className="flex flex-wrap gap-2">
+    <nav
+      aria-label="Filter best sellers by category"
+      className="rounded-2xl border border-border/60 bg-card p-2 shadow-card"
+    >
+      <ul className="flex flex-wrap gap-1.5">
         <li>
           <Link
             href={href()}

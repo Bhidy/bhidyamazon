@@ -19,13 +19,20 @@ export function KpiCard({
   className?: string;
 }) {
   return (
-    <Card className={cn("gap-0 py-0", className)}>
-      <CardContent className="flex flex-col gap-2 p-4">
-        <div className="flex items-center justify-between">
+    <Card className={cn("gap-0 py-0 shadow-card", className)}>
+      <CardContent className="flex flex-col gap-3 p-5">
+        <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-medium text-muted-foreground">{label}</span>
-          {Icon && <Icon className="size-4 text-muted-foreground/70" />}
+          {Icon && (
+            <span
+              aria-hidden
+              className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent text-brand-foreground"
+            >
+              <Icon className="size-[1.05rem]" />
+            </span>
+          )}
         </div>
-        <div className="text-2xl font-semibold tracking-tight tabular-nums text-foreground">
+        <div className="text-3xl font-bold tracking-tight tabular-nums text-foreground">
           {value}
         </div>
         {(hint || footer) && (

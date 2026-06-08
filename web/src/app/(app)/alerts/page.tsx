@@ -151,9 +151,9 @@ export default async function AlertsPage() {
                             productTitle={alert.productTitle}
                             active={alert.active}
                           />
-                          <span className="text-xs text-muted-foreground">
+                          <Badge variant={alert.active ? "success" : "secondary"}>
                             {alert.active ? "Active" : "Paused"}
-                          </span>
+                          </Badge>
                         </div>
                       </TableCell>
 

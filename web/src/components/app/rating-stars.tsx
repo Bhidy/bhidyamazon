@@ -28,9 +28,9 @@ export function RatingStars({
       aria-label={`${formatRating(rating)} out of 5 stars`}
     >
       <span className="relative inline-flex">
-        <span className="inline-flex text-muted-foreground/40">{stars("fill-current")}</span>
+        <span className="inline-flex text-muted-foreground/30">{stars("fill-current")}</span>
         <span
-          className="absolute inset-0 inline-flex overflow-hidden text-amber-400"
+          className="absolute inset-0 inline-flex overflow-hidden text-confidence-medium"
           style={{ width: `${pct}%` }}
         >
           {stars("fill-current shrink-0")}

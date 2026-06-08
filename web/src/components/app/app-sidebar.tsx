@@ -8,6 +8,7 @@ import {
   Bookmark,
   Boxes,
   Calculator,
+  ChevronRight,
   LayoutDashboard,
   Radar,
   Search,
@@ -48,27 +49,43 @@ export function AppSidebar() {
   const pathname = usePathname();
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
+      <SidebarHeader className="gap-3 p-3">
         <Link
           href="/"
-          className="flex items-center gap-2.5 px-1.5 py-1.5"
+          className="flex items-center gap-2.5 rounded-xl px-1.5 py-1.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-sidebar-ring group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0"
           aria-label="Rasid home"
         >
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Radar className="size-4.5" />
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-brand text-brand-foreground shadow-brand">
+            <Radar className="size-5" />
           </div>
           <div className="grid leading-tight group-data-[collapsible=icon]:hidden">
-            <span className="text-sm font-semibold tracking-tight">Rasid</span>
+            <span className="text-sm font-bold tracking-tight">Rasid</span>
             <span className="text-[11px] text-muted-foreground">amazon.eg radar</span>
           </div>
         </Link>
+        {/* Brand identity block — static Rasid identity, echoes the Fynix account row. */}
+        <div className="flex items-center gap-2.5 rounded-2xl border border-border/60 bg-card p-2 shadow-card group-data-[collapsible=icon]:hidden">
+          <div
+            className="flex size-9 shrink-0 items-center justify-center rounded-full bg-hero-lime text-sm font-bold text-brand-foreground"
+            aria-hidden="true"
+          >
+            R
+          </div>
+          <div className="grid min-w-0 flex-1 leading-tight">
+            <span className="truncate text-sm font-semibold text-foreground">Rasid</span>
+            <span className="truncate text-[11px] text-muted-foreground">amazon.eg radar</span>
+          </div>
+          <ChevronRight className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+        </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="px-1.5">
         {NAV_GROUPS.map((group) => (
           <SidebarGroup key={group.labelEn}>
-            <SidebarGroupLabel>{group.labelEn}</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              {group.labelEn}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
-              <SidebarMenu>
+              <SidebarMenu className="gap-1">
                 {group.items.map((item) => {
                   const Icon = ICONS[item.icon] ?? Activity;
                   const active =
@@ -81,9 +98,16 @@ export function AppSidebar() {
                         render={<Link href={item.href} />}
                         isActive={active}
                         tooltip={item.labelEn}
+                        className="rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground data-active:bg-sidebar-accent data-active:font-semibold data-active:text-sidebar-accent-foreground"
                       >
                         <Icon />
                         <span>{item.labelEn}</span>
+                        {active ? (
+                          <span
+                            className="ms-auto size-1.5 rounded-full bg-brand group-data-[collapsible=icon]:hidden"
+                            aria-hidden="true"
+                          />
+                        ) : null}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );
@@ -93,8 +117,8 @@ export function AppSidebar() {
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarFooter>
-        <div className="rounded-md bg-sidebar-accent/60 px-2.5 py-2 text-[11px] leading-snug text-muted-foreground group-data-[collapsible=icon]:hidden">
+      <SidebarFooter className="p-3">
+        <div className="rounded-2xl bg-accent px-3 py-3 text-[11px] leading-snug text-accent-foreground group-data-[collapsible=icon]:hidden">
           Personal-use research tool. Signals are relative, not exact units.
         </div>
       </SidebarFooter>

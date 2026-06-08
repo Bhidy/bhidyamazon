@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/app/page-header";
 import { CalibrationNotice } from "@/components/app/calibration-notice";
 import { RankRow } from "@/components/app/rank-row";
@@ -51,7 +52,7 @@ export default async function MoversPage({
         <PeriodTabs value={period} params={periodParams} />
       </PageHeader>
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/60 bg-card px-4 py-2.5 shadow-card">
         <CategoryFilter value={category} period={period} />
         <Freshness iso={lastUpdated} />
       </div>
@@ -59,11 +60,16 @@ export default async function MoversPage({
       <CalibrationNotice />
 
       <Card className="gap-0">
-        <CardHeader className="border-b pb-4">
+        <CardHeader className="border-b border-border/60 pb-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="size-4 text-positive" />
-              <CardTitle className="text-base">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <span
+                aria-hidden
+                className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent text-brand-foreground"
+              >
+                <TrendingUp className="size-4.5" />
+              </span>
+              <CardTitle className="truncate text-base font-semibold">
                 {categoryName ? `${categoryName} — rising now` : "Rising now"}
               </CardTitle>
               <span className="text-xs font-medium text-positive">
@@ -75,9 +81,9 @@ export default async function MoversPage({
                 confidence="medium"
                 note="Ranked by Δlog(BSR) over the period — a relative velocity signal, not a units-sold count."
               />
-              <span className="text-xs tabular-nums text-muted-foreground">
+              <Badge variant="success" className="tabular-nums">
                 {rows.length} rising
-              </span>
+              </Badge>
             </div>
           </div>
           <CardDescription className="flex items-start gap-1.5">

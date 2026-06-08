@@ -110,8 +110,10 @@ export default async function SettingsPage() {
       {/* ───────────────────────── Data source ───────────────────────── */}
       <Card className="gap-0">
         <CardHeader className="border-b pb-4">
-          <div className="flex items-center gap-2">
-            <Database className="size-4 text-brand" />
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent text-brand-foreground">
+              <Database className="size-4.5" />
+            </span>
             <CardTitle className="text-base">Data source</CardTitle>
           </div>
           <CardDescription>
@@ -121,15 +123,13 @@ export default async function SettingsPage() {
         <CardContent className="space-y-5 pt-5">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full bg-confidence-medium/15 py-1 ps-2 pe-3 text-sm font-medium text-confidence-medium">
                 <span className="relative inline-flex size-2.5 items-center justify-center">
                   <span className="absolute inline-flex size-full animate-ping rounded-full bg-confidence-medium/60" />
                   <span className="relative inline-flex size-2 rounded-full bg-confidence-medium" />
                 </span>
-                <span className="text-sm font-medium text-foreground">
-                  Free / best-effort scraping
-                </span>
-              </div>
+                Free / best-effort scraping
+              </span>
               <p className="max-w-xl text-sm text-muted-foreground">
                 Public amazon.eg pages are read on a best-effort basis. There is no paid
                 data feed behind these numbers — accuracy and freshness depend on what the
@@ -140,27 +140,27 @@ export default async function SettingsPage() {
 
           <Separator />
 
-          <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="space-y-1">
+          <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="space-y-1 rounded-xl bg-muted/50 p-3">
               <dt className="text-xs font-medium text-muted-foreground">Marketplace</dt>
               <dd className="flex items-center gap-1.5 text-sm font-medium text-foreground">
                 <Globe className="size-3.5 text-muted-foreground/70" />
                 {MARKETPLACE.domain}
               </dd>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 rounded-xl bg-muted/50 p-3">
               <dt className="text-xs font-medium text-muted-foreground">Marketplace ID</dt>
               <dd className="font-mono text-sm tabular-nums text-foreground">
                 {MARKETPLACE.marketplaceId}
               </dd>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 rounded-xl bg-muted/50 p-3">
               <dt className="text-xs font-medium text-muted-foreground">Currency</dt>
               <dd className="text-sm font-medium tabular-nums text-foreground">
                 {MARKETPLACE.currency}
               </dd>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 rounded-xl bg-muted/50 p-3">
               <dt className="text-xs font-medium text-muted-foreground">Scrape cadence</dt>
               <dd className="text-sm font-medium text-foreground">
                 Roughly daily, throttled
@@ -180,9 +180,12 @@ export default async function SettingsPage() {
             <h3 className="text-sm font-medium text-foreground">Legal &amp; ethical guardrails</h3>
             <ul className="grid gap-3 sm:grid-cols-2">
               {GUARDRAILS.map(({ icon: Icon, label, detail }) => (
-                <li key={label} className="flex items-start gap-2.5">
-                  <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
-                    <Icon className="size-3.5" />
+                <li
+                  key={label}
+                  className="flex items-start gap-2.5 rounded-xl border border-border/60 bg-card p-3 shadow-card"
+                >
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent text-brand-foreground">
+                    <Icon className="size-4" />
                   </span>
                   <div className="space-y-0.5">
                     <span className="text-sm font-medium text-foreground">{label}</span>
@@ -214,8 +217,10 @@ export default async function SettingsPage() {
       <Card className="gap-0">
         <CardHeader className="border-b pb-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <Receipt className="size-4 text-confidence-medium" />
+            <div className="flex items-center gap-2.5">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-confidence-medium/15 text-confidence-medium">
+                <Receipt className="size-4.5" />
+              </span>
               <CardTitle className="text-base">Fee schedule</CardTitle>
               <ConfidenceBadge
                 confidence="medium"
@@ -285,25 +290,31 @@ export default async function SettingsPage() {
               Charged on the sale price. Tiered categories apply each rate to the portion of
               the price within its band.
             </p>
-            <div className="overflow-hidden rounded-lg border">
+            <div className="overflow-hidden rounded-xl border border-border/70">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-muted/40 hover:bg-muted/40">
-                    <TableHead>Category</TableHead>
-                    <TableHead>Referral rate</TableHead>
-                    <TableHead className="text-right">Min fee</TableHead>
+                  <TableRow className="bg-muted/50 hover:bg-muted/50">
+                    <TableHead className="ps-4 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      Category
+                    </TableHead>
+                    <TableHead className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      Referral rate
+                    </TableHead>
+                    <TableHead className="pe-4 text-right text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      Min fee
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {schedule.referral.map((rule: ReferralRule) => (
                     <TableRow key={rule.categoryNode ?? rule.category}>
-                      <TableCell className="font-medium text-foreground">
+                      <TableCell className="ps-4 font-medium text-foreground">
                         {rule.category}
                       </TableCell>
                       <TableCell className="tabular-nums text-muted-foreground">
                         {humanizeTiers(rule)}
                       </TableCell>
-                      <TableCell className="text-right tabular-nums text-foreground">
+                      <TableCell className="pe-4 text-right tabular-nums text-foreground">
                         {rule.minFeeEgp != null
                           ? formatEgp(rule.minFeeEgp, "en", { decimals: 0 })
                           : "—"}
@@ -323,27 +334,35 @@ export default async function SettingsPage() {
               {formatEgp(schedule.fbaPriceBandEgp, "en", { decimals: 0 })} price band; the
               high fee applies above it.
             </p>
-            <div className="overflow-hidden rounded-lg border">
+            <div className="overflow-hidden rounded-xl border border-border/70">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-muted/40 hover:bg-muted/40">
-                    <TableHead>Size tier</TableHead>
-                    <TableHead className="text-right">Max weight</TableHead>
-                    <TableHead className="text-right">Fee ≤ band</TableHead>
-                    <TableHead className="text-right">Fee &gt; band</TableHead>
+                  <TableRow className="bg-muted/50 hover:bg-muted/50">
+                    <TableHead className="ps-4 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      Size tier
+                    </TableHead>
+                    <TableHead className="text-right text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      Max weight
+                    </TableHead>
+                    <TableHead className="text-right text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      Fee ≤ band
+                    </TableHead>
+                    <TableHead className="pe-4 text-right text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      Fee &gt; band
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {schedule.fbaLadder.map((rung: FbaRung) => (
                     <TableRow key={rung.sizeTier}>
-                      <TableCell className="font-medium text-foreground">{rung.label}</TableCell>
+                      <TableCell className="ps-4 font-medium text-foreground">{rung.label}</TableCell>
                       <TableCell className="text-right tabular-nums text-muted-foreground">
                         {rung.maxWeightKg} kg
                       </TableCell>
                       <TableCell className="text-right tabular-nums text-foreground">
                         {formatEgp(rung.lowPriceFeeEgp, "en", { decimals: 0 })}
                       </TableCell>
-                      <TableCell className="text-right tabular-nums text-foreground">
+                      <TableCell className="pe-4 text-right tabular-nums text-foreground">
                         {formatEgp(rung.highPriceFeeEgp, "en", { decimals: 0 })}
                       </TableCell>
                     </TableRow>
@@ -362,15 +381,17 @@ export default async function SettingsPage() {
       {/* ───────────────────────── Language ───────────────────────── */}
       <Card className="gap-0">
         <CardHeader className="border-b pb-4">
-          <div className="flex items-center gap-2">
-            <Languages className="size-4 text-brand" />
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent text-brand-foreground">
+              <Languages className="size-4.5" />
+            </span>
             <CardTitle className="text-base">Language</CardTitle>
           </div>
           <CardDescription>English and Arabic, with right-to-left support.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 pt-5">
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-lg border p-3">
+            <div className="rounded-xl border border-border/70 bg-muted/40 p-3.5">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-foreground">English</span>
                 <span className="font-mono text-xs text-muted-foreground">
@@ -381,7 +402,7 @@ export default async function SettingsPage() {
                 Default interface language, laid out left-to-right.
               </p>
             </div>
-            <div className="rounded-lg border p-3">
+            <div className="rounded-xl border border-border/70 bg-muted/40 p-3.5">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-foreground" dir="rtl">
                   <span className="font-arabic">العربية</span>
@@ -406,8 +427,10 @@ export default async function SettingsPage() {
       {/* ───────────────────────── About ───────────────────────── */}
       <Card className="gap-0">
         <CardHeader className="border-b pb-4">
-          <div className="flex items-center gap-2">
-            <Info className="size-4 text-brand" />
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent text-brand-foreground">
+              <Info className="size-4.5" />
+            </span>
             <CardTitle className="text-base">About Rasid</CardTitle>
           </div>
           <CardDescription>Honest product research for amazon.eg.</CardDescription>

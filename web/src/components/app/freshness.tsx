@@ -27,10 +27,13 @@ export function Freshness({
   }, [iso]);
   return (
     <span
-      className={cn("inline-flex items-center gap-1.5 text-xs text-muted-foreground", className)}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full bg-muted/60 px-2.5 py-1 text-xs font-medium text-muted-foreground tabular-nums",
+        className,
+      )}
       title={formatDate(iso, "en", { dateStyle: "medium", timeStyle: "short" } as Intl.DateTimeFormatOptions)}
     >
-      <Clock className="size-3.5" />
+      <Clock className="size-3.5 text-positive" />
       {label} {rel ?? formatDate(iso)}
     </span>
   );

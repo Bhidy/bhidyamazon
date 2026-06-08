@@ -151,9 +151,11 @@ export default async function ProductDetailPage({
       </Breadcrumb>
 
       {/* ─────────────────────────── (a) Header ─────────────────────────── */}
-      <Card className="gap-0">
-        <CardContent className="flex flex-col gap-5 p-5 sm:flex-row sm:gap-6">
-          <ProductThumb product={product} size={96} className="self-start" />
+      <Card className="gap-0 shadow-card-lg">
+        <CardContent className="flex flex-col gap-5 p-5 sm:flex-row sm:gap-6 sm:p-6">
+          <div className="self-start rounded-2xl bg-accent/50 p-2.5">
+            <ProductThumb product={product} size={96} />
+          </div>
 
           <div className="min-w-0 flex-1 space-y-3">
             <div className="space-y-1.5">
@@ -187,12 +189,12 @@ export default async function ProductDetailPage({
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <span className="inline-flex items-baseline gap-2">
-                <span className="text-2xl font-semibold tabular-nums text-foreground">
+                <span className="text-3xl font-bold tracking-tight tabular-nums text-primary sm:text-4xl">
                   {formatEgp(product.priceEgp)}
                 </span>
                 <ConfidenceBadge confidence="high" note="Observed list price on amazon.eg." />
               </span>
-              <Separator orientation="vertical" className="h-5" />
+              <Separator orientation="vertical" className="h-6" />
               <RatingStars rating={product.rating} count={product.reviewCount} size={16} />
             </div>
 
@@ -283,7 +285,12 @@ export default async function ProductDetailPage({
         <CardHeader className="border-b pb-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <Activity className="size-4 text-chart-1" />
+              <span
+                aria-hidden
+                className="grid size-8 shrink-0 place-items-center rounded-xl bg-accent text-brand-foreground"
+              >
+                <Activity className="size-4" />
+              </span>
               <CardTitle className="text-base">
                 {history.points.length >= 2
                   ? "Rank & price history (90 days)"
@@ -296,11 +303,11 @@ export default async function ProductDetailPage({
             </div>
             <div className="flex items-center gap-3 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
-                <span className="h-0.5 w-3 rounded-full bg-chart-1" />
+                <span className="h-1 w-3.5 rounded-full bg-chart-1" />
                 BSR (rank)
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <span className="h-0.5 w-3 rounded-full bg-chart-3" />
+                <span className="h-1 w-3.5 rounded-full bg-chart-2" />
                 Price
               </span>
             </div>

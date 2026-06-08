@@ -28,7 +28,11 @@ export function LangFilter({
     return `${pathname}?${sp.toString()}`;
   };
   return (
-    <div className="inline-flex rounded-lg border bg-muted/50 p-0.5" role="tablist" aria-label="Filter keywords by language">
+    <div
+      className="inline-flex rounded-full border border-border bg-muted/60 p-1"
+      role="tablist"
+      aria-label="Filter keywords by language"
+    >
       {LANGS.map((opt) => (
         <Link
           key={opt.k}
@@ -37,10 +41,10 @@ export function LangFilter({
           aria-selected={value === opt.k}
           dir={opt.labelAr ? "rtl" : undefined}
           className={cn(
-            "rounded-md px-3 py-1 text-xs font-medium transition-colors",
+            "rounded-full px-3.5 py-1 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             opt.labelAr && "font-arabic",
             value === opt.k
-              ? "bg-background text-foreground shadow-sm"
+              ? "bg-card text-foreground shadow-card"
               : "text-muted-foreground hover:text-foreground",
           )}
         >

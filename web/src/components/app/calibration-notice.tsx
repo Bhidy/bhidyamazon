@@ -12,13 +12,18 @@ export function CalibrationNotice({ className }: { className?: string }) {
     <div
       role="note"
       className={cn(
-        "flex items-start gap-2.5 rounded-lg border border-confidence-medium/30 bg-confidence-medium/[0.07] px-3 py-2.5 text-xs text-muted-foreground",
+        "flex items-start gap-3 rounded-2xl border border-confidence-medium/25 bg-confidence-medium/[0.08] px-4 py-3 text-xs text-muted-foreground shadow-card",
         className,
       )}
     >
-      <TriangleAlert className="mt-0.5 size-4 shrink-0 text-confidence-medium" />
-      <p>
-        <span className="font-medium text-foreground">Read signals as relative. </span>
+      <span
+        aria-hidden
+        className="grid size-7 shrink-0 place-items-center rounded-lg bg-confidence-medium/15 text-confidence-medium"
+      >
+        <TriangleAlert className="size-4" />
+      </span>
+      <p className="self-center">
+        <span className="font-semibold text-foreground">Read signals as relative. </span>
         {DISCLOSURE.calibrationNoticeEn}
       </p>
     </div>
