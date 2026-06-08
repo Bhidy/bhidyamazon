@@ -64,7 +64,11 @@ export function formatDate(
   if (!iso) return "—";
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "—";
-  return new Intl.DateTimeFormat(localeTag(locale), opts).format(d);
+  // Pin the marketplace timezone so server-side rendering (UTC on Vercel) and the
+  // client (the user's zone) format the SAME calendar day — otherwise a timestamp
+  // near midnight UTC renders "Jun 8" on the server and "Jun 9" in the browser,
+  // a hydration text mismatch (React #418). amazon.eg is an Egypt marketplace.
+  return new Intl.DateTimeFormat(localeTag(locale), { timeZone: "Africa/Cairo", ...opts }).format(d);
 }
 
 /**

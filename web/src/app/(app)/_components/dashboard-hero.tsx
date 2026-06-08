@@ -1,6 +1,7 @@
 import { ArrowUpRight, Calculator, Trophy } from "lucide-react";
 import { ButtonLink } from "@/components/app/button-link";
 import { Freshness } from "@/components/app/freshness";
+import { formatNumber } from "@/lib/format";
 import type { DashboardSummary } from "@/lib/data";
 
 export function DashboardHero({ summary: s }: { summary: DashboardSummary }) {
@@ -30,7 +31,7 @@ export function DashboardHero({ summary: s }: { summary: DashboardSummary }) {
               <span data-bi-ar="">متابعة أفضل منتجات amazon.eg</span>
             </p>
             <h2 className="text-4xl font-bold tracking-tight tabular-nums md:text-5xl">
-              {s.productsTracked.toLocaleString()}{" "}
+              {formatNumber(s.productsTracked)}{" "}
               <span className="text-2xl font-semibold text-brand-foreground/70 md:text-3xl">
                 <span data-bi-en="">products tracked</span>
                 <span data-bi-ar="">منتج متتبع</span>
