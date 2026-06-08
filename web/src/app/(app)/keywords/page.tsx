@@ -1,9 +1,4 @@
 import { Radar, SearchX } from "lucide-react";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -15,11 +10,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { PageHeader } from "@/components/app/page-header";
-import { ConfidenceBadge } from "@/components/app/confidence";
 import { DemandTrendChip } from "@/components/app/demand-trend-chip";
 import { getKeywords } from "@/lib/data";
 import { formatNumber } from "@/lib/format";
-import { DISCLOSURE } from "@/lib/constants";
 import { LangFilter } from "./_components/lang-filter";
 
 const LANGS = ["all", "en", "ar"] as const;
@@ -58,24 +51,6 @@ export default async function KeywordsPage({
       >
         <LangFilter value={lang} />
       </PageHeader>
-
-      <Alert className="border-confidence-low/30 bg-confidence-low/[0.07]">
-        <Radar className="text-confidence-low" />
-        <AlertTitle className="flex flex-wrap items-center gap-2">
-          Autocomplete prominence — not search volume or demand quantity
-          <ConfidenceBadge
-            confidence="low"
-            note="Sourced from Amazon search autocomplete prefixes — an ordinal prominence signal only."
-          />
-        </AlertTitle>
-        <AlertDescription>
-          {DISCLOSURE.demandProxyEn} The prominence tier reflects how high a term
-          sits in amazon.eg autocomplete suggestions relative to others — i.e. how
-          prominently Amazon suggests it. It is an ordinal ranking, never a count of
-          searches, units, or demand, and is not comparable to a true search-volume
-          figure.
-        </AlertDescription>
-      </Alert>
 
       <Card className="gap-0">
         <CardHeader className="flex-row items-center justify-between border-b pb-4">
