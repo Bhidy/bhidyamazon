@@ -1,7 +1,6 @@
-import { ArrowUpRight, Calculator, Layers, Star, Trophy } from "lucide-react";
+import { ArrowUpRight, Calculator, Trophy } from "lucide-react";
 import { ButtonLink } from "@/components/app/button-link";
 import { Freshness } from "@/components/app/freshness";
-import { formatRating } from "@/lib/format";
 import type { DashboardSummary } from "@/lib/data";
 
 /**
@@ -11,8 +10,6 @@ import type { DashboardSummary } from "@/lib/data";
  * visual reframing of data already shown elsewhere on the page.
  */
 export function DashboardHero({ summary: s }: { summary: DashboardSummary }) {
-  const topRiser = s.topRisers[0]?.product;
-
   return (
     <section
       aria-label="Tracking overview"
@@ -46,19 +43,6 @@ export function DashboardHero({ summary: s }: { summary: DashboardSummary }) {
             </h2>
           </div>
 
-          <dl className="flex flex-wrap items-center gap-2">
-            {topRiser && (
-              <HeroChip icon={Trophy} label="Top riser">
-                <span>{(topRiser.titleEn ?? "").slice(0, 20).trimEnd()}{(topRiser.titleEn?.length ?? 0) > 20 ? "…" : ""}</span>
-              </HeroChip>
-            )}
-            <HeroChip icon={Star} label="Avg rating">
-              <span className="tabular-nums">{formatRating(s.avgRating)}</span>
-            </HeroChip>
-            <HeroChip icon={Layers} label="Categories">
-              <span className="tabular-nums">{s.categoriesTracked}</span>
-            </HeroChip>
-          </dl>
         </div>
 
         <div className="flex flex-wrap gap-2.5">
@@ -82,26 +66,5 @@ export function DashboardHero({ summary: s }: { summary: DashboardSummary }) {
         </div>
       </div>
     </section>
-  );
-}
-
-/** Small frosted pill used for the secondary metrics inside the hero. */
-function HeroChip({
-  icon: Icon,
-  label,
-  children,
-}: {
-  icon: typeof Star;
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="inline-flex items-center gap-2 rounded-full bg-brand-foreground/10 py-1.5 ps-2.5 pe-3.5 text-sm">
-      <span className="grid size-6 shrink-0 place-items-center rounded-full bg-brand-foreground/15">
-        <Icon aria-hidden className="size-3.5" />
-      </span>
-      <dt className="font-medium text-brand-foreground/70">{label}</dt>
-      <dd className="font-semibold text-brand-foreground">{children}</dd>
-    </div>
   );
 }
