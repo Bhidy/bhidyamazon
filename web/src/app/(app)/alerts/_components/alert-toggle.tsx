@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Per-row enable/disable toggle for an alert.
@@ -22,13 +23,19 @@ export function AlertToggle({
   active: boolean;
 }) {
   const [enabled, setEnabled] = useState(active);
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
 
   function onCheckedChange(next: boolean) {
     setEnabled(next);
     if (next) {
-      toast.success("Alert enabled (demo)", { description: productTitle });
+      toast.success(isAr ? "تم تفعيل التنبيه (عرض توضيحي)" : "Alert enabled (demo)", {
+        description: productTitle,
+      });
     } else {
-      toast("Alert paused (demo)", { description: productTitle });
+      toast(isAr ? "تم إيقاف التنبيه (عرض توضيحي)" : "Alert paused (demo)", {
+        description: productTitle,
+      });
     }
   }
 
@@ -39,8 +46,8 @@ export function AlertToggle({
       data-alert-id={alertId}
       aria-label={
         enabled
-          ? `Pause alert for ${productTitle}`
-          : `Enable alert for ${productTitle}`
+          ? (isAr ? `إيقاف تنبيه لـ ${productTitle}` : `Pause alert for ${productTitle}`)
+          : (isAr ? `تفعيل تنبيه لـ ${productTitle}` : `Enable alert for ${productTitle}`)
       }
     />
   );

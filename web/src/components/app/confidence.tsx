@@ -7,24 +7,40 @@ import {
 import { cn } from "@/lib/utils";
 import type { Confidence, Provenance } from "@/lib/types";
 
-const META: Record<Confidence, { label: string; cls: string; dot: string; help: string }> = {
+const META: Record<
+  Confidence,
+  {
+    labelEn: string;
+    labelAr: string;
+    cls: string;
+    dot: string;
+    helpEn: string;
+    helpAr: string;
+  }
+> = {
   high: {
-    label: "Verified",
+    labelEn: "Verified",
+    labelAr: "مؤكد",
     cls: "text-confidence-high bg-confidence-high/12",
     dot: "bg-confidence-high",
-    help: "Scraped fact — directly observed on amazon.eg.",
+    helpEn: "Scraped fact — directly observed on amazon.eg.",
+    helpAr: "بيانات مستخلصة — مرصودة مباشرةً على amazon.eg.",
   },
   medium: {
-    label: "Relative",
+    labelEn: "Relative",
+    labelAr: "نسبي",
     cls: "text-confidence-medium bg-confidence-medium/15",
     dot: "bg-confidence-medium",
-    help: "Ordinal / relative signal — comparable only within a category.",
+    helpEn: "Ordinal / relative signal — comparable only within a category.",
+    helpAr: "إشارة ترتيبية/نسبية — مقارنة داخل الفئة فقط.",
   },
   low: {
-    label: "Estimated",
+    labelEn: "Estimated",
+    labelAr: "تقديري",
     cls: "text-confidence-low bg-confidence-low/15",
     dot: "bg-confidence-low",
-    help: "Modeled estimate — a rough indicator, not a fact.",
+    helpEn: "Modeled estimate — a rough indicator, not a fact.",
+    helpAr: "تقدير نموذجي — مؤشر تقريبي، ليس حقيقة.",
   },
 };
 
@@ -53,10 +69,12 @@ export function ConfidenceBadge({
         }
       >
         <span className={cn("size-1.5 rounded-full", m.dot)} />
-        {m.label}
+        <span data-bi-en="">{m.labelEn}</span>
+        <span data-bi-ar="">{m.labelAr}</span>
       </TooltipTrigger>
       <TooltipContent className="max-w-[240px] text-xs">
-        {m.help}
+        <span data-bi-en="">{m.helpEn}</span>
+        <span data-bi-ar="">{m.helpAr}</span>
         {note ? <div className="mt-1 text-muted-foreground">{note}</div> : null}
       </TooltipContent>
     </Tooltip>
@@ -83,10 +101,20 @@ export function ProvenanceHint({
         <Info className="size-3.5" />
       </TooltipTrigger>
       <TooltipContent className="max-w-[260px] text-xs">
-        <div className="font-medium">Source: {provenance.source}</div>
+        <div className="font-medium">
+          <span data-bi-en="">Source: </span>
+          <span data-bi-ar="">المصدر: </span>
+          {provenance.source}
+        </div>
         <div className="text-muted-foreground">
-          Confidence: {provenance.confidence}
-          {provenance.isEstimated ? " · estimated" : ""}
+          <span data-bi-en="">Confidence: {provenance.confidence}</span>
+          <span data-bi-ar="">الموثوقية: {provenance.confidence}</span>
+          {provenance.isEstimated ? (
+            <>
+              <span data-bi-en=""> · estimated</span>
+              <span data-bi-ar=""> · تقديري</span>
+            </>
+          ) : ""}
         </div>
         {provenance.note ? <div className="mt-1">{provenance.note}</div> : null}
       </TooltipContent>

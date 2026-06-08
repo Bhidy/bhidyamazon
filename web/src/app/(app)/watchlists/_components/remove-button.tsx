@@ -3,6 +3,7 @@
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Removes an item from the watchlist. The persistent list will live in a
@@ -22,12 +23,15 @@ export function RemoveButton({
   /** Restore the card (wired to the toast's Undo action). */
   onRestore: () => void;
 }) {
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
   function onClick() {
     onRemove();
-    toast("Removed from watchlist", {
+    toast(isAr ? "أُزيل من قائمة المتابعة" : "Removed from watchlist", {
       description: title,
       action: {
-        label: "Undo",
+        label: isAr ? "تراجع" : "Undo",
         onClick: onRestore,
       },
     });
@@ -40,10 +44,14 @@ export function RemoveButton({
       size="sm"
       onClick={onClick}
       className="text-muted-foreground hover:text-destructive"
-      aria-label={`Remove ${title} from watchlist`}
+      aria-label={
+        isAr
+          ? `إزالة ${title} من قائمة المتابعة`
+          : `Remove ${title} from watchlist`
+      }
     >
       <Trash2 className="size-3.5" />
-      Remove
+      {isAr ? "إزالة" : "Remove"}
     </Button>
   );
 }

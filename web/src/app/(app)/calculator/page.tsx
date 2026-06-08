@@ -36,8 +36,18 @@ export default async function CalculatorPage({
   return (
     <>
       <PageHeader
-        title="Profit Calculator"
-        description="Will the margin survive Amazon Egypt's fees and 14% VAT? Run it before you source."
+        title={
+          <>
+            <span data-bi-en="">Profit Calculator</span>
+            <span data-bi-ar="">حاسبة الربح</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">Will the margin survive Amazon Egypt&apos;s fees and 14% VAT? Run it before you source.</span>
+            <span data-bi-ar="">هل سينجو الهامش من رسوم Amazon Egypt و14% ضريبة القيمة المضافة؟ احسبه قبل الشراء.</span>
+          </>
+        }
       />
 
       <CalculatorForm initialPrice={initialPrice} initialCategory={initialCategory} />

@@ -3,10 +3,12 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "@fontsource-variable/plus-jakarta-sans"; // primary UI/display face (self-hosted)
 import "@fontsource/cairo/400.css";
+import "@fontsource/cairo/600.css";
 import "@fontsource/cairo/700.css";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+import { LocaleProvider } from "@/lib/locale";
 
 // Self-hosted fonts only — Geist via geist/font (next/font/local under the hood)
 // and Cairo via @fontsource — so the production build never fetches Google Fonts.
@@ -35,8 +37,10 @@ export default function RootLayout({
       style={{ ["--font-arabic" as string]: "'Cairo', sans-serif" }}
     >
       <body className="min-h-full">
-        <TooltipProvider delay={200}>{children}</TooltipProvider>
-        <Toaster richColors position="top-right" />
+        <LocaleProvider>
+          <TooltipProvider delay={200}>{children}</TooltipProvider>
+          <Toaster richColors position="top-right" />
+        </LocaleProvider>
       </body>
     </html>
   );

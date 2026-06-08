@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { CATEGORIES } from "@/lib/constants";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Category chips for the product catalogue. Same approach as the best-sellers
@@ -21,6 +22,8 @@ export function CategoryFilter({
   params?: Record<string, string>;
 }) {
   const pathname = usePathname();
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
 
   const href = (node?: string) => {
     const sp = new URLSearchParams(params);
@@ -39,9 +42,12 @@ export function CategoryFilter({
     );
 
   return (
-    <nav aria-label="Filter by category" className="flex flex-wrap gap-1.5">
+    <nav
+      aria-label={isAr ? "تصفية حسب الفئة" : "Filter by category"}
+      className="flex flex-wrap gap-1.5"
+    >
       <Link href={href(undefined)} aria-current={!active ? "true" : undefined} className={chip(!active)}>
-        All
+        {isAr ? "الكل" : "All"}
       </Link>
       {CATEGORIES.map((c) => {
         const selected = active === c.nodeId;
@@ -52,9 +58,12 @@ export function CategoryFilter({
             aria-current={selected ? "true" : undefined}
             className={chip(selected)}
           >
-            {c.nameEn}
-            <span className="ms-1.5 font-arabic text-[10px] opacity-70" dir="rtl">
-              {c.nameAr}
+            {isAr ? c.nameAr : c.nameEn}
+            <span
+              className="ms-1.5 font-arabic text-[10px] opacity-70"
+              dir={isAr ? "ltr" : "rtl"}
+            >
+              {isAr ? c.nameEn : c.nameAr}
             </span>
           </Link>
         );

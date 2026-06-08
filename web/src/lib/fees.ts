@@ -53,6 +53,7 @@ export const DEFAULT_FEE_SCHEDULE: FeeSchedule = {
     { category: "Toys & Games", categoryNode: "toys", minFeeEgp: 5, tiers: [{ uptoEgp: null, rate: 0.12 }] },
     { category: "Baby", categoryNode: "baby", minFeeEgp: 5, tiers: [{ uptoEgp: null, rate: 0.1 }] },
     { category: "Sports", categoryNode: "sports", minFeeEgp: 5, tiers: [{ uptoEgp: null, rate: 0.12 }] },
+    { category: "Automotive", categoryNode: "automotive", minFeeEgp: 5, tiers: [{ uptoEgp: null, rate: 0.12 }] },
     { category: "Health & Household", categoryNode: "health", minFeeEgp: 5, tiers: [{ uptoEgp: null, rate: 0.1 }] },
     { category: "Books", categoryNode: "books", minFeeEgp: 3, tiers: [{ uptoEgp: null, rate: 0.12 }] },
   ],

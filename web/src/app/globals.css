@@ -194,9 +194,42 @@
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
-  /* Arabic font + RTL when the document direction flips. */
-  [dir="rtl"] body {
-    font-family: var(--font-arabic), var(--font-geist-sans), sans-serif;
+  /* Arabic mode: Cairo font + RTL when the document direction flips. */
+  [dir="rtl"] body,
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] button,
+  [dir="rtl"] label,
+  [dir="rtl"] p,
+  [dir="rtl"] span:not(.font-mono):not([class*="tabular"]),
+  [dir="rtl"] a,
+  [dir="rtl"] th,
+  [dir="rtl"] td,
+  [dir="rtl"] li {
+    font-family: "Cairo", var(--font-geist-sans), sans-serif;
+    letter-spacing: 0;
+  }
+
+  /* ── Bilingual text switching ──────────────────────────────────────────
+     Both [data-bi-en] and [data-bi-ar] are always rendered for SSR safety.
+     CSS shows only the one matching the current document direction.
+     The display swap is instant when dir changes — no JS re-render needed. */
+  html:not([dir="rtl"]) [data-bi-ar] {
+    display: none;
+  }
+  html[dir="rtl"] [data-bi-en] {
+    display: none;
+  }
+  /* Bilingual block elements (paragraphs, divs) */
+  [data-bi-ar],
+  [data-bi-en] {
+    display: inline;
+  }
+  html[dir="rtl"] [data-bi-ar] {
+    display: inline;
+    text-align: start;
   }
   /* Always show a clear keyboard focus ring (WCAG 2.1 AA 2.4.7). The base
      `outline-ring/50` on `*` sets the colour; this makes it visible and offset

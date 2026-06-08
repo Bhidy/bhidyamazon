@@ -11,10 +11,10 @@ export function KpiCard({
   footer,
   className,
 }: {
-  label: string;
+  label: React.ReactNode;
   value: React.ReactNode;
   icon?: LucideIcon;
-  hint?: string;
+  hint?: React.ReactNode;
   footer?: React.ReactNode;
   className?: string;
 }) {

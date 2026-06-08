@@ -44,6 +44,7 @@ import { ConfidenceBadge } from "@/components/app/confidence";
 import { computeProfit, DEFAULT_FEE_SCHEDULE } from "@/lib/fees";
 import { CATEGORIES, CATEGORY_BY_NODE, DISCLOSURE } from "@/lib/constants";
 import { formatEgp, formatDate, formatPct } from "@/lib/format";
+import { useLocale } from "@/lib/locale";
 import type {
   CalculatorInput,
   FulfillmentMethod,
@@ -52,24 +53,31 @@ import { cn } from "@/lib/utils";
 
 /* ───────────────────────── small field helpers ─────────────────────────── */
 
-/** Label + optional info tooltip + suffix-decorated numeric input. */
 function MoneyField({
   id,
-  label,
+  labelEn,
+  labelAr,
   value,
   onChange,
-  hint,
+  hintEn,
+  hintAr,
   placeholder,
   min = 0,
+  isAr,
 }: {
   id: string;
-  label: string;
+  labelEn: string;
+  labelAr: string;
   value: string;
   onChange: (next: string) => void;
-  hint?: string;
+  hintEn?: string;
+  hintAr?: string;
   placeholder?: string;
   min?: number;
+  isAr: boolean;
 }) {
+  const label = isAr ? labelAr : labelEn;
+  const hint = isAr ? hintAr : hintEn;
   return (
     <div className="space-y-1.5">
       <div className="flex items-center gap-1.5">
@@ -106,21 +114,24 @@ function MoneyField({
   );
 }
 
-/** One row of the results breakdown table. `tone` colors the amount. */
 function LineItem({
-  label,
+  labelEn,
+  labelAr,
   value,
   sub,
   tone = "default",
   strong = false,
   indent = false,
+  isAr,
 }: {
-  label: React.ReactNode;
+  labelEn: React.ReactNode;
+  labelAr: React.ReactNode;
   value: number;
   sub?: string;
   tone?: "default" | "muted" | "negative" | "positive";
   strong?: boolean;
   indent?: boolean;
+  isAr: boolean;
 }) {
   const toneCls =
     tone === "negative"
@@ -139,7 +150,7 @@ function LineItem({
     >
       <div className="min-w-0">
         <span className={cn(strong ? "font-medium text-foreground" : "text-muted-foreground")}>
-          {label}
+          {isAr ? labelAr : labelEn}
         </span>
         {sub ? <span className="ml-1.5 text-xs text-muted-foreground/80">{sub}</span> : null}
       </div>
@@ -153,7 +164,6 @@ function LineItem({
 
 /* ─────────────────────────── parse helper ──────────────────────────────── */
 
-/** Coerce a text field to a non-negative number; blank/invalid → 0. */
 function num(value: string): number {
   const n = Number(value);
   return Number.isFinite(n) && n > 0 ? n : 0;
@@ -168,7 +178,9 @@ export function CalculatorForm({
   initialPrice?: number;
   initialCategory: string;
 }) {
-  // Raw text state keeps the inputs honest (an empty box stays empty, never "0").
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
   const [sellPrice, setSellPrice] = useState(initialPrice != null ? String(initialPrice) : "499");
   const [cogs, setCogs] = useState("180");
   const [categoryNode, setCategoryNode] = useState(initialCategory);
@@ -205,8 +217,6 @@ export function CalculatorForm({
       ? "text-negative"
       : "text-foreground";
 
-  // Tonal surface for the headline result: lime highlight when profitable,
-  // negative tint on a loss, neutral at break-even.
   const headlineSurface = profitable
     ? "border-brand/40 bg-accent shadow-brand/40"
     : result.netProfitEgp < 0
@@ -225,10 +235,14 @@ export function CalculatorForm({
             >
               <Coins className="size-4.5" />
             </span>
-            <CardTitle className="text-base">Deal inputs</CardTitle>
+            <CardTitle className="text-base">
+              {isAr ? "بيانات الصفقة" : "Deal inputs"}
+            </CardTitle>
           </div>
           <CardDescription>
-            Enter the consumer price (what the shopper pays) and your landed costs.
+            {isAr
+              ? "أدخل سعر المستهلك (ما يدفعه المتسوق) وتكاليفك الإجمالية."
+              : "Enter the consumer price (what the shopper pays) and your landed costs."}
           </CardDescription>
         </CardHeader>
 
@@ -236,25 +250,31 @@ export function CalculatorForm({
           <div className="grid gap-4 sm:grid-cols-2">
             <MoneyField
               id="sell-price"
-              label="Sell price"
+              labelEn="Sell price"
+              labelAr="سعر البيع"
               value={sellPrice}
               onChange={setSellPrice}
               placeholder="0"
-              hint="The listed consumer price on amazon.eg. It is VAT-inclusive — what the shopper actually pays at checkout."
+              hintEn="The listed consumer price on amazon.eg. It is VAT-inclusive — what the shopper actually pays at checkout."
+              hintAr="السعر المدرج للمستهلك على amazon.eg. يشمل ضريبة القيمة المضافة — ما يدفعه المتسوق فعلياً عند الدفع."
+              isAr={isAr}
             />
             <MoneyField
               id="cogs"
-              label="Cost of goods"
+              labelEn="Cost of goods"
+              labelAr="تكلفة البضاعة"
               value={cogs}
               onChange={setCogs}
               placeholder="0"
-              hint="What you pay your supplier or the local shop per unit, before shipping it to Amazon."
+              hintEn="What you pay your supplier or the local shop per unit, before shipping it to Amazon."
+              hintAr="ما تدفعه لمورّدك أو المتجر المحلي لكل وحدة، قبل شحنها إلى Amazon."
+              isAr={isAr}
             />
           </div>
 
           {/* Category */}
           <div className="space-y-1.5">
-            <Label htmlFor="category">Category</Label>
+            <Label htmlFor="category">{isAr ? "الفئة" : "Category"}</Label>
             <Select
               value={categoryNode}
               onValueChange={(next) => setCategoryNode(next ?? CATEGORIES[0].nodeId)}
@@ -262,17 +282,17 @@ export function CalculatorForm({
               <SelectTrigger
                 id="category"
                 className="h-10 w-full rounded-xl"
-                aria-label="Product category"
+                aria-label={isAr ? "فئة المنتج" : "Product category"}
               >
                 <SelectValue>
                   {(v: string | null) => {
                     const c = CATEGORY_BY_NODE[v ?? categoryNode];
                     return (
                       <span className="flex items-center gap-2">
-                        <span>{c?.nameEn}</span>
+                        <span>{isAr ? c?.nameAr : c?.nameEn}</span>
                         {c ? (
-                          <span dir="rtl" className="font-arabic text-xs text-muted-foreground">
-                            {c.nameAr}
+                          <span dir={isAr ? "ltr" : "rtl"} className="font-arabic text-xs text-muted-foreground">
+                            {isAr ? c.nameEn : c.nameAr}
                           </span>
                         ) : null}
                       </span>
@@ -284,9 +304,9 @@ export function CalculatorForm({
                 {CATEGORIES.map((c) => (
                   <SelectItem key={c.nodeId} value={c.nodeId}>
                     <span className="flex w-full items-center justify-between gap-3">
-                      <span>{c.nameEn}</span>
-                      <span dir="rtl" className="font-arabic text-xs text-muted-foreground">
-                        {c.nameAr}
+                      <span>{isAr ? c.nameAr : c.nameEn}</span>
+                      <span dir={isAr ? "ltr" : "rtl"} className="font-arabic text-xs text-muted-foreground">
+                        {isAr ? c.nameEn : c.nameAr}
                       </span>
                     </span>
                   </SelectItem>
@@ -294,17 +314,16 @@ export function CalculatorForm({
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
-              Sets the referral-fee rate. {category?.nameEn} is currently{" "}
-              <span className="font-medium text-foreground tabular-nums">
-                {referralLabel(categoryNode)}
-              </span>
-              .
+              {isAr
+                ? <>يحدد نسبة رسوم الإحالة. {category?.nameAr} حالياً <span className="font-medium text-foreground tabular-nums">{referralLabel(categoryNode)}</span>.</>
+                : <>Sets the referral-fee rate. {category?.nameEn} is currently <span className="font-medium text-foreground tabular-nums">{referralLabel(categoryNode)}</span>.</>
+              }
             </p>
           </div>
 
           {/* Fulfillment */}
           <div className="space-y-1.5">
-            <Label>Fulfillment</Label>
+            <Label>{isAr ? "طريقة التوصيل" : "Fulfillment"}</Label>
             <Tabs
               value={fulfillment}
               onValueChange={(v) => setFulfillment((v as FulfillmentMethod) ?? "fba")}
@@ -328,15 +347,15 @@ export function CalculatorForm({
             </Tabs>
             <p className="text-xs text-muted-foreground">
               {fulfillment === "fba"
-                ? "Fulfilled by Amazon — adds a per-unit fulfillment fee from the size ladder."
-                : "Fulfilled by you (merchant) — no Amazon fulfillment fee; you cover delivery yourself."}
+                ? (isAr ? "تلبية بواسطة Amazon — تضيف رسوم تلبية لكل وحدة من جدول الأحجام." : "Fulfilled by Amazon — adds a per-unit fulfillment fee from the size ladder.")
+                : (isAr ? "تلبية بواسطتك (التاجر) — لا رسوم تلبية من Amazon؛ أنت تتولى التوصيل." : "Fulfilled by you (merchant) — no Amazon fulfillment fee; you cover delivery yourself.")}
             </p>
           </div>
 
-          {/* FBA size tier — only when FBA */}
+          {/* FBA size tier */}
           {fulfillment === "fba" ? (
             <div className="space-y-1.5">
-              <Label htmlFor="fba-tier">FBA size tier</Label>
+              <Label htmlFor="fba-tier">{isAr ? "حجم FBA" : "FBA size tier"}</Label>
               <Select
                 value={fbaSizeTier}
                 onValueChange={(next) =>
@@ -346,12 +365,12 @@ export function CalculatorForm({
                 <SelectTrigger
                   id="fba-tier"
                   className="h-10 w-full rounded-xl"
-                  aria-label="FBA size tier"
+                  aria-label={isAr ? "حجم FBA" : "FBA size tier"}
                 >
                   <SelectValue>
                     {(v: string | null) =>
                       DEFAULT_FEE_SCHEDULE.fbaLadder.find((r) => r.sizeTier === (v ?? fbaSizeTier))
-                        ?.label ?? "Select a size tier"
+                        ?.label ?? (isAr ? "اختر حجماً" : "Select a size tier")
                     }
                   </SelectValue>
                 </SelectTrigger>
@@ -369,11 +388,10 @@ export function CalculatorForm({
                 </SelectContent>
               </Select>
               <p className="text-xs text-muted-foreground">
-                Fee steps up for items priced over{" "}
-                <span className="tabular-nums">
-                  {formatEgp(DEFAULT_FEE_SCHEDULE.fbaPriceBandEgp)}
-                </span>
-                .
+                {isAr
+                  ? <>ترتفع الرسوم للمنتجات التي يتجاوز سعرها <span className="tabular-nums">{formatEgp(DEFAULT_FEE_SCHEDULE.fbaPriceBandEgp)}</span>.</>
+                  : <>Fee steps up for items priced over <span className="tabular-nums">{formatEgp(DEFAULT_FEE_SCHEDULE.fbaPriceBandEgp)}</span>.</>
+                }
               </p>
             </div>
           ) : null}
@@ -382,19 +400,25 @@ export function CalculatorForm({
           <div className="grid gap-4 sm:grid-cols-2">
             <MoneyField
               id="inbound"
-              label="Inbound shipping"
+              labelEn="Inbound shipping"
+              labelAr="شحن الوارد"
               value={inbound}
               onChange={setInbound}
               placeholder="0"
-              hint="Your cost to get one unit to Amazon's fulfillment center (or to the customer, if FBM)."
+              hintEn="Your cost to get one unit to Amazon's fulfillment center (or to the customer, if FBM)."
+              hintAr="تكلفتك لإيصال وحدة واحدة إلى مستودع Amazon (أو للعميل إذا كان FBM)."
+              isAr={isAr}
             />
             <MoneyField
               id="misc"
-              label="Misc cost"
+              labelEn="Misc cost"
+              labelAr="تكاليف أخرى"
               value={misc}
               onChange={setMisc}
               placeholder="0"
-              hint="Anything else per unit: prep, packaging, returns allowance, ad cost amortised over a unit, etc."
+              hintEn="Anything else per unit: prep, packaging, returns allowance, ad cost amortised over a unit, etc."
+              hintAr="أي شيء آخر لكل وحدة: تجهيز، تعبئة، مخصصات المرتجعات، تكلفة الإعلانات موزعة على الوحدة، إلخ."
+              isAr={isAr}
             />
           </div>
 
@@ -404,20 +428,20 @@ export function CalculatorForm({
           <div className="flex items-start justify-between gap-4 rounded-xl border border-border/70 bg-muted/40 px-3.5 py-3">
             <div className="space-y-0.5">
               <Label htmlFor="vat-registered" className="cursor-pointer">
-                VAT-registered seller
+                {isAr ? "بائع مسجل في ضريبة القيمة المضافة" : "VAT-registered seller"}
               </Label>
               <p className="text-xs text-muted-foreground">
-                Registered: revenue = price ÷ {(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}, and the
-                {" "}
-                {vatRatePct}% VAT Amazon charges on its fees is reclaimable. Unregistered: you keep the
-                full price but that fee-VAT is a real cost.
+                {isAr
+                  ? <>مسجل: الإيراد = السعر ÷ {(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}، وضريبة {vatRatePct}% التي تفرضها Amazon على رسومها قابلة للاسترداد. غير مسجل: تحتفظ بالسعر كاملاً لكن ضريبة الرسوم تكلفة حقيقية.</>
+                  : <>Registered: revenue = price ÷ {(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}, and the {vatRatePct}% VAT Amazon charges on its fees is reclaimable. Unregistered: you keep the full price but that fee-VAT is a real cost.</>
+                }
               </p>
             </div>
             <Switch
               id="vat-registered"
               checked={vatRegistered}
               onCheckedChange={setVatRegistered}
-              aria-label="VAT-registered seller"
+              aria-label={isAr ? "بائع مسجل في ضريبة القيمة المضافة" : "VAT-registered seller"}
             />
           </div>
         </CardContent>
@@ -435,12 +459,16 @@ export function CalculatorForm({
                 >
                   <ReceiptText className="size-4.5" />
                 </span>
-                <CardTitle className="text-base">Per-unit result</CardTitle>
+                <CardTitle className="text-base">
+                  {isAr ? "النتيجة لكل وحدة" : "Per-unit result"}
+                </CardTitle>
               </div>
               <ConfidenceBadge confidence="medium" note={DISCLOSURE.estimatedFeesEn} />
             </div>
             <CardDescription>
-              Net profit on one unit after Amazon&apos;s fees and {vatRatePct}% VAT.
+              {isAr
+                ? `صافي الربح لوحدة واحدة بعد رسوم Amazon و${vatRatePct}% ضريبة القيمة المضافة.`
+                : `Net profit on one unit after Amazon's fees and ${vatRatePct}% VAT.`}
             </CardDescription>
           </CardHeader>
 
@@ -450,7 +478,7 @@ export function CalculatorForm({
               <div className="flex items-end justify-between gap-3">
                 <div>
                   <div className="text-xs font-medium text-muted-foreground">
-                    Net profit / unit
+                    {isAr ? "صافي الربح / وحدة" : "Net profit / unit"}
                   </div>
                   <div className={cn("mt-0.5 text-4xl font-bold tracking-tight tabular-nums", profitTone)}>
                     {result.netProfitEgp < 0 ? "−" : ""}
@@ -461,7 +489,11 @@ export function CalculatorForm({
                   variant={profitable ? "brand" : result.netProfitEgp < 0 ? "destructive" : "outline"}
                   className="h-6 px-2.5"
                 >
-                  {profitable ? "Profitable" : result.netProfitEgp < 0 ? "Loss" : "Break-even"}
+                  {profitable
+                    ? (isAr ? "مربح" : "Profitable")
+                    : result.netProfitEgp < 0
+                      ? (isAr ? "خسارة" : "Loss")
+                      : (isAr ? "نقطة التعادل" : "Break-even")}
                 </Badge>
               </div>
 
@@ -469,24 +501,28 @@ export function CalculatorForm({
                 <div className="rounded-xl border border-border/70 bg-card px-3 py-2.5 shadow-card">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Scale className="size-3.5" />
-                    Margin
+                    {isAr ? "الهامش" : "Margin"}
                   </div>
                   <div className={cn("mt-0.5 text-lg font-semibold tabular-nums", profitTone)}>
                     {formatPct(result.marginPct, "en", { decimals: 1, signed: result.marginPct < 0 })}
                   </div>
-                  <div className="text-[11px] text-muted-foreground">of sell price</div>
+                  <div className="text-[11px] text-muted-foreground">
+                    {isAr ? "من سعر البيع" : "of sell price"}
+                  </div>
                 </div>
                 <div className="rounded-xl border border-border/70 bg-card px-3 py-2.5 shadow-card">
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Coins className="size-3.5" />
-                    ROI
+                    {isAr ? "عائد الاستثمار" : "ROI"}
                   </div>
                   <div className={cn("mt-0.5 text-lg font-semibold tabular-nums", profitTone)}>
                     {result.roiPct === 0 && input.costOfGoodsEgp === 0
                       ? "—"
                       : formatPct(result.roiPct, "en", { decimals: 1, signed: result.roiPct < 0 })}
                   </div>
-                  <div className="text-[11px] text-muted-foreground">on cash invested</div>
+                  <div className="text-[11px] text-muted-foreground">
+                    {isAr ? "على رأس المال" : "on cash invested"}
+                  </div>
                 </div>
               </div>
             </div>
@@ -494,76 +530,93 @@ export function CalculatorForm({
             {/* Line-item breakdown */}
             <div>
               <div className="mb-1 flex items-center justify-between">
-                <h3 className="text-sm font-medium text-foreground">Breakdown</h3>
+                <h3 className="text-sm font-medium text-foreground">
+                  {isAr ? "التفصيل" : "Breakdown"}
+                </h3>
                 {vatRegistered ? (
-                  <span className="text-[11px] text-muted-foreground">VAT-registered</span>
+                  <span className="text-[11px] text-muted-foreground">
+                    {isAr ? "مسجل ضريبياً" : "VAT-registered"}
+                  </span>
                 ) : (
-                  <span className="text-[11px] text-muted-foreground">Not VAT-registered</span>
+                  <span className="text-[11px] text-muted-foreground">
+                    {isAr ? "غير مسجل ضريبياً" : "Not VAT-registered"}
+                  </span>
                 )}
               </div>
               <div className="rounded-xl border border-border/70 px-3 py-1 divide-y divide-border/60">
                 <LineItem
-                  label="Net revenue"
+                  labelEn="Net revenue"
+                  labelAr="الإيراد الصافي"
                   sub={vatRegistered ? `price ÷ ${(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}` : "price (no VAT strip)"}
                   value={result.netRevenueEgp}
                   tone="positive"
                   strong
+                  isAr={isAr}
                 />
-                <LineItem label="Referral fee" value={-result.referralFeeEgp} tone="negative" />
+                <LineItem labelEn="Referral fee" labelAr="رسوم الإحالة" value={-result.referralFeeEgp} tone="negative" isAr={isAr} />
                 <LineItem
-                  label={`Referral VAT (${vatRatePct}%)`}
+                  labelEn={`Referral VAT (${vatRatePct}%)`}
+                  labelAr={`ضريبة الإحالة (${vatRatePct}%)`}
                   value={-result.referralVatEgp}
                   tone="negative"
                   indent
-                  sub={vatRegistered ? "reclaimed" : undefined}
+                  sub={vatRegistered ? (isAr ? "مستردة" : "reclaimed") : undefined}
+                  isAr={isAr}
                 />
                 {fulfillment === "fba" ? (
                   <>
-                    <LineItem label="FBA fee" value={-result.fbaFeeEgp} tone="negative" />
+                    <LineItem labelEn="FBA fee" labelAr="رسوم FBA" value={-result.fbaFeeEgp} tone="negative" isAr={isAr} />
                     <LineItem
-                      label={`FBA VAT (${vatRatePct}%)`}
+                      labelEn={`FBA VAT (${vatRatePct}%)`}
+                      labelAr={`ضريبة FBA (${vatRatePct}%)`}
                       value={-result.fbaVatEgp}
                       tone="negative"
                       indent
-                      sub={vatRegistered ? "reclaimed" : undefined}
+                      sub={vatRegistered ? (isAr ? "مستردة" : "reclaimed") : undefined}
+                      isAr={isAr}
                     />
                   </>
                 ) : null}
                 {vatRegistered && result.reclaimableVatEgp > 0 ? (
                   <LineItem
-                    label="Reclaimable fee VAT"
+                    labelEn="Reclaimable fee VAT"
+                    labelAr="ضريبة الرسوم المستردة"
                     value={result.reclaimableVatEgp}
                     tone="positive"
                     indent
-                    sub="input credit"
+                    sub={isAr ? "ائتمان مدخلات" : "input credit"}
+                    isAr={isAr}
                   />
                 ) : null}
-                <LineItem label="Cost of goods" value={-result.costOfGoodsEgp} tone="negative" />
+                <LineItem labelEn="Cost of goods" labelAr="تكلفة البضاعة" value={-result.costOfGoodsEgp} tone="negative" isAr={isAr} />
                 {result.inboundShippingEgp > 0 ? (
-                  <LineItem label="Inbound shipping" value={-result.inboundShippingEgp} tone="negative" />
+                  <LineItem labelEn="Inbound shipping" labelAr="شحن الوارد" value={-result.inboundShippingEgp} tone="negative" isAr={isAr} />
                 ) : null}
                 {result.miscCostEgp > 0 ? (
-                  <LineItem label="Misc cost" value={-result.miscCostEgp} tone="negative" />
+                  <LineItem labelEn="Misc cost" labelAr="تكاليف أخرى" value={-result.miscCostEgp} tone="negative" isAr={isAr} />
                 ) : null}
-                <LineItem label="Total cost" value={-result.totalCostEgp} tone="muted" strong />
-                <LineItem label="Net profit" value={result.netProfitEgp} tone={profitable ? "positive" : "negative"} strong />
+                <LineItem labelEn="Total cost" labelAr="إجمالي التكاليف" value={-result.totalCostEgp} tone="muted" strong isAr={isAr} />
+                <LineItem labelEn="Net profit" labelAr="صافي الربح" value={result.netProfitEgp} tone={profitable ? "positive" : "negative"} strong isAr={isAr} />
               </div>
             </div>
 
             {/* Break-even */}
             <div className="flex items-center justify-between rounded-lg border bg-muted/30 px-3 py-2.5">
               <div className="flex items-center gap-1.5">
-                <span className="text-sm font-medium text-foreground">Break-even price</span>
+                <span className="text-sm font-medium text-foreground">
+                  {isAr ? "سعر نقطة التعادل" : "Break-even price"}
+                </span>
                 <Tooltip>
                   <TooltipTrigger
                     className="inline-flex text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="About break-even price"
+                    aria-label={isAr ? "حول سعر نقطة التعادل" : "About break-even price"}
                   >
                     <Info className="size-3.5" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-[240px] text-xs">
-                    The lowest consumer price at which this unit stops losing money, holding your
-                    costs and the current fee schedule fixed.
+                    {isAr
+                      ? "أقل سعر مستهلك لا تخسر عنده مع ثبات التكاليف وجدول الرسوم الحالي."
+                      : "The lowest consumer price at which this unit stops losing money, holding your costs and the current fee schedule fixed."}
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -602,15 +655,17 @@ export function CalculatorForm({
               <div className="flex items-start gap-2">
                 <ReceiptText className="mt-0.5 size-3.5 shrink-0" />
                 <p>
-                  The consumer price is VAT-inclusive: a VAT-registered seller&apos;s revenue is{" "}
-                  <span className="font-medium text-foreground">price ÷ {(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}</span>,
-                  and Amazon adds {vatRatePct}% VAT on top of its referral and FBA fees.
+                  {isAr
+                    ? <>سعر المستهلك يشمل ضريبة القيمة المضافة: إيراد البائع المسجل هو <span className="font-medium text-foreground">السعر ÷ {(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}</span>، وتضيف Amazon {vatRatePct}% ضريبة على رسوم الإحالة وFBA.</>
+                    : <>The consumer price is VAT-inclusive: a VAT-registered seller&apos;s revenue is <span className="font-medium text-foreground">price ÷ {(1 + DEFAULT_FEE_SCHEDULE.vatRate).toFixed(2)}</span>, and Amazon adds {vatRatePct}% VAT on top of its referral and FBA fees.</>
+                  }
                 </p>
               </div>
               <div className="flex items-start gap-2">
                 <Info className="mt-0.5 size-3.5 shrink-0" />
                 <p>
-                  {DISCLOSURE.estimatedFeesEn} Schedule as of{" "}
+                  {isAr ? DISCLOSURE.estimatedFeesEn : DISCLOSURE.estimatedFeesEn}{" "}
+                  {isAr ? "الجدول اعتباراً من" : "Schedule as of"}{" "}
                   <span className="tabular-nums">{formatDate(DEFAULT_FEE_SCHEDULE.asOf)}</span>.
                 </p>
               </div>
@@ -622,9 +677,6 @@ export function CalculatorForm({
   );
 }
 
-/* ───────────────────────── derived display copy ────────────────────────── */
-
-/** Human-readable referral rate for the active category (handles tiered rules). */
 function referralLabel(categoryNode: string): string {
   const rule =
     DEFAULT_FEE_SCHEDULE.referral.find((r) => r.categoryNode === categoryNode) ??

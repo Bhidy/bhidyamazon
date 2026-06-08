@@ -21,6 +21,7 @@ import type {
   SentimentSummary,
 } from "@/lib/types";
 import { CATEGORY_BY_NODE } from "@/lib/constants";
+import { BREAK_TOKENS, FIT_TOKENS, type ScoreContext } from "@/lib/winning-score";
 
 const DIR = path.join(process.cwd(), "src/data/real");
 type Any = Record<string, any>;
@@ -93,6 +94,19 @@ function leafBsr(asin: string): { rank: number; category: string } | null {
   return b?.length ? b[b.length - 1] : null;
 }
 
+/** Count reviews in the scraped sample whose text matches any token (EN + AR).
+ *  Returns undefined when there is no sample (so the engine falls back to a
+ *  material-only baseline rather than treating absence as zero complaints). */
+function countComplaints(reviews: Any[] | undefined, tokens: string[]): number | undefined {
+  if (!reviews?.length) return undefined;
+  let n = 0;
+  for (const r of reviews) {
+    const text = `${r.title ?? ""} ${r.body ?? ""}`.toLowerCase();
+    if (tokens.some((t) => text.includes(t.toLowerCase()))) n++;
+  }
+  return n;
+}
+
 function rowToProduct(row: Any): Product {
   const enr = store().pr?.products?.[row.asin];
   const leaf = leafBsr(row.asin);
@@ -111,6 +125,21 @@ function rowToProduct(row: Any): Product {
     sellerName: undefined,
     inStock: row.price_egp != null,
     lastSeenAt: scrapedAt() ?? undefined,
+    // Detail-page attributes — present only on ENRICHED products (else undefined,
+    // which the Winning Score treats as "criterion unavailable", never zero).
+    material: enr?.material ?? undefined,
+    manufacturer: enr?.manufacturer ?? undefined,
+    color: enr?.color ?? undefined,
+    numberOfItems: enr?.number_of_items ?? undefined,
+    itemWeightKg: enr?.item_weight_kg ?? undefined,
+    itemDimensionsCm: enr?.item_dims_cm ?? undefined,
+    imageCount: enr?.image_count ?? undefined,
+    featureBulletCount: enr?.feature_bullet_count ?? undefined,
+    offerCount: enr?.offer_count ?? undefined,
+    bsrLeafCategory: leaf?.category ?? undefined,
+    reviewSampleSize: enr?.reviews_list?.length ?? undefined,
+    breakComplaintCount: countComplaints(enr?.reviews_list, BREAK_TOKENS),
+    fitComplaintCount: countComplaints(enr?.reviews_list, FIT_TOKENS),
     provenance: prov(
       "amazon_html_bestsellers",
       "high",
@@ -137,6 +166,31 @@ export function bestSellers(q: { categoryNode?: string; period?: Period; limit?:
   const rows: Any[] = q.categoryNode ? s.bs?.categories?.[q.categoryNode] ?? [] : s.bs?.all ?? [];
   const out = rows.map((r) => rowToRanking(r, pos));
   return q.limit ? out.slice(0, q.limit) : out;
+}
+
+/** Products in a category (or all), projected to domain type — the Opportunity
+ *  Finder scores these. Enriched products carry the size/weight/material facts. */
+export function opportunityProducts(categoryNode?: string): Product[] {
+  const rows: Any[] = categoryNode ? store().bs?.categories?.[categoryNode] ?? [] : store().bs?.all ?? [];
+  return rows.map(rowToProduct);
+}
+
+/** Niche-relative peer distributions for the competition + demand criteria.
+ *  Built once per category so the per-product scorers stay pure. */
+export function scoreContextFor(categoryNode: string): ScoreContext {
+  const rows: Any[] = store().bs?.categories?.[categoryNode] ?? [];
+  const products = store().pr?.products ?? {};
+  const peerReviewCounts: number[] = [];
+  const peerBrandCounts: Record<string, number> = {};
+  const peerImageCounts: number[] = [];
+  for (const r of rows) {
+    if (typeof r.reviews === "number") peerReviewCounts.push(r.reviews);
+    const enr = products[r.asin];
+    const brand: string | undefined = enr?.brand ?? r.brand;
+    if (brand) peerBrandCounts[brand] = (peerBrandCounts[brand] ?? 0) + 1;
+    if (enr && typeof enr.image_count === "number") peerImageCounts.push(enr.image_count);
+  }
+  return { peerReviewCounts, peerBrandCounts, peerCount: rows.length, peerImageCounts };
 }
 
 /**

@@ -34,23 +34,16 @@ import {
 } from "./_components/new-alert-dialog";
 import { AlertToggle } from "./_components/alert-toggle";
 
-/** Human-readable label + icon for each alert rule. */
 const RULE_META: Record<
   AlertRule,
-  { label: string; icon: typeof BellRing; tone: string }
+  { labelEn: string; labelAr: string; icon: typeof BellRing; tone: string }
 > = {
-  price_drop: { label: "Price drop", icon: TrendingDown, tone: "text-positive" },
-  bsr_rising: { label: "Rising rank", icon: ArrowUpRight, tone: "text-brand" },
-  back_in_stock: { label: "Back in stock", icon: PackageCheck, tone: "text-confidence-medium" },
-  rating_drop: { label: "Rating drop", icon: Star, tone: "text-negative" },
+  price_drop:   { labelEn: "Price drop",    labelAr: "انخفاض السعر",    icon: TrendingDown, tone: "text-positive" },
+  bsr_rising:   { labelEn: "Rising rank",   labelAr: "ارتفاع الترتيب", icon: ArrowUpRight,  tone: "text-brand" },
+  back_in_stock:{ labelEn: "Back in stock", labelAr: "عاد للمخزون",    icon: PackageCheck,  tone: "text-confidence-medium" },
+  rating_drop:  { labelEn: "Rating drop",   labelAr: "انخفاض التقييم", icon: Star,          tone: "text-negative" },
 };
 
-/**
- * Turn the structured `Alert.threshold` object into a compact, honest label.
- *   { pct: 10 }     → "-10%"
- *   { window: "7d" }→ "over 7d"
- *   {}              → "Any change"
- */
 function humanizeThreshold(threshold: Record<string, number | string>): string {
   if (threshold.pct != null) return `-${threshold.pct}%`;
   if (threshold.window != null) return `over ${threshold.window}`;
@@ -63,8 +56,6 @@ function humanizeThreshold(threshold: Record<string, number | string>): string {
 export default async function AlertsPage() {
   const alerts = getAlerts();
 
-  // Source the product picker from the real data layer (best sellers across all
-  // categories) so the dialog stays in sync with what the platform tracks.
   const productOptions: AlertProductOption[] = getBestSellers().map((row) => ({
     asin: row.product.asin,
     titleEn: row.product.titleEn,
@@ -76,8 +67,18 @@ export default async function AlertsPage() {
   return (
     <>
       <PageHeader
-        title="Alerts"
-        description="Get notified when a tracked product moves."
+        title={
+          <>
+            <span data-bi-en="">Alerts</span>
+            <span data-bi-ar="">التنبيهات</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">Get notified when a tracked product moves.</span>
+            <span data-bi-ar="">احصل على إشعار عند تحرك منتج متتبع.</span>
+          </>
+        }
       >
         <NewAlertDialog products={productOptions} />
       </PageHeader>
@@ -85,16 +86,28 @@ export default async function AlertsPage() {
       <Card className="gap-0">
         <CardHeader className="flex-row items-center justify-between border-b pb-4">
           <div className="space-y-1">
-            <CardTitle className="text-base">Your alerts</CardTitle>
+            <CardTitle className="text-base">
+              <span data-bi-en="">Your alerts</span>
+              <span data-bi-ar="">تنبيهاتك</span>
+            </CardTitle>
             <CardDescription>
-              {alerts.length
-                ? `${activeCount} active of ${alerts.length} · evaluated against our daily amazon.eg snapshots, not in real time.`
-                : "Create your first alert to start tracking movement."}
+              {alerts.length ? (
+                <>
+                  <span data-bi-en="">{activeCount} active of {alerts.length} · evaluated against our daily amazon.eg snapshots, not in real time.</span>
+                  <span data-bi-ar="">{activeCount} نشط من {alerts.length} · تُقيَّم مقابل لقطاتنا اليومية من amazon.eg، ليس في الوقت الفعلي.</span>
+                </>
+              ) : (
+                <>
+                  <span data-bi-en="">Create your first alert to start tracking movement.</span>
+                  <span data-bi-ar="">أنشئ تنبيهك الأول لبدء تتبع الحركة.</span>
+                </>
+              )}
             </CardDescription>
           </div>
           {alerts.length ? (
             <Badge variant="outline" className="tabular-nums">
-              {alerts.length} {alerts.length === 1 ? "rule" : "rules"}
+              <span data-bi-en="">{alerts.length} {alerts.length === 1 ? "rule" : "rules"}</span>
+              <span data-bi-ar="">{alerts.length} {alerts.length === 1 ? "قاعدة" : "قواعد"}</span>
             </Badge>
           ) : null}
         </CardHeader>
@@ -104,12 +117,30 @@ export default async function AlertsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="pl-4">Product</TableHead>
-                  <TableHead>Rule</TableHead>
-                  <TableHead>Threshold</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Last fired</TableHead>
-                  <TableHead className="pr-4">Created</TableHead>
+                  <TableHead className="pl-4">
+                    <span data-bi-en="">Product</span>
+                    <span data-bi-ar="">المنتج</span>
+                  </TableHead>
+                  <TableHead>
+                    <span data-bi-en="">Rule</span>
+                    <span data-bi-ar="">القاعدة</span>
+                  </TableHead>
+                  <TableHead>
+                    <span data-bi-en="">Threshold</span>
+                    <span data-bi-ar="">الحد</span>
+                  </TableHead>
+                  <TableHead>
+                    <span data-bi-en="">Status</span>
+                    <span data-bi-ar="">الحالة</span>
+                  </TableHead>
+                  <TableHead>
+                    <span data-bi-en="">Last fired</span>
+                    <span data-bi-ar="">آخر تشغيل</span>
+                  </TableHead>
+                  <TableHead className="pr-4">
+                    <span data-bi-en="">Created</span>
+                    <span data-bi-ar="">التاريخ</span>
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -134,7 +165,8 @@ export default async function AlertsPage() {
                       <TableCell>
                         <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm">
                           <Icon className={`size-3.5 ${meta.tone}`} />
-                          {meta.label}
+                          <span data-bi-en="">{meta.labelEn}</span>
+                          <span data-bi-ar="">{meta.labelAr}</span>
                         </span>
                       </TableCell>
 
@@ -152,7 +184,8 @@ export default async function AlertsPage() {
                             active={alert.active}
                           />
                           <Badge variant={alert.active ? "success" : "secondary"}>
-                            {alert.active ? "Active" : "Paused"}
+                            <span data-bi-en="">{alert.active ? "Active" : "Paused"}</span>
+                            <span data-bi-ar="">{alert.active ? "نشط" : "موقوف"}</span>
                           </Badge>
                         </div>
                       </TableCell>
@@ -176,17 +209,24 @@ export default async function AlertsPage() {
               </div>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-foreground">
-                  No alerts yet
+                  <span data-bi-en="">No alerts yet</span>
+                  <span data-bi-ar="">لا تنبيهات بعد</span>
                 </p>
                 <p className="mx-auto max-w-sm text-sm text-muted-foreground">
-                  Track a product and we&apos;ll notify you on a price drop,
-                  rising rank, restock, or rating slip.
+                  <span data-bi-en="">
+                    Track a product and we&apos;ll notify you on a price drop,
+                    rising rank, restock, or rating slip.
+                  </span>
+                  <span data-bi-ar="">
+                    تابع منتجاً وسنُخطرك عند انخفاض السعر أو ارتفاع الترتيب أو عودة المخزون أو تراجع التقييم.
+                  </span>
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <NewAlertDialog products={productOptions} />
                 <ButtonLink href="/bestsellers" variant="outline" size="sm">
-                  Browse products
+                  <span data-bi-en="">Browse products</span>
+                  <span data-bi-ar="">تصفح المنتجات</span>
                 </ButtonLink>
               </div>
             </div>

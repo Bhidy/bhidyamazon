@@ -7,9 +7,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <a
         href="#main"
-        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-md focus-visible:bg-background focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-medium focus-visible:text-foreground focus-visible:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:start-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-md focus-visible:bg-background focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-medium focus-visible:text-foreground focus-visible:shadow-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
       >
-        Skip to main content
+        <span data-bi-en="">Skip to main content</span>
+        <span data-bi-ar="">انتقل إلى المحتوى الرئيسي</span>
       </a>
       <AppSidebar />
       <SidebarInset className="min-w-0 overflow-x-hidden">

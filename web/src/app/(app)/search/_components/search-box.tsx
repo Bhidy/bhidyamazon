@@ -6,6 +6,7 @@ import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Controlled search field. Prefilled with the active query and, on submit,
@@ -21,6 +22,8 @@ export function SearchBox({
 }) {
   const router = useRouter();
   const [value, setValue] = useState(initialQuery);
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,8 +48,8 @@ export function SearchBox({
           type="search"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Search products on amazon.eg…"
-          aria-label="Search products on amazon.eg"
+          placeholder={isAr ? "ابحث عن منتجات على amazon.eg…" : "Search products on amazon.eg…"}
+          aria-label={isAr ? "ابحث عن منتجات على amazon.eg" : "Search products on amazon.eg"}
           autoComplete="off"
           className="h-11 rounded-full bg-muted/60 ps-10 pe-9 shadow-none [&::-webkit-search-cancel-button]:appearance-none"
         />
@@ -54,7 +57,7 @@ export function SearchBox({
           <button
             type="button"
             onClick={() => setValue("")}
-            aria-label="Clear search"
+            aria-label={isAr ? "مسح البحث" : "Clear search"}
             className="absolute end-3 top-1/2 inline-flex -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full"
           >
             <X className="size-4" />
@@ -63,7 +66,7 @@ export function SearchBox({
       </div>
       <Button type="submit" variant="brand" size="lg" className="shrink-0">
         <Search className="size-4" />
-        Search
+        {isAr ? "بحث" : "Search"}
       </Button>
     </form>
   );

@@ -21,6 +21,8 @@ import type {
   Review,
   SentimentSummary,
   WatchlistItem,
+  WinningScore,
+  WpsOverrides,
 } from "@/lib/types";
 import {
   ASPECTS,
@@ -36,6 +38,12 @@ import {
 } from "@/lib/seed";
 import { CATEGORY_BY_NODE } from "@/lib/constants";
 import * as real from "@/lib/real-store";
+import {
+  computeWinningScore,
+  WINNING_SCORE_CONFIG,
+  EMPTY_CONTEXT,
+  type ScoreContext,
+} from "@/lib/winning-score";
 
 /** Deterministic "freshness" — pretend the last scrape was 3h before SEED_NOW. */
 const FETCHED_AT = new Date(SEED_NOW - 3 * 3600 * 1000).toISOString();
@@ -215,6 +223,47 @@ function buildRow(
     demandBand: demandBandFor(p.asin, period),
     product: toProduct(p, period),
   };
+}
+
+/* ───────────────────── Opportunity Finder (Winning Product Score) ──────────── */
+
+export interface OpportunityRow {
+  product: Product;
+  score: WinningScore;
+}
+
+/** Niche peer distributions for the competition/demand criteria (real or empty). */
+export function getOpportunityContext(categoryNode: string): ScoreContext {
+  return real.available() ? real.scoreContextFor(categoryNode) : EMPTY_CONTEXT;
+}
+
+/** Candidate products for a niche — enriched ones carry size/weight/material. */
+export function getOpportunityProducts(categoryNode: string): Product[] {
+  if (real.available()) return real.opportunityProducts(categoryNode);
+  return PRODUCTS.filter((p) => p.categoryNode === categoryNode).map((p) => toProduct(p));
+}
+
+/**
+ * The Opportunity Finder seam — scores a niche's products against the 12-point
+ * winning-product filter. Pure scoring; `overrides` come from the client store.
+ * Gated / insufficient-data candidates sink to the bottom of the list.
+ */
+export function getOpportunities(
+  q: { categoryNode?: string; limit?: number } = {},
+  overrides: WpsOverrides = {},
+): OpportunityRow[] {
+  const categoryNode = q.categoryNode ?? "automotive";
+  const ctx = getOpportunityContext(categoryNode);
+  const rows = getOpportunityProducts(categoryNode).map((product) => ({
+    product,
+    score: computeWinningScore(product, overrides, WINNING_SCORE_CONFIG, ctx),
+  }));
+  rows.sort((a, b) => {
+    if (a.score.gated !== b.score.gated) return a.score.gated ? 1 : -1;
+    if (!a.score.gated && !b.score.gated) return (b.score.score ?? 0) - (a.score.score ?? 0);
+    return b.score.completeness - a.score.completeness;
+  });
+  return q.limit ? rows.slice(0, q.limit) : rows;
 }
 
 export function getReviews(asin: string, opts: { limit?: number } = {}): Review[] {

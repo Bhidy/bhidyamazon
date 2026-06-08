@@ -8,15 +8,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useLocale } from "@/lib/locale";
 
 export type SortKey = "rank" | "price-asc" | "price-desc" | "rating" | "reviews";
 
-const OPTIONS: { value: SortKey; label: string }[] = [
-  { value: "rank", label: "Best Seller Rank" },
-  { value: "price-asc", label: "Price: low to high" },
-  { value: "price-desc", label: "Price: high to low" },
-  { value: "rating", label: "Top rated" },
-  { value: "reviews", label: "Most reviewed" },
+const OPTIONS: { value: SortKey; en: string; ar: string }[] = [
+  { value: "rank", en: "Best Seller Rank", ar: "ترتيب الأكثر مبيعاً" },
+  { value: "price-asc", en: "Price: low to high", ar: "السعر: من الأقل للأعلى" },
+  { value: "price-desc", en: "Price: high to low", ar: "السعر: من الأعلى للأقل" },
+  { value: "rating", en: "Top rated", ar: "الأعلى تقييماً" },
+  { value: "reviews", en: "Most reviewed", ar: "الأكثر مراجعات" },
 ];
 
 /**
@@ -34,6 +35,8 @@ export function SortSelect({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
 
   const onValueChange = (next: SortKey | null) => {
     const key = next ?? "rank";
@@ -44,20 +47,24 @@ export function SortSelect({
     router.push(qs ? `${pathname}?${qs}` : pathname);
   };
 
+  const currentLabel = OPTIONS.find((o) => o.value === value);
+
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger size="sm" className="w-[190px]" aria-label="Sort products">
-        <span className="text-muted-foreground">Sort:</span>
+      <SelectTrigger size="sm" className="w-[190px]" aria-label={isAr ? "ترتيب المنتجات" : "Sort products"}>
+        <span className="text-muted-foreground">{isAr ? "ترتيب:" : "Sort:"}</span>
         <SelectValue>
-          {(v: SortKey | null) =>
-            OPTIONS.find((o) => o.value === v)?.label ?? OPTIONS[0].label
+          {(_v: SortKey | null) =>
+            isAr
+              ? (currentLabel?.ar ?? OPTIONS[0].ar)
+              : (currentLabel?.en ?? OPTIONS[0].en)
           }
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
         {OPTIONS.map((o) => (
           <SelectItem key={o.value} value={o.value}>
-            {o.label}
+            {isAr ? o.ar : o.en}
           </SelectItem>
         ))}
       </SelectContent>

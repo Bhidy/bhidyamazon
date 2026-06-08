@@ -2,17 +2,12 @@ import { Minus, TrendingDown, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { DemandTrend } from "@/lib/types";
 
-const META: Record<DemandTrend, { label: string; Icon: typeof TrendingUp; cls: string }> = {
-  rising: { label: "Rising", Icon: TrendingUp, cls: "text-positive" },
-  falling: { label: "Falling", Icon: TrendingDown, cls: "text-falling" },
-  flat: { label: "Flat", Icon: Minus, cls: "text-muted-foreground" },
+const META: Record<DemandTrend, { labelEn: string; labelAr: string; Icon: typeof TrendingUp; cls: string }> = {
+  rising: { labelEn: "Rising", labelAr: "صاعد", Icon: TrendingUp, cls: "text-positive" },
+  falling: { labelEn: "Falling", labelAr: "هابط", Icon: TrendingDown, cls: "text-falling" },
+  flat: { labelEn: "Flat", labelAr: "مستقر", Icon: Minus, cls: "text-muted-foreground" },
 };
 
-/**
- * Directional demand-trend chip — a WORD, never a fabricated percentage.
- * (Keyword demand has no real magnitude, only a direction, so showing a
- * numeric "+12%" via the same chip as real data would be dishonest.)
- */
 export function DemandTrendChip({ trend, className }: { trend: DemandTrend; className?: string }) {
   const m = META[trend];
   return (
@@ -24,7 +19,8 @@ export function DemandTrendChip({ trend, className }: { trend: DemandTrend; clas
       )}
     >
       <m.Icon className="size-3.5" />
-      {m.label}
+      <span data-bi-en="">{m.labelEn}</span>
+      <span data-bi-ar="">{m.labelAr}</span>
     </span>
   );
 }

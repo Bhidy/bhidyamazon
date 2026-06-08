@@ -10,6 +10,7 @@ import type { Product } from "@/lib/types";
 /**
  * Search/product grid tile — thumbnail, bilingual title, rating, ordinal BSR,
  * and price. The whole card links to the product detail page.
+ * Uses CSS data-bi-en/data-bi-ar for server-safe bilingual text.
  */
 export function ProductCard({ product }: { product: Product }) {
   const p = product;
@@ -57,9 +58,15 @@ export function ProductCard({ product }: { product: Product }) {
             </div>
           </div>
           {p.inStock ? (
-            <span className="text-xs font-medium text-positive">In stock</span>
+            <span className="text-xs font-medium text-positive">
+              <span data-bi-en="">In stock</span>
+              <span data-bi-ar="">متوفر</span>
+            </span>
           ) : (
-            <span className="text-xs font-medium text-muted-foreground">Out of stock</span>
+            <span className="text-xs font-medium text-muted-foreground">
+              <span data-bi-en="">Out of stock</span>
+              <span data-bi-ar="">غير متوفر</span>
+            </span>
           )}
         </div>
       </Link>

@@ -30,17 +30,14 @@ import { DashboardHero } from "./_components/dashboard-hero";
 
 const PERIODS = ["daily", "weekly", "monthly"];
 
-/**
- * Ordinal autocomplete-prominence tier for the Demand radar card. The keyword
- * `demandScore` is a re-encoding of a term's POSITION in Amazon autocomplete,
- * not a magnitude — so we surface a WORD (Top / High / Medium), never a 0–100
- * number that could be misread as a demand quantity.
- */
-function prominenceTier(score: number): { label: string; cls: string } {
-  if (score >= 100) return { label: "Top", cls: "text-brand-foreground border-brand/30 bg-brand/20" };
-  if (score >= 84) return { label: "High", cls: "text-muted-foreground border-border bg-muted/40" };
-  return { label: "Medium", cls: "text-muted-foreground border-border bg-muted/40" };
+function prominenceTier(score: number): { labelEn: string; labelAr: string; cls: string } {
+  if (score >= 100) return { labelEn: "Top", labelAr: "الأول", cls: "text-brand-foreground border-brand/30 bg-brand/20" };
+  if (score >= 84) return { labelEn: "High", labelAr: "مرتفع", cls: "text-muted-foreground border-border bg-muted/40" };
+  return { labelEn: "Medium", labelAr: "متوسط", cls: "text-muted-foreground border-border bg-muted/40" };
 }
+
+const PERIOD_LABEL_EN: Record<string, string> = { daily: "daily", weekly: "weekly", monthly: "monthly" };
+const PERIOD_LABEL_AR: Record<string, string> = { daily: "يومي", weekly: "أسبوعي", monthly: "شهري" };
 
 export default async function DashboardPage({
   searchParams,
@@ -54,8 +51,13 @@ export default async function DashboardPage({
   return (
     <>
       <PageHeader
-        title="Dashboard"
-        description="What's selling and rising on amazon.eg right now — ranked, tracked over time, and honestly labelled."
+        title={<><span data-bi-en="">Dashboard</span><span data-bi-ar="">لوحة التحكم</span></>}
+        description={
+          <>
+            <span data-bi-en="">What&apos;s selling and rising on amazon.eg right now — ranked, tracked over time, and honestly labelled.</span>
+            <span data-bi-ar="">ما يُباع ويرتفع في amazon.eg الآن — مُرتَّب، متتبع بمرور الوقت، ومُصنَّف بصدق.</span>
+          </>
+        }
       >
         <PeriodTabs value={period} />
       </PageHeader>
@@ -66,21 +68,46 @@ export default async function DashboardPage({
         <Freshness iso={s.lastUpdated} />
         <ButtonLink href="/calculator" variant="outline" size="sm">
           <Calculator className="size-4" />
-          Run a profit check
+          <span data-bi-en="">Run a profit check</span>
+          <span data-bi-ar="">احسب الربح</span>
         </ButtonLink>
       </div>
 
-
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <KpiCard label="Products tracked" value={s.productsTracked} icon={Boxes} hint="Across amazon.eg categories" />
         <KpiCard
-          label={`Rising (${period})`}
+          label={<><span data-bi-en="">Products tracked</span><span data-bi-ar="">المنتجات المتتبعة</span></>}
+          value={s.productsTracked}
+          icon={Boxes}
+          hint={<><span data-bi-en="">Across amazon.eg categories</span><span data-bi-ar="">عبر فئات amazon.eg</span></>}
+        />
+        <KpiCard
+          label={
+            <>
+              <span data-bi-en="">Rising ({PERIOD_LABEL_EN[period]})</span>
+              <span data-bi-ar="">الصاعدة ({PERIOD_LABEL_AR[period]})</span>
+            </>
+          }
           value={s.risingCount}
           icon={TrendingUp}
-          footer={<span className="text-positive">Improving rank velocity</span>}
+          footer={
+            <span className="text-positive">
+              <span data-bi-en="">Improving rank velocity</span>
+              <span data-bi-ar="">تحسن سرعة الترتيب</span>
+            </span>
+          }
         />
-        <KpiCard label="Avg rating" value={formatRating(s.avgRating)} icon={Star} hint="Weighted across tracked items" />
-        <KpiCard label="Categories" value={s.categoriesTracked} icon={Layers} hint="Best-seller lists monitored" />
+        <KpiCard
+          label={<><span data-bi-en="">Avg rating</span><span data-bi-ar="">متوسط التقييم</span></>}
+          value={formatRating(s.avgRating)}
+          icon={Star}
+          hint={<><span data-bi-en="">Weighted across tracked items</span><span data-bi-ar="">مرجح عبر المنتجات المتتبعة</span></>}
+        />
+        <KpiCard
+          label={<><span data-bi-en="">Categories</span><span data-bi-ar="">الفئات</span></>}
+          value={s.categoriesTracked}
+          icon={Layers}
+          hint={<><span data-bi-en="">Best-seller lists monitored</span><span data-bi-ar="">قوائم الأكثر مبيعاً تحت المراقبة</span></>}
+        />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
@@ -88,10 +115,15 @@ export default async function DashboardPage({
           <CardHeader className="flex-row items-center justify-between border-b pb-4">
             <div className="flex items-center gap-2">
               <TrendingUp className="size-4 text-positive" />
-              <CardTitle className="text-base">Rising now</CardTitle>
+              <CardTitle className="text-base">
+                <span data-bi-en="">Rising now</span>
+                <span data-bi-ar="">الصاعدة الآن</span>
+              </CardTitle>
             </div>
             <ButtonLink href="/movers" variant="ghost" size="sm" className="text-muted-foreground">
-              All movers <ArrowRight className="size-3.5" />
+              <span data-bi-en="">All movers</span>
+              <span data-bi-ar="">كل الصاعدة</span>
+              {" "}<ArrowRight className="size-3.5" />
             </ButtonLink>
           </CardHeader>
           <CardContent className="p-2">
@@ -99,7 +131,8 @@ export default async function DashboardPage({
               s.topRisers.map((row) => <RankRow key={row.product.asin} row={row} />)
             ) : (
               <p className="px-2 py-6 text-center text-sm text-muted-foreground">
-                No rising products in this window.
+                <span data-bi-en="">No rising products in this window.</span>
+                <span data-bi-ar="">لا توجد منتجات صاعدة في هذه الفترة.</span>
               </p>
             )}
           </CardContent>
@@ -109,10 +142,15 @@ export default async function DashboardPage({
           <CardHeader className="flex-row items-center justify-between border-b pb-4">
             <div className="flex items-center gap-2">
               <Trophy className="size-4 text-confidence-medium" />
-              <CardTitle className="text-base">Best sellers</CardTitle>
+              <CardTitle className="text-base">
+                <span data-bi-en="">Best sellers</span>
+                <span data-bi-ar="">الأكثر مبيعاً</span>
+              </CardTitle>
             </div>
             <ButtonLink href="/bestsellers" variant="ghost" size="sm" className="text-muted-foreground">
-              All best sellers <ArrowRight className="size-3.5" />
+              <span data-bi-en="">All best sellers</span>
+              <span data-bi-ar="">كل الأكثر مبيعاً</span>
+              {" "}<ArrowRight className="size-3.5" />
             </ButtonLink>
           </CardHeader>
           <CardContent className="p-2">
@@ -128,14 +166,25 @@ export default async function DashboardPage({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Radar className="size-4 text-brand" />
-              <CardTitle className="text-base">Demand radar</CardTitle>
-              <ConfidenceBadge confidence="low" note="How prominently amazon.eg suggests the term in autocomplete — an ordinal signal, not search volume." />
+              <CardTitle className="text-base">
+                <span data-bi-en="">Demand radar</span>
+                <span data-bi-ar="">رادار الطلب</span>
+              </CardTitle>
+              <ConfidenceBadge
+                confidence="low"
+                note="How prominently amazon.eg suggests the term in autocomplete — an ordinal signal, not search volume."
+              />
             </div>
             <ButtonLink href="/keywords" variant="ghost" size="sm" className="text-muted-foreground">
-              Full radar <ArrowRight className="size-3.5" />
+              <span data-bi-en="">Full radar</span>
+              <span data-bi-ar="">الرادار الكامل</span>
+              {" "}<ArrowRight className="size-3.5" />
             </ButtonLink>
           </div>
-          <CardDescription>Autocomplete prominence (how prominently Amazon suggests the term) — not search volume or demand quantity.</CardDescription>
+          <CardDescription>
+            <span data-bi-en="">Autocomplete prominence (how prominently Amazon suggests the term) — not search volume or demand quantity.</span>
+            <span data-bi-ar="">بروز الإكمال التلقائي (مدى اقتراح Amazon للمصطلح) — وليس حجم البحث أو كمية الطلب.</span>
+          </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-2.5 sm:grid-cols-2">
           {s.topKeywords.map((k) => {
@@ -155,7 +204,7 @@ export default async function DashboardPage({
                     aria-valuenow={k.demandScore}
                     aria-valuemin={0}
                     aria-valuemax={100}
-                    aria-label={`Autocomplete prominence: ${tier.label} (rank signal, not search volume)`}
+                    aria-label={`Autocomplete prominence: ${tier.labelEn} (rank signal, not search volume)`}
                   >
                     <div className="h-full rounded-full bg-brand" style={{ width: `${k.demandScore}%` }} />
                   </div>
@@ -163,7 +212,8 @@ export default async function DashboardPage({
                 <span
                   className={`inline-flex w-14 shrink-0 items-center justify-center rounded-full border px-1.5 py-0.5 text-[11px] font-medium leading-none ${tier.cls}`}
                 >
-                  {tier.label}
+                  <span data-bi-en="">{tier.labelEn}</span>
+                  <span data-bi-ar="">{tier.labelAr}</span>
                 </span>
               </div>
             );

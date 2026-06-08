@@ -6,6 +6,7 @@ import { DISCLOSURE } from "@/lib/constants";
  * Persistent, never-buried notice that the platform's sales/demand signals are
  * relative — not exact units or search volume. Required by the feasibility
  * audit's UI-disclosure rules; render it on every screen that shows ranks/demand.
+ * Uses CSS bilingual data attributes so it works in both server and client renders.
  */
 export function CalibrationNotice({ className }: { className?: string }) {
   return (
@@ -23,8 +24,14 @@ export function CalibrationNotice({ className }: { className?: string }) {
         <TriangleAlert className="size-4" />
       </span>
       <p className="self-center">
-        <span className="font-semibold text-foreground">Read signals as relative. </span>
-        {DISCLOSURE.calibrationNoticeEn}
+        <span data-bi-en="">
+          <span className="font-semibold text-foreground">Read signals as relative. </span>
+          {DISCLOSURE.calibrationNoticeEn}
+        </span>
+        <span data-bi-ar="">
+          <span className="font-semibold text-foreground">اقرأ الإشارات كمؤشرات نسبية. </span>
+          {DISCLOSURE.calibrationNoticeAr}
+        </span>
       </p>
     </div>
   );

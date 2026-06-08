@@ -63,21 +63,26 @@ import { WatchButton } from "./_components/watch-button";
 
 const PERIODS = ["daily", "weekly", "monthly"] as const;
 
-const LANG_LABEL: Record<ReviewLang, string> = {
+const LANG_LABEL_EN: Record<ReviewLang, string> = {
   ar: "Arabic",
   en: "English",
   mixed: "Mixed",
   unknown: "Unknown",
 };
+const LANG_LABEL_AR: Record<ReviewLang, string> = {
+  ar: "العربية",
+  en: "الإنجليزية",
+  mixed: "مختلط",
+  unknown: "غير معروف",
+};
 
-/** Sentiment-chip styling, reused for the review list and aspect rows. */
 const SENTIMENT_META: Record<
   SentimentLabel,
-  { label: string; cls: string }
+  { labelEn: string; labelAr: string; cls: string }
 > = {
-  positive: { label: "Positive", cls: "text-positive border-positive/30 bg-positive/10" },
-  neutral: { label: "Neutral", cls: "text-muted-foreground border-border bg-muted" },
-  negative: { label: "Negative", cls: "text-negative border-negative/30 bg-negative/10" },
+  positive: { labelEn: "Positive", labelAr: "إيجابي", cls: "text-positive border-positive/30 bg-positive/10" },
+  neutral: { labelEn: "Neutral", labelAr: "محايد", cls: "text-muted-foreground border-border bg-muted" },
+  negative: { labelEn: "Negative", labelAr: "سلبي", cls: "text-negative border-negative/30 bg-negative/10" },
 };
 
 export default async function ProductDetailPage({
@@ -100,10 +105,7 @@ export default async function ProductDetailPage({
   const reviews = getReviews(asin, {});
   const sentiment = getSentimentSummary(asin);
 
-  // Where this product sits in the movers list → rank-velocity context.
   const moverRow = getMovers({ period }).find((r) => r.product.asin === asin);
-  // Demand band comes from the category-relative BEST-SELLER row; movers/velocity is
-  // empty until >= 2 daily snapshots accumulate, so never source the band from it.
   const bandRow = getBestSellers({ categoryNode: product.categoryNode, period }).find(
     (r) => r.product.asin === asin,
   );
@@ -112,15 +114,12 @@ export default async function ProductDetailPage({
   const demandBand = bandRow?.demandBand ?? moverRow?.demandBand ?? "unknown";
   const bandMeta = DEMAND_BAND_META[demandBand];
 
-  // Merge the two server series into the chart's row shape on the server, so the
-  // client component only receives plain points (no extra data fetching).
   const points: HistoryPoint[] = history.points.map((pt, i) => ({
     date: pt.date,
     bsr: pt.value,
     price: history.pricePoints[i]?.value ?? null,
   }));
 
-  // Indicative referral-fee preview (estimate) — links into the full calculator.
   const referralRule = getReferralRule(product.categoryNode);
   const referralFee =
     product.priceEgp != null ? computeReferralFee(product.priceEgp, referralRule) : null;
@@ -134,11 +133,17 @@ export default async function ProductDetailPage({
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink render={<Link href="/" />}>Dashboard</BreadcrumbLink>
+            <BreadcrumbLink render={<Link href="/" />}>
+              <span data-bi-en="">Dashboard</span>
+              <span data-bi-ar="">لوحة التحكم</span>
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink render={<Link href="/bestsellers" />}>Products</BreadcrumbLink>
+            <BreadcrumbLink render={<Link href="/bestsellers" />}>
+              <span data-bi-en="">Products</span>
+              <span data-bi-ar="">المنتجات</span>
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -149,7 +154,7 @@ export default async function ProductDetailPage({
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* ─────────────────────────── (a) Header ─────────────────────────── */}
+      {/* ─────────────────────────── Header ─────────────────────────── */}
       <Card className="gap-0 shadow-card-lg">
         <CardContent className="flex flex-col gap-5 p-5 sm:flex-row sm:gap-6 sm:p-6">
           <div className="self-start rounded-2xl bg-accent/50 p-2.5">
@@ -181,7 +186,9 @@ export default async function ProductDetailPage({
               )}
               {product.brand && (
                 <p className="text-sm text-muted-foreground">
-                  by <span className="font-medium text-foreground">{product.brand}</span>
+                  <span data-bi-en="">by </span>
+                  <span data-bi-ar="">بواسطة </span>
+                  <span className="font-medium text-foreground">{product.brand}</span>
                 </p>
               )}
             </div>
@@ -206,12 +213,14 @@ export default async function ProductDetailPage({
               {product.inStock ? (
                 <span className="inline-flex items-center gap-1 rounded-full border border-positive/30 bg-positive/10 px-2 py-0.5 text-xs font-medium text-positive">
                   <PackageCheck className="size-3.5" />
-                  In stock
+                  <span data-bi-en="">In stock</span>
+                  <span data-bi-ar="">متوفر</span>
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
                   <PackageX className="size-3.5" />
-                  Out of stock
+                  <span data-bi-en="">Out of stock</span>
+                  <span data-bi-ar="">غير متوفر</span>
                 </span>
               )}
               <Freshness iso={product.lastSeenAt ?? product.provenance.fetchedAt} />
@@ -224,12 +233,14 @@ export default async function ProductDetailPage({
               className="w-full"
             >
               <Gauge className="size-4" />
-              Check profit
+              <span data-bi-en="">Check profit</span>
+              <span data-bi-ar="">فحص الربح</span>
             </ButtonLink>
             <WatchButton asin={product.asin} title={product.titleEn} />
             {referralFee != null && (
               <p className="text-center text-[11px] leading-snug text-muted-foreground">
-                Est. referral fee ≈{" "}
+                <span data-bi-en="">Est. referral fee ≈ </span>
+                <span data-bi-ar="">رسوم الإحالة التقديرية ≈ </span>
                 <span className="font-medium tabular-nums text-foreground">
                   {formatEgp(referralFee)}
                 </span>
@@ -239,47 +250,64 @@ export default async function ProductDetailPage({
         </CardContent>
       </Card>
 
-
-
-      {/* ───────────────────── (c) Key signals (KPI row) ─────────────────── */}
+      {/* ───────────────────── Key signals (KPI row) ─────────────────── */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <KpiCard
-          label="Relative demand"
-          value={bandMeta.labelEn}
+          label={<><span data-bi-en="">Relative demand</span><span data-bi-ar="">الطلب النسبي</span></>}
+          value={
+            <>
+              <span data-bi-en="">{bandMeta.labelEn}</span>
+              <span data-bi-ar="">{bandMeta.labelAr}</span>
+            </>
+          }
           icon={Gauge}
           footer={
-            <span className="text-muted-foreground">{DISCLOSURE.ordinalEn}</span>
-          }
-        />
-        <KpiCard
-          label="Rank velocity"
-          value={<TrendIndicator value={gainPct} invert={false} />}
-          icon={riseScore > 0 ? TrendingUp : riseScore < 0 ? TrendingDown : Minus}
-          footer={
             <span className="text-muted-foreground">
-              {riseScore > 0
-                ? "Improving vs last window"
-                : riseScore < 0
-                  ? "Slipping vs last window"
-                  : "Holding steady"}
+              <span data-bi-en="">{DISCLOSURE.ordinalEn}</span>
+              <span data-bi-ar="">الترتيب قابل للمقارنة فقط ضمن نفس الفئة في amazon.eg.</span>
             </span>
           }
         />
         <KpiCard
-          label="Reviews"
-          value={formatNumber(product.reviewCount)}
-          icon={MessageSquareQuote}
-          hint="Total reported on the listing"
+          label={<><span data-bi-en="">Rank velocity</span><span data-bi-ar="">سرعة الترتيب</span></>}
+          value={<TrendIndicator value={gainPct} invert={false} />}
+          icon={riseScore > 0 ? TrendingUp : riseScore < 0 ? TrendingDown : Minus}
+          footer={
+            <span className="text-muted-foreground">
+              {riseScore > 0 ? (
+                <>
+                  <span data-bi-en="">Improving vs last window</span>
+                  <span data-bi-ar="">تحسن مقارنة بالفترة الماضية</span>
+                </>
+              ) : riseScore < 0 ? (
+                <>
+                  <span data-bi-en="">Slipping vs last window</span>
+                  <span data-bi-ar="">تراجع مقارنة بالفترة الماضية</span>
+                </>
+              ) : (
+                <>
+                  <span data-bi-en="">Holding steady</span>
+                  <span data-bi-ar="">مستقر</span>
+                </>
+              )}
+            </span>
+          }
         />
         <KpiCard
-          label="Avg rating"
+          label={<><span data-bi-en="">Reviews</span><span data-bi-ar="">المراجعات</span></>}
+          value={formatNumber(product.reviewCount)}
+          icon={MessageSquareQuote}
+          hint={<><span data-bi-en="">Total reported on the listing</span><span data-bi-ar="">الإجمالي المُبلَّغ عنه</span></>}
+        />
+        <KpiCard
+          label={<><span data-bi-en="">Avg rating</span><span data-bi-ar="">متوسط التقييم</span></>}
           value={formatRating(product.rating)}
           icon={Star}
-          hint="Listing star average"
+          hint={<><span data-bi-en="">Listing star average</span><span data-bi-ar="">متوسط نجوم القائمة</span></>}
         />
       </div>
 
-      {/* ───────────────────── (b) Rank & price history ──────────────────── */}
+      {/* ───────────────────── Rank & price history ──────────────────── */}
       <Card className="gap-0">
         <CardHeader className="border-b pb-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -291,9 +319,17 @@ export default async function ProductDetailPage({
                 <Activity className="size-4" />
               </span>
               <CardTitle className="text-base">
-                {history.points.length >= 2
-                  ? "Rank & price history (90 days)"
-                  : "Rank & price history — tracking just started (1 snapshot)"}
+                {history.points.length >= 2 ? (
+                  <>
+                    <span data-bi-en="">Rank &amp; price history (90 days)</span>
+                    <span data-bi-ar="">تاريخ الترتيب والسعر (90 يوماً)</span>
+                  </>
+                ) : (
+                  <>
+                    <span data-bi-en="">Rank &amp; price history — tracking just started (1 snapshot)</span>
+                    <span data-bi-ar="">تاريخ الترتيب والسعر — التتبع بدأ للتو (لقطة واحدة)</span>
+                  </>
+                )}
               </CardTitle>
               <ConfidenceBadge
                 confidence="medium"
@@ -303,17 +339,24 @@ export default async function ProductDetailPage({
             <div className="flex items-center gap-3 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-1 w-3.5 rounded-full bg-chart-1" />
-                BSR (rank)
+                <span data-bi-en="">BSR (rank)</span>
+                <span data-bi-ar="">BSR (الترتيب)</span>
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-1 w-3.5 rounded-full bg-chart-2" />
-                Price
+                <span data-bi-en="">Price</span>
+                <span data-bi-ar="">السعر</span>
               </span>
             </div>
           </div>
           <CardDescription className="mt-1">
-            History starts the day we began tracking this ASIN — it builds up over time
-            from zero coverage, so early gaps are expected. Rank axis is inverted (up = better).
+            <span data-bi-en="">
+              History starts the day we began tracking this ASIN — it builds up over time
+              from zero coverage, so early gaps are expected. Rank axis is inverted (up = better).
+            </span>
+            <span data-bi-ar="">
+              يبدأ التاريخ من يوم بدأنا تتبع هذا ASIN — يتراكم بمرور الوقت من صفر، لذا الفجوات الأولى متوقعة. محور الترتيب معكوس (أعلى = أفضل).
+            </span>
           </CardDescription>
         </CardHeader>
         <CardContent className="px-2 pt-4 sm:px-4">
@@ -324,29 +367,45 @@ export default async function ProductDetailPage({
         </CardContent>
       </Card>
 
-      {/* ───────────────────── (d) Review intelligence ───────────────────── */}
+      {/* ───────────────────── Review intelligence ───────────────────── */}
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         {/* Sentiment summary */}
         <Card className="gap-0">
           <CardHeader className="border-b pb-4">
             <div className="flex items-center gap-2">
               <MessageSquareQuote className="size-4 text-brand" />
-              <CardTitle className="text-base">Review intelligence</CardTitle>
+              <CardTitle className="text-base">
+                <span data-bi-en="">Review intelligence</span>
+                <span data-bi-ar="">تحليل المراجعات</span>
+              </CardTitle>
               <ConfidenceBadge
                 confidence="low"
                 note={sentiment.provenance.note ?? "Sentiment is modeled on a logged-out review sample."}
               />
             </div>
             <CardDescription className="mt-1">
-              Based on{" "}
-              <span className="font-medium tabular-nums text-foreground">
-                {formatNumber(analysed)}
-              </span>{" "}
-              of{" "}
-              <span className="font-medium tabular-nums text-foreground">
-                {formatNumber(reported)}
-              </span>{" "}
-              reported reviews ({formatPct(coveragePct, "en", { decimals: 0 })} sampled).
+              <span data-bi-en="">
+                Based on{" "}
+                <span className="font-medium tabular-nums text-foreground">
+                  {formatNumber(analysed)}
+                </span>{" "}
+                of{" "}
+                <span className="font-medium tabular-nums text-foreground">
+                  {formatNumber(reported)}
+                </span>{" "}
+                reported reviews ({formatPct(coveragePct, "en", { decimals: 0 })} sampled).
+              </span>
+              <span data-bi-ar="">
+                بناءً على{" "}
+                <span className="font-medium tabular-nums text-foreground">
+                  {formatNumber(analysed)}
+                </span>{" "}
+                من{" "}
+                <span className="font-medium tabular-nums text-foreground">
+                  {formatNumber(reported)}
+                </span>{" "}
+                مراجعة مُبلَّغ عنها ({formatPct(coveragePct, "en", { decimals: 0 })} مُختارة).
+              </span>
             </CardDescription>
           </CardHeader>
 
@@ -366,15 +425,18 @@ export default async function ProductDetailPage({
                 <div className="h-full bg-negative" style={{ width: `${sentiment.negativePct}%` }} />
               </div>
               <div className="grid grid-cols-3 gap-2 text-xs">
-                <SplitLegend tone="positive" label="Positive" pct={sentiment.positivePct} />
-                <SplitLegend tone="neutral" label="Neutral" pct={sentiment.neutralPct} />
-                <SplitLegend tone="negative" label="Negative" pct={sentiment.negativePct} />
+                <SplitLegend tone="positive" labelEn="Positive" labelAr="إيجابي" pct={sentiment.positivePct} />
+                <SplitLegend tone="neutral" labelEn="Neutral" labelAr="محايد" pct={sentiment.neutralPct} />
+                <SplitLegend tone="negative" labelEn="Negative" labelAr="سلبي" pct={sentiment.negativePct} />
               </div>
             </div>
 
             {/* Language mix */}
             <div className="space-y-2">
-              <p className="text-xs font-medium text-muted-foreground">Language mix</p>
+              <p className="text-xs font-medium text-muted-foreground">
+                <span data-bi-en="">Language mix</span>
+                <span data-bi-ar="">مزيج اللغات</span>
+              </p>
               <div className="flex flex-wrap gap-1.5">
                 {(Object.entries(sentiment.langMix) as [ReviewLang, number][])
                   .filter(([, n]) => n > 0)
@@ -383,7 +445,8 @@ export default async function ProductDetailPage({
                       key={lang}
                       className="inline-flex items-center gap-1 rounded-full border border-border bg-muted px-2 py-0.5 text-xs text-muted-foreground"
                     >
-                      {LANG_LABEL[lang]}
+                      <span data-bi-en="">{LANG_LABEL_EN[lang]}</span>
+                      <span data-bi-ar="">{LANG_LABEL_AR[lang]}</span>
                       <span className="font-medium tabular-nums text-foreground">{n}</span>
                     </span>
                   ))}
@@ -392,28 +455,36 @@ export default async function ProductDetailPage({
 
             <Separator />
 
-            {/* Pros / Cons with evidence quotes */}
+            {/* Pros / Cons */}
             <div className="space-y-4">
               <AspectGroup
-                title="What buyers like"
+                titleEn="What buyers like"
+                titleAr="ما يعجب المشترين"
                 icon={<ThumbsUp className="size-4 text-positive" />}
                 aspects={sentiment.pros}
                 tone="positive"
-                emptyLabel="No positive aspects surfaced in the sample."
+                emptyLabelEn="No positive aspects surfaced in the sample."
+                emptyLabelAr="لم تظهر جوانب إيجابية في العينة."
               />
               <AspectGroup
-                title="Common complaints"
+                titleEn="Common complaints"
+                titleAr="الشكاوى الشائعة"
                 icon={<ThumbsDown className="size-4 text-negative" />}
                 aspects={sentiment.cons}
                 tone="negative"
-                emptyLabel="No recurring complaints in the sample."
+                emptyLabelEn="No recurring complaints in the sample."
+                emptyLabelAr="لا شكاوى متكررة في العينة."
               />
             </div>
 
             <p className="flex items-start gap-1.5 text-[11px] leading-snug text-muted-foreground">
               <span aria-hidden>⚠</span>
-              Reviews are a truncated logged-out sample; treat themes as directional, not
-              exhaustive.
+              <span data-bi-en="">
+                Reviews are a truncated logged-out sample; treat themes as directional, not exhaustive.
+              </span>
+              <span data-bi-ar="">
+                المراجعات عينة مقتطعة بدون تسجيل دخول؛ تعامل مع الموضوعات كمؤشرات توجيهية لا شاملة.
+              </span>
             </p>
           </CardContent>
         </Card>
@@ -423,9 +494,12 @@ export default async function ProductDetailPage({
           <CardHeader className="border-b pb-4">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base">
-                Reviews
+                <span data-bi-en="">Reviews</span>
+                <span data-bi-ar="">المراجعات</span>
                 <span className="ml-2 text-sm font-normal tabular-nums text-muted-foreground">
-                  {formatNumber(reviews.length)} shown
+                  {formatNumber(reviews.length)}{" "}
+                  <span data-bi-en="">shown</span>
+                  <span data-bi-ar="">معروضة</span>
                 </span>
               </CardTitle>
               <ConfidenceBadge confidence="medium" note="Individual review text as scraped." />
@@ -435,12 +509,13 @@ export default async function ProductDetailPage({
             {reviews.length ? (
               <ul className="divide-y divide-border">
                 {reviews.map((review) => (
-                  <ReviewItem key={review.reviewId} review={review} />
+                  <ReviewItem key={review.reviewId} review={review} langLabels={LANG_LABEL_EN} sentimentMeta={SENTIMENT_META} />
                 ))}
               </ul>
             ) : (
               <p className="px-4 py-10 text-center text-sm text-muted-foreground">
-                No reviews captured for this product yet.
+                <span data-bi-en="">No reviews captured for this product yet.</span>
+                <span data-bi-ar="">لم يتم التقاط مراجعات لهذا المنتج بعد.</span>
               </p>
             )}
           </CardContent>
@@ -454,11 +529,13 @@ export default async function ProductDetailPage({
 
 function SplitLegend({
   tone,
-  label,
+  labelEn,
+  labelAr,
   pct,
 }: {
   tone: "positive" | "neutral" | "negative";
-  label: string;
+  labelEn: string;
+  labelAr: string;
   pct: number;
 }) {
   const dot =
@@ -466,7 +543,10 @@ function SplitLegend({
   return (
     <div className="flex items-center gap-1.5">
       <span className={cn("size-2 shrink-0 rounded-full", dot)} />
-      <span className="text-muted-foreground">{label}</span>
+      <span className="text-muted-foreground">
+        <span data-bi-en="">{labelEn}</span>
+        <span data-bi-ar="">{labelAr}</span>
+      </span>
       <span className="ml-auto font-medium tabular-nums text-foreground">
         {formatPct(pct, "en", { decimals: 0 })}
       </span>
@@ -475,20 +555,23 @@ function SplitLegend({
 }
 
 function AspectGroup({
-  title,
+  titleEn,
+  titleAr,
   icon,
   aspects,
   tone,
-  emptyLabel,
+  emptyLabelEn,
+  emptyLabelAr,
 }: {
-  title: string;
+  titleEn: string;
+  titleAr: string;
   icon: React.ReactNode;
   aspects: { aspect: string; quote?: string }[];
   tone: "positive" | "negative";
-  emptyLabel: string;
+  emptyLabelEn: string;
+  emptyLabelAr: string;
 }) {
   const accent = tone === "positive" ? "border-l-positive/50" : "border-l-negative/50";
-  // De-duplicate by aspect so we show one representative quote per theme.
   const seen = new Set<string>();
   const unique = aspects.filter((a) => {
     if (seen.has(a.aspect)) return false;
@@ -499,7 +582,8 @@ function AspectGroup({
     <div className="space-y-2">
       <p className="flex items-center gap-1.5 text-sm font-medium text-foreground">
         {icon}
-        {title}
+        <span data-bi-en="">{titleEn}</span>
+        <span data-bi-ar="">{titleAr}</span>
       </p>
       {unique.length ? (
         <ul className="space-y-2">
@@ -518,15 +602,25 @@ function AspectGroup({
           ))}
         </ul>
       ) : (
-        <p className="text-xs text-muted-foreground">{emptyLabel}</p>
+        <p className="text-xs text-muted-foreground">
+          <span data-bi-en="">{emptyLabelEn}</span>
+          <span data-bi-ar="">{emptyLabelAr}</span>
+        </p>
       )}
     </div>
   );
 }
 
-function ReviewItem({ review }: { review: Review }) {
+function ReviewItem({
+  review,
+  sentimentMeta,
+}: {
+  review: Review;
+  langLabels: Record<ReviewLang, string>;
+  sentimentMeta: Record<SentimentLabel, { labelEn: string; labelAr: string; cls: string }>;
+}) {
   const isAr = review.lang === "ar";
-  const sentiment = review.sentiment ? SENTIMENT_META[review.sentiment] : null;
+  const sentiment = review.sentiment ? sentimentMeta[review.sentiment] : null;
   return (
     <li className="space-y-2 px-4 py-3.5">
       <div className="flex items-start justify-between gap-3">
@@ -547,7 +641,8 @@ function ReviewItem({ review }: { review: Review }) {
             {review.verifiedPurchase && (
               <span className="inline-flex items-center gap-1 text-positive">
                 <BadgeCheck className="size-3.5" />
-                Verified purchase
+                <span data-bi-en="">Verified purchase</span>
+                <span data-bi-ar="">عملية شراء موثقة</span>
               </span>
             )}
             <span aria-hidden>·</span>
@@ -561,7 +656,8 @@ function ReviewItem({ review }: { review: Review }) {
               sentiment.cls,
             )}
           >
-            {sentiment.label}
+            <span data-bi-en="">{sentiment.labelEn}</span>
+            <span data-bi-ar="">{sentiment.labelAr}</span>
           </span>
         )}
       </div>
@@ -576,7 +672,8 @@ function ReviewItem({ review }: { review: Review }) {
       {review.helpfulVotes != null && review.helpfulVotes > 0 && (
         <p className="flex items-center gap-1 text-xs text-muted-foreground">
           <ThumbsUp className="size-3" />
-          {formatNumber(review.helpfulVotes)} found this helpful
+          <span data-bi-en="">{formatNumber(review.helpfulVotes)} found this helpful</span>
+          <span data-bi-ar="">وجده {formatNumber(review.helpfulVotes)} مفيداً</span>
         </p>
       )}
     </li>

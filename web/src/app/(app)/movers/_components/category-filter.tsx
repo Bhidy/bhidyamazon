@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CATEGORIES } from "@/lib/constants";
+import { useLocale } from "@/lib/locale";
 
 const ALL = "all";
 
@@ -28,10 +29,14 @@ export function CategoryFilter({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
+  const allLabel = isAr ? "جميع الفئات" : "All categories";
 
   const items: Record<string, string> = {
-    [ALL]: "All categories",
-    ...Object.fromEntries(CATEGORIES.map((c) => [c.nodeId, c.nameEn])),
+    [ALL]: allLabel,
+    ...Object.fromEntries(CATEGORIES.map((c) => [c.nodeId, isAr ? c.nameAr : c.nameEn])),
   };
 
   const onValueChange = (next: string | null) => {
@@ -49,18 +54,18 @@ export function CategoryFilter({
       <SelectTrigger
         size="sm"
         className="min-w-[10rem]"
-        aria-label="Filter by category"
+        aria-label={isAr ? "تصفية حسب الفئة" : "Filter by category"}
       >
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value={ALL}>All categories</SelectItem>
+        <SelectItem value={ALL}>{allLabel}</SelectItem>
         {CATEGORIES.map((c) => (
           <SelectItem key={c.nodeId} value={c.nodeId}>
             <span className="flex w-full items-center justify-between gap-3">
-              <span>{c.nameEn}</span>
-              <span dir="rtl" className="font-arabic text-muted-foreground">
-                {c.nameAr}
+              <span>{isAr ? c.nameAr : c.nameEn}</span>
+              <span dir={isAr ? "ltr" : "rtl"} className="font-arabic text-muted-foreground">
+                {isAr ? c.nameEn : c.nameAr}
               </span>
             </span>
           </SelectItem>

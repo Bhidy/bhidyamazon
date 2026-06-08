@@ -33,6 +33,7 @@ export const CATEGORIES: Category[] = [
   { nodeId: "toys", slug: "toys", nameEn: "Toys & Games", nameAr: "الألعاب" },
   { nodeId: "baby", slug: "baby", nameEn: "Baby", nameAr: "مستلزمات الأطفال" },
   { nodeId: "sports", slug: "sports", nameEn: "Sports", nameAr: "الرياضة" },
+  { nodeId: "automotive", slug: "automotive", nameEn: "Automotive", nameAr: "السيارات" },
   { nodeId: "health", slug: "health", nameEn: "Health & Household", nameAr: "الصحة" },
   { nodeId: "books", slug: "books", nameEn: "Books", nameAr: "الكتب" },
 ];
@@ -63,6 +64,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { labelEn: "Best Sellers", labelAr: "الأكثر مبيعًا", href: "/bestsellers", icon: "Trophy" },
       { labelEn: "Movers & Shakers", labelAr: "الأكثر صعودًا", href: "/movers", icon: "TrendingUp" },
       { labelEn: "Demand Radar", labelAr: "رادار الطلب", href: "/keywords", icon: "Radar" },
+      { labelEn: "Opportunity Finder", labelAr: "الفرص الرابحة", href: "/opportunities", icon: "Target" },
     ],
   },
   {

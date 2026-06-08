@@ -92,6 +92,91 @@ def _first_text(soup, selectors: list[str]):
     return None
 
 
+def _detail_attrs(soup) -> dict:
+    """Build a {label: value} map from the detail-page spec tables + detail bullets.
+    Validated live on amazon.eg automotive: specs live in <table> th/td rows
+    (Item Weight, Item Dimensions L x W [x H], Material Type, Manufacturer,
+    Number of Items, Brand Name, Color) and sometimes in #detailBullets li."""
+    attrs: dict[str, str] = {}
+    for tr in soup.select("table tr"):
+        th = tr.find("th")
+        td = tr.find("td")
+        if th and td:
+            k = th.get_text(" ", strip=True)
+            v = td.get_text(" ", strip=True)
+            if k and v and len(k) < 50:
+                attrs.setdefault(k, v)
+    for li in soup.select("#detailBullets_feature_div li"):
+        txt = li.get_text(" ", strip=True)
+        if ":" in txt and len(txt) < 120:
+            k, _, v = txt.partition(":")
+            if k.strip() and v.strip():
+                attrs.setdefault(k.strip(), v.strip())
+    return attrs
+
+
+def _attr_get(attrs: dict, *labels: str):
+    """Case-insensitive, variant-tolerant attribute lookup (exact then contains)."""
+    low = {k.lower(): v for k, v in attrs.items()}
+    for lb in labels:
+        if lb.lower() in low:
+            return low[lb.lower()]
+    for k, v in attrs.items():
+        kl = k.lower()
+        if any(lb.lower() in kl for lb in labels):
+            return v
+    return None
+
+
+def _weight_to_kg(raw: str | None):
+    """Normalize a weight string to kg. Returns None if no unit is recognized —
+    we never guess the magnitude (an unlabeled number could be grams or kg)."""
+    if not raw:
+        return None
+    m = re.search(r"([\d]+\.?\d*)", raw.replace(",", ""))
+    if not m:
+        return None
+    v = float(m.group(1))
+    s = raw.lower()
+    if "milligram" in s:
+        return round(v / 1_000_000, 6)
+    if "kilogram" in s or re.search(r"\bkg\b", s):
+        return round(v, 4)
+    if "gram" in s or re.search(r"\bg\b", s):
+        return round(v / 1000, 4)
+    if "ounce" in s or re.search(r"\boz\b", s):
+        return round(v * 0.0283495, 4)
+    if "pound" in s or re.search(r"\b(lb|lbs)\b", s):
+        return round(v * 0.453592, 4)
+    return None
+
+
+def _dims_to_cm(raw: str | None):
+    """Normalize an 'L x W [x H]' dimension string to centimeters → {l, w, h}.
+    Handles centimeters/cm, mm, meters, inches; defaults to cm (amazon.eg's
+    default). h is 0 when only two dimensions are given."""
+    if not raw:
+        return None
+    s = raw.lower()
+    if "millimet" in s or re.search(r"\bmm\b", s):
+        f = 0.1
+    elif "centimet" in s or re.search(r"\bcm\b", s):
+        f = 1.0
+    elif "inch" in s or '"' in s:
+        f = 2.54
+    elif "meter" in s or re.search(r"\bm\b", s):
+        f = 100.0
+    else:
+        f = 1.0  # amazon.eg default is centimeters
+    nums = re.findall(r"[\d]+\.?\d*", raw)
+    if not nums:
+        return None
+    vals = [round(float(n) * f, 2) for n in nums[:3]]
+    while len(vals) < 3:
+        vals.append(0.0)
+    return {"l": vals[0], "w": vals[1], "h": vals[2]}
+
+
 def parse_product(html: str, asin: str) -> dict:
     """Product detail page → fields incl. leaf BSR + the 8 embedded reviews (no auth)."""
     soup = BeautifulSoup(html, "html.parser")
@@ -161,6 +246,27 @@ def parse_product(html: str, asin: str) -> dict:
                 "lang": "ar" if _ARABIC_RE.search((r_title or "") + body) else "en",
             }
         )
+    # Detail-page spec attributes (selectors validated live on amazon.eg automotive).
+    attrs = _detail_attrs(soup)
+    if not brand:
+        bt = _attr_get(attrs, "Brand Name", "Brand")
+        brand = bt[:60] if bt else None
+    weight_raw = _attr_get(attrs, "Item Weight", "Product Weight", "Fabric Weight", "Weight")
+    dims_raw = _attr_get(
+        attrs,
+        "Item Dimensions L x W x H",
+        "Item Dimensions L x W",
+        "Item Dimensions",
+        "Product Dimensions",
+        "Package Dimensions",
+    )
+    image_count = len(soup.select("#altImages li.imageThumbnail, #altImages li.item")) or None
+    feature_bullet_count = len(soup.select("#feature-bullets li")) or None
+    offer_count = None
+    olp = soup.select_one("a[href*='/gp/offer-listing'], #olpLinkWidget")
+    if olp:
+        m = re.search(r"(\d+)", olp.get_text())
+        offer_count = int(m.group(1)) if m else None
     return {
         "asin": asin,
         "title": title,
@@ -172,4 +278,16 @@ def parse_product(html: str, asin: str) -> dict:
         "availability": availability,
         "bsr": bsr,
         "reviews_list": reviews_list,
+        # New: detail-page attributes for the winning-product score (all optional).
+        "material": _attr_get(attrs, "Material Type", "Material", "Fabric Type"),
+        "manufacturer": _attr_get(attrs, "Manufacturer"),
+        "color": _attr_get(attrs, "Color", "Colour"),
+        "number_of_items": _int(_attr_get(attrs, "Number of Items", "Unit Count", "Item Package Quantity")),
+        "item_weight_raw": weight_raw,
+        "item_weight_kg": _weight_to_kg(weight_raw),
+        "item_dims_raw": dims_raw,
+        "item_dims_cm": _dims_to_cm(dims_raw),
+        "image_count": image_count,
+        "feature_bullet_count": feature_bullet_count,
+        "offer_count": offer_count,
     }

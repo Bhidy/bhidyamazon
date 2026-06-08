@@ -14,7 +14,6 @@ import { ProductCard } from "./_components/product-card";
 const PERIODS: Period[] = ["daily", "weekly", "monthly"];
 const SORTS: SortKey[] = ["rank", "price-asc", "price-desc", "rating", "reviews"];
 
-/** Reorder rows by the chosen sort. `rank` keeps the data layer's BSR ordering. */
 function sortRows(rows: RankingRow[], sort: SortKey): RankingRow[] {
   if (sort === "rank") return rows;
   const copy = [...rows];
@@ -45,19 +44,32 @@ export default async function ProductsPage({
 
   const rows = sortRows(getBestSellers({ categoryNode: category, period }), sort);
 
-  // Params each control must preserve when it builds its own links.
   const carried: Record<string, string> = {};
   if (category) carried.category = category;
   if (period !== "daily") carried.period = period;
   if (sort !== "rank") carried.sort = sort;
 
-  const categoryName = category ? CATEGORY_BY_NODE[category]?.nameEn : undefined;
+  const categoryEn = category ? CATEGORY_BY_NODE[category]?.nameEn : undefined;
+  const categoryAr = category ? CATEGORY_BY_NODE[category]?.nameAr : undefined;
   const lastUpdated = getDashboardSummary(period).lastUpdated;
   const count = rows.length;
 
   return (
     <>
-      <PageHeader title="Products" description="Every product Rasid is tracking on amazon.eg.">
+      <PageHeader
+        title={
+          <>
+            <span data-bi-en="">Products</span>
+            <span data-bi-ar="">المنتجات</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">Every product Rasid is tracking on amazon.eg.</span>
+            <span data-bi-ar="">كل منتج تتتبعه رصيد على amazon.eg.</span>
+          </>
+        }
+      >
         <PeriodTabs value={period} params={omit(carried, "period")} />
       </PageHeader>
 
@@ -65,26 +77,33 @@ export default async function ProductsPage({
         <Freshness iso={lastUpdated} />
         <ButtonLink href="/calculator" variant="outline" size="sm">
           <Boxes className="size-4" />
-          Run a profit check
+          <span data-bi-en="">Run a profit check</span>
+          <span data-bi-ar="">احسب الربح</span>
         </ButtonLink>
       </div>
-
-
 
       <div className="flex flex-col gap-3">
         <CategoryFilter active={category} params={omit(carried, "category")} />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-muted-foreground" aria-live="polite">
-            <span className="font-semibold tabular-nums text-foreground">{formatNumber(count)}</span>{" "}
-            {count === 1 ? "product" : "products"}
-            {categoryName ? (
-              <>
-                {" in "}
-                <span className="font-medium text-foreground">{categoryName}</span>
-              </>
-            ) : (
-              " tracked"
-            )}
+            <span data-bi-en="">
+              <span className="font-semibold tabular-nums text-foreground">{formatNumber(count)}</span>{" "}
+              {count === 1 ? "product" : "products"}
+              {categoryEn ? (
+                <> in <span className="font-medium text-foreground">{categoryEn}</span></>
+              ) : (
+                " tracked"
+              )}
+            </span>
+            <span data-bi-ar="">
+              <span className="font-semibold tabular-nums text-foreground">{formatNumber(count)}</span>{" "}
+              {count === 1 ? "منتج" : "منتجات"}
+              {categoryAr ? (
+                <> في <span className="font-medium text-foreground">{categoryAr}</span></>
+              ) : (
+                " متتبع"
+              )}
+            </span>
           </p>
           <SortSelect value={sort} params={omit(carried, "sort")} />
         </div>
@@ -104,15 +123,26 @@ export default async function ProductsPage({
           >
             <PackageOpen className="size-6" />
           </span>
-          <p className="text-sm font-semibold text-foreground">No products tracked here yet</p>
+          <p className="text-sm font-semibold text-foreground">
+            <span data-bi-en="">No products tracked here yet</span>
+            <span data-bi-ar="">لا توجد منتجات متتبعة هنا بعد</span>
+          </p>
           <p className="max-w-sm text-sm text-muted-foreground">
-            {categoryName
-              ? `Rasid isn't tracking anything in ${categoryName} on amazon.eg right now.`
-              : "Nothing is being tracked for this view yet."}
+            <span data-bi-en="">
+              {categoryEn
+                ? `Rasid isn't tracking anything in ${categoryEn} on amazon.eg right now.`
+                : "Nothing is being tracked for this view yet."}
+            </span>
+            <span data-bi-ar="">
+              {categoryAr
+                ? `رصيد لا يتتبع شيئاً في ${categoryAr} على amazon.eg الآن.`
+                : "لا شيء يُتتبع لهذا العرض بعد."}
+            </span>
           </p>
           {category && (
             <ButtonLink href="/products" variant="outline" size="sm" className="mt-1">
-              Clear category filter
+              <span data-bi-en="">Clear category filter</span>
+              <span data-bi-ar="">إزالة فلتر الفئة</span>
             </ButtonLink>
           )}
         </div>
@@ -121,7 +151,6 @@ export default async function ProductsPage({
   );
 }
 
-/** Drop a key from a carried-params record so a control doesn't echo its own param. */
 function omit(obj: Record<string, string>, key: string): Record<string, string> {
   return Object.fromEntries(Object.entries(obj).filter(([k]) => k !== key));
 }

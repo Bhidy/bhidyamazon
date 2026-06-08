@@ -16,6 +16,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import { formatEgp, formatRank } from "@/lib/format";
+import { useLocale } from "@/lib/locale";
 
 export interface HistoryPoint {
   /** ISO date (YYYY-MM-DD). */
@@ -30,10 +31,13 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 /** Short axis date label, e.g. "8 Jun". */
-function shortDate(iso: string): string {
+function shortDate(iso: string, locale: string = "en"): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return new Intl.DateTimeFormat("en-US", { day: "numeric", month: "short" }).format(d);
+  return new Intl.DateTimeFormat(locale === "ar" ? "ar-EG" : "en-US", {
+    day: "numeric",
+    month: "short",
+  }).format(d);
 }
 
 /**
@@ -45,6 +49,9 @@ function shortDate(iso: string): string {
  * bundle until hydration.
  */
 export function HistoryChart({ data }: { data: HistoryPoint[] }) {
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
   // Pad the BSR domain a touch so the reversed line never clips the frame.
   const bsrDomain = useMemo<[number, number]>(() => {
     const vals = data.map((d) => d.bsr).filter((v): v is number => v != null);
@@ -55,31 +62,48 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
     return [Math.max(1, min - pad), max + pad];
   }, [data]);
 
-  // Non-visual summary: describe the BSR direction (start → end) and the price
-  // move so screen-reader users get the same takeaway as the chart line.
+  // Non-visual summary for screen readers
   const summary = useMemo(() => {
     const firstBsr = data.find((d) => d.bsr != null)?.bsr ?? null;
     const lastBsr = [...data].reverse().find((d) => d.bsr != null)?.bsr ?? null;
     const firstPrice = data.find((d) => d.price != null)?.price ?? null;
     const lastPrice = [...data].reverse().find((d) => d.price != null)?.price ?? null;
 
-    // A lower BSR is a better rank, so a falling number is an improvement.
+    if (isAr) {
+      let rankPart = "بيانات ترتيب الأكثر مبيعاً غير متاحة.";
+      if (firstBsr != null && lastBsr != null) {
+        const direction =
+          lastBsr < firstBsr ? "تحسّن" : lastBsr > firstBsr ? "تراجع" : "استقر";
+        rankPart = `ترتيب الأكثر مبيعاً ${direction} من ${formatRank(firstBsr)} إلى ${formatRank(lastBsr)}`;
+      }
+      let pricePart = "";
+      if (firstPrice != null && lastPrice != null) {
+        const direction =
+          lastPrice > firstPrice ? "ارتفع" : lastPrice < firstPrice ? "انخفض" : "استقر";
+        pricePart = `؛ السعر ${direction} من ${formatEgp(firstPrice)} إلى ${formatEgp(lastPrice)}`;
+      }
+      return `مخطط تاريخي بمحورين. ${rankPart}${pricePart}.`;
+    }
+
     let rankPart = "Best Seller Rank history is unavailable.";
     if (firstBsr != null && lastBsr != null) {
       const direction =
         lastBsr < firstBsr ? "improved" : lastBsr > firstBsr ? "declined" : "held steady";
       rankPart = `Best Seller Rank ${direction} from ${formatRank(firstBsr)} to ${formatRank(lastBsr)}`;
     }
-
     let pricePart = "";
     if (firstPrice != null && lastPrice != null) {
       const direction =
         lastPrice > firstPrice ? "rose" : lastPrice < firstPrice ? "fell" : "held";
       pricePart = `; price ${direction} from ${formatEgp(firstPrice)} to ${formatEgp(lastPrice)}`;
     }
-
     return `Dual-axis history chart. ${rankPart}${pricePart}.`;
-  }, [data]);
+  }, [data, isAr]);
+
+  const noData = isAr ? "لا بيانات" : "No data";
+  const bsrLabel = isAr ? "ترتيب الأكثر مبيعاً" : "Best Seller Rank";
+  const priceLabel = isAr ? "السعر (ج.م)" : "Price (EGP)";
+  const dateLabel = isAr ? "التاريخ" : "Date";
 
   return (
    <figure className="m-0" role="img" aria-label={summary}>
@@ -97,7 +121,7 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
 
         <XAxis
           dataKey="date"
-          tickFormatter={shortDate}
+          tickFormatter={(v) => shortDate(String(v), locale)}
           tickLine={false}
           axisLine={false}
           minTickGap={48}
@@ -133,14 +157,12 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
           cursor={{ strokeDasharray: "3 3" }}
           content={
             <ChartTooltipContent
-              labelFormatter={(value) => shortDate(String(value))}
+              labelFormatter={(value) => shortDate(String(value), locale)}
               formatter={(rawValue, name) => {
                 const value = Number(rawValue);
                 const isBsr = name === "bsr";
-                const label = isBsr ? "Best Seller Rank" : "Price";
-                const display = isBsr
-                  ? formatRank(value)
-                  : formatEgp(value);
+                const label = isBsr ? bsrLabel : priceLabel;
+                const display = isBsr ? formatRank(value) : formatEgp(value);
                 return (
                   <div className="flex w-full items-center justify-between gap-3">
                     <span className="flex items-center gap-1.5 text-muted-foreground">
@@ -198,17 +220,17 @@ export function HistoryChart({ data }: { data: HistoryPoint[] }) {
         <caption>{summary}</caption>
         <thead>
           <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Best Seller Rank</th>
-            <th scope="col">Price (EGP)</th>
+            <th scope="col">{dateLabel}</th>
+            <th scope="col">{bsrLabel}</th>
+            <th scope="col">{priceLabel}</th>
           </tr>
         </thead>
         <tbody>
           {data.map((point) => (
             <tr key={point.date}>
-              <th scope="row">{shortDate(point.date)}</th>
-              <td>{point.bsr != null ? formatRank(point.bsr) : "No data"}</td>
-              <td>{point.price != null ? formatEgp(point.price) : "No data"}</td>
+              <th scope="row">{shortDate(point.date, locale)}</th>
+              <td>{point.bsr != null ? formatRank(point.bsr) : noData}</td>
+              <td>{point.price != null ? formatEgp(point.price) : noData}</td>
             </tr>
           ))}
         </tbody>

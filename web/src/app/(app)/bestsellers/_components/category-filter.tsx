@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { CATEGORIES } from "@/lib/constants";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Horizontal category chip filter for the Best Sellers list. An "All" chip plus
@@ -23,6 +24,8 @@ export function CategoryFilter({
   active?: string;
 }) {
   const pathname = usePathname();
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
 
   const href = (nodeId?: string) => {
     const sp = new URLSearchParams();
@@ -41,7 +44,7 @@ export function CategoryFilter({
 
   return (
     <nav
-      aria-label="Filter best sellers by category"
+      aria-label={isAr ? "تصفية الأكثر مبيعاً حسب الفئة" : "Filter best sellers by category"}
       className="rounded-2xl border border-border/60 bg-card p-2 shadow-card"
     >
       <ul className="flex flex-wrap gap-1.5">
@@ -51,7 +54,7 @@ export function CategoryFilter({
             aria-current={active ? undefined : "page"}
             className={chipClass(!active)}
           >
-            All
+            {isAr ? "الكل" : "All"}
           </Link>
         </li>
         {CATEGORIES.map((c) => {
@@ -61,12 +64,15 @@ export function CategoryFilter({
               <Link
                 href={href(c.nodeId)}
                 aria-current={isActive ? "page" : undefined}
-                title={c.nameAr}
+                title={isAr ? c.nameEn : c.nameAr}
                 className={chipClass(isActive)}
               >
-                {c.nameEn}
-                <span dir="rtl" className="font-arabic text-[10px] opacity-70">
-                  {c.nameAr}
+                {isAr ? c.nameAr : c.nameEn}
+                <span
+                  dir={isAr ? "ltr" : "rtl"}
+                  className="font-arabic text-[10px] opacity-70"
+                >
+                  {isAr ? c.nameEn : c.nameAr}
                 </span>
               </Link>
             </li>

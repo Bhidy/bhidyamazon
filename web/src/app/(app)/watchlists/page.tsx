@@ -16,7 +16,20 @@ export default async function WatchlistsPage() {
 
   return (
     <>
-      <PageHeader title="Watchlists" description="Products you're tracking to source.">
+      <PageHeader
+        title={
+          <>
+            <span data-bi-en="">Watchlists</span>
+            <span data-bi-ar="">قوائم المتابعة</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">Products you&apos;re tracking to source.</span>
+            <span data-bi-ar="">المنتجات التي تتابعها للتوريد.</span>
+          </>
+        }
+      >
         <NewListButton />
       </PageHeader>
 
@@ -27,19 +40,30 @@ export default async function WatchlistsPage() {
               <Telescope className="size-6" />
             </div>
             <div className="space-y-1.5">
-              <CardTitle className="text-base">No products tracked yet</CardTitle>
+              <CardTitle className="text-base">
+                <span data-bi-en="">No products tracked yet</span>
+                <span data-bi-ar="">لا توجد منتجات متتبعة بعد</span>
+              </CardTitle>
               <CardDescription className="mx-auto max-w-sm">
-                Watch products to keep an eye on their rank, price, and demand over time —
-                then move on the ones worth sourcing. Start from the best-seller lists.
+                <span data-bi-en="">
+                  Watch products to keep an eye on their rank, price, and demand over time —
+                  then move on the ones worth sourcing. Start from the best-seller lists.
+                </span>
+                <span data-bi-ar="">
+                  تابع المنتجات لرصد ترتيبها وسعرها وطلبها بمرور الوقت —
+                  ثم تحرك نحو الأجدر بالتوريد. ابدأ من قوائم الأكثر مبيعاً.
+                </span>
               </CardDescription>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-2">
               <ButtonLink href="/bestsellers" size="sm">
                 <Compass className="size-4" />
-                Browse best sellers
+                <span data-bi-en="">Browse best sellers</span>
+                <span data-bi-ar="">تصفح الأكثر مبيعاً</span>
               </ButtonLink>
               <ButtonLink href="/products" variant="outline" size="sm">
-                Explore all products
+                <span data-bi-en="">Explore all products</span>
+                <span data-bi-ar="">استعرض كل المنتجات</span>
               </ButtonLink>
             </div>
           </CardContent>
@@ -49,11 +73,14 @@ export default async function WatchlistsPage() {
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Bookmark className="size-4 text-brand" />
             <span className="tabular-nums">
-              {items.length} {items.length === 1 ? "product" : "products"} tracked
+              <span data-bi-en="">
+                {items.length} {items.length === 1 ? "product" : "products"} tracked
+              </span>
+              <span data-bi-ar="">
+                {items.length} {items.length === 1 ? "منتج" : "منتجات"} متتبع
+              </span>
             </span>
           </div>
-
-
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((item) => (

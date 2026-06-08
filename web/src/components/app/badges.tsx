@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { DEMAND_BAND_META } from "@/lib/constants";
 import type { DemandBand } from "@/lib/types";
 
-// Tonal fills aligned to the Badge recipe (success / warning / brand / secondary).
 const TONE_CLS: Record<string, string> = {
   high: "text-positive bg-positive/12",
   medium: "text-confidence-medium bg-confidence-medium/15",
@@ -11,7 +10,7 @@ const TONE_CLS: Record<string, string> = {
   muted: "text-muted-foreground bg-secondary",
 };
 
-/** Relative-demand pill (within-category only — never a unit count). */
+/** Relative-demand pill — uses bilingual data attributes for instant CSS switching. */
 export function DemandBadge({ band, className }: { band: DemandBand; className?: string }) {
   const meta = DEMAND_BAND_META[band];
   return (
@@ -22,15 +21,12 @@ export function DemandBadge({ band, className }: { band: DemandBand; className?:
         className,
       )}
     >
-      {meta.labelEn}
+      <span data-bi-en="">{meta.labelEn}</span>
+      <span data-bi-ar="">{meta.labelAr}</span>
     </span>
   );
 }
 
-/**
- * Directional trend chip. `value` is a percentage; positive = up.
- * Pass `invert` when a lower raw number is better (e.g. BSR).
- */
 export function TrendIndicator({
   value,
   suffix = "%",

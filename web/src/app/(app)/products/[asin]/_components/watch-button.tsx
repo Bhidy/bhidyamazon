@@ -4,12 +4,8 @@ import { useState } from "react";
 import { Bookmark, BookmarkCheck } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/locale";
 
-/**
- * "Add to watchlist" toggle. The persistent watchlist will live in a Supabase
- * RLS table; for now this is an optimistic client-only toggle that confirms the
- * action with a toast (the global <Toaster /> is mounted in the root layout).
- */
 export function WatchButton({
   asin,
   title,
@@ -18,20 +14,22 @@ export function WatchButton({
   title: string;
 }) {
   const [watched, setWatched] = useState(false);
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
 
   function onClick() {
     const next = !watched;
     setWatched(next);
     if (next) {
-      toast.success("Added to watchlist", {
+      toast.success(isAr ? "أُضيف إلى قائمة المتابعة" : "Added to watchlist", {
         description: title,
         action: {
-          label: "Undo",
+          label: isAr ? "تراجع" : "Undo",
           onClick: () => setWatched(false),
         },
       });
     } else {
-      toast("Removed from watchlist", { description: title });
+      toast(isAr ? "أُزيل من قائمة المتابعة" : "Removed from watchlist", { description: title });
     }
   }
 
@@ -42,7 +40,11 @@ export function WatchButton({
       size="sm"
       onClick={onClick}
       aria-pressed={watched}
-      aria-label={watched ? `Remove ${title} from watchlist` : `Add ${title} to watchlist`}
+      aria-label={
+        watched
+          ? (isAr ? `إزالة ${title} من قائمة المتابعة` : `Remove ${title} from watchlist`)
+          : (isAr ? `إضافة ${title} إلى قائمة المتابعة` : `Add ${title} to watchlist`)
+      }
       data-asin={asin}
     >
       {watched ? (
@@ -50,7 +52,9 @@ export function WatchButton({
       ) : (
         <Bookmark className="size-4" />
       )}
-      {watched ? "Watching" : "Add to watchlist"}
+      {watched
+        ? (isAr ? "تتم المتابعة" : "Watching")
+        : (isAr ? "أضف للمتابعة" : "Add to watchlist")}
     </Button>
   );
 }

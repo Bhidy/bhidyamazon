@@ -14,11 +14,6 @@ import { MARKETPLACE } from "@/lib/constants";
 import { SearchBox } from "./_components/search-box";
 import { ProductCard } from "./_components/product-card";
 
-/**
- * Suggested starter queries. Each is verified to resolve against the seed
- * catalogue's naive substring/Arabic search so the chips never lead to a dead
- * zero-results screen.
- */
 const SUGGESTED_QUERIES: { label: string; lang: "en" | "ar" }[] = [
   { label: "earbuds", lang: "en" },
   { label: "charger", lang: "en" },
@@ -28,7 +23,6 @@ const SUGGESTED_QUERIES: { label: string; lang: "en" | "ar" }[] = [
   { label: "سماعات", lang: "ar" },
 ];
 
-/** Honest note: today search matches the tracked catalogue; live SERP scraping is a later upgrade. */
 function SerpProvenanceCaption() {
   return (
     <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
@@ -37,7 +31,8 @@ function SerpProvenanceCaption() {
         note={`Matches across products Rasid tracks on ${MARKETPLACE.domain}. Live ${MARKETPLACE.domain} SERP scraping is a later upgrade; results here come from the tracked catalogue.`}
       />
       <span>
-        Matches across products tracked on {MARKETPLACE.domain} — not a live ranked index.
+        <span data-bi-en="">Matches across products tracked on {MARKETPLACE.domain} — not a live ranked index.</span>
+        <span data-bi-ar="">نتائج من المنتجات التي تتتبعها رصيد على {MARKETPLACE.domain} — ليس فهرساً مباشراً.</span>
       </span>
     </p>
   );
@@ -54,7 +49,20 @@ export default async function SearchPage({
 
   return (
     <>
-      <PageHeader title="Search" description="Find any product on amazon.eg by name." />
+      <PageHeader
+        title={
+          <>
+            <span data-bi-en="">Search</span>
+            <span data-bi-ar="">بحث</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">Find any product on amazon.eg by name.</span>
+            <span data-bi-ar="">ابحث عن أي منتج في amazon.eg بالاسم.</span>
+          </>
+        }
+      />
 
       <Card className="gap-0">
         <CardContent className="p-4">
@@ -65,17 +73,19 @@ export default async function SearchPage({
         </CardContent>
       </Card>
 
-
-
       {!query ? (
         <Card className="gap-0">
           <CardHeader className="border-b pb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="size-4 text-brand" />
-              <CardTitle className="text-base">Start with a search</CardTitle>
+              <CardTitle className="text-base">
+                <span data-bi-en="">Start with a search</span>
+                <span data-bi-ar="">ابدأ بالبحث</span>
+              </CardTitle>
             </div>
             <CardDescription>
-              Type a product, brand, or keyword above — or try one of these.
+              <span data-bi-en="">Type a product, brand, or keyword above — or try one of these.</span>
+              <span data-bi-ar="">اكتب منتجاً أو علامة تجارية أو كلمة مفتاحية أعلاه — أو جرب أحد هذه.</span>
             </CardDescription>
           </CardHeader>
           <CardContent className="p-4">
@@ -105,12 +115,12 @@ export default async function SearchPage({
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium text-foreground">
-                No results for{" "}
-                <span className="font-semibold">&ldquo;{query}&rdquo;</span>
+                <span data-bi-en="">No results for <span className="font-semibold">&ldquo;{query}&rdquo;</span></span>
+                <span data-bi-ar="">لا نتائج لـ <span className="font-semibold">&rdquo;{query}&ldquo;</span></span>
               </p>
               <p className="max-w-md text-sm text-muted-foreground">
-                Nothing on amazon.eg matched that term. Check the spelling, try a
-                broader keyword, or search in Arabic.
+                <span data-bi-en="">Nothing on amazon.eg matched that term. Check the spelling, try a broader keyword, or search in Arabic.</span>
+                <span data-bi-ar="">لم يتطابق أي شيء في amazon.eg مع هذا المصطلح. تحقق من الإملاء، جرب كلمة أوسع، أو ابحث بالعربية.</span>
               </p>
             </div>
             <div className="mt-1 flex flex-wrap justify-center gap-2">
@@ -134,12 +144,20 @@ export default async function SearchPage({
         <section className="space-y-3">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-sm font-medium text-foreground">
-              <span className="tabular-nums">{results.length}</span>{" "}
-              {results.length === 1 ? "result" : "results"} for{" "}
-              <span className="font-semibold">&ldquo;{query}&rdquo;</span>
+              <span data-bi-en="">
+                <span className="tabular-nums">{results.length}</span>{" "}
+                {results.length === 1 ? "result" : "results"} for{" "}
+                <span className="font-semibold">&ldquo;{query}&rdquo;</span>
+              </span>
+              <span data-bi-ar="">
+                <span className="tabular-nums">{results.length}</span>{" "}
+                {results.length === 1 ? "نتيجة" : "نتائج"} لـ{" "}
+                <span className="font-semibold">&rdquo;{query}&ldquo;</span>
+              </span>
             </h2>
             <span className="text-xs text-muted-foreground">
-              Ranked as shown on {MARKETPLACE.domain}
+              <span data-bi-en="">Ranked as shown on {MARKETPLACE.domain}</span>
+              <span data-bi-ar="">مرتبة كما تظهر على {MARKETPLACE.domain}</span>
             </span>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

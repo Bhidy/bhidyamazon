@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDate, formatRelativeTime } from "@/lib/format";
+import { useLocale } from "@/lib/locale";
 
 /**
  * "Updated 3h ago" freshness chip. Renders an absolute date on the server and
@@ -12,19 +13,25 @@ import { formatDate, formatRelativeTime } from "@/lib/format";
 export function Freshness({
   iso,
   className,
-  label = "Updated",
+  label,
 }: {
   iso: string;
   className?: string;
   label?: string;
 }) {
   const [rel, setRel] = useState<string | null>(null);
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
   useEffect(() => {
     const tick = () => setRel(formatRelativeTime(iso, Date.now()));
     tick();
     const id = setInterval(tick, 60_000);
     return () => clearInterval(id);
   }, [iso]);
+
+  const defaultLabel = label ?? (isAr ? "تحديث" : "Updated");
+
   return (
     <span
       className={cn(
@@ -34,7 +41,7 @@ export function Freshness({
       title={formatDate(iso, "en", { dateStyle: "medium", timeStyle: "short" } as Intl.DateTimeFormatOptions)}
     >
       <Clock className="size-3.5 text-positive" />
-      {label} {rel ?? formatDate(iso)}
+      {defaultLabel} {rel ?? formatDate(iso)}
     </span>
   );
 }

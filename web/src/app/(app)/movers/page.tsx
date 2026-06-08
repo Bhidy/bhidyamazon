@@ -19,10 +19,15 @@ import { CategoryFilter } from "./_components/category-filter";
 
 const PERIODS = ["daily", "weekly", "monthly"];
 
-const PERIOD_WINDOW: Record<Period, string> = {
+const PERIOD_WINDOW_EN: Record<Period, string> = {
   daily: "the last day",
   weekly: "the last 7 days",
   monthly: "the last 30 days",
+};
+const PERIOD_WINDOW_AR: Record<Period, string> = {
+  daily: "اليوم الأخير",
+  weekly: "آخر 7 أيام",
+  monthly: "آخر 30 يوماً",
 };
 
 export default async function MoversPage({
@@ -37,16 +42,26 @@ export default async function MoversPage({
 
   const rows = getMovers({ categoryNode: category, period });
   const lastUpdated = getDashboardSummary(period).lastUpdated;
-  const categoryName = category ? CATEGORY_BY_NODE[category]?.nameEn : undefined;
+  const categoryNameEn = category ? CATEGORY_BY_NODE[category]?.nameEn : undefined;
+  const categoryNameAr = category ? CATEGORY_BY_NODE[category]?.nameAr : undefined;
 
-  // Preserve the active category when the period tabs navigate.
   const periodParams = category ? { category } : undefined;
 
   return (
     <>
       <PageHeader
-        title="Movers & Shakers"
-        description="Products climbing the ranks on amazon.eg — sorted by how fast their Best Seller Rank is improving, not by absolute position."
+        title={
+          <>
+            <span data-bi-en="">Movers &amp; Shakers</span>
+            <span data-bi-ar="">الأكثر صعوداً</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">Products climbing the ranks on amazon.eg — sorted by how fast their Best Seller Rank is improving, not by absolute position.</span>
+            <span data-bi-ar="">المنتجات التي تتصاعد في amazon.eg — مرتبة بحسب سرعة تحسن ترتيب الأكثر مبيعاً، لا بالموضع المطلق.</span>
+          </>
+        }
       >
         <PeriodTabs value={period} params={periodParams} />
       </PageHeader>
@@ -55,8 +70,6 @@ export default async function MoversPage({
         <CategoryFilter value={category} period={period} />
         <Freshness iso={lastUpdated} />
       </div>
-
-
 
       <Card className="gap-0">
         <CardHeader className="border-b border-border/60 pb-4">
@@ -69,10 +82,21 @@ export default async function MoversPage({
                 <TrendingUp className="size-4.5" />
               </span>
               <CardTitle className="truncate text-base font-semibold">
-                {categoryName ? `${categoryName} — rising now` : "Rising now"}
+                {categoryNameEn ? (
+                  <>
+                    <span data-bi-en="">{categoryNameEn} — rising now</span>
+                    <span data-bi-ar="">{categoryNameAr} — الصاعدة الآن</span>
+                  </>
+                ) : (
+                  <>
+                    <span data-bi-en="">Rising now</span>
+                    <span data-bi-ar="">الصاعدة الآن</span>
+                  </>
+                )}
               </CardTitle>
               <span className="text-xs font-medium text-positive">
-                Biggest rank gains
+                <span data-bi-en="">Biggest rank gains</span>
+                <span data-bi-ar="">أكبر مكاسب في الترتيب</span>
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -81,17 +105,25 @@ export default async function MoversPage({
                 note="Ranked by Δlog(BSR) over the period — a relative velocity signal, not a units-sold count."
               />
               <Badge variant="success" className="tabular-nums">
-                {rows.length} rising
+                <span data-bi-en="">{rows.length} rising</span>
+                <span data-bi-ar="">{rows.length} صاعد</span>
               </Badge>
             </div>
           </div>
           <CardDescription className="flex items-start gap-1.5">
             <Activity className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
             <span>
-              &ldquo;Rising&rdquo; means improving rank velocity over{" "}
-              {PERIOD_WINDOW[period]} — the change in log Best Seller Rank
-              (Δlog&nbsp;BSR). It is the most defensible signal we ship: it
-              measures direction and pace of movement, never exact sales.
+              <span data-bi-en="">
+                &ldquo;Rising&rdquo; means improving rank velocity over{" "}
+                {PERIOD_WINDOW_EN[period]} — the change in log Best Seller Rank
+                (Δlog&nbsp;BSR). It is the most defensible signal we ship: it
+                measures direction and pace of movement, never exact sales.
+              </span>
+              <span data-bi-ar="">
+                &rdquo;الصاعد&ldquo; يعني تحسن سرعة الترتيب خلال {PERIOD_WINDOW_AR[period]} —
+                التغير في لوغاريتم ترتيب الأكثر مبيعاً (Δlog BSR). وهو أكثر إشارة موثوقة
+                نقدمها: يقيس اتجاه الحركة وسرعتها، لا المبيعات الفعلية.
+              </span>
             </span>
           </CardDescription>
         </CardHeader>
@@ -102,13 +134,21 @@ export default async function MoversPage({
             <div className="flex flex-col items-center gap-1.5 px-2 py-12 text-center">
               <TrendingUp className="size-6 text-muted-foreground/60" />
               <p className="text-sm font-medium text-foreground">
-                Nothing is rising in this window
+                <span data-bi-en="">Nothing is rising in this window</span>
+                <span data-bi-ar="">لا شيء يصعد في هذه الفترة</span>
               </p>
               <p className="max-w-sm text-xs text-muted-foreground">
-                No tracked
-                {categoryName ? ` ${categoryName} ` : " "}
-                product improved its rank over {PERIOD_WINDOW[period]}. Try a
-                longer period or a different category.
+                <span data-bi-en="">
+                  No tracked
+                  {categoryNameEn ? ` ${categoryNameEn} ` : " "}
+                  product improved its rank over {PERIOD_WINDOW_EN[period]}. Try a
+                  longer period or a different category.
+                </span>
+                <span data-bi-ar="">
+                  لم يتحسن ترتيب أي منتج متتبع
+                  {categoryNameAr ? ` في ${categoryNameAr} ` : " "}
+                  خلال {PERIOD_WINDOW_AR[period]}. جرب فترة أطول أو فئة مختلفة.
+                </span>
               </p>
             </div>
           )}

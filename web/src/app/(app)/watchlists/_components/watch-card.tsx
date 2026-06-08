@@ -15,10 +15,13 @@ import { formatEgp, formatRank, formatDate } from "@/lib/format";
 import { DISCLOSURE } from "@/lib/constants";
 import type { WatchlistItem } from "@/lib/types";
 import { RemoveButton } from "./remove-button";
+import { useLocale } from "@/lib/locale";
 
 /** One tracked product, rendered as a card. Removable (optimistic, client-only). */
 export function WatchCard({ item }: { item: WatchlistItem }) {
   const [removed, setRemoved] = useState(false);
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
   const p = item.product;
 
   if (removed) return null;
@@ -65,7 +68,7 @@ export function WatchCard({ item }: { item: WatchlistItem }) {
       <CardFooter className="justify-between">
         <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
           <CalendarPlus className="size-3.5" />
-          Added {formatDate(item.addedAt)}
+          {isAr ? "أُضيف" : "Added"} {formatDate(item.addedAt)}
         </span>
         <RemoveButton
           title={p.titleEn}

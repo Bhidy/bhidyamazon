@@ -18,18 +18,12 @@ import { LangFilter } from "./_components/lang-filter";
 const LANGS = ["all", "en", "ar"] as const;
 type LangScope = (typeof LANGS)[number];
 
-/**
- * Ordinal prominence tier derived from how high the term sits in Amazon's
- * autocomplete list (demandScore is a position re-encoding, NOT a magnitude).
- * Top = appears at the very top of suggestions; lower tiers sit further down.
- * Deliberately a WORD, so the value can never be read as a demand quantity.
- */
 function prominenceTier(
   score: number,
-): { label: string; variant: "brand" | "secondary" } {
-  if (score >= 100) return { label: "Top", variant: "brand" };
-  if (score >= 84) return { label: "High", variant: "secondary" };
-  return { label: "Medium", variant: "secondary" };
+): { labelEn: string; labelAr: string; variant: "brand" | "secondary" } {
+  if (score >= 100) return { labelEn: "Top", labelAr: "الأول", variant: "brand" };
+  if (score >= 84) return { labelEn: "High", labelAr: "مرتفع", variant: "secondary" };
+  return { labelEn: "Medium", labelAr: "متوسط", variant: "secondary" };
 }
 
 export default async function KeywordsPage({
@@ -40,14 +34,23 @@ export default async function KeywordsPage({
   const sp = await searchParams;
   const lang = (LANGS.includes(sp.lang as LangScope) ? sp.lang : "all") as LangScope;
 
-  // getKeywords returns rows already sorted desc by demandScore.
   const keywords = getKeywords({ lang: lang === "all" ? undefined : lang });
 
   return (
     <>
       <PageHeader
-        title="Demand Radar"
-        description="How prominently amazon.eg suggests each term in search autocomplete — an ordinal prominence signal, not search volume or demand quantity."
+        title={
+          <>
+            <span data-bi-en="">Demand Radar</span>
+            <span data-bi-ar="">رادار الطلب</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">How prominently amazon.eg suggests each term in search autocomplete — an ordinal prominence signal, not search volume or demand quantity.</span>
+            <span data-bi-ar="">مدى بروز كل مصطلح في الإكمال التلقائي لـ amazon.eg — إشارة بروز ترتيبية، لا حجم بحث أو كمية طلب.</span>
+          </>
+        }
       >
         <LangFilter value={lang} />
       </PageHeader>
@@ -58,10 +61,18 @@ export default async function KeywordsPage({
             <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent text-brand-foreground">
               <Radar className="size-4" />
             </span>
-            <CardTitle className="text-base">Tracked keywords</CardTitle>
+            <CardTitle className="text-base">
+              <span data-bi-en="">Tracked keywords</span>
+              <span data-bi-ar="">الكلمات المفتاحية المتتبعة</span>
+            </CardTitle>
           </div>
           <span className="text-xs text-muted-foreground tabular-nums">
-            {keywords.length} {keywords.length === 1 ? "term" : "terms"}
+            <span data-bi-en="">
+              {keywords.length} {keywords.length === 1 ? "term" : "terms"}
+            </span>
+            <span data-bi-ar="">
+              {keywords.length} {keywords.length === 1 ? "مصطلح" : "مصطلحات"}
+            </span>
           </span>
         </CardHeader>
         <CardContent className="p-0">
@@ -70,13 +81,21 @@ export default async function KeywordsPage({
               <TableHeader>
                 <TableRow className="border-b hover:bg-transparent [&>th]:h-9 [&>th]:text-[0.6875rem] [&>th]:font-medium [&>th]:uppercase [&>th]:tracking-wide [&>th]:text-muted-foreground">
                   <TableHead className="w-10 pl-4 text-end">#</TableHead>
-                  <TableHead>Keyword</TableHead>
-                  <TableHead className="w-[34%] min-w-52">
-                    Autocomplete prominence
+                  <TableHead>
+                    <span data-bi-en="">Keyword</span>
+                    <span data-bi-ar="">الكلمة المفتاحية</span>
                   </TableHead>
-                  <TableHead>Trend</TableHead>
+                  <TableHead className="w-[34%] min-w-52">
+                    <span data-bi-en="">Autocomplete prominence</span>
+                    <span data-bi-ar="">بروز الإكمال التلقائي</span>
+                  </TableHead>
+                  <TableHead>
+                    <span data-bi-en="">Trend</span>
+                    <span data-bi-ar="">الاتجاه</span>
+                  </TableHead>
                   <TableHead className="pr-4 text-end">
-                    Appearances
+                    <span data-bi-en="">Appearances</span>
+                    <span data-bi-ar="">الظهورات</span>
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -110,7 +129,7 @@ export default async function KeywordsPage({
                                 aria-valuenow={k.demandScore}
                                 aria-valuemin={0}
                                 aria-valuemax={100}
-                                aria-label={`Autocomplete prominence: ${tier.label} (rank signal, not search volume)`}
+                                aria-label={`Autocomplete prominence: ${tier.labelEn} (rank signal, not search volume)`}
                               >
                                 <div
                                   className="h-full rounded-full bg-brand"
@@ -121,7 +140,8 @@ export default async function KeywordsPage({
                                 variant={tier.variant}
                                 className="w-16 justify-center"
                               >
-                                {tier.label}
+                                <span data-bi-en="">{tier.labelEn}</span>
+                                <span data-bi-ar="">{tier.labelAr}</span>
                               </Badge>
                             </div>
                           );
@@ -143,17 +163,18 @@ export default async function KeywordsPage({
               <span className="flex size-11 items-center justify-center rounded-full bg-muted text-muted-foreground">
                 <SearchX className="size-5" />
               </span>
-              <p className="text-sm font-medium">No keywords in this language</p>
+              <p className="text-sm font-medium">
+                <span data-bi-en="">No keywords in this language</span>
+                <span data-bi-ar="">لا توجد كلمات مفتاحية بهذه اللغة</span>
+              </p>
               <p className="max-w-sm text-xs text-muted-foreground">
-                No autocomplete terms surfaced for the selected language scope. Try
-                widening to all languages.
+                <span data-bi-en="">No autocomplete terms surfaced for the selected language scope. Try widening to all languages.</span>
+                <span data-bi-ar="">لم تظهر أي مصطلحات إكمال تلقائي لنطاق اللغة المحدد. جرب التوسيع إلى جميع اللغات.</span>
               </p>
             </div>
           )}
         </CardContent>
       </Card>
-
-
     </>
   );
 }

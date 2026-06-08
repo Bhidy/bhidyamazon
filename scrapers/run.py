@@ -16,6 +16,7 @@ import parse
 
 # amazon.eg slug -> app categoryNode (web/src/lib/constants.ts)
 CATEGORIES = [
+    ("automotive", "automotive"),
     ("electronics", "electronics"),
     ("beauty", "beauty"),
     ("home", "home"),
@@ -25,12 +26,22 @@ CATEGORIES = [
     ("baby-products", "baby"),
     ("health", "health"),
 ]
+# The Opportunity Finder's target niche — scraped wider + enriched deeper so the
+# winning-product score has real size/weight/material signal, not just gated rows.
+TARGET_NICHE = "automotive"
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "web" / "src" / "data" / "real"
 TOP_N = 15
-ENRICH_PER_CAT = 2
-ENRICH_MAX = 8
-SCHEMA_VERSION = 2
+TOP_N_NICHE = 30
+# Enrichment depth is BACKEND-AWARE. Local residential (RASID_FETCH=direct) has no
+# API budget, so it enriches deeply. The cloud cron uses Firecrawl (~1 credit/page,
+# 1,000/mo free tier), so it stays lean to keep monthly usage under budget:
+#   firecrawl ≈ 9 cats × 2 (en+ar) = 18 list + 12 enrich = 30/day ≈ 900/mo < 1,000.
+_FIRECRAWL = os.environ.get("RASID_FETCH", "direct").lower() == "firecrawl"
+ENRICH_PER_CAT = 1 if _FIRECRAWL else 2
+ENRICH_NICHE = 10 if _FIRECRAWL else 16
+ENRICH_MAX = 12 if _FIRECRAWL else 30
+SCHEMA_VERSION = 3
 
 
 def _write_atomic(name: str, obj: dict) -> None:
@@ -96,7 +107,7 @@ def main() -> None:
         if len(rows) < 5:  # fill-rate guard: markup changed or empty
             print(f"  [WARN] {slug}: only {len(rows)} parsed — skipping.", flush=True)
             continue
-        rows = rows[:TOP_N]
+        rows = rows[: (TOP_N_NICHE if node == TARGET_NICHE else TOP_N)]
         # Arabic title pass (join on ASIN) — EN and AR stored independently.
         ar_titles: dict[str, str] = {}
         try:
@@ -110,7 +121,7 @@ def main() -> None:
             r["title_ar"] = ar_titles.get(r["asin"])
         bestsellers[node] = rows
         all_rows.extend(rows)
-        enrich.extend(r["asin"] for r in rows[:ENRICH_PER_CAT])
+        enrich.extend(r["asin"] for r in rows[: (ENRICH_NICHE if node == TARGET_NICHE else ENRICH_PER_CAT)])
         priced = sum(1 for r in rows if r["price_egp"] is not None)
         titled = sum(1 for r in rows if r["title"])
         parsed_count = len(rows)

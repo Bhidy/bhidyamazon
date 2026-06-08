@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/locale";
 
 const LANGS = [
-  { k: "all", l: "All", labelAr: undefined },
-  { k: "en", l: "English", labelAr: undefined },
-  { k: "ar", l: "العربية", labelAr: "ar" },
+  { k: "all", en: "All", ar: "الكل" },
+  { k: "en", en: "English", ar: "English" },
+  { k: "ar", en: "العربية", ar: "العربية" },
 ] as const;
 
 /**
@@ -23,6 +24,9 @@ export function LangFilter({
   params?: Record<string, string>;
 }) {
   const pathname = usePathname();
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
   const href = (k: string) => {
     const sp = new URLSearchParams({ ...params, lang: k });
     return `${pathname}?${sp.toString()}`;
@@ -31,7 +35,7 @@ export function LangFilter({
     <div
       className="inline-flex rounded-full border border-border bg-muted/60 p-1"
       role="tablist"
-      aria-label="Filter keywords by language"
+      aria-label={isAr ? "تصفية الكلمات المفتاحية حسب اللغة" : "Filter keywords by language"}
     >
       {LANGS.map((opt) => (
         <Link
@@ -39,16 +43,15 @@ export function LangFilter({
           href={href(opt.k)}
           role="tab"
           aria-selected={value === opt.k}
-          dir={opt.labelAr ? "rtl" : undefined}
+          dir={opt.k === "ar" ? "rtl" : undefined}
           className={cn(
             "rounded-full px-3.5 py-1 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-            opt.labelAr && "font-arabic",
             value === opt.k
               ? "bg-card text-foreground shadow-card"
               : "text-muted-foreground hover:text-foreground",
           )}
         >
-          {opt.l}
+          {isAr ? opt.ar : opt.en}
         </Link>
       ))}
     </div>

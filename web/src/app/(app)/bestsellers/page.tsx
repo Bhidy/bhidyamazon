@@ -19,10 +19,15 @@ import { CategoryFilter } from "./_components/category-filter";
 
 const PERIODS = ["daily", "weekly", "monthly"];
 
-const PERIOD_LABEL: Record<Period, string> = {
+const PERIOD_LABEL_EN: Record<Period, string> = {
   daily: "today",
   weekly: "this week",
   monthly: "this month",
+};
+const PERIOD_LABEL_AR: Record<Period, string> = {
+  daily: "اليوم",
+  weekly: "هذا الأسبوع",
+  monthly: "هذا الشهر",
 };
 
 export default async function BestSellersPage({
@@ -33,24 +38,32 @@ export default async function BestSellersPage({
   const sp = await searchParams;
 
   const period = (PERIODS.includes(sp.period ?? "") ? sp.period : "daily") as Period;
-  // A valid category is a known CATEGORIES nodeId; anything else means "all".
   const category =
     sp.category && CATEGORY_BY_NODE[sp.category] ? sp.category : undefined;
 
   const rows = getBestSellers({ categoryNode: category, period });
   const activeCategory = category ? CATEGORY_BY_NODE[category] : undefined;
 
-  // Freshness: prefer the snapshot time on a returned product; fall back to the
-  // dashboard's last-updated marker when the (filtered) list is empty.
   const freshnessIso = rows[0]?.product.lastSeenAt ?? getDashboardSummary(period).lastUpdated;
 
-  const scopeLabel = activeCategory ? activeCategory.nameEn : "all categories";
+  const scopeLabelEn = activeCategory ? activeCategory.nameEn : "all categories";
+  const scopeLabelAr = activeCategory ? activeCategory.nameAr : "جميع الفئات";
 
   return (
     <>
       <PageHeader
-        title="Best Sellers"
-        description="The highest-ranking products on amazon.eg by Best Seller Rank — tracked over time and labelled as relative, not exact, signals."
+        title={
+          <>
+            <span data-bi-en="">Best Sellers</span>
+            <span data-bi-ar="">الأكثر مبيعاً</span>
+          </>
+        }
+        description={
+          <>
+            <span data-bi-en="">The highest-ranking products on amazon.eg by Best Seller Rank — tracked over time and labelled as relative, not exact, signals.</span>
+            <span data-bi-ar="">أعلى المنتجات ترتيباً في amazon.eg حسب ترتيب الأكثر مبيعاً — متتبع بمرور الوقت ومُصنَّف كمؤشرات نسبية.</span>
+          </>
+        }
       >
         <PeriodTabs value={period} params={category ? { category } : {}} />
       </PageHeader>
@@ -58,11 +71,10 @@ export default async function BestSellersPage({
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/60 bg-card px-4 py-2.5 shadow-card">
         <Freshness iso={freshnessIso} />
         <span className="text-xs text-muted-foreground">
-          Ranked best sellers across {scopeLabel} · {PERIOD_LABEL[period]}
+          <span data-bi-en="">Ranked best sellers across {scopeLabelEn} · {PERIOD_LABEL_EN[period]}</span>
+          <span data-bi-ar="">أفضل المنتجات مبيعاً في {scopeLabelAr} · {PERIOD_LABEL_AR[period]}</span>
         </span>
       </div>
-
-
 
       <CategoryFilter period={period} active={category} />
 
@@ -76,12 +88,14 @@ export default async function BestSellersPage({
               <Trophy className="size-4.5" />
             </span>
             <CardTitle className="truncate text-base font-semibold">
-              {activeCategory ? activeCategory.nameEn : "All categories"}
+              <span data-bi-en="">{activeCategory ? activeCategory.nameEn : "All categories"}</span>
+              <span data-bi-ar="">{activeCategory ? activeCategory.nameAr : "جميع الفئات"}</span>
             </CardTitle>
             {activeCategory && (
               <span
                 dir="rtl"
                 className="truncate font-arabic text-sm text-muted-foreground"
+                data-bi-en=""
               >
                 {activeCategory.nameAr}
               </span>
@@ -92,7 +106,8 @@ export default async function BestSellersPage({
             />
           </div>
           <Badge variant="secondary" className="shrink-0 tabular-nums">
-            {formatNumber(rows.length)} {rows.length === 1 ? "product" : "products"}
+            <span data-bi-en="">{formatNumber(rows.length)} {rows.length === 1 ? "product" : "products"}</span>
+            <span data-bi-ar="">{formatNumber(rows.length)} {rows.length === 1 ? "منتج" : "منتجات"}</span>
           </Badge>
         </CardHeader>
         <CardContent className="p-2">
@@ -107,11 +122,12 @@ export default async function BestSellersPage({
                 <Trophy className="size-6" />
               </span>
               <p className="mt-4 text-sm font-semibold text-foreground">
-                No best sellers in {scopeLabel}
+                <span data-bi-en="">No best sellers in {scopeLabelEn}</span>
+                <span data-bi-ar="">لا يوجد أفضل منتجات مبيعاً في {scopeLabelAr}</span>
               </p>
               <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">
-                We have not tracked ranked products for this category yet. Try
-                another category or switch the period.
+                <span data-bi-en="">We have not tracked ranked products for this category yet. Try another category or switch the period.</span>
+                <span data-bi-ar="">لم نتتبع منتجات مرتبة في هذه الفئة بعد. جرب فئة أخرى أو غيّر الفترة الزمنية.</span>
               </p>
             </div>
           )}

@@ -12,6 +12,7 @@ import {
   Radar,
   Search,
   Settings,
+  Target,
   TrendingUp,
   Trophy,
   type LucideIcon,
@@ -29,6 +30,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NAV_GROUPS } from "@/lib/constants";
+import { useLocale } from "@/lib/locale";
 
 const ICONS: Record<string, LucideIcon> = {
   LayoutDashboard,
@@ -41,12 +43,16 @@ const ICONS: Record<string, LucideIcon> = {
   Bookmark,
   Bell,
   Settings,
+  Target,
 };
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" side={isAr ? "right" : "left"}>
       <SidebarHeader className="gap-3 p-3">
         <Link
           href="/"
@@ -58,7 +64,9 @@ export function AppSidebar() {
           </div>
           <div className="grid leading-tight group-data-[collapsible=icon]:hidden">
             <span className="text-sm font-bold tracking-tight">Rasid</span>
-            <span className="text-[11px] text-muted-foreground">amazon.eg radar</span>
+            <span className="text-[11px] text-muted-foreground">
+              {isAr ? "رادار amazon.eg" : "amazon.eg radar"}
+            </span>
           </div>
         </Link>
       </SidebarHeader>
@@ -66,7 +74,7 @@ export function AppSidebar() {
         {NAV_GROUPS.map((group) => (
           <SidebarGroup key={group.labelEn}>
             <SidebarGroupLabel className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              {group.labelEn}
+              {isAr ? group.labelAr : group.labelEn}
             </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu className="gap-1">
@@ -81,11 +89,11 @@ export function AppSidebar() {
                       <SidebarMenuButton
                         render={<Link href={item.href} />}
                         isActive={active}
-                        tooltip={item.labelEn}
+                        tooltip={isAr ? item.labelAr : item.labelEn}
                         className="rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground data-active:bg-sidebar-accent data-active:font-semibold data-active:text-sidebar-accent-foreground"
                       >
                         <Icon />
-                        <span>{item.labelEn}</span>
+                        <span>{isAr ? item.labelAr : item.labelEn}</span>
                         {active ? (
                           <span
                             className="ms-auto size-1.5 rounded-full bg-brand group-data-[collapsible=icon]:hidden"

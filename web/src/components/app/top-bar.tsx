@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Languages, Search, Settings } from "lucide-react";
@@ -8,22 +8,11 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/locale";
 
 function LocaleToggle() {
-  const [locale, setLocale] = useState<"en" | "ar">("en");
-  useEffect(() => {
-    const saved = (localStorage.getItem("rasid.locale") as "en" | "ar") ?? "en";
-    setLocale(saved);
-    document.documentElement.lang = saved;
-    document.documentElement.dir = saved === "ar" ? "rtl" : "ltr";
-  }, []);
-  const toggle = () => {
-    const next = locale === "en" ? "ar" : "en";
-    setLocale(next);
-    localStorage.setItem("rasid.locale", next);
-    document.documentElement.lang = next;
-    document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
-  };
+  const { locale, setLocale } = useLocale();
+  const toggle = () => setLocale(locale === "en" ? "ar" : "en");
   return (
     <Button variant="ghost" size="sm" onClick={toggle} className="gap-1.5" aria-label="Toggle language">
       <Languages className="size-4" />
@@ -34,7 +23,9 @@ function LocaleToggle() {
 
 export function TopBar() {
   const router = useRouter();
+  const { locale } = useLocale();
   const [q, setQ] = useState("");
+  const isAr = locale === "ar";
   return (
     <header className="sticky top-0 z-20 flex h-16 items-center gap-2 border-b border-border/60 bg-background/80 px-3 backdrop-blur-md md:px-4">
       <SidebarTrigger />
@@ -50,9 +41,10 @@ export function TopBar() {
         <Input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search any amazon.eg product…"
+          placeholder={isAr ? "ابحث عن أي منتج في amazon.eg…" : "Search any amazon.eg product…"}
           className="h-10 rounded-full border-transparent bg-muted/60 ps-9.5 shadow-none focus-visible:bg-card"
-          aria-label="Search products"
+          aria-label={isAr ? "بحث المنتجات" : "Search products"}
+          dir={isAr ? "rtl" : "ltr"}
         />
       </form>
       <div className="ms-auto flex items-center gap-1.5">
@@ -62,7 +54,7 @@ export function TopBar() {
           size="icon-sm"
           nativeButton={false}
           render={<Link href="/settings" />}
-          aria-label="Settings"
+          aria-label={isAr ? "الإعدادات" : "Settings"}
         >
           <Settings className="size-4" />
         </Button>

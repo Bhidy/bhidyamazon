@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/locale";
 
 const PERIODS = [
-  { k: "daily", l: "Daily" },
-  { k: "weekly", l: "Weekly" },
-  { k: "monthly", l: "Monthly" },
+  { k: "daily", en: "Daily", ar: "يومي" },
+  { k: "weekly", en: "Weekly", ar: "أسبوعي" },
+  { k: "monthly", en: "Monthly", ar: "شهري" },
 ] as const;
 
 /**
@@ -22,6 +23,9 @@ export function PeriodTabs({
   params?: Record<string, string>;
 }) {
   const pathname = usePathname();
+  const { locale } = useLocale();
+  const isAr = locale === "ar";
+
   const href = (k: string) => {
     const sp = new URLSearchParams({ ...params, period: k });
     return `${pathname}?${sp.toString()}`;
@@ -41,7 +45,7 @@ export function PeriodTabs({
               : "text-muted-foreground hover:text-foreground",
           )}
         >
-          {p.l}
+          {isAr ? p.ar : p.en}
         </Link>
       ))}
     </div>
