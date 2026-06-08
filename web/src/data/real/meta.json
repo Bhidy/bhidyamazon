@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "scraped_at": "2026-06-08T09:32:55.251153+00:00",
+  "scraped_at": "2026-06-08T11:52:25.860327+00:00",
   "categories": [
     "electronics",
     "beauty",
@@ -13,5 +13,61 @@
   ],
   "product_count": 120,
   "enriched": 8,
-  "source": "amazon.eg direct (residential)"
+  "source": "amazon.eg via firecrawl",
+  "health": {
+    "categories_ok": 8,
+    "categories_degraded": [],
+    "min_title_fill": 100.0,
+    "total_products": 120,
+    "per_category": {
+      "electronics": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
+        "degraded": false
+      },
+      "beauty": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
+        "degraded": false
+      },
+      "home": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
+        "degraded": false
+      },
+      "fashion": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 93.3,
+        "degraded": false
+      },
+      "toys": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
+        "degraded": false
+      },
+      "grocery": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 93.3,
+        "degraded": false
+      },
+      "baby": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
+        "degraded": false
+      },
+      "health": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
+        "degraded": false
+      }
+    }
+  }
 }

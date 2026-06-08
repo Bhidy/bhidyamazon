@@ -1,6 +1,7 @@
 {
-  "scraped_at": "2026-06-08T09:38:45.035655+00:00",
+  "scraped_at": "2026-06-08T11:57:45.877926+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
+  "signal": "autocomplete_prominence_ordinal",
   "keywords": [
     {
       "query": "earbuds",
