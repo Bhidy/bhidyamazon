@@ -106,11 +106,29 @@ data source can change without touching a single screen.
 
 ### Operational endpoints
 
-- `GET /api/health` — readiness probe. Reads `web/src/data/real/meta.json` and
-  returns `{ status, scrapedAt, productCount, categories }`. Reports `ok` when the
-  dataset is present (and serving real data) or `degraded` (HTTP 503) when the
-  manifest is missing and the app is on seed-fallback — suitable for uptime
-  monitors and the deploy gate.
+- `GET /api/health` — readiness probe. Reads `web/src/data/real/meta.json` plus
+  the schema-rejection reasons collected by the data layer, and returns
+  `{ status, scrapedAt, productCount, categories, issues }`. Reports `ok` when
+  the dataset is present and valid, or `degraded` (HTTP 503) when the manifest
+  is missing **or a core data file failed schema validation** — suitable for
+  uptime monitors and the deploy gate.
+
+### Data trust boundary
+
+Every scraped JSON file is validated against an explicit contract
+(`web/src/lib/real-schema.ts`) in three places: at read time (an invalid file is
+rejected and the app falls back to seed, with the reason surfaced via
+`/api/health`), in CI on every push, and in the daily workflow **before** the
+refreshed data is committed. A drifted scraper output fails the run instead of
+reaching the UI.
+
+### User-owned data (watchlist & alerts)
+
+The watchlist and alert rules are real, persistent client-side stores
+(`localStorage`, per device — `web/src/lib/watchlist-store.tsx`,
+`alerts-store.tsx`). Alert rules capture a baseline snapshot at creation and are
+evaluated **on view** against the latest daily snapshot — the UI says exactly
+that; nothing pretends to be a real-time notification engine.
 
 ### Security headers
 
@@ -133,10 +151,16 @@ machine to keep awake — see `.github/workflows/scrape-and-deploy.yml`:
 2. It scrapes amazon.eg **through Firecrawl** (datacenter/CI IPs get `503` from
    amazon.eg, so the request is proxied with country = EG; ~1 credit/page, well
    within the free tier) and refreshes the demand keywords.
-3. Changed JSON under `web/src/data/real/` is **committed back to the repo**, giving
+3. The refreshed JSON must pass the **schema gate** (same validators the app
+   enforces) before anything is committed; keyword-refresh failures open a
+   deduped tracking issue instead of passing silently.
+4. Changed JSON under `web/src/data/real/` is **committed back to the repo**, giving
    an append-only data history.
-4. The workflow **deploys to Vercel (production)**, so the live site always reflects
+5. The workflow **deploys to Vercel (production)**, so the live site always reflects
    the latest Egypt data.
+6. A separate **freshness watchdog** (`data-freshness.yml`) checks the committed
+   timestamps every evening and opens an issue if the core data exceeds 36h or
+   keywords exceed 72h.
 
 A local/residential cron (`scrapers/run_daily.sh`, launchd plist) is an
 alternative for running the scrape from a home IP. Either way the guardrails below

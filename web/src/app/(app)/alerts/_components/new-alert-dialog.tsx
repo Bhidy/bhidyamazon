@@ -25,12 +25,21 @@ import {
 } from "@/components/ui/select";
 import type { AlertRule } from "@/lib/types";
 import { useLocale } from "@/lib/locale";
+import { useAlerts, type StoredAlert } from "@/lib/alerts-store";
 
-/** Minimal product shape needed to populate the picker (passed from the server). */
+/**
+ * Product shape for the picker (passed from the server). The fact fields are
+ * today's scraped values — captured as the rule's BASELINE at creation time so
+ * evaluation later compares two real observations.
+ */
 export interface AlertProductOption {
   asin: string;
   titleEn: string;
   titleAr?: string;
+  priceEgp?: number;
+  bsr?: number;
+  rating?: number;
+  inStock?: boolean;
 }
 
 const RULES: {
@@ -80,12 +89,13 @@ function thresholdKind(rule: AlertRule): "pct" | "window" | "none" {
 }
 
 /**
- * "New alert" dialog. Persisting alerts will be a Supabase RLS write; for now
- * this validates the form locally and confirms the (stubbed) creation with a
- * toast. The threshold control adapts to the chosen rule so the captured shape
- * mirrors the real `Alert.threshold` union (e.g. { pct } vs { window }).
+ * "New alert" dialog. Saves the rule to the persistent alerts store
+ * (localStorage, see lib/alerts-store.tsx) together with a baseline snapshot of
+ * the product's current facts. The threshold control adapts to the chosen rule
+ * so the captured shape mirrors `StoredAlert.threshold` ({ pct } vs { window }).
  */
 export function NewAlertDialog({ products }: { products: AlertProductOption[] }) {
+  const { add } = useAlerts();
   const [open, setOpen] = useState(false);
   const [asin, setAsin] = useState<string>("");
   const [rule, setRule] = useState<AlertRule>("price_drop");
@@ -127,6 +137,27 @@ export function NewAlertDialog({ products }: { products: AlertProductOption[] })
         return;
       }
     }
+    const threshold: Record<string, number | string> =
+      kind === "pct" ? { pct: Number(pct) } : kind === "window" ? { window: windowVal } : {};
+    const alert: StoredAlert = {
+      id: crypto.randomUUID(),
+      asin: selected.asin,
+      titleEn: selected.titleEn,
+      titleAr: selected.titleAr,
+      rule,
+      threshold,
+      active: true,
+      createdAt: new Date().toISOString(),
+      // Baseline = the product's facts as of today's snapshot; evaluation later
+      // compares the latest snapshot against these real observations.
+      baseline: {
+        priceEgp: selected.priceEgp,
+        bsr: selected.bsr,
+        rating: selected.rating,
+        inStock: selected.inStock,
+      },
+    };
+    add(alert);
     const ruleLabel = isAr ? ruleMeta.ar : ruleMeta.en;
     const detail =
       kind === "pct"
@@ -134,7 +165,7 @@ export function NewAlertDialog({ products }: { products: AlertProductOption[] })
         : kind === "window"
           ? isAr ? ` خلال ${windowVal}` : ` over ${windowVal}`
           : "";
-    toast.success(isAr ? "تم إنشاء التنبيه (عرض توضيحي)" : "Alert created (demo)", {
+    toast.success(isAr ? "تم حفظ التنبيه على هذا الجهاز" : "Alert saved on this device", {
       description: `${ruleLabel}${detail} · ${selected.titleEn}`,
     });
     setOpen(false);
@@ -165,8 +196,8 @@ export function NewAlertDialog({ products }: { products: AlertProductOption[] })
           </DialogTitle>
           <DialogDescription>
             {isAr
-              ? "احصل على إشعار عند تحرك منتج متتبَّع. تُقيَّم التنبيهات مقابل لقطات amazon.eg اليومية."
-              : "Get notified when a tracked product moves. Alerts are evaluated against our daily amazon.eg snapshots."}
+              ? "يُحفظ التنبيه في متصفحك ويُقيَّم عند فتح صفحة التنبيهات مقابل أحدث لقطة يومية من amazon.eg — ليس في الوقت الفعلي، ولا تُرسل إشعارات."
+              : "Saved in your browser and evaluated when you open the Alerts page, against the latest daily amazon.eg snapshot — not real-time, and no push notifications are sent."}
           </DialogDescription>
         </DialogHeader>
 
@@ -273,8 +304,8 @@ export function NewAlertDialog({ products }: { products: AlertProductOption[] })
           ) : (
             <p className="rounded-lg border border-dashed px-3 py-2 text-xs text-muted-foreground">
               {isAr
-                ? "لا حاجة لحد أدنى — ستتلقى إشعاراً فور عودة هذا المنتج للمخزون."
-                : "No threshold needed — you'll be notified as soon as this item is back in stock."}
+                ? "لا حاجة لحد أدنى — سيظهر التنبيه كمُتحقق عندما تُظهر لقطة لاحقة عودة المنتج للمخزون."
+                : "No threshold needed — the alert shows as triggered once a later snapshot sees this item back in stock."}
             </p>
           )}
 

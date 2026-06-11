@@ -160,6 +160,28 @@ describe("computeProfit — VAT model, fulfillment, margin/ROI", () => {
     expect(atBe.netProfitEgp).toBeLessThanOrEqual(TOL);
     expect(atBe.netProfitEgp).toBeGreaterThanOrEqual(-TOL);
   });
+
+  it("break-even returns the FIRST crossing when the FBA fee step creates two", () => {
+    // home 12% / FBM-VAT model (non-registered) / small-standard FBA (15 → 22 at 350).
+    // COGS 280: profit(p) = p − (280 + 0.12p·1.14 + fba·1.14)
+    //   below band: 0.8632p − 297.1   → first crossing ≈ 344.18 (< 350)
+    //   at 351:     0.8632·351 − 305.08 ≈ −2.10  → dips NEGATIVE above the step
+    // A naive global bisection can land on the SECOND crossing (~353.4); the
+    // solver must return the first.
+    const seed = input({
+      sellPriceEgp: 500,
+      costOfGoodsEgp: 280,
+      categoryNode: "home",
+      fulfillment: "fba",
+      fbaSizeTier: "small-standard",
+    });
+    const r = computeProfit(seed);
+    expect(r.breakEvenPriceEgp).toBeLessThan(350);
+    expect(r.breakEvenPriceEgp).toBeCloseTo(344.18, 0);
+    // …and at that price profit is genuinely ~0.
+    const atBe = computeProfit({ ...seed, sellPriceEgp: r.breakEvenPriceEgp });
+    expect(Math.abs(atBe.netProfitEgp)).toBeLessThanOrEqual(TOL);
+  });
 });
 
 describe("DEFAULT_FEE_SCHEDULE — sanity of the versioned schedule", () => {

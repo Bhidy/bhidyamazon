@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Build/test artifacts (minified bundles produce thousands of bogus findings):
+    ".vercel/**",
+    "playwright-report/**",
+    "test-results/**",
   ]),
 ]);
 

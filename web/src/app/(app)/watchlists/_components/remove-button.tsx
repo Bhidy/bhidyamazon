@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button";
 import { useLocale } from "@/lib/locale";
 
 /**
- * Removes an item from the watchlist. The persistent list will live in a
- * Supabase RLS table; for now this is an optimistic client-only action that
- * hides the card and confirms with a toast (the global <Toaster /> is mounted
- * in the root layout). The toast exposes an Undo that restores the card.
+ * Removes an item from the persistent watchlist (localStorage store). The
+ * parent wires `onRemove` to the store's remove and `onRestore` to a re-add,
+ * so the toast's Undo genuinely restores the entry — not just the card.
  */
 export function RemoveButton({
   title,

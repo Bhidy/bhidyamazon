@@ -11,7 +11,7 @@ import { PeriodTabs } from "@/components/app/period-tabs";
 import { Freshness } from "@/components/app/freshness";
 import { RankRow } from "@/components/app/rank-row";
 import { ConfidenceBadge } from "@/components/app/confidence";
-import { getBestSellers, getDashboardSummary } from "@/lib/data";
+import { getBestSellers, getDashboardSummary, isRealData } from "@/lib/data";
 import { CATEGORY_BY_NODE } from "@/lib/constants";
 import { formatNumber } from "@/lib/format";
 import type { Period } from "@/lib/types";
@@ -43,6 +43,10 @@ export default async function BestSellersPage({
 
   const rows = getBestSellers({ categoryNode: category, period });
   const activeCategory = category ? CATEGORY_BY_NODE[category] : undefined;
+  // Real best-seller data is ONE daily list — a period switch changes nothing,
+  // so showing the tabs would imply a capability that doesn't exist. They stay
+  // available in seed mode, where the synthesized windows genuinely differ.
+  const showPeriods = !isRealData();
 
   const freshnessIso = rows[0]?.product.lastSeenAt ?? getDashboardSummary(period).lastUpdated;
 
@@ -65,14 +69,20 @@ export default async function BestSellersPage({
           </>
         }
       >
-        <PeriodTabs value={period} params={category ? { category } : {}} />
+        {showPeriods && <PeriodTabs value={period} params={category ? { category } : {}} />}
       </PageHeader>
 
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/60 bg-card px-4 py-2.5 shadow-card">
         <Freshness iso={freshnessIso} />
         <span className="text-xs text-muted-foreground">
-          <span data-bi-en="">Ranked best sellers across {scopeLabelEn} · {PERIOD_LABEL_EN[period]}</span>
-          <span data-bi-ar="">أفضل المنتجات مبيعاً في {scopeLabelAr} · {PERIOD_LABEL_AR[period]}</span>
+          <span data-bi-en="">
+            Ranked best sellers across {scopeLabelEn}
+            {showPeriods ? ` · ${PERIOD_LABEL_EN[period]}` : " · latest daily snapshot"}
+          </span>
+          <span data-bi-ar="">
+            أفضل المنتجات مبيعاً في {scopeLabelAr}
+            {showPeriods ? ` · ${PERIOD_LABEL_AR[period]}` : " · أحدث لقطة يومية"}
+          </span>
         </span>
       </div>
 

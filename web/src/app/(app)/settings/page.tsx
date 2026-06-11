@@ -36,7 +36,7 @@ import { DEFAULT_FEE_SCHEDULE } from "@/lib/fees";
 import { WINNING_SCORE_CONFIG } from "@/lib/winning-score";
 import { DISCLOSURE, MARKETPLACE } from "@/lib/constants";
 import { formatDate, formatEgp, formatPct } from "@/lib/format";
-import type { FbaRung, ReferralRule } from "@/lib/types";
+import type { FbaRung, ReferralRule, SignalKind } from "@/lib/types";
 
 const GUARDRAILS: { icon: typeof UserX; labelEn: string; labelAr: string; detailEn: string; detailAr: string }[] = [
   {
@@ -92,25 +92,14 @@ function humanizeTiers(rule: ReferralRule): string {
     .join(", ");
 }
 
-const WPS_TYPE_META: Record<string, { en: string; ar: string; cls: string }> = {
-  measured: { en: "Measured", ar: "مقيس", cls: "text-confidence-high bg-confidence-high/12" },
-  relative: { en: "Relative", ar: "نسبي", cls: "text-confidence-medium bg-confidence-medium/15" },
-  inferred: { en: "Inferred", ar: "مُستنتَج", cls: "text-confidence-low bg-confidence-low/15" },
-  assisted: { en: "Assisted", ar: "مُساعَد", cls: "text-muted-foreground bg-muted" },
-};
-const WPS_KIND: Record<string, keyof typeof WPS_TYPE_META> = {
-  category: "measured",
-  size: "measured",
-  weight: "measured",
-  material: "measured",
-  price: "measured",
-  competition: "relative",
-  demand: "relative",
-  breakRisk: "inferred",
-  returnRisk: "inferred",
-  useCaseClarity: "inferred",
-  bundle: "inferred",
-  sourcing: "assisted",
+/** Display metadata per SignalKind — driven by the engine config itself (one
+ *  source of truth), so this page can never disagree with how a criterion is
+ *  actually scored (the old hand-maintained map drifted: it showed `material`
+ *  as "Measured" while the engine treats it as an estimate). */
+const WPS_SIGNAL_META: Record<SignalKind, { en: string; ar: string; cls: string }> = {
+  fact: { en: "Measured", ar: "مقيس", cls: "text-confidence-high bg-confidence-high/12" },
+  ordinal: { en: "Relative", ar: "نسبي", cls: "text-confidence-medium bg-confidence-medium/15" },
+  estimate: { en: "Inferred", ar: "مُستنتَج", cls: "text-confidence-low bg-confidence-low/15" },
 };
 
 export default async function SettingsPage() {
@@ -178,7 +167,7 @@ export default async function SettingsPage() {
             </TableHeader>
             <TableBody>
               {WINNING_SCORE_CONFIG.criteria.map((c) => {
-                const m = WPS_TYPE_META[WPS_KIND[c.key]];
+                const m = WPS_SIGNAL_META[c.signal];
                 return (
                   <TableRow key={c.key}>
                     <TableCell className="font-medium">

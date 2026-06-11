@@ -3,7 +3,14 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { hashString } from "@/lib/seed";
-import type { Product } from "@/lib/types";
+
+/** Structural subset of Product — lets snapshot rows (watchlist) render too. */
+interface ThumbProduct {
+  asin: string;
+  titleEn: string;
+  brand?: string;
+  imageUrl?: string;
+}
 
 const GRADIENTS = [
   "from-chart-1/25 to-chart-1/5 text-chart-1",
@@ -13,7 +20,7 @@ const GRADIENTS = [
   "from-chart-5/25 to-chart-5/5 text-chart-5",
 ];
 
-function initials(p: Product): string {
+function initials(p: ThumbProduct): string {
   const src = p.brand || p.titleEn;
   return src
     .split(/\s+/)
@@ -32,7 +39,7 @@ export function ProductThumb({
   size = 48,
   className,
 }: {
-  product: Product;
+  product: ThumbProduct;
   size?: number;
   className?: string;
 }) {

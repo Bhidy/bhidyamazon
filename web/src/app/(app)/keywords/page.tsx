@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/table";
 import { PageHeader } from "@/components/app/page-header";
 import { DemandTrendChip } from "@/components/app/demand-trend-chip";
-import { getKeywords } from "@/lib/data";
+import { Freshness } from "@/components/app/freshness";
+import { getKeywords, getKeywordsFreshness } from "@/lib/data";
 import { formatNumber } from "@/lib/format";
 import { LangFilter } from "./_components/lang-filter";
 
@@ -35,6 +36,9 @@ export default async function KeywordsPage({
   const lang = (LANGS.includes(sp.lang as LangScope) ? sp.lang : "all") as LangScope;
 
   const keywords = getKeywords({ lang: lang === "all" ? undefined : lang });
+  // Keywords carry their OWN freshness: the trends worker can fail while the
+  // main scrape succeeds, and stale terms must show their real age.
+  const keywordsFreshness = getKeywordsFreshness();
 
   return (
     <>
@@ -54,6 +58,12 @@ export default async function KeywordsPage({
       >
         <LangFilter value={lang} />
       </PageHeader>
+
+      {keywordsFreshness && (
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <Freshness iso={keywordsFreshness} />
+        </div>
+      )}
 
       <Card className="gap-0">
         <CardHeader className="flex-row items-center justify-between border-b pb-4">

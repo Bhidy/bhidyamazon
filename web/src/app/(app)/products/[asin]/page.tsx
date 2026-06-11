@@ -229,15 +229,17 @@ export default async function ProductDetailPage({
 
           <div className="flex shrink-0 flex-col gap-2 sm:w-44">
             <ButtonLink
-              href={`/calculator?price=${product.priceEgp ?? ""}&category=${product.categoryNode}`}
+              href={`/calculator?price=${product.priceEgp ?? ""}&category=${
+                product.categoryNode === "unknown" ? "" : product.categoryNode
+              }`}
               className="w-full"
             >
               <Gauge className="size-4" />
               <span data-bi-en="">Check profit</span>
               <span data-bi-ar="">فحص الربح</span>
             </ButtonLink>
-            <WatchButton asin={product.asin} title={product.titleEn} />
-            {referralFee != null && (
+            <WatchButton product={product} />
+            {referralFee != null && product.categoryNode !== "unknown" && (
               <p className="text-center text-[11px] leading-snug text-muted-foreground">
                 <span data-bi-en="">Est. referral fee ≈ </span>
                 <span data-bi-ar="">رسوم الإحالة التقديرية ≈ </span>

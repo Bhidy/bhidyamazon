@@ -112,7 +112,10 @@ create table if not exists reviews (
   asin text not null references products(asin),
   rating numeric, title text, body text,
   detected_lang text,                                 -- ar | en | mixed
-  author_name text, reviewed_at text,
+  -- No author/display-name column ON PURPOSE: the platform's PII guardrail is
+  -- "reviewer names dropped at ingest" (scrapers/parse.py) — the schema must
+  -- not offer a place to store what the pipeline promises never to keep.
+  reviewed_at text,
   verified_purchase boolean, helpful_votes int,
   scraped_at timestamptz not null default now(),
   source text references sources(id)

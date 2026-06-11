@@ -9,7 +9,6 @@
  */
 
 import type {
-  Alert,
   BsrHistory,
   Confidence,
   DemandBand,
@@ -20,7 +19,6 @@ import type {
   RankingRow,
   Review,
   SentimentSummary,
-  WatchlistItem,
   WinningScore,
   WpsOverrides,
 } from "@/lib/types";
@@ -47,6 +45,20 @@ import {
 
 /** Deterministic "freshness" — pretend the last scrape was 3h before SEED_NOW. */
 const FETCHED_AT = new Date(SEED_NOW - 3 * 3600 * 1000).toISOString();
+
+/** Whether the app is serving REAL scraped data (vs deterministic seed). Lets
+ *  screens hide controls that have no effect in real mode (e.g. period tabs on
+ *  best-sellers, which are a single daily list). */
+export function isRealData(): boolean {
+  return real.available();
+}
+
+/** Freshness of the keywords channel specifically — the trends worker can fail
+ *  independently of the main scrape, so keywords never borrow the newer stamp. */
+export function getKeywordsFreshness(): string | null {
+  if (real.available()) return real.keywordsScrapedAt();
+  return FETCHED_AT;
+}
 
 function prov(
   source: string,
@@ -399,32 +411,8 @@ export function getDashboardSummary(period: Period = "daily"): DashboardSummary 
   };
 }
 
-/* ----- user-owned sample data (replaced by Supabase RLS tables later) ---- */
-
-export function getWatchlist(): WatchlistItem[] {
-  // Source ASINs from the live dataset in real mode (seed ASINs don't resolve to real products).
-  const asins = real.available()
-    ? getBestSellers({ limit: 3 }).map((r) => r.product.asin)
-    : ["B0EG0XIAM2", "B0EG0PHIL6", "B0EG0LORE9"];
-  return asins
-    .map((asin) => {
-      const product = getProduct(asin);
-      return product ? { asin, addedAt: isoDay(SEED_DAYS - 14), product } : null;
-    })
-    .filter((x): x is WatchlistItem => x !== null);
-}
-
-export function getAlerts(): Alert[] {
-  // Derive demo alerts from real top products when available (seed ASINs otherwise).
-  const top = real.available() ? getBestSellers({ limit: 3 }).map((r) => r.product) : [];
-  const at = (i: number, fa: string, ft: string) =>
-    top[i] ? { asin: top[i].asin, title: top[i].titleEn } : { asin: fa, title: ft };
-  const p0 = at(0, "B0EG0XIAM2", "Redmi Buds 5 Wireless Earbuds");
-  const p1 = at(1, "B0EG0PHIL6", "Philips Airfryer 4.1L HD9252");
-  const p2 = at(2, "B0EG0LORE9", "L'Oréal Revitalift Hyaluronic Serum");
-  return [
-    { id: "al1", asin: p0.asin, productTitle: p0.title, rule: "price_drop", threshold: { pct: 10 }, active: true, createdAt: isoDay(SEED_DAYS - 20) },
-    { id: "al2", asin: p1.asin, productTitle: p1.title, rule: "bsr_rising", threshold: { window: "7d" }, active: true, lastFiredAt: isoDay(SEED_DAYS - 2), createdAt: isoDay(SEED_DAYS - 18) },
-    { id: "al3", asin: p2.asin, productTitle: p2.title, rule: "back_in_stock", threshold: {}, active: false, createdAt: isoDay(SEED_DAYS - 30) },
-  ];
-}
+/* User-owned data (watchlist, alerts) lives in REAL persistent client stores —
+   see lib/watchlist-store.tsx and lib/alerts-store.tsx. The fabricated demo
+   getWatchlist()/getAlerts() that used to live here were removed: a platform
+   whose contract is "every number on screen is honest" must not invent user
+   state. (A Supabase RLS table swap later replaces those stores, not this file.) */

@@ -22,22 +22,40 @@ import type {
 } from "@/lib/types";
 import { CATEGORY_BY_NODE } from "@/lib/constants";
 import { BREAK_TOKENS, FIT_TOKENS, type ScoreContext } from "@/lib/winning-score";
+import { VALIDATORS } from "@/lib/real-schema";
 
 const DIR = path.join(process.cwd(), "src/data/real");
+// Projection input type for the scraped JSON. Loose on purpose at the TYPE
+// level — the real contract is enforced at RUNTIME by real-schema.ts before
+// any object reaches this code (invalid files are rejected, never projected).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- runtime-validated boundary (see real-schema.ts)
 type Any = Record<string, any>;
 
-function readJson(name: string): Any | null {
+/** Read + schema-validate one data file. An ABSENT file is not an issue (seed
+ *  fallback is by design); an unreadable or schema-invalid file IS — it is
+ *  rejected (null) and the reason recorded so /api/health can report it. */
+function readJson(name: string, issues: Record<string, string>): Any | null {
+  const f = path.join(DIR, name);
+  if (!existsSync(f)) return null;
+  let parsed: unknown;
   try {
-    const f = path.join(DIR, name);
-    if (!existsSync(f)) return null;
-    return JSON.parse(readFileSync(f, "utf8"));
+    parsed = JSON.parse(readFileSync(f, "utf8"));
   } catch {
+    issues[name] = "unreadable or invalid JSON";
     return null;
   }
+  const err = VALIDATORS[name]?.(parsed) ?? null;
+  if (err) {
+    issues[name] = err;
+    return null;
+  }
+  return parsed as Any;
 }
 
 // Cache keyed on the data files' mtime so a fresh scrape is picked up live.
-let cache: { mtime: number; bs: Any | null; pr: Any | null; kw: Any | null; sn: Any | null } | null = null;
+let cache:
+  | { mtime: number; bs: Any | null; pr: Any | null; kw: Any | null; sn: Any | null; issues: Record<string, string> }
+  | null = null;
 function store() {
   let mtime = 0;
   for (const f of ["bestsellers.json", "products.json", "keywords.json", "snapshots.json"]) {
@@ -48,15 +66,23 @@ function store() {
     }
   }
   if (!cache || cache.mtime !== mtime) {
+    const issues: Record<string, string> = {};
     cache = {
       mtime,
-      bs: readJson("bestsellers.json"),
-      pr: readJson("products.json"),
-      kw: readJson("keywords.json"),
-      sn: readJson("snapshots.json"),
+      bs: readJson("bestsellers.json", issues),
+      pr: readJson("products.json", issues),
+      kw: readJson("keywords.json", issues),
+      sn: readJson("snapshots.json", issues),
+      issues,
     };
   }
   return cache;
+}
+
+/** Schema-rejection reasons for the current data generation (file → reason).
+ *  Empty when everything present parsed and validated. Surfaced by /api/health. */
+export function dataIssues(): Record<string, string> {
+  return { ...store().issues };
 }
 
 export function available(): boolean {
@@ -64,6 +90,11 @@ export function available(): boolean {
 }
 export function scrapedAt(): string | null {
   return store().bs?.scraped_at ?? null;
+}
+/** Keywords have their OWN freshness — the trends worker can fail independently
+ *  of the main scrape, and stale keywords must never borrow the newer stamp. */
+export function keywordsScrapedAt(): string | null {
+  return store().kw?.scraped_at ?? null;
 }
 
 function prov(source: string, confidence: "high" | "medium" | "low", isEstimated: boolean, note?: string): Provenance {
@@ -116,7 +147,8 @@ function rowToProduct(row: Any): Product {
     titleAr: row.title_ar ?? undefined,
     brand: enr?.brand ?? undefined,
     categoryNode: row.category,
-    categoryName: CATEGORY_BY_NODE[row.category]?.nameEn ?? row.category,
+    categoryName:
+      CATEGORY_BY_NODE[row.category]?.nameEn ?? (row.category === "unknown" ? undefined : row.category),
     imageUrl: row.image_url ?? undefined,
     priceEgp: row.price_egp ?? undefined,
     rating: row.rating ?? undefined,
@@ -221,31 +253,10 @@ export function movers(q: { categoryNode?: string; period?: Period; limit?: numb
     if (q.categoryNode && row.category !== q.categoryNode) continue;
     risers.push({ asin, rise, row });
   }
-  // First-run proxy: no velocity history yet (all series have < 2 entries).
-  // Surface products that currently outrank their review-count peers — a product
-  // ranked better than its review count would predict has likely risen recently.
-  // Scaled by 0.12 so gainPct lands in the 5–25% range typical for daily movers.
-  // This block is unreachable once real snapshot pairs accumulate.
-  if (risers.length === 0 && all.length > 0) {
-    const pool = q.categoryNode ? all.filter((r) => r.category === q.categoryNode) : all;
-    const cats = new Map<string, Any[]>();
-    for (const r of pool) {
-      if (!cats.has(r.category)) cats.set(r.category, []);
-      cats.get(r.category)!.push(r);
-    }
-    for (const catRows of cats.values()) {
-      const byRank = [...catRows].sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
-      const byReviews = [...catRows].sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0));
-      for (const row of catRows) {
-        const rankPos = byRank.indexOf(row);
-        const reviewPos = byReviews.indexOf(row);
-        if (rankPos < 0 || reviewPos < 0 || reviewPos <= rankPos) continue;
-        const rawRise = Math.log(reviewPos + 1) - Math.log(rankPos + 1);
-        if (rawRise < 0.1) continue;
-        risers.push({ asin: row.asin, rise: rawRise * 0.12, row });
-      }
-    }
-  }
+  // No fallback when velocity history is missing: a synthesized "riser" with a
+  // manufactured gainPct would violate the honest-data contract. Movers stays
+  // empty until >= 2 daily snapshots exist (the UI explains why), which is the
+  // steady state after the first two cron runs.
 
   risers.sort((a, b) => b.rise - a.rise);
 
@@ -269,13 +280,16 @@ export function product(asin: string): Product | undefined {
   if (row) return rowToProduct(row);
   const enr = store().pr?.products?.[asin];
   if (enr) {
+    // Enriched-only product (dropped off the live lists): its app category is
+    // genuinely unknown — never attribute a made-up one (the UI hides
+    // category-dependent bits like the referral-fee preview for "unknown").
     return rowToProduct({
       asin,
       title: enr.title,
       price_egp: enr.price_egp,
       rating: enr.rating,
       reviews: enr.reviews,
-      category: "electronics",
+      category: "unknown",
       image_url: undefined,
     });
   }

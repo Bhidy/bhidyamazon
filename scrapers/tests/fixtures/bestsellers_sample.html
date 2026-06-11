@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--
+  Structurally faithful amazon.eg Best Sellers fragment
+  (selectors per docs/research/05-selectors-and-samples.md, validated live 2026-06-08).
+  Cards covered:
+    p13n-asin-index-0  B0TESTA001  rank #1     full normal card (NBSP price, nested
+                                               duplicate id="gridItemRoot" exactly like the
+                                               live page -> selected twice, deduped by ASIN)
+    p13n-asin-index-1  B0TESTA002  rank #2     out of stock: NO p13n-sc-price span,
+                                               review count only via rating-anchor aria-label
+    p13n-asin-index-2  B0TESTA003  rank #1,234 comma rank badge
+    p13n-asin-index-3  B0TESTA004  rank #4     EMPTY line-clamp div -> title from img[alt]
+    p13n-asin-index-4  B0TESTA001  rank #5     duplicate-ASIN card -> must be deduped
+    p13n-asin-index-5  B0TESTA007  rank #3     normal card
+    div#gridItemRoot   B0TESTA006  NO badge    Arabic title, rank=None (sorts last)
+-->
+<html lang="en-eg">
+<head><meta charset="utf-8"><title>Amazon.eg Best Sellers: The most popular items in Automotive</title></head>
+<body class="a-aui_72554-c">
+<div id="a-page">
+<h1 class="a-size-large a-spacing-medium a-text-bold">Best Sellers in Automotive</h1>
+<div id="zg-right-col" class="p13n-desktop-grid" role="group">
+
+  <div id="p13n-asin-index-0" class="a-cardui _cDEzb_grid-cell_1uMOS expandableGrid p13n-grid-content">
+    <div id="gridItemRoot" class="a-cardui-deck" data-asin="">
+      <div class="zg-bdg-ctr">
+        <div class="zg-bdg-body zg-bdg-clr-body"><span class="zg-bdg-text">#1</span></div>
+        <div class="zg-bdg-tri zg-bdg-clr-tri"></div>
+      </div>
+      <div class="zg-grid-general-faceout">
+        <div class="p13n-sc-uncoverable-faceout" data-asin="B0TESTA001">
+          <a class="a-link-normal aok-block" href="/-/en/FOO-Car-Trunk-Organizer-Foldable/dp/B0TESTA001/ref=zg_bs_g_automotive_d_sccl_1/000-0000000-0000000">
+            <div class="a-section a-spacing-mini _cDEzb_noop_3Xbw5">
+              <img alt="FOO Car Trunk Organizer Foldable Storage Box with Lid, 60L - Black" src="https://m.media-amazon.com/images/I/81testA001L._AC_UL300_SR300,200_.jpg" class="a-dynamic-image p13n-product-image">
+            </div>
+          </a>
+          <a class="a-link-normal" href="/-/en/FOO-Car-Trunk-Organizer-Foldable/dp/B0TESTA001/ref=zg_bs_g_automotive_d_sccl_1/000-0000000-0000000">
+            <div class="_cDEzb_p13n-sc-css-line-clamp-3_g3dy1">FOO Car Trunk Organizer Foldable Storage Box with Lid, 60L - Black</div>
+          </a>
+          <div class="a-icon-row">
+            <a class="a-link-normal" title="4.3 out of 5 stars" href="/product-reviews/B0TESTA001" aria-label="4.3 out of 5 stars, 2,847 ratings">
+              <i class="a-icon a-icon-star-small a-star-small-4-5 aok-align-top"><span class="a-icon-alt">4.3 out of 5 stars</span></i>
+            </a>
+            <span class="a-size-small">2,847</span>
+          </div>
+          <span class="a-size-base a-color-price"><span class="_cDEzb_p13n-sc-price_3mJ9Z">EGP&nbsp;1,299.00</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="p13n-asin-index-1" class="a-cardui _cDEzb_grid-cell_1uMOS expandableGrid p13n-grid-content">
+    <div class="zg-bdg-ctr">
+      <div class="zg-bdg-body zg-bdg-clr-body"><span class="zg-bdg-text">#2</span></div>
+      <div class="zg-bdg-tri zg-bdg-clr-tri"></div>
+    </div>
+    <div class="zg-grid-general-faceout">
+      <div class="p13n-sc-uncoverable-faceout" data-asin="B0TESTA002">
+        <a class="a-link-normal aok-block" href="/-/en/Dashboard-Anti-Slip-Mat/dp/B0TESTA002/ref=zg_bs_g_automotive_d_sccl_2/000-0000000-0000000">
+          <div class="a-section a-spacing-mini _cDEzb_noop_3Xbw5">
+            <img alt="Dashboard Anti-Slip Mat for Phones and Coins, Universal" src="https://m.media-amazon.com/images/I/61testA002L._AC_UL300_SR300,200_.jpg" class="a-dynamic-image p13n-product-image">
+          </div>
+        </a>
+        <a class="a-link-normal" href="/-/en/Dashboard-Anti-Slip-Mat/dp/B0TESTA002/ref=zg_bs_g_automotive_d_sccl_2/000-0000000-0000000">
+          <div class="_cDEzb_p13n-sc-css-line-clamp-3_g3dy1">Dashboard Anti-Slip Mat for Phones and Coins, Universal</div>
+        </a>
+        <div class="a-icon-row">
+          <a class="a-link-normal" title="4.0 out of 5 stars" href="/product-reviews/B0TESTA002" aria-label="4.0 out of 5 stars, 567 ratings">
+            <i class="a-icon a-icon-star-small a-star-small-4 aok-align-top"><span class="a-icon-alt">4.0 out of 5 stars</span></i>
+          </a>
+        </div>
+        <span class="a-size-small a-color-secondary">Currently unavailable</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="p13n-asin-index-2" class="a-cardui _cDEzb_grid-cell_1uMOS expandableGrid p13n-grid-content">
+    <div class="zg-bdg-ctr">
+      <div class="zg-bdg-body zg-bdg-clr-body"><span class="zg-bdg-text">#1,234</span></div>
+      <div class="zg-bdg-tri zg-bdg-clr-tri"></div>
+    </div>
+    <div class="zg-grid-general-faceout">
+      <div class="p13n-sc-uncoverable-faceout" data-asin="B0TESTA003">
+        <a class="a-link-normal aok-block" href="/-/en/Tire-Pressure-Gauge-Digital/dp/B0TESTA003/ref=zg_bs_g_automotive_d_sccl_3/000-0000000-0000000">
+          <div class="a-section a-spacing-mini _cDEzb_noop_3Xbw5">
+            <img alt="Digital Tire Pressure Gauge with Backlit LCD, 150 PSI" src="https://m.media-amazon.com/images/I/71testA003L._AC_UL300_SR300,200_.jpg" class="a-dynamic-image p13n-product-image">
+          </div>
+        </a>
+        <a class="a-link-normal" href="/-/en/Tire-Pressure-Gauge-Digital/dp/B0TESTA003/ref=zg_bs_g_automotive_d_sccl_3/000-0000000-0000000">
+          <div class="_cDEzb_p13n-sc-css-line-clamp-3_g3dy1">Digital Tire Pressure Gauge with Backlit LCD, 150 PSI</div>
+        </a>
+        <div class="a-icon-row">
+          <a class="a-link-normal" title="4.8 out of 5 stars" href="/product-reviews/B0TESTA003" aria-label="4.8 out of 5 stars, 12 ratings">
+            <i class="a-icon a-icon-star-small a-star-small-5 aok-align-top"><span class="a-icon-alt">4.8 out of 5 stars</span></i>
+          </a>
+          <span class="a-size-small">12</span>
+        </div>
+        <span class="a-size-base a-color-price"><span class="_cDEzb_p13n-sc-price_3mJ9Z">EGP 89.99</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="p13n-asin-index-3" class="a-cardui _cDEzb_grid-cell_1uMOS expandableGrid p13n-grid-content">
+    <div class="zg-bdg-ctr">
+      <div class="zg-bdg-body zg-bdg-clr-body"><span class="zg-bdg-text">#4</span></div>
+      <div class="zg-bdg-tri zg-bdg-clr-tri"></div>
+    </div>
+    <div class="zg-grid-general-faceout">
+      <div class="p13n-sc-uncoverable-faceout" data-asin="B0TESTA004">
+        <a class="a-link-normal aok-block" href="/-/en/Magnetic-Phone-Holder/dp/B0TESTA004/ref=zg_bs_g_automotive_d_sccl_4/000-0000000-0000000">
+          <div class="a-section a-spacing-mini _cDEzb_noop_3Xbw5">
+            <img alt="Magnetic Phone Holder for Car Dashboard 360 Rotation - Black" src="https://m.media-amazon.com/images/I/51testA004L._AC_UL300_SR300,200_.jpg" class="a-dynamic-image p13n-product-image">
+          </div>
+        </a>
+        <a class="a-link-normal" href="/-/en/Magnetic-Phone-Holder/dp/B0TESTA004/ref=zg_bs_g_automotive_d_sccl_4/000-0000000-0000000">
+          <div class="_cDEzb_p13n-sc-css-line-clamp-2_EWgCb"></div>
+        </a>
+        <div class="a-icon-row">
+          <a class="a-link-normal" title="3.9 out of 5 stars" href="/product-reviews/B0TESTA004" aria-label="3.9 out of 5 stars, 88 ratings">
+            <i class="a-icon a-icon-star-small a-star-small-4 aok-align-top"><span class="a-icon-alt">3.9 out of 5 stars</span></i>
+          </a>
+          <span class="a-size-small">88</span>
+        </div>
+        <span class="a-size-base a-color-price"><span class="_cDEzb_p13n-sc-price_3mJ9Z">EGP 450.00</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="p13n-asin-index-4" class="a-cardui _cDEzb_grid-cell_1uMOS expandableGrid p13n-grid-content">
+    <div class="zg-bdg-ctr">
+      <div class="zg-bdg-body zg-bdg-clr-body"><span class="zg-bdg-text">#5</span></div>
+      <div class="zg-bdg-tri zg-bdg-clr-tri"></div>
+    </div>
+    <div class="zg-grid-general-faceout">
+      <div class="p13n-sc-uncoverable-faceout" data-asin="B0TESTA001">
+        <a class="a-link-normal aok-block" href="/-/en/FOO-Car-Trunk-Organizer-Foldable/dp/B0TESTA001/ref=zg_bs_g_automotive_d_sccl_5/000-0000000-0000000">
+          <div class="a-section a-spacing-mini _cDEzb_noop_3Xbw5">
+            <img alt="DUPLICATE CARD - same ASIN as rank 1, must be deduped" src="https://m.media-amazon.com/images/I/81testA001L._AC_UL300_SR300,200_.jpg" class="a-dynamic-image p13n-product-image">
+          </div>
+        </a>
+        <a class="a-link-normal" href="/-/en/FOO-Car-Trunk-Organizer-Foldable/dp/B0TESTA001/ref=zg_bs_g_automotive_d_sccl_5/000-0000000-0000000">
+          <div class="_cDEzb_p13n-sc-css-line-clamp-3_g3dy1">DUPLICATE CARD - same ASIN as rank 1, must be deduped</div>
+        </a>
+        <span class="a-size-base a-color-price"><span class="_cDEzb_p13n-sc-price_3mJ9Z">EGP 999.00</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="p13n-asin-index-5" class="a-cardui _cDEzb_grid-cell_1uMOS expandableGrid p13n-grid-content">
+    <div class="zg-bdg-ctr">
+      <div class="zg-bdg-body zg-bdg-clr-body"><span class="zg-bdg-text">#3</span></div>
+      <div class="zg-bdg-tri zg-bdg-clr-tri"></div>
+    </div>
+    <div class="zg-grid-general-faceout">
+      <div class="p13n-sc-uncoverable-faceout" data-asin="B0TESTA007">
+        <a class="a-link-normal aok-block" href="/-/en/Microfiber-Car-Cleaning-Cloths/dp/B0TESTA007/ref=zg_bs_g_automotive_d_sccl_6/000-0000000-0000000">
+          <div class="a-section a-spacing-mini _cDEzb_noop_3Xbw5">
+            <img alt="Microfiber Car Cleaning Cloths Pack of 6, Lint Free" src="https://m.media-amazon.com/images/I/91testA007L._AC_UL300_SR300,200_.jpg" class="a-dynamic-image p13n-product-image">
+          </div>
+        </a>
+        <a class="a-link-normal" href="/-/en/Microfiber-Car-Cleaning-Cloths/dp/B0TESTA007/ref=zg_bs_g_automotive_d_sccl_6/000-0000000-0000000">
+          <div class="_cDEzb_p13n-sc-css-line-clamp-3_g3dy1">Microfiber Car Cleaning Cloths Pack of 6, Lint Free</div>
+        </a>
+        <div class="a-icon-row">
+          <a class="a-link-normal" title="4.5 out of 5 stars" href="/product-reviews/B0TESTA007" aria-label="4.5 out of 5 stars, 1,050 ratings">
+            <i class="a-icon a-icon-star-small a-star-small-4-5 aok-align-top"><span class="a-icon-alt">4.5 out of 5 stars</span></i>
+          </a>
+          <span class="a-size-small">1,050</span>
+        </div>
+        <span class="a-size-base a-color-price"><span class="_cDEzb_p13n-sc-price_3mJ9Z">EGP 320.00</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="gridItemRoot" class="a-cardui-deck" data-asin="">
+    <div class="zg-grid-general-faceout">
+      <div class="p13n-sc-uncoverable-faceout" data-asin="B0TESTA006">
+        <a class="a-link-normal aok-block" href="/-/en/Backseat-Organizer-Arabic/dp/B0TESTA006/ref=zg_bs_g_automotive_d_sccl_7/000-0000000-0000000">
+          <div class="a-section a-spacing-mini _cDEzb_noop_3Xbw5">
+            <img alt="منظم مقعد السيارة الخلفي مع حامل أكواب وجيوب متعددة" src="https://m.media-amazon.com/images/I/41testA006L._AC_UL300_SR300,200_.jpg" class="a-dynamic-image p13n-product-image">
+          </div>
+        </a>
+        <a class="a-link-normal" href="/-/en/Backseat-Organizer-Arabic/dp/B0TESTA006/ref=zg_bs_g_automotive_d_sccl_7/000-0000000-0000000">
+          <div class="_cDEzb_p13n-sc-css-line-clamp-3_g3dy1">منظم مقعد السيارة الخلفي مع حامل أكواب وجيوب متعددة</div>
+        </a>
+        <div class="a-icon-row">
+          <a class="a-link-normal" title="4.1 من 5 نجوم" href="/product-reviews/B0TESTA006" aria-label="4.1 من 5 نجوم, 1,021 ratings">
+            <i class="a-icon a-icon-star-small a-star-small-4 aok-align-top"><span class="a-icon-alt">4.1 من 5 نجوم</span></i>
+          </a>
+          <span class="a-size-small">1,021</span>
+        </div>
+        <span class="a-size-base a-color-price"><span class="_cDEzb_p13n-sc-price_3mJ9Z">EGP 75.50</span></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="navFooterLine navFooterLinkLine navFooterPadItemLine">&copy; 1996-2026, Amazon.com, Inc. or its affiliates &mdash; amazon.eg</div>
+</div>
+</body>
+</html>

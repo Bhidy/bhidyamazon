@@ -34,13 +34,57 @@ jobs:
       - name: Install scraper deps
         run: pip install --quiet curl_cffi beautifulsoup4
 
-      - name: Scrape amazon.eg (via Firecrawl) + demand keywords
+      - name: Scrape amazon.eg (via Firecrawl)
         env:
           RASID_FETCH: firecrawl
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+        run: python scrapers/run.py
+
+      # Keywords are best-effort (autocomplete can be blocked from CI IPs) but the
+      # failure must be VISIBLE — this used to be `|| echo`, which froze keywords
+      # for days with no signal while the rest of the data refreshed.
+      - name: Refresh demand keywords (best-effort, alerted)
+        id: trends
+        continue-on-error: true
+        run: python scrapers/trends.py
+
+      - name: Warn if keyword refresh failed (deduped issue)
+        if: steps.trends.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python scrapers/run.py
-          python scrapers/trends.py || echo "keywords best-effort (autocomplete may be blocked from CI)"
+          gh label create keywords-stale --force --color D93F0B \
+            --description "Daily keyword refresh is failing" || true
+          open=$(gh issue list --label keywords-stale --state open --json number --jq length)
+          if [ "$open" = "0" ]; then
+            gh issue create \
+              --title "Keyword refresh failing — keywords.json is going stale" \
+              --label keywords-stale \
+              --body "scrapers/trends.py failed on $(date -u +%FT%TZ) (run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+
+          The main scrape still succeeds, so best-sellers stay fresh while keyword
+          freshness drifts — the Demand Radar page shows the channel's own age.
+          Close this issue once a run refreshes keywords.json again." \
+            || echo "issue creation failed (non-blocking)"
+          else
+            echo "open keywords-stale issue already exists — not duplicating"
+          fi
+
+      # Schema gate: the refreshed JSON must satisfy web/src/lib/real-schema.ts
+      # BEFORE it is committed. A drifted scraper output fails the run here (and
+      # the failure step opens an issue) instead of landing in the repo and being
+      # silently rejected at render time.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Validate refreshed data (schema gate)
+        working-directory: web
+        run: |
+          npm install --no-audit --no-fund
+          npx vitest run src/lib/__tests__/real-data-integrity.test.ts
 
       - name: Commit refreshed data (history)
         run: |
@@ -58,7 +102,9 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          npm i -g vercel@latest
+          # Pinned major: an unattended daily job must not absorb breaking CLI
+          # changes the moment they ship. Bump deliberately.
+          npm i -g vercel@54
           vercel pull --yes --environment=production --token="$VERCEL_TOKEN" --cwd web
           vercel build --prod --token="$VERCEL_TOKEN" --cwd web
           vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --cwd web

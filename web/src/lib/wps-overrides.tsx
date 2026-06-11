@@ -65,10 +65,12 @@ const WpsOverrideContext = createContext<WpsOverrideContextValue>({
 export function WpsOverrideProvider({ children }: { children: ReactNode }) {
   const [overrides, setState] = useState<WpsOverrides>({});
 
-  // Load once on mount (client only), guarding a malformed blob.
+  // Load once on mount (client only), guarding a malformed blob. localStorage
+  // is unreadable during SSR, so hydrate-in-effect is the canonical pattern.
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage hydration
       if (raw) setState(JSON.parse(raw) as WpsOverrides);
     } catch {
       /* corrupt → start empty */

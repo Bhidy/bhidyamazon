@@ -47,6 +47,18 @@ _MARKERS = [
 _JAR: dict[str, str] = {"i18n-prefs": "EGP", "lc-acbeg": "en_AE"}
 _last_request = [0.0]
 
+# Firecrawl budget guard: the free tier is ~1,000 credits/month and the tuned
+# daily run uses ~30 pages, so a runaway loop or a markup change that balloons
+# enrichment must hard-stop instead of silently draining the month's quota
+# (which would starve every later daily run). 35/run × 30 days ≈ 1,050 ceiling.
+_FIRECRAWL_MAX = int(os.environ.get("RASID_FIRECRAWL_MAX", "35"))
+_firecrawl_calls = [0]
+
+
+def firecrawl_calls() -> int:
+    """Number of Firecrawl requests made this run (reported into meta.json health)."""
+    return _firecrawl_calls[0]
+
 
 class Blocked(Exception):
     """Raised on any hard block — the caller STOPS the run, never retry-hammers."""
@@ -79,6 +91,11 @@ def _fetch_firecrawl(url: str, lang: str) -> str:
     key = os.environ.get("FIRECRAWL_API_KEY")
     if not key:
         raise Blocked("FIRECRAWL_API_KEY not set")
+    if _firecrawl_calls[0] >= _FIRECRAWL_MAX:
+        raise Blocked(
+            f"firecrawl per-run budget ({_FIRECRAWL_MAX}) exhausted — stopping to protect the monthly free tier"
+        )
+    _firecrawl_calls[0] += 1
     r = creq.post(
         "https://api.firecrawl.dev/v1/scrape",
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},

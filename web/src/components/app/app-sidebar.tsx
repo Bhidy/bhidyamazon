@@ -4,14 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Activity,
-  Bell,
-  Bookmark,
   Boxes,
-  Calculator,
   LayoutDashboard,
   Radar,
   Search,
-  Settings,
   Target,
   TrendingUp,
   Trophy,
@@ -39,10 +35,6 @@ const ICONS: Record<string, LucideIcon> = {
   Radar,
   Boxes,
   Search,
-  Calculator,
-  Bookmark,
-  Bell,
-  Settings,
   Target,
 };
 

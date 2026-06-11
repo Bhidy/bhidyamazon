@@ -124,21 +124,31 @@ def main() -> None:
         enrich.extend(r["asin"] for r in rows[: (ENRICH_NICHE if node == TARGET_NICHE else ENRICH_PER_CAT)])
         priced = sum(1 for r in rows if r["price_egp"] is not None)
         titled = sum(1 for r in rows if r["title"])
+        rated = sum(1 for r in rows if r["rating"] is not None)
+        reviewed = sum(1 for r in rows if r["reviews"] is not None)
         parsed_count = len(rows)
         title_fill = round(100 * titled / parsed_count, 1) if parsed_count else 0.0
         price_fill = round(100 * priced / parsed_count, 1) if parsed_count else 0.0
-        degraded = title_fill < 90 or parsed_count < 10
+        rating_fill = round(100 * rated / parsed_count, 1) if parsed_count else 0.0
+        reviews_fill = round(100 * reviewed / parsed_count, 1) if parsed_count else 0.0
+        # rating/reviews gate at 60%: a selector drift that nulls them out across
+        # the board must surface as DEGRADED, while categories that genuinely list
+        # sparsely-rated items (grocery etc.) stay below the alarm line.
+        degraded = title_fill < 90 or parsed_count < 10 or rating_fill < 60 or reviews_fill < 60
         health[node] = {
             "parsed_count": parsed_count,
             "title_fill": title_fill,
             "price_fill": price_fill,
+            "rating_fill": rating_fill,
+            "reviews_fill": reviews_fill,
             "degraded": degraded,
         }
         if degraded:
             print(
                 f"  [WARN] {slug}: DEGRADED — parsed={parsed_count} "
                 f"title_fill={title_fill}% price_fill={price_fill}% "
-                f"(need title_fill >= 90% and parsed >= 10).",
+                f"rating_fill={rating_fill}% reviews_fill={reviews_fill}% "
+                f"(need title_fill >= 90%, parsed >= 10, rating/reviews_fill >= 60%).",
                 flush=True,
             )
         top = rows[0]
@@ -185,6 +195,7 @@ def main() -> None:
         "categories_degraded": degraded_cats,
         "min_title_fill": round(min(title_fills), 1) if title_fills else 0.0,
         "total_products": len(all_rows),
+        "firecrawl_calls": fetch.firecrawl_calls(),  # 0 on direct runs; budget telemetry on cloud runs
         "per_category": health,
     }
 

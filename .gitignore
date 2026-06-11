@@ -16,9 +16,12 @@ scrapers/logs/
 .env
 .env*.local
 
-# local screenshots & playwright artifacts (root only)
+# local screenshots & playwright artifacts
 /*.png
+docs/screenshots/
 .playwright-mcp/
+web/test-results/
+web/playwright-report/
 
 # os / tmp
 .DS_Store

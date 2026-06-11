@@ -75,20 +75,6 @@ export const NAV_GROUPS: NavGroup[] = [
       { labelEn: "Search", labelAr: "بحث", href: "/search", icon: "Search" },
     ],
   },
-  {
-    labelEn: "Tools",
-    labelAr: "أدوات",
-    items: [
-      { labelEn: "Profit Calculator", labelAr: "حاسبة الربح", href: "/calculator", icon: "Calculator" },
-      { labelEn: "Watchlists", labelAr: "قوائم المتابعة", href: "/watchlists", icon: "Bookmark" },
-      { labelEn: "Alerts", labelAr: "التنبيهات", href: "/alerts", icon: "Bell" },
-    ],
-  },
-  {
-    labelEn: "Account",
-    labelAr: "الحساب",
-    items: [{ labelEn: "Settings", labelAr: "الإعدادات", href: "/settings", icon: "Settings" }],
-  },
 ];
 
 /** Visual + copy metadata for the relative demand band (within-category only). */

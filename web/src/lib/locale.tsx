@@ -17,9 +17,12 @@ const LocaleContext = createContext<LocaleContextValue>({
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
 
+  // localStorage is unreadable during SSR — hydrate-in-effect is the canonical
+  // pattern (the pre-paint inline script in the root layout avoids the flash).
   useEffect(() => {
     const saved = (localStorage.getItem("rasid.locale") as Locale) ?? "en";
     applyLocale(saved);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage hydration
     setLocaleState(saved);
   }, []);
 

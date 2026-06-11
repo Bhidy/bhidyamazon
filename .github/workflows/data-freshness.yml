@@ -1,0 +1,94 @@
+name: data-freshness
+
+# Staleness watchdog: the daily scrape can stop silently (secret expired,
+# schedule disabled, Firecrawl quota gone, repeated trends failures). This
+# checks the committed data's own timestamps every evening and opens ONE
+# deduped issue per stale channel — so a dead pipeline is noticed within a
+# day instead of whenever someone happens to look at the site.
+
+on:
+  schedule:
+    - cron: "30 18 * * *" # 18:30 UTC ≈ 20:30 Africa/Cairo, after the daily refresh window
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check channel ages (bestsellers ≤ 36h, keywords ≤ 72h)
+        id: ages
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import json, datetime, pathlib
+
+          def age_hours(file, key="scraped_at"):
+              p = pathlib.Path("web/src/data/real") / file
+              if not p.exists():
+                  return None
+              try:
+                  iso = json.loads(p.read_text()).get(key)
+                  ts = datetime.datetime.fromisoformat(str(iso).replace("Z", "+00:00"))
+              except Exception:
+                  return None
+              now = datetime.datetime.now(datetime.timezone.utc)
+              return (now - ts).total_seconds() / 3600
+
+          core = age_hours("bestsellers.json")
+          kw = age_hours("keywords.json")
+          print(f"core_age_h={'' if core is None else round(core, 1)}")
+          print(f"kw_age_h={'' if kw is None else round(kw, 1)}")
+          print(f"core_stale={'true' if core is None or core > 36 else 'false'}")
+          print(f"kw_stale={'true' if kw is None or kw > 72 else 'false'}")
+          EOF
+
+      - name: Open issue if the core dataset is stale
+        if: steps.ages.outputs.core_stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create data-stale --force --color B60205 \
+            --description "Committed real data is older than its freshness budget" || true
+          open=$(gh issue list --label data-stale --state open --search "core dataset" --json number --jq length)
+          if [ "$open" = "0" ]; then
+            gh issue create \
+              --title "Core dataset is stale (bestsellers.json > 36h old)" \
+              --label data-stale \
+              --body "bestsellers.json scraped_at is ${{ steps.ages.outputs.core_age_h }}h old (budget: 36h) as of $(date -u +%FT%TZ).
+
+          The daily scrape-and-deploy workflow has likely stopped working — check its
+          recent runs, the FIRECRAWL_API_KEY / VERCEL_* secrets, and the Firecrawl quota.
+          Close once a fresh data commit lands." \
+            || echo "issue creation failed (non-blocking)"
+          else
+            echo "open core-stale issue already exists — not duplicating"
+          fi
+
+      - name: Open issue if keywords are stale
+        if: steps.ages.outputs.kw_stale == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create data-stale --force --color B60205 \
+            --description "Committed real data is older than its freshness budget" || true
+          open=$(gh issue list --label data-stale --state open --search "keywords" --json number --jq length)
+          if [ "$open" = "0" ]; then
+            gh issue create \
+              --title "Keywords channel is stale (keywords.json > 72h old)" \
+              --label data-stale \
+              --body "keywords.json scraped_at is ${{ steps.ages.outputs.kw_age_h }}h old (budget: 72h) as of $(date -u +%FT%TZ).
+
+          The main scrape may still be fine — this is the trends/autocomplete worker
+          failing repeatedly (it is best-effort per run, alerted per failure, and
+          watchdogged here). The Demand Radar page shows this channel's own age.
+          Close once a run refreshes keywords.json." \
+            || echo "issue creation failed (non-blocking)"
+          else
+            echo "open keywords-stale issue already exists — not duplicating"
+          fi

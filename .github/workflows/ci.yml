@@ -43,8 +43,63 @@ jobs:
         # lockfile variance between the macOS dev machine and the Linux runner.
         run: npm install --no-audit --no-fund
 
+      - name: Lint
+        run: npm run lint
+
       - name: Typecheck
         run: npx tsc --noEmit
 
       - name: Unit tests
         run: npm test
+
+      # A page that typechecks can still fail to compile/prerender (RSC rules,
+      # route exports). Catch it here, not at deploy time.
+      - name: Build
+        run: npm run build
+
+  # Render-the-real-data gate: production build + server + real CSP, a clean
+  # console, and the persistent watchlist surviving navigation.
+  smoke-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Build (production)
+        run: npm run build
+
+      - name: Smoke E2E
+        run: npm run e2e
+
+  # The HTML parsers are the system's most drift-prone code (selectors on markup
+  # we don't control). The fixture suite locks their behavior.
+  scraper-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test deps
+        run: pip install --quiet beautifulsoup4 pytest
+
+      - name: Parser tests
+        run: python -m pytest scrapers/tests/ -q

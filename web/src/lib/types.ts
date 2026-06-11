@@ -245,29 +245,15 @@ export interface CalculatorResult {
 }
 
 /* ───────────────────────────── User-owned ──────────────────────────────── */
-
-export interface WatchlistItem {
-  asin: string;
-  addedAt: string;
-  product: Product;
-}
+/* Watchlist + alert STORAGE shapes live with their persistent client stores
+   (lib/watchlist-store.tsx, lib/alerts-store.tsx); only the rule vocabulary is
+   part of the shared domain model. */
 
 export type AlertRule =
   | "price_drop"
   | "bsr_rising"
   | "back_in_stock"
   | "rating_drop";
-
-export interface Alert {
-  id: string;
-  asin: string;
-  productTitle: string;
-  rule: AlertRule;
-  threshold: Record<string, number | string>;
-  active: boolean;
-  lastFiredAt?: string;
-  createdAt: string;
-}
 
 /** Period selector shared across dashboard / rankings. */
 export type Period = "daily" | "weekly" | "monthly";

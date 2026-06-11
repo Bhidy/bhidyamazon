@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--
+  Structurally faithful amazon.eg product detail fragment for ASIN B0TESTPROD
+  (selectors per docs/research/05-selectors-and-samples.md, validated live 2026-06-08):
+  - #productTitle / #bylineInfo "Visit the FOO Store" / #corePrice_feature_div span.a-offscreen
+  - #acrPopover[title] / #acrCustomerReviewText / #availability
+  - BSR in an UNNAMED table.a-keyvalue.prodDetTable, th.prodDetSectionEntry "Best Sellers Rank",
+    td holds TWO ranks: "#2,345 in Automotive (...) #12 in Car Organizers (...)"
+  - tech-spec table th/td rows (Item Weight, Item Dimensions L x W x H, Material Type, ...)
+  - #detailBullets_feature_div "Key : Value" li items
+  - #altImages with 4 li.imageThumbnail (+1 non-matching template li)
+  - #feature-bullets with 5 li
+  - 3 embedded reviews in #localTopReviewsList, div[data-hook='review'] with the .eg
+    camelCase hooks (reviewTitle/reviewText) + kebab hooks (review-star-rating, review-date,
+    avp-badge, helpful-vote-statement); star alt text sits INSIDE the h5 title (must be stripped)
+-->
+<html lang="en-eg">
+<head><meta charset="utf-8"><title>FOO Car Seat Gap Organizer with Cup Holder, 2 Pack - Black Silicone : Amazon.eg</title></head>
+<body class="a-aui_72554-c">
+<div id="a-page">
+<div id="dp" class="automotive en_EG">
+
+  <div id="centerCol" class="centerColAlign">
+    <div id="titleSection" class="celwidget">
+      <h1 id="title" class="a-size-large a-spacing-none">
+        <span id="productTitle" class="a-size-large product-title-word-break">FOO Car Seat Gap Organizer with Cup Holder, 2 Pack - Black Silicone</span>
+      </h1>
+    </div>
+    <div id="bylineInfo_feature_div" class="celwidget">
+      <a id="bylineInfo" class="a-link-normal" href="/stores/FOO/page/0TESTSTORE">Visit the FOO Store</a>
+    </div>
+    <div id="averageCustomerReviews_feature_div" class="celwidget">
+      <span id="acrPopover" class="reviewCountTextLinkedHistogram noUnderline" title="4.4 out of 5 stars">
+        <i class="a-icon a-icon-star a-star-4-5"><span class="a-icon-alt">4.4 out of 5 stars</span></i>
+      </span>
+      <a id="acrCustomerReviewLink" class="a-link-normal" href="#customerReviews">
+        <span id="acrCustomerReviewText" class="a-size-base">1,234 ratings</span>
+      </a>
+    </div>
+    <div id="corePrice_feature_div" class="celwidget" data-feature-name="corePrice">
+      <span class="a-price aok-align-center" data-a-size="xl" data-a-color="base">
+        <span class="a-offscreen">EGP&nbsp;178.00</span>
+        <span aria-hidden="true"><span class="a-price-symbol">EGP</span><span class="a-price-whole">178<span class="a-price-decimal">.</span></span><span class="a-price-fraction">00</span></span>
+      </span>
+    </div>
+    <div id="availability" class="a-section a-spacing-base">
+      <span class="a-size-medium a-color-success">In Stock</span>
+    </div>
+    <div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+      <ul class="a-unordered-list a-vertical a-spacing-mini">
+        <li class="a-spacing-mini"><span class="a-list-item">PERFECT FIT - fills the gap between seat and console on most sedans and SUVs</span></li>
+        <li class="a-spacing-mini"><span class="a-list-item">2 PACK - one organizer for the driver side and one for the passenger side</span></li>
+        <li class="a-spacing-mini"><span class="a-list-item">CUP HOLDER - integrated holder keeps drinks stable on rough roads</span></li>
+        <li class="a-spacing-mini"><span class="a-list-item">PREMIUM SILICONE - flexible, easy to wipe clean, no rattling</span></li>
+        <li class="a-spacing-mini"><span class="a-list-item">EASY INSTALL - slides into the seat gap in seconds, no tools needed</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="leftCol">
+    <div id="altImages" class="a-fixed-left-grid-col a-col-left">
+      <ul class="a-unordered-list a-nostyle a-button-list a-vertical regularAltImageViewLayout">
+        <li class="a-spacing-small item imageThumbnail"><span class="a-button a-button-thumbnail"><img src="https://m.media-amazon.com/images/I/41testP1._AC_US40_.jpg" alt=""></span></li>
+        <li class="a-spacing-small item imageThumbnail"><span class="a-button a-button-thumbnail"><img src="https://m.media-amazon.com/images/I/41testP2._AC_US40_.jpg" alt=""></span></li>
+        <li class="a-spacing-small item imageThumbnail"><span class="a-button a-button-thumbnail"><img src="https://m.media-amazon.com/images/I/41testP3._AC_US40_.jpg" alt=""></span></li>
+        <li class="a-spacing-small item imageThumbnail"><span class="a-button a-button-thumbnail"><img src="https://m.media-amazon.com/images/I/41testP4._AC_US40_.jpg" alt=""></span></li>
+        <li class="a-spacing-small template"><span class="a-button a-button-thumbnail"></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="prodDetails" class="celwidget">
+    <h1 class="a-size-base-plus">Product information</h1>
+    <table class="a-keyvalue prodDetTable" role="presentation">
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Brand Name</th>
+        <td class="a-size-base prodDetAttrValue">FOO</td>
+      </tr>
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Item Weight</th>
+        <td class="a-size-base prodDetAttrValue">250 g</td>
+      </tr>
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Item Dimensions L x W x H</th>
+        <td class="a-size-base prodDetAttrValue">20 x 10 x 5 Centimeters</td>
+      </tr>
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Material Type</th>
+        <td class="a-size-base prodDetAttrValue">Silicone</td>
+      </tr>
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Manufacturer</th>
+        <td class="a-size-base prodDetAttrValue">FOO Industries</td>
+      </tr>
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Number of Items</th>
+        <td class="a-size-base prodDetAttrValue">2</td>
+      </tr>
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Color</th>
+        <td class="a-size-base prodDetAttrValue">Black</td>
+      </tr>
+    </table>
+    <table class="a-keyvalue prodDetTable" role="presentation">
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Best Sellers Rank</th>
+        <td class="a-size-base prodDetAttrValue">
+          <span>
+            <span>#2,345 in Automotive (<a href="/-/en/gp/bestsellers/automotive/ref=pd_zg_ts_automotive">See Top 100 in Automotive</a>)</span>
+            <br>
+            <span>#12 in Car Organizers (<a href="/-/en/gp/bestsellers/automotive/21864174031/ref=pd_zg_hrsr_automotive_1_1">See Top 100 in Car Organizers</a>)</span>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th class="a-color-secondary a-size-base prodDetSectionEntry">Date First Available</th>
+        <td class="a-size-base prodDetAttrValue">1 March 2026</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="detailBullets_feature_div" class="celwidget">
+    <ul class="a-unordered-list a-nostyle a-vertical a-spacing-none detail-bullet-list">
+      <li><span class="a-list-item"><span class="a-text-bold">ASIN : </span><span>B0TESTPROD</span></span></li>
+      <li><span class="a-list-item"><span class="a-text-bold">Country of origin : </span><span>China</span></span></li>
+    </ul>
+  </div>
+
+  <div id="customerReviews" class="celwidget">
+    <h2>Top reviews from Egypt</h2>
+    <div id="localTopReviewsList">
+
+      <div id="R1TESTEN5STAR" data-hook="review" class="a-section review aok-relative">
+        <div class="a-row a-spacing-mini">
+          <div class="a-profile-content"><span class="a-profile-name">John Doe</span></div>
+        </div>
+        <h5 data-hook="reviewTitle" class="a-size-base review-title a-text-bold">
+          <i data-hook="review-star-rating" class="a-icon a-icon-star a-star-5 review-rating"><span class="a-icon-alt">5.0 out of 5 stars</span></i>
+          <span class="cr-original-review-content">Excellent quality and fits perfectly</span>
+        </h5>
+        <span data-hook="review-date" class="a-size-base a-color-secondary review-date">Reviewed in Egypt on 12 May 2026</span>
+        <div class="a-row a-spacing-mini review-data review-format-strip">
+          <span data-hook="avp-badge" class="a-size-mini a-color-state a-text-bold">Verified Purchase</span>
+        </div>
+        <div data-hook="reviewText" class="a-expander-content reviewText review-text-content a-expander-partial-collapse-content">
+          <span>Great organizer, very sturdy and the straps keep it fixed in place. Highly recommended for any car owner.</span>
+        </div>
+        <div class="a-row a-spacing-top-small review-comments cr-vote-action-bar">
+          <span data-hook="helpful-vote-statement" class="a-size-base a-color-tertiary cr-vote-text">12 people found this helpful</span>
+        </div>
+      </div>
+
+      <div id="R2TESTAR1STAR" data-hook="review" class="a-section review aok-relative">
+        <div class="a-row a-spacing-mini">
+          <div class="a-profile-content"><span class="a-profile-name">أحمد محمود</span></div>
+        </div>
+        <h5 data-hook="reviewTitle" class="a-size-base review-title a-text-bold">
+          <i data-hook="review-star-rating" class="a-icon a-icon-star a-star-1 review-rating"><span class="a-icon-alt">1.0 out of 5 stars</span></i>
+          <span class="cr-original-review-content">جودة سيئة جدا</span>
+        </h5>
+        <span data-hook="review-date" class="a-size-base a-color-secondary review-date">Reviewed in Egypt on 26 April 2026</span>
+        <div data-hook="reviewText" class="a-expander-content reviewText review-text-content a-expander-partial-collapse-content">
+          <span>المنتج سيء ولا يستحق السعر، الخامة رديئة وتمزق بعد أسبوع واحد من الاستخدام.</span>
+        </div>
+      </div>
+
+      <div id="R3TESTBOILER" data-hook="review" class="a-section review aok-relative">
+        <div class="a-row a-spacing-mini">
+          <div class="a-profile-content"><span class="a-profile-name">Sara K.</span></div>
+        </div>
+        <h5 data-hook="reviewTitle" class="a-size-base review-title a-text-bold">
+          <i data-hook="review-star-rating" class="a-icon a-icon-star a-star-3 review-rating"><span class="a-icon-alt">3.0 out of 5 stars</span></i>
+          <span class="cr-original-review-content">Average but acceptable</span>
+        </h5>
+        <span data-hook="review-date" class="a-size-base a-color-secondary review-date">Reviewed in Egypt on 10 April 2026</span>
+        <div data-hook="reviewText" class="a-expander-content reviewText review-text-content a-expander-partial-collapse-content">
+          <span>Average product, does the job.</span>
+          <span class="a-expander-prompt">Read more</span>
+          <span class="aok-hidden">Brief content visible, double tap to read full content.</span>
+        </div>
+        <div class="a-row a-spacing-top-small review-comments cr-vote-action-bar">
+          <span data-hook="helpful-vote-statement" class="a-size-base a-color-tertiary cr-vote-text">One person found this helpful</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<div class="navFooterLine navFooterLinkLine navFooterPadItemLine">&copy; 1996-2026, Amazon.com, Inc. or its affiliates &mdash; amazon.eg</div>
+</div>
+</body>
+</html>

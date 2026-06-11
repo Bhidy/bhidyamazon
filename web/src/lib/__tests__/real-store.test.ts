@@ -8,7 +8,7 @@ import { describe, it, expect, vi } from "vitest";
 
 const FILES: Record<string, unknown> = {
   "bestsellers.json": {
-    schema_version: 2,
+    schema_version: 3, // must match real-schema.ts — invalid versions are rejected
     scraped_at: "2026-06-08T09:00:00Z",
     categories: {
       electronics: [
@@ -21,7 +21,7 @@ const FILES: Record<string, unknown> = {
       { asin: "A2", rank: 8, price_egp: 50, category: "electronics", title: "Faller" },
     ],
   },
-  "products.json": { products: {} },
+  "products.json": { schema_version: 3, products: {} },
   "keywords.json": { keywords: [] },
   "snapshots.json": {
     schema_version: 1,

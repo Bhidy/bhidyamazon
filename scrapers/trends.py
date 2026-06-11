@@ -15,6 +15,7 @@ or buy. We do not invent magnitudes; the UI labels it as prominence/tier only.
 from __future__ import annotations
 import datetime
 import json
+import sys
 import time
 import urllib.parse
 from pathlib import Path
@@ -104,8 +105,13 @@ def main() -> None:
     trends_rising_tags(kws)
 
     if not kws:
-        print("\n[SKIP] no keywords obtained — keeping existing keywords.json.", flush=True)
-        return
+        # Exit non-zero so callers can SEE the failure: this exact case used to
+        # pass silently in CI ("|| echo best-effort") and keywords froze for days
+        # while the rest of the data kept refreshing. Existing keywords.json is
+        # still kept — staleness is now visible (per-channel freshness in the UI,
+        # a workflow warning step, and the data-freshness monitor).
+        print("\n[FAIL] no keywords obtained — keeping existing keywords.json (exit 2).", flush=True)
+        sys.exit(2)
     # Sort by autocomplete prominence (ordinal), then by how many seed prefixes
     # surfaced the term. demandScore stays the field name for schema stability,
     # but it is an ordinal prominence rank — never a demand/volume magnitude.

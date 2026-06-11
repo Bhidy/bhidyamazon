@@ -182,25 +182,42 @@ export function computeProfit(
 }
 
 /**
- * Break-even sell price (netProfit = 0). Because referral is piecewise and the
- * FBA fee steps at the price band, we solve numerically with a binary search
- * rather than algebraically — robust across tiers and bands.
+ * Break-even sell price (netProfit = 0), solved numerically per MONOTONIC
+ * segment. Within a segment profit is continuous and strictly increasing in
+ * price (marginal net revenue ≥ 1/1.14 beats the max 15% marginal referral
+ * rate), but the FBA fee JUMPS at `fbaPriceBandEgp` — so profit can cross zero
+ * below the band, dip negative just above it, and cross again. A naive global
+ * bisection may land on the SECOND crossing; we always return the FIRST
+ * (lowest) break-even price.
  */
 function solveBreakEven(input: CalculatorInput, schedule = DEFAULT_FEE_SCHEDULE): number {
   const profitAt = (price: number) =>
     computeProfitCore({ ...input, sellPriceEgp: price }, schedule);
 
-  let lo = 0;
-  let hi = Math.max(100, (input.costOfGoodsEgp + (input.inboundShippingEgp ?? 0)) * 6 + 1000);
+  const bisect = (lo: number, hi: number): number => {
+    // invariant: profitAt(lo) < 0 <= profitAt(hi), profit monotonic on [lo, hi]
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (profitAt(mid) >= 0) hi = mid;
+      else lo = mid;
+    }
+    return round2(hi);
+  };
+
+  // Segment 1: [0, band] — only exists when the FBA fee step applies.
+  const stepAt =
+    input.fulfillment === "fba" && input.fbaSizeTier ? schedule.fbaPriceBandEgp : null;
+  if (stepAt != null && profitAt(stepAt) >= 0) {
+    return profitAt(0) >= 0 ? 0 : bisect(0, stepAt);
+  }
+
+  // Segment 2 (or the whole domain when there is no step).
+  const lo = stepAt ?? 0;
+  let hi = Math.max(lo + 100, (input.costOfGoodsEgp + (input.inboundShippingEgp ?? 0)) * 6 + 1000);
   // Expand hi until profit turns positive (guards pathological fee configs).
   for (let i = 0; i < 40 && profitAt(hi) < 0; i++) hi *= 1.6;
   if (profitAt(hi) < 0) return NaN;
-  for (let i = 0; i < 60; i++) {
-    const mid = (lo + hi) / 2;
-    if (profitAt(mid) >= 0) hi = mid;
-    else lo = mid;
-  }
-  return round2(hi);
+  return bisect(lo, hi);
 }
 
 /** Lightweight net-profit-only core used by the break-even solver (no warnings). */
