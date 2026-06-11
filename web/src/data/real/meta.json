@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-06-10T10:33:57.787426+00:00",
+  "scraped_at": "2026-06-11T10:58:57.504365+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -36,31 +36,31 @@
       "beauty": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 93.3,
         "degraded": false
       },
       "home": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 93.3,
         "degraded": false
       },
       "fashion": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 100.0,
         "degraded": false
       },
       "toys": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 100.0,
         "degraded": false
       },
       "grocery": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 86.7,
+        "price_fill": 100.0,
         "degraded": false
       },
       "baby": {
