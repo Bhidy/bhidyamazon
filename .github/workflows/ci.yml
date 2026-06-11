@@ -1,8 +1,7 @@
 name: ci
 
-# Institutional quality gate: typecheck + unit tests on every change to main.
-# Runs against the Next.js app in web/. No build/deploy here — that lives in
-# scrape-and-deploy.yml; this job exists purely to block regressions.
+# Quality gate + deploy: runs on every push to main and on PRs.
+# PRs get tests only; pushes to main also deploy to Vercel production.
 
 on:
   push:
@@ -10,8 +9,6 @@ on:
   pull_request:
     branches: [main]
 
-# Opt the bundled JS actions (checkout/setup-node) into the Node-24 runtime ahead
-# of GitHub's June-2026 forced migration, so runs are warning-free today.
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -103,3 +100,38 @@ jobs:
 
       - name: Parser tests
         run: python -m pytest scrapers/tests/ -q
+
+  # Deploy to Vercel production on every push to main (not on PRs).
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [quality-gate, scraper-tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+        working-directory: web
+
+      - name: Build (production)
+        run: npm run build
+        working-directory: web
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npm i -g vercel@54
+          vercel pull --yes --environment=production --token="$VERCEL_TOKEN" --cwd web
+          vercel build --prod --token="$VERCEL_TOKEN" --cwd web
+          vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --cwd web
