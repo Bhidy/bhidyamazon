@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-06-11T10:58:57.504365+00:00",
+  "scraped_at": "2026-06-12T10:40:49.938802+00:00",
   "products": {
     "B09V27R871": {
       "asin": "B09V27R871",
@@ -376,120 +376,6 @@
       "image_count": 7,
       "feature_bullet_count": 1,
       "offer_count": 20
-    },
-    "B0CCY38RGC": {
-      "asin": "B0CCY38RGC",
-      "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Musk After Smoke (7.5g)",
-      "brand": "Godrej aer",
-      "price_egp": 95.0,
-      "currency": "EGP",
-      "rating": 4.1,
-      "reviews": 3372,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 4,
-          "category": "Automotive"
-        },
-        {
-          "rank": 1,
-          "category": "Automotive Air Fresheners"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R36KWTVK8ONKDT",
-          "rating": 1.0,
-          "title": "لا ارجح",
-          "body": "ريحتها مش احسن حاجة ومش بتفوح خالص",
-          "author": null,
-          "date": "Reviewed in Egypt on 7 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R10C5VZKZARQKT",
-          "rating": 1.0,
-          "title": "لا يوجد رائحة معطرة",
-          "body": "رائحته زى مسحوق الغسيل، مفيش معضر",
-          "author": null,
-          "date": "Reviewed in Egypt on 10 April 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2I1GPP2YT8GFL",
-          "rating": 1.0,
-          "title": "Unpleasant, Overpowering S",
-          "body": "The scent is not pleasant, it’s an acquired taste, and smelling it too much can easily cause a headache. The fragrance also lacks a sense of luxury.",
-          "author": null,
-          "date": "Reviewed in the United States on 24 April 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R2MTZ0MI9EWUYI",
-          "rating": 3.0,
-          "title": "Smell",
-          "body": "Smell really good and it is strong smell for cars. But it does not lasts long as described.",
-          "author": null,
-          "date": "Reviewed in Canada on 26 February 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R2ZJXHT9JYUBI6",
-          "rating": 5.0,
-          "title": "Best Car Freshner !",
-          "body": "The fragnance is top notch. It persists for a long time and the intensity is best in the category. This 90rs thing can easily beat any 1-2k category car freshner. It's simple to put to use. I have always received good feedback from people sitting or entering my car. The smell is amazing. Just get 10 packs of it and you are set for a year. Just dont judge it for it's price cause it punches way above its weight.",
-          "author": null,
-          "date": "Reviewed in India on 20 May 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "RIJNV1TR788TQ",
-          "rating": 5.0,
-          "title": "Quality",
-          "body": "Very nice. Highly recommended",
-          "author": null,
-          "date": "Reviewed in Saudi Arabia on 5 April 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R2PDG4LNWE939G",
-          "rating": 5.0,
-          "title": "Nice & effective",
-          "body": "A very nice fragrance and quite effective at keeping the car fresh.",
-          "author": null,
-          "date": "Reviewed in the United Arab Emirates on 8 March 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        }
-      ],
-      "material": null,
-      "manufacturer": "Godrej Consumer Products Limited",
-      "color": "orange,black",
-      "number_of_items": 4,
-      "item_weight_raw": "8 Grams",
-      "item_weight_kg": 0.008,
-      "item_dims_raw": "9.2 x 4.3 x 19.8 centimeters",
-      "item_dims_cm": {
-        "l": 9.2,
-        "w": 4.3,
-        "h": 19.8
-      },
-      "image_count": 7,
-      "feature_bullet_count": 1,
-      "offer_count": 2
     },
     "B0CXPDG6KV": {
       "asin": "B0CXPDG6KV",
