@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Radar,
   Search,
+  Store,
   Target,
   TrendingUp,
   Trophy,
@@ -35,6 +36,7 @@ const ICONS: Record<string, LucideIcon> = {
   Radar,
   Boxes,
   Search,
+  Store,
   Target,
 };
 

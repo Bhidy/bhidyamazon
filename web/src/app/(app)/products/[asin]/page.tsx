@@ -39,12 +39,15 @@ import { DemandBadge, TrendIndicator } from "@/components/app/badges";
 import { ConfidenceBadge, ProvenanceHint } from "@/components/app/confidence";
 import { Freshness } from "@/components/app/freshness";
 import {
+  amazonProductUrl,
   getBestSellers,
   getBsrHistory,
   getMovers,
+  getOffers,
   getProduct,
   getReviews,
   getSentimentSummary,
+  getSimilarProducts,
 } from "@/lib/data";
 import { DEMAND_BAND_META, DISCLOSURE } from "@/lib/constants";
 import { computeReferralFee, getReferralRule } from "@/lib/fees";
@@ -60,6 +63,10 @@ import type { Review, ReviewLang, SentimentLabel } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { HistoryChart, type HistoryPoint } from "./_components/history-chart";
 import { WatchButton } from "./_components/watch-button";
+import { OffersSection } from "./_components/offers-section";
+import { SimilarProducts } from "./_components/similar-products";
+import { ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const PERIODS = ["daily", "weekly", "monthly"] as const;
 
@@ -104,6 +111,8 @@ export default async function ProductDetailPage({
   const history = getBsrHistory(asin);
   const reviews = getReviews(asin, {});
   const sentiment = getSentimentSummary(asin);
+  const offerBook = getOffers(asin);
+  const similar = getSimilarProducts(asin, 6);
 
   const moverRow = getMovers({ period }).find((r) => r.product.asin === asin);
   const bandRow = getBestSellers({ categoryNode: product.categoryNode, period }).find(
@@ -238,6 +247,22 @@ export default async function ProductDetailPage({
               <span data-bi-en="">Check profit</span>
               <span data-bi-ar="">فحص الربح</span>
             </ButtonLink>
+            <Button
+              variant="outline"
+              nativeButton={false}
+              className="w-full"
+              render={
+                <a
+                  href={amazonProductUrl(product.asin)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+            >
+              <ExternalLink className="size-4" />
+              <span data-bi-en="">View on Amazon.eg</span>
+              <span data-bi-ar="">عرض على Amazon.eg</span>
+            </Button>
             <WatchButton product={product} />
             {referralFee != null && product.categoryNode !== "unknown" && (
               <p className="text-center text-[11px] leading-snug text-muted-foreground">
@@ -522,6 +547,12 @@ export default async function ProductDetailPage({
             )}
           </CardContent>
         </Card>
+
+        {/* Other sellers & offers (real per-seller offer-listing data) */}
+        <OffersSection book={offerBook} />
+
+        {/* Similar products in Egypt (same category / brand we track) */}
+        <SimilarProducts products={similar} />
       </div>
     </>
   );

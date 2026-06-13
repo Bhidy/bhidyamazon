@@ -37,6 +37,11 @@ def product(product_html):
     return parse_product(product_html, PRODUCT_ASIN)
 
 
+@pytest.fixture(scope="session")
+def offers(load_fixture):
+    return parse.parse_offers(load_fixture("offer_listing_sample.html"), PRODUCT_ASIN)
+
+
 def _row(rows, asin):
     return next(r for r in rows if r["asin"] == asin)
 
@@ -433,3 +438,53 @@ class TestNumIntHelpers:
     )
     def test_int(self, raw, expected):
         assert _int(raw) == expected
+
+
+# ---------------------------------------------------------------------------
+# parse_offers — AOD offer-listing (real per-seller offers, Egypt marketplace)
+# ---------------------------------------------------------------------------
+
+class TestParseOffers:
+    def test_offer_count_after_dedupe(self, offers):
+        # pinned (Nour-Commerce) + 3 list rows, but one list row duplicates the
+        # pinned offer (same seller/price/condition) → deduped to 3.
+        assert len(offers) == 3
+
+    def test_buybox_is_first_and_flagged(self, offers):
+        assert offers[0]["is_buybox"] is True
+        assert offers[0]["seller_name"] == "Nour-Commerce"
+        assert sum(1 for o in offers if o["is_buybox"]) == 1
+
+    def test_seller_ids_recovered(self, offers):
+        assert {o["seller_id"] for o in offers} == {
+            "A371X7XSBF320S",
+            "AS7YKHQNZZ2EB",
+            "AHV6MKWNOCBIW",
+        }
+
+    def test_prices_parsed_through_rtl_bidi_marks(self, offers):
+        by_seller = {o["seller_id"]: o for o in offers}
+        assert by_seller["A371X7XSBF320S"]["price_egp"] == 170.0
+        assert by_seller["AS7YKHQNZZ2EB"]["price_egp"] == 165.5
+        assert by_seller["AHV6MKWNOCBIW"]["price_egp"] == 159.0
+
+    def test_fba_flag(self, offers):
+        by_seller = {o["seller_id"]: o for o in offers}
+        assert by_seller["A371X7XSBF320S"]["fba"] is True   # isAmazonFulfilled=1
+        assert by_seller["AHV6MKWNOCBIW"]["fba"] is False   # merchant-fulfilled
+
+    def test_condition_normalized(self, offers):
+        by_seller = {o["seller_id"]: o for o in offers}
+        assert by_seller["A371X7XSBF320S"]["condition"] == "New"
+        assert by_seller["AHV6MKWNOCBIW"]["condition"] == "Used"  # "Used - Like New"
+
+    def test_shipping_details_link_not_mistaken_for_seller_name(self, offers):
+        # The merchant-fulfilled offer has a preceding aag/details "Details" link
+        # that also carries seller=...; the real merchant name must win.
+        mf = next(o for o in offers if o["seller_id"] == "AHV6MKWNOCBIW")
+        assert mf["seller_name"] == "Smart1Home"
+        for o in offers:
+            assert o["seller_name"] not in ("Details", "التفاصيل")
+
+    def test_empty_page_yields_no_offers(self):
+        assert parse.parse_offers("<html><body>no offers</body></html>", "B0X") == []

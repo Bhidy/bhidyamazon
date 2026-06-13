@@ -13,16 +13,22 @@ import type {
   BsrHistory,
   DemandBand,
   Keyword,
+  Offer,
+  OfferBook,
+  OfferCondition,
   Period,
   Product,
   Provenance,
   RankingRow,
   Review,
+  SellerProfile,
+  SellerSummary,
   SentimentSummary,
 } from "@/lib/types";
 import { CATEGORY_BY_NODE } from "@/lib/constants";
 import { BREAK_TOKENS, FIT_TOKENS, type ScoreContext } from "@/lib/winning-score";
 import { VALIDATORS } from "@/lib/real-schema";
+import { profileFromProducts, rankSimilar, summariesFromProducts } from "@/lib/seller-analysis";
 
 const DIR = path.join(process.cwd(), "src/data/real");
 // Projection input type for the scraped JSON. Loose on purpose at the TYPE
@@ -437,4 +443,79 @@ export function keywords(opts: { limit?: number; lang?: "en" | "ar" } = {}): Key
     }))
     .sort((a, b) => b.demandScore - a.demandScore);
   return opts.limit ? list.slice(0, opts.limit) : list;
+}
+
+/* ───────────────────────── Sellers & offers ───────────────────────── */
+
+const AMAZON_EG = "https://www.amazon.eg";
+
+/** amazon.eg product deep link (opens in the shopper's residential browser). */
+export function amazonProductUrl(asin: string): string {
+  return `${AMAZON_EG}/dp/${asin}`;
+}
+
+const CONDITIONS: OfferCondition[] = ["New", "Used", "Refurbished"];
+
+/** Real per-seller offers for a product (offer-listing/AOD scrape), price-sorted.
+ *  Every offer is the same Egypt listing from a different merchant. */
+export function offers(asin: string): OfferBook {
+  const raw: Any[] = store().pr?.products?.[asin]?.offers ?? [];
+  const enr = store().pr?.products?.[asin];
+  const list: Offer[] = raw
+    .map((o) => ({
+      sellerName: o.seller_name ?? undefined,
+      sellerId: o.seller_id ?? undefined,
+      priceEgp: o.price_egp ?? undefined,
+      fba: Boolean(o.fba),
+      condition: (CONDITIONS.includes(o.condition) ? o.condition : "New") as OfferCondition,
+      isBuyBox: Boolean(o.is_buybox),
+    }))
+    // Cheapest first; offers without a price sink to the bottom.
+    .sort((a, b) => (a.priceEgp ?? Infinity) - (b.priceEgp ?? Infinity));
+  return {
+    asin,
+    offers: list,
+    reportedOfferCount: enr?.offer_count ?? undefined,
+    amazonOffersUrl: `${AMAZON_EG}/gp/offer-listing/${asin}`,
+    provenance: prov(
+      "amazon_html_offer_listing",
+      "high",
+      false,
+      list.length
+        ? "Live amazon.eg offer-listing — seller, price & fulfilment are scraped facts."
+        : "Per-seller offers not yet scraped for this item; see the listing on Amazon.",
+    ),
+  };
+}
+
+/** All tracked products as domain objects (best-seller rows carry the brand). */
+export function allProducts(): Product[] {
+  return (store().bs?.all ?? []).map(rowToProduct);
+}
+
+const SELLER_PROV_NOTE =
+  "Seller = the brand/store byline on the amazon.eg best-seller listings we track (a sample, not their full catalogue).";
+
+/** Similar products in Egypt: same category (price-proximity ranked) then same brand. */
+export function similarProducts(asin: string, limit = 6): Product[] {
+  const self = product(asin);
+  if (!self) return [];
+  return rankSimilar(self, allProducts().filter((p) => p.asin !== asin), limit);
+}
+
+/** Brand/store sellers aggregated across tracked products, strongest first. */
+export function sellers(): SellerSummary[] {
+  return summariesFromProducts(
+    allProducts(),
+    prov("amazon_html_bestsellers", "high", false, SELLER_PROV_NOTE),
+  );
+}
+
+/** Full seller (brand) profile + data-derived competitive analysis. */
+export function seller(slug: string): SellerProfile | undefined {
+  return profileFromProducts(
+    slug,
+    allProducts(),
+    prov("amazon_html_bestsellers", "high", false, SELLER_PROV_NOTE),
+  );
 }

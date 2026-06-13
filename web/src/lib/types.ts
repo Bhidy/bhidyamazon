@@ -159,6 +159,62 @@ export interface SentimentSummary {
   provenance: Provenance;
 }
 
+/* ───────────────────────── Sellers & offers ─────────────────────────
+   Real amazon.eg marketplace data. `Offer` = one seller's offer for a product
+   (scraped from the offer-listing / AOD page — every offer is the same Egypt
+   listing from a different merchant). `SellerSummary`/`SellerProfile` aggregate
+   the BRAND/store byline across the products we track. All Egypt-only. */
+
+export type OfferCondition = "New" | "Used" | "Refurbished";
+
+export interface Offer {
+  sellerName?: string;
+  /** Stable amazon.eg seller id (e.g. A371X7XSBF320S), when recoverable. */
+  sellerId?: string;
+  priceEgp?: number;
+  /** Fulfilled by Amazon (FBA) vs merchant-fulfilled. */
+  fba: boolean;
+  condition: OfferCondition;
+  /** The featured buy-box offer (the default "Add to cart" seller). */
+  isBuyBox: boolean;
+}
+
+export interface OfferBook {
+  asin: string;
+  offers: Offer[];
+  /** Total offers reported on the listing (may exceed scraped `offers.length`). */
+  reportedOfferCount?: number;
+  /** amazon.eg "see all offers" deep link. */
+  amazonOffersUrl: string;
+  provenance: Provenance;
+}
+
+export interface SellerSummary {
+  /** URL-safe slug derived from the brand name. */
+  slug: string;
+  name: string;
+  productCount: number;
+  /** categoryNodes this seller appears in. */
+  categories: string[];
+  avgRating?: number;
+  /** Sum of reported review counts across their tracked products. */
+  totalReviews: number;
+  minPriceEgp?: number;
+  maxPriceEgp?: number;
+  /** Strongest (lowest) BSR among their products. */
+  bestBsr?: number;
+  provenance: Provenance;
+}
+
+export interface SellerProfile extends SellerSummary {
+  products: Product[];
+  /** Data-derived competitive intelligence (from tracked Egypt listings only). */
+  strengths: string[];
+  weaknesses: string[];
+  /** Actionable "how to beat them" plays grounded in the observed data. */
+  plays: string[];
+}
+
 export type DemandTrend = "rising" | "flat" | "falling";
 
 /**

@@ -125,7 +125,97 @@
       },
       "image_count": 5,
       "feature_bullet_count": 1,
-      "offer_count": 31
+      "offer_count": 31,
+      "offers": [
+        {
+          "seller_name": "Nour-Commerce",
+          "seller_id": "A371X7XSBF320S",
+          "price_egp": 170.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "سوق كادو1",
+          "seller_id": "AS7YKHQNZZ2EB",
+          "price_egp": 170.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Ebaskt",
+          "seller_id": "A19I0J9SEXYVB",
+          "price_egp": 170.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Egypt_Hub",
+          "seller_id": "A3LJ7INIF6KBNN",
+          "price_egp": 184.9,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "xxDiscountxx",
+          "seller_id": "A3HBJVIC14OEWA",
+          "price_egp": 184.9,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "AL TOP",
+          "seller_id": "AY5C6K213AW5F",
+          "price_egp": 187.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "LOKYBOY",
+          "seller_id": "A2U96IT6K9NZMH",
+          "price_egp": 188.5,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Smart1Home",
+          "seller_id": "AHV6MKWNOCBIW",
+          "price_egp": 165.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "RP4",
+          "seller_id": "A1I0FICP9MI8R",
+          "price_egp": 165.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Home&Kitchen2",
+          "seller_id": "AJUVNJ6XUGKVI",
+          "price_egp": 199.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ِAlthouraya",
+          "seller_id": "ATA7C2W7DYK8W",
+          "price_egp": 223.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B09NRNLTZV": {
       "asin": "B09NRNLTZV",
@@ -250,7 +340,25 @@
       },
       "image_count": 5,
       "feature_bullet_count": 4,
-      "offer_count": 2
+      "offer_count": 2,
+      "offers": [
+        {
+          "seller_name": "Es-ho",
+          "seller_id": "APU3P1PNBYDUN",
+          "price_egp": 80.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "Spaceshoop_October",
+          "seller_id": "ASCKB7YHANFEH",
+          "price_egp": 82.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0BGPLGQKQ": {
       "asin": "B0BGPLGQKQ",
@@ -375,7 +483,97 @@
       },
       "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 20
+      "offer_count": 20,
+      "offers": [
+        {
+          "seller_name": "PrimeHubb",
+          "seller_id": "ALHOX5C4ZV3KA",
+          "price_egp": 60.5,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "Hema_STORE",
+          "seller_id": "A39P92WEHA5PKC",
+          "price_egp": 60.5,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "اير ماكس",
+          "seller_id": "A3LCDE8LV68D7T",
+          "price_egp": 60.75,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 66.64,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Ebeid 2024",
+          "seller_id": "A1CV158K9868SH",
+          "price_egp": 73.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Mazmaza",
+          "seller_id": "A2EBCJRJM8IQU3",
+          "price_egp": 73.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Blue_bird",
+          "seller_id": "A2UBE9MBSIT7QJ",
+          "price_egp": 74.4,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "H-H-H-H-H",
+          "seller_id": "A2GHUN9XZES1M1",
+          "price_egp": 75.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ElFairouz",
+          "seller_id": "A1W81VDO4RBW1I",
+          "price_egp": 75.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "King trade1",
+          "seller_id": "AYU1U564QFKUB",
+          "price_egp": 75.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Es-ho",
+          "seller_id": "APU3P1PNBYDUN",
+          "price_egp": 103.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0CXPDG6KV": {
       "asin": "B0CXPDG6KV",
@@ -500,7 +698,97 @@
       },
       "image_count": 7,
       "feature_bullet_count": 6,
-      "offer_count": 14
+      "offer_count": 14,
+      "offers": [
+        {
+          "seller_name": "K-E_egy",
+          "seller_id": "A3K973ZYAXWN3H",
+          "price_egp": 59.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "S_M_Store",
+          "seller_id": "A1YERW7MSNSZEZ",
+          "price_egp": 59.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "King trade1",
+          "seller_id": "AYU1U564QFKUB",
+          "price_egp": 59.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "H-H-H-H-H",
+          "seller_id": "A2GHUN9XZES1M1",
+          "price_egp": 59.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Hema_STORE",
+          "seller_id": "A39P92WEHA5PKC",
+          "price_egp": 59.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Tranatula",
+          "seller_id": "AP25QM9KNMKPL",
+          "price_egp": 59.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 68.32,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "HEMA_Store",
+          "seller_id": "A1QDODOF1RYKZV",
+          "price_egp": 75.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Mark_Spain",
+          "seller_id": "A11XVL698L71EZ",
+          "price_egp": 75.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Es-ho",
+          "seller_id": "APU3P1PNBYDUN",
+          "price_egp": 79.99,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "The.Value.Store",
+          "seller_id": "A2JQWSUOHS4VQE",
+          "price_egp": 89.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B096L5ZB2L": {
       "asin": "B096L5ZB2L",
@@ -621,7 +909,17 @@
       "item_dims_cm": null,
       "image_count": 4,
       "feature_bullet_count": 4,
-      "offer_count": null
+      "offer_count": null,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 72.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        }
+      ]
     },
     "B0CLD3RNMG": {
       "asin": "B0CLD3RNMG",
@@ -746,7 +1044,97 @@
       },
       "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 24
+      "offer_count": 24,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 148.07,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "Nour-Commerce",
+          "seller_id": "A371X7XSBF320S",
+          "price_egp": 150.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "S&M-Store",
+          "seller_id": "A24L91U83A8RCR",
+          "price_egp": 150.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "AL TOP",
+          "seller_id": "AY5C6K213AW5F",
+          "price_egp": 152.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Sporting support  Prime sport",
+          "seller_id": "A26V17IJ7QKL0O",
+          "price_egp": 130.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Mazmaza",
+          "seller_id": "A2EBCJRJM8IQU3",
+          "price_egp": 188.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "RP4",
+          "seller_id": "A1I0FICP9MI8R",
+          "price_egp": 165.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "EL-Captain.CGS",
+          "seller_id": "A3C6DQMZ338AD7",
+          "price_egp": 191.35,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Black & white Store",
+          "seller_id": "A30J3VO0UI12SJ",
+          "price_egp": 199.99,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "the scorpion",
+          "seller_id": "A1PCE68D0LHOEV",
+          "price_egp": 200.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "MAKYSTORE",
+          "seller_id": "A1DR4KQJJILTB4",
+          "price_egp": 210.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0CCXZRDV7": {
       "asin": "B0CCXZRDV7",
@@ -805,7 +1193,17 @@
       },
       "image_count": 4,
       "feature_bullet_count": 1,
-      "offer_count": null
+      "offer_count": null,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 95.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        }
+      ]
     },
     "B07MX3F36F": {
       "asin": "B07MX3F36F",
@@ -930,7 +1328,97 @@
       },
       "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 17
+      "offer_count": 17,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 255.63,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "Nour-Commerce",
+          "seller_id": "A371X7XSBF320S",
+          "price_egp": 255.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ميلانو تولز",
+          "seller_id": "A1X4JBCR3H072N",
+          "price_egp": 229.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Energypt",
+          "seller_id": "A1IGZEE65RL93S",
+          "price_egp": 255.63,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "autoshico",
+          "seller_id": "A22QSE0E87ALE0",
+          "price_egp": 257.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Elhussein tools",
+          "seller_id": "A1BX9MCTXHJ5TY",
+          "price_egp": 268.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Bans Auto Store",
+          "seller_id": "A1E948S0EJKF99",
+          "price_egp": 274.99,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "MAKEOVER_egy",
+          "seller_id": "A35YNN45MFPEGB",
+          "price_egp": 278.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Zain Electric",
+          "seller_id": "A206AX7MERE9W",
+          "price_egp": 290.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ELMASRIA 2000",
+          "seller_id": "AU1Z1XTB2CRPZ",
+          "price_egp": 290.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ForSale22",
+          "seller_id": "A25MRWLE1UOPQV",
+          "price_egp": 345.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0BKWXJB29": {
       "asin": "B0BKWXJB29",
@@ -1051,7 +1539,73 @@
       "item_dims_cm": null,
       "image_count": 4,
       "feature_bullet_count": 5,
-      "offer_count": 9
+      "offer_count": 9,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 1199.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "شمس الدين للتوريدات العمومية",
+          "seller_id": "A3FP7NL4FTR5SH",
+          "price_egp": 1198.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Aruzan,eg",
+          "seller_id": "A3UOP9X5H2YRUW",
+          "price_egp": 1575.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Amjmasn",
+          "seller_id": "ALONLDV38T00A",
+          "price_egp": 1750.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "A-M Motors",
+          "seller_id": "A1GXIJR5ECINB9",
+          "price_egp": 1770.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Trust Automotive ™®",
+          "seller_id": "A3MOLW4FBXJG9N",
+          "price_egp": 1888.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Nad1124",
+          "seller_id": "A30DOEYPUAU34P",
+          "price_egp": 1950.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "MW Group01",
+          "seller_id": "A2UIGMSVDLWTMX",
+          "price_egp": 2200.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0CPC8JMCW": {
       "asin": "B0CPC8JMCW",
@@ -1172,7 +1726,49 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 7,
-      "offer_count": 5
+      "offer_count": 5,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 59.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 50.85,
+          "fba": false,
+          "condition": "Used",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "International-Trading",
+          "seller_id": "A4ULDS6FNW74W",
+          "price_egp": 79.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Basics EG",
+          "seller_id": "AW90T2UBCRHQ",
+          "price_egp": 90.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Nar-Store",
+          "seller_id": "A2T3ESIZA4EBXS",
+          "price_egp": 99.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B07LBQQ6P4": {
       "asin": "B07LBQQ6P4",
@@ -1297,7 +1893,65 @@
       },
       "image_count": 5,
       "feature_bullet_count": 5,
-      "offer_count": null
+      "offer_count": null,
+      "offers": [
+        {
+          "seller_name": "Zikry Pharmacies",
+          "seller_id": "A2K0PMZO7Z3H3E",
+          "price_egp": 51.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "Rasm aljamal",
+          "seller_id": "A3KWJ6CK2W6MID",
+          "price_egp": 90.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Zikry Pharmacies",
+          "seller_id": "A2K0PMZO7Z3H3E",
+          "price_egp": 91.2,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "EgyptianBeauty",
+          "seller_id": "A3HTBNTTJPUZTN",
+          "price_egp": 94.38,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Romany Signature",
+          "seller_id": "A2QZ4VH1ZHXOXN",
+          "price_egp": 125.69,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Doss Pharmacies",
+          "seller_id": "A3W2KY9917TGJ4",
+          "price_egp": 142.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "barsoum group pharmacies",
+          "seller_id": "AKQCNXOBWHBFH",
+          "price_egp": 160.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     }
   }
 }

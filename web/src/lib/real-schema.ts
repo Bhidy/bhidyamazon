@@ -85,6 +85,8 @@ export function validateProducts(j: unknown): string | null {
     if (p.bsr != null && !Array.isArray(p.bsr)) return `products.${asin}: bsr is not an array`;
     if (p.reviews_list != null && !Array.isArray(p.reviews_list))
       return `products.${asin}: reviews_list is not an array`;
+    if (p.offers != null && !Array.isArray(p.offers))
+      return `products.${asin}: offers is not an array`;
     if (p.item_dims_cm != null) {
       const d = p.item_dims_cm;
       if (!isObj(d) || !optNum(d.l) || !optNum(d.w) || !optNum(d.h))

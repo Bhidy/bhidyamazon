@@ -72,6 +72,7 @@ export const NAV_GROUPS: NavGroup[] = [
     labelAr: "البحث",
     items: [
       { labelEn: "Products", labelAr: "المنتجات", href: "/products", icon: "Boxes" },
+      { labelEn: "Sellers", labelAr: "البائعون", href: "/sellers", icon: "Store" },
       { labelEn: "Search", labelAr: "بحث", href: "/search", icon: "Search" },
     ],
   },

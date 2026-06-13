@@ -28,13 +28,21 @@ const FILES: Record<string, unknown> = {
       // Egypt-only guardrail must surface ONLY the Egypt ones.
       A1: {
         asin: "A1",
+        brand: "Acme",
         reviews_list: [
           { review_id: "EG1", rating: 5, title: "ممتاز", body: "حلو", date: "Reviewed in Egypt on 12 May 2026", lang: "ar" },
           { review_id: "EG2", rating: 2, title: "broke", body: "fragile broken", date: "Reviewed in Egypt on 3 May 2026", lang: "en" },
           { review_id: "UAE1", rating: 5, title: "great", body: "fast to dubai", date: "Reviewed in the United Arab Emirates on 1 May 2026", lang: "en" },
           { review_id: "US1", rating: 1, title: "bad", body: "overseas", date: "Reviewed in the United States on 3 April 2026", lang: "en" },
         ],
+        offer_count: 9,
+        offers: [
+          { seller_name: "MidCo", seller_id: "S2", price_egp: 110, fba: false, condition: "New", is_buybox: false },
+          { seller_name: "TopCo", seller_id: "S1", price_egp: 100, fba: true, condition: "New", is_buybox: true },
+          { seller_name: "CheapCo", seller_id: "S3", price_egp: 95, fba: false, condition: "Used", is_buybox: false },
+        ],
       },
+      A2: { asin: "A2", brand: "Globex", offer_count: 1 },
     },
   },
   "keywords.json": { keywords: [] },
@@ -104,5 +112,56 @@ describe("real-store · Egypt-only review guardrail", () => {
     expect(s.negativePct).toBe(50);
     expect(s.langMix.ar).toBe(1);
     expect(s.langMix.en).toBe(1);
+  });
+});
+
+describe("real-store · offers (per-seller, price-sorted)", () => {
+  it("maps and sorts offers cheapest-first", () => {
+    const book = store.offers("A1");
+    expect(book.offers.map((o) => o.priceEgp)).toEqual([95, 100, 110]);
+    expect(book.offers[0].sellerName).toBe("CheapCo");
+  });
+
+  it("flags the buy-box and carries fulfilment + condition", () => {
+    const book = store.offers("A1");
+    const bb = book.offers.find((o) => o.isBuyBox)!;
+    expect(bb.sellerName).toBe("TopCo");
+    expect(bb.fba).toBe(true);
+    const used = book.offers.find((o) => o.sellerId === "S3")!;
+    expect(used.condition).toBe("Used");
+    expect(used.fba).toBe(false);
+  });
+
+  it("exposes reported count + an amazon.eg offers deep link", () => {
+    const book = store.offers("A1");
+    expect(book.reportedOfferCount).toBe(9);
+    expect(book.amazonOffersUrl).toBe("https://www.amazon.eg/gp/offer-listing/A1");
+  });
+
+  it("returns an empty book (not an error) when no offers scraped", () => {
+    const book = store.offers("A2");
+    expect(book.offers).toEqual([]);
+    expect(book.amazonOffersUrl).toContain("/A2");
+  });
+});
+
+describe("real-store · sellers (brand axis) & similar", () => {
+  it("aggregates sellers by brand from tracked products", () => {
+    const names = store.sellers().map((s) => s.name).sort();
+    expect(names).toEqual(["Acme", "Globex"]);
+  });
+
+  it("resolves a seller profile by slug with analysis", () => {
+    const acme = store.sellers().find((s) => s.name === "Acme")!;
+    const profile = store.seller(acme.slug)!;
+    expect(profile.name).toBe("Acme");
+    expect(profile.products.map((p) => p.asin)).toContain("A1");
+    expect(profile.plays.length).toBeGreaterThan(0);
+  });
+
+  it("similarProducts excludes self and stays in-category", () => {
+    const sim = store.similarProducts("A1", 6);
+    expect(sim.map((p) => p.asin)).not.toContain("A1");
+    expect(sim.every((p) => p.categoryNode === "electronics")).toBe(true);
   });
 });

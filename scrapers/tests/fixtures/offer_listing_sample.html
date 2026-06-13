@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+  Structurally faithful amazon.eg AOD offer-listing fixture (selectors validated
+  live 2026-06-13 on /-/en/gp/offer-listing/<ASIN>?aod=0).
+  - #aod-pinned-offer = featured buy-box offer
+  - #aod-offer-list > div#aod-offer = remaining sellers
+  - merchant name+id: #aod-offer-soldBy a[href*='seller='] (aag/main, olp_merch_name)
+  - a shipping "Details" link (aag/details) precedes the name on MF offers — must NOT
+    be mistaken for the seller name.
+  - price: #aod-offer-price .aok-offscreen (carries RTL bidi marks)
+  - FBA: a[href*='isAmazonFulfilled=1']
+-->
+<html lang="en-eg"><head><meta charset="utf-8"></head><body>
+<div id="all-offers-display">
+  <div id="aod-pinned-offer">
+    <div id="aod-offer-price"><span class="a-price"><span class="aok-offscreen">&#8207;170.00&#160;EGP</span><span aria-hidden="true">EGP&#8206;170.&#8206;00</span></span></div>
+    <div id="aod-offer-heading"><span class="a-text-bold">New</span></div>
+    <div id="aod-offer-soldBy"><a href="https://www.amazon.eg/gp/aag/main?ie=UTF8&amp;seller=A371X7XSBF320S&amp;isAmazonFulfilled=1&amp;asin=B0TESTPROD&amp;ref_=olp_merch_name_0">Nour-Commerce</a></div>
+  </div>
+
+  <div id="aod-offer-list">
+    <div id="aod-offer" class="a-section">
+      <div id="aod-offer-price"><span class="a-price"><span class="aok-offscreen">&#8207;165.50&#160;EGP</span></span></div>
+      <div id="aod-offer-heading"><span class="a-text-bold">New</span></div>
+      <div id="aod-offer-soldBy"><a href="https://www.amazon.eg/gp/aag/main?ie=UTF8&amp;seller=AS7YKHQNZZ2EB&amp;isAmazonFulfilled=1&amp;asin=B0TESTPROD&amp;ref_=olp_merch_name_1">سوق كادو1</a></div>
+    </div>
+
+    <!-- Merchant-fulfilled offer: the shipping "Details" link comes FIRST and also
+         carries seller=...; the parser must still pick the merchant-name anchor. -->
+    <div id="aod-offer" class="a-section">
+      <div id="aod-offer-price"><span class="aok-offscreen">&#8207;159.00&#160;EGP</span></div>
+      <div id="aod-offer-heading"><span class="a-text-bold">Used - Like New</span></div>
+      <div class="aod-delivery-promise">Delivery EGP 26
+        <a href="https://www.amazon.eg/gp/aag/details/?seller=AHV6MKWNOCBIW&amp;sshmPath=shipping-rates">Details</a>
+      </div>
+      <div id="aod-offer-soldBy"><a href="https://www.amazon.eg/gp/aag/main?ie=UTF8&amp;seller=AHV6MKWNOCBIW&amp;isAmazonFulfilled=0&amp;asin=B0TESTPROD&amp;ref_=olp_merch_name_2">Smart1Home</a></div>
+    </div>
+
+    <!-- Duplicate of the pinned offer (same seller, price, condition) — must be deduped. -->
+    <div id="aod-offer" class="a-section">
+      <div id="aod-offer-price"><span class="aok-offscreen">&#8207;170.00&#160;EGP</span></div>
+      <div id="aod-offer-heading"><span class="a-text-bold">New</span></div>
+      <div id="aod-offer-soldBy"><a href="https://www.amazon.eg/gp/aag/main?ie=UTF8&amp;seller=A371X7XSBF320S&amp;isAmazonFulfilled=1&amp;asin=B0TESTPROD&amp;ref_=olp_merch_name_3">Nour-Commerce</a></div>
+    </div>
+  </div>
+</div>
+</body></html>

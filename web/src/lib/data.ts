@@ -13,11 +13,14 @@ import type {
   Confidence,
   DemandBand,
   Keyword,
+  OfferBook,
   Period,
   Product,
   Provenance,
   RankingRow,
   Review,
+  SellerProfile,
+  SellerSummary,
   SentimentSummary,
   WinningScore,
   WpsOverrides,
@@ -36,6 +39,11 @@ import {
 } from "@/lib/seed";
 import { CATEGORY_BY_NODE } from "@/lib/constants";
 import * as real from "@/lib/real-store";
+import {
+  profileFromProducts,
+  rankSimilar,
+  summariesFromProducts,
+} from "@/lib/seller-analysis";
 import {
   computeWinningScore,
   WINNING_SCORE_CONFIG,
@@ -186,6 +194,52 @@ export function getProduct(asin: string, period: Period = "daily"): Product | un
   if (real.available()) return real.product(asin);
   const p = PRODUCT_BY_ASIN[asin];
   return p ? toProduct(p, period) : undefined;
+}
+
+/** amazon.eg deep link for the product (opens on Amazon in a new tab). */
+export function amazonProductUrl(asin: string): string {
+  return `https://www.amazon.eg/dp/${asin}`;
+}
+
+/** Real per-seller offers for the product (Egypt marketplace). Seed mode has no
+ *  offer data, so it returns an empty book that degrades to the Amazon link. */
+export function getOffers(asin: string): OfferBook {
+  if (real.available()) return real.offers(asin);
+  return {
+    asin,
+    offers: [],
+    reportedOfferCount: undefined,
+    amazonOffersUrl: `https://www.amazon.eg/gp/offer-listing/${asin}`,
+    provenance: prov("seed", "low", true, "Offer data is available only with live amazon.eg data."),
+  };
+}
+
+/** Similar products in Egypt (same category, then same brand), excluding self. */
+export function getSimilarProducts(asin: string, limit = 6): Product[] {
+  if (real.available()) return real.similarProducts(asin, limit);
+  const self = getProduct(asin);
+  if (!self) return [];
+  const pool = PRODUCTS.map((p) => toProduct(p)).filter((p) => p.asin !== asin);
+  return rankSimilar(self, pool, limit);
+}
+
+const SEED_SELLER_PROV = prov(
+  "seed",
+  "low",
+  true,
+  "Seller = the brand/store byline; synthesized in seed mode.",
+);
+
+/** Brand/store sellers aggregated across tracked products, strongest first. */
+export function getSellers(): SellerSummary[] {
+  if (real.available()) return real.sellers();
+  return summariesFromProducts(PRODUCTS.map((p) => toProduct(p)), SEED_SELLER_PROV);
+}
+
+/** Full seller (brand) profile + competitive analysis, or undefined if unknown. */
+export function getSeller(slug: string): SellerProfile | undefined {
+  if (real.available()) return real.seller(slug);
+  return profileFromProducts(slug, PRODUCTS.map((p) => toProduct(p)), SEED_SELLER_PROV);
 }
 
 export interface RankingQuery {

@@ -86,8 +86,10 @@ def _throttle(min_s: float = 10.0, max_s: float = 18.0) -> None:
     _last_request[0] = time.time()
 
 
-def _fetch_firecrawl(url: str, lang: str) -> str:
-    """Fetch via the Firecrawl API (datacenter-safe → used by the cloud cron). ~1 credit/page."""
+def _fetch_firecrawl(url: str, lang: str, wait_ms: int = 0, proxy: str | None = None) -> str:
+    """Fetch via the Firecrawl API (datacenter-safe → used by the cloud cron). ~1 credit/page.
+    wait_ms>0 lets a JS-rendered module settle (the offer-listing AOD block loads
+    lazily and otherwise comes back empty); proxy='auto' escalates stealth."""
     key = os.environ.get("FIRECRAWL_API_KEY")
     if not key:
         raise Blocked("FIRECRAWL_API_KEY not set")
@@ -96,17 +98,23 @@ def _fetch_firecrawl(url: str, lang: str) -> str:
             f"firecrawl per-run budget ({_FIRECRAWL_MAX}) exhausted — stopping to protect the monthly free tier"
         )
     _firecrawl_calls[0] += 1
+    payload = {
+        "url": url,
+        "formats": ["rawHtml"],
+        "location": {"country": "EG", "languages": ["ar-EG" if lang == "ar" else "en-EG"]},
+        "onlyMainContent": False,
+        "timeout": 45000,
+    }
+    if wait_ms:
+        payload["waitFor"] = wait_ms
+        payload["timeout"] = 45000 + wait_ms
+    if proxy:
+        payload["proxy"] = proxy
     r = creq.post(
         "https://api.firecrawl.dev/v1/scrape",
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        json={
-            "url": url,
-            "formats": ["rawHtml"],
-            "location": {"country": "EG", "languages": ["ar-EG" if lang == "ar" else "en-EG"]},
-            "onlyMainContent": False,
-            "timeout": 45000,
-        },
-        timeout=80,
+        json=payload,
+        timeout=80 + wait_ms // 1000,
     )
     if r.status_code != 200:
         raise Blocked(f"firecrawl HTTP {r.status_code}")
@@ -117,14 +125,15 @@ def _fetch_firecrawl(url: str, lang: str) -> str:
     return html
 
 
-def fetch(path: str, *, throttle: bool = True, lang: str = "en") -> str:
+def fetch(path: str, *, throttle: bool = True, lang: str = "en", wait_ms: int = 0, proxy: str | None = None) -> str:
     """GET an amazon.eg path. lang='ar' forces the Arabic UI (Arabic titles).
-    Returns HTML or raises Blocked."""
+    wait_ms/proxy apply to the Firecrawl backend only (the direct residential
+    fetch already receives the server-rendered page). Returns HTML or raises Blocked."""
     url = path if path.startswith("http") else BASE + path
     if throttle:
         _throttle()
     if FETCH_BACKEND == "firecrawl":
-        html = _fetch_firecrawl(url, lang)
+        html = _fetch_firecrawl(url, lang, wait_ms=wait_ms, proxy=proxy)
         if _is_blocked(200, html) or not _is_eg_page(html):
             raise Blocked(f"BLOCKED/invalid (firecrawl content) url={url}")
         return html

@@ -329,3 +329,93 @@ def parse_product(html: str, asin: str) -> dict:
         "feature_bullet_count": feature_bullet_count,
         "offer_count": offer_count,
     }
+
+
+# Bidi/format marks Amazon injects into RTL price strings; strip before numeric parse.
+_BIDI_RE = re.compile(r"[‎‏​‪-‮]")
+_SELLER_ID_RE = re.compile(r"seller=([A-Z0-9]{10,})")
+
+
+def _offer_condition(block) -> str:
+    """Offer condition normalized to New / Used / Refurbished (EN + Arabic aware)."""
+    txt = ""
+    h = block.select_one("#aod-offer-heading, [id*='aod-offer-heading'], .a-text-bold")
+    if h:
+        txt = h.get_text(" ", strip=True)
+    low = txt.lower()
+    if "refurb" in low or "مجدد" in txt:
+        return "Refurbished"
+    if "used" in low or "مستعمل" in txt or "open box" in low:
+        return "Used"
+    return "New"
+
+
+def _parse_offer_block(block, *, is_buybox: bool) -> dict | None:
+    """One AOD offer (#aod-offer / #aod-pinned-offer) → normalized seller offer.
+    Returns None if neither a price nor a seller can be recovered (dead block)."""
+    # Price: .aok-offscreen is the clean, screen-reader copy ("‏170.00 جنيه").
+    price = None
+    pe = block.select_one("#aod-offer-price .aok-offscreen, #aod-offer-price .a-offscreen, .aok-offscreen")
+    if pe:
+        price = _num(_BIDI_RE.sub("", pe.get_text(" ", strip=True)))
+    # Seller: prefer the "sold by" merchant-NAME anchor (aag/main + olp_merch_name);
+    # a plain a[href*='seller='] would also match the shipping "Details" link
+    # (aag/details) that precedes it on merchant-fulfilled offers → wrong text.
+    seller_name = seller_id = None
+    slink = (
+        block.select_one("#aod-offer-soldBy a[href*='seller=']")
+        or block.select_one("a[href*='olp_merch_name'], a[href*='aag/main'][href*='seller=']")
+        or block.select_one("a[href*='seller=']")
+    )
+    if slink:
+        m = _SELLER_ID_RE.search(slink.get("href", ""))
+        seller_id = m.group(1) if m else None
+        name = slink.get_text(" ", strip=True)
+        # Guard against the "Details"/"التفاصيل" shipping link leaking in as a name.
+        if name and name not in ("Details", "التفاصيل"):
+            seller_name = name
+    # "Sold by Amazon" / no third-party link → Amazon is the seller.
+    if not seller_name and block.select_one("#aod-offer-shipsFromSoldBy, [id*='soldBy']"):
+        seller_name = "Amazon"
+    is_fba = bool(block.select_one("a[href*='isAmazonFulfilled=1'], #aod-offer-shipsFrom [class*='fulfilled']"))
+    if price is None and not seller_name:
+        return None
+    return {
+        "seller_name": seller_name,
+        "seller_id": seller_id,
+        "price_egp": price,
+        "fba": is_fba,
+        "condition": _offer_condition(block),
+        "is_buybox": is_buybox,
+    }
+
+
+def parse_offers(html: str, asin: str) -> list[dict]:
+    """Offer-listing (AOD) page → real per-seller offers for an amazon.eg ASIN.
+
+    Source: /-/en/gp/offer-listing/<ASIN>?aod=0. Structure (validated live
+    2026-06-13): #aod-pinned-offer is the featured buy-box offer; #aod-offer-list
+    holds the remaining sellers as div#aod-offer rows. Each offer is the SAME
+    Egypt marketplace listing from a different seller — Egypt-only by definition.
+    Deduped on (seller_id, price, condition) so a pinned offer that also appears
+    in the list is not double-counted.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    offers: list[dict] = []
+    seen: set = set()
+    blocks = []
+    pinned = soup.select_one("#aod-pinned-offer")
+    if pinned:
+        blocks.append((pinned, True))
+    for b in soup.select("#aod-offer-list div#aod-offer, div#aod-offer"):
+        blocks.append((b, False))
+    for block, is_buybox in blocks:
+        o = _parse_offer_block(block, is_buybox=is_buybox)
+        if not o:
+            continue
+        key = (o["seller_id"], o["price_egp"], o["condition"])
+        if key in seen:
+            continue
+        seen.add(key)
+        offers.append(o)
+    return offers

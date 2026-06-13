@@ -36,11 +36,14 @@ TOP_N_NICHE = 30
 # Enrichment depth is BACKEND-AWARE. Local residential (RASID_FETCH=direct) has no
 # API budget, so it enriches deeply. The cloud cron uses Firecrawl (~1 credit/page,
 # 1,000/mo free tier), so it stays lean to keep monthly usage under budget:
-#   firecrawl ≈ 9 cats × 2 (en+ar) = 18 list + 12 enrich = 30/day ≈ 900/mo < 1,000.
+#   firecrawl ≈ 9 cats × 2 (en+ar) = 18 list + 12 enrich + 3 offers = 33/day ≈ 990/mo < 1,000.
 _FIRECRAWL = os.environ.get("RASID_FETCH", "direct").lower() == "firecrawl"
 ENRICH_PER_CAT = 1 if _FIRECRAWL else 2
 ENRICH_NICHE = 10 if _FIRECRAWL else 16
 ENRICH_MAX = 12 if _FIRECRAWL else 30
+# Per-seller offers cost one extra fetch each. Cloud stays tiny to protect the
+# free tier (3/day → +90/mo); local residential has no budget, so it goes deep.
+OFFERS_MAX = 3 if _FIRECRAWL else 30
 SCHEMA_VERSION = 3
 
 
@@ -160,6 +163,7 @@ def main() -> None:
 
     print("\n=== Product detail (BSR + reviews) ===", flush=True)
     products: dict[str, dict] = {}
+    detail_order: list[str] = []
     for asin in list(dict.fromkeys(enrich))[:ENRICH_MAX]:
         try:
             html = fetch.fetch(f"/-/en/dp/{asin}")
@@ -171,12 +175,36 @@ def main() -> None:
             continue
         p = parse.parse_product(html, asin)
         products[asin] = p
+        detail_order.append(asin)
         leaf = p["bsr"][-1] if p["bsr"] else None
         print(
             f"  [DETAIL] {asin}: BSR={leaf} reviews={len(p['reviews_list'])} "
             f"· {(p['title'] or '')[:42]}",
             flush=True,
         )
+
+    # Real per-seller offers (AOD offer-listing) for the top enriched products.
+    # Budget-aware: one extra fetch/product, capped at OFFERS_MAX so the cloud
+    # Firecrawl run stays inside the monthly free tier (see budget note above).
+    # Other products keep their offer_count + the "see all offers" deep link.
+    print("\n=== Seller offers (offer-listing) ===", flush=True)
+    for asin in detail_order[:OFFERS_MAX]:
+        try:
+            # NOT /-/en/ — the language-prefixed offer-listing returns a lazy AOD
+            # shell with no server-rendered offers. The bare ?aod=0 page renders all
+            # sellers (conditions come back in Arabic; parse_offers maps them).
+            # wait_ms+proxy: the AOD block loads lazily under Firecrawl and otherwise
+            # comes back empty for high-offer-count listings — give it time to settle.
+            ohtml = fetch.fetch(f"/gp/offer-listing/{asin}?aod=0", wait_ms=7000, proxy="auto")
+        except fetch.Blocked as e:
+            print(f"  [BLOCKED] offers/{asin}: {e} — STOPPING offer fetch.", flush=True)
+            break
+        except Exception as e:  # noqa: BLE001
+            print(f"  [ERROR] offers/{asin}: {e}", flush=True)
+            continue
+        offers = parse.parse_offers(ohtml, asin)
+        products[asin]["offers"] = offers
+        print(f"  [OFFERS] {asin}: {len(offers)} sellers", flush=True)
 
     # Durability guard: never destroy good data with an empty / blocked / PARTIAL run.
     min_cats = max(1, (len(CATEGORIES) * 3) // 4)
