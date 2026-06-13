@@ -184,6 +184,23 @@
       </div>
 
     </div>
+
+    <!-- "Top reviews from other countries" — Amazon embeds FOREIGN reviews lower on
+         the same dp page using the SAME data-hook='review'. Egypt-only platform:
+         these must be excluded both by container scope and by the country filter. -->
+    <div id="cr-international-reviews" data-hook="cr-international-reviews">
+      <h3>Top reviews from other countries</h3>
+      <div id="RFOREIGNUAE01" data-hook="review" class="a-section review aok-relative">
+        <h5 data-hook="reviewTitle"><i data-hook="review-star-rating"><span class="a-icon-alt">5.0 out of 5 stars</span></i><span>ممتاز</span></h5>
+        <span data-hook="review-date" class="review-date">Reviewed in the United Arab Emirates on 1 May 2026</span>
+        <div data-hook="reviewText"><span>Great product, fast delivery to Dubai.</span></div>
+      </div>
+      <div id="RFOREIGNUS01" data-hook="review" class="a-section review aok-relative">
+        <h5 data-hook="reviewTitle"><i data-hook="review-star-rating"><span class="a-icon-alt">2.0 out of 5 stars</span></i><span>Not great</span></h5>
+        <span data-hook="review-date" class="review-date">Reviewed in the United States on 3 April 2026</span>
+        <div data-hook="reviewText"><span>Did not meet expectations, shipped from overseas.</span></div>
+      </div>
+    </div>
   </div>
 
 </div>

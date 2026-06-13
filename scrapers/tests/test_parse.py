@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import pytest
 
+import parse
 from parse import (
     BASE,
     _dims_to_cm,
@@ -261,6 +262,46 @@ class TestParseProductReviews:
         assert "المنتج سيء" in ar1["body"]
         assert en5["date"] == "Reviewed in Egypt on 12 May 2026"
         assert ar1["date"] == "Reviewed in Egypt on 26 April 2026"
+
+    def test_foreign_reviews_excluded(self, product):
+        """Egypt-only platform: 'Top reviews from other countries' (UAE/US/…)
+        share data-hook='review' on the same dp page and MUST NOT be ingested.
+        The fixture embeds a UAE 5★ and a US 2★ foreign review; neither may appear."""
+        ids = [rv["review_id"] for rv in product["reviews_list"]]
+        assert "RFOREIGNUAE01" not in ids
+        assert "RFOREIGNUS01" not in ids
+        for rv in product["reviews_list"]:
+            assert "Reviewed in Egypt" in (rv["date"] or "")
+            assert "United Arab Emirates" not in (rv["date"] or "")
+            assert "United States" not in (rv["date"] or "")
+
+
+class TestEgyptReviewFilter:
+    """Unit coverage for the origin guardrail used by parse_product."""
+
+    def test_egypt_english_date_kept(self):
+        assert parse._is_egypt_review("Reviewed in Egypt on 12 May 2026") is True
+
+    def test_egypt_arabic_date_kept(self):
+        assert parse._is_egypt_review("تمت المراجعة في مصر في 12 مايو 2026") is True
+
+    @pytest.mark.parametrize(
+        "date_text",
+        [
+            "Reviewed in the United Arab Emirates on 1 May 2026",
+            "Reviewed in the United States on 3 April 2026",
+            "Reviewed in Saudi Arabia on 2 May 2026",
+            "Reviewed in India on 4 April 2026",
+            "Reviewed in Canada on 5 April 2026",
+        ],
+    )
+    def test_foreign_dates_dropped(self, date_text):
+        assert parse._is_egypt_review(date_text) is False
+
+    def test_unparseable_date_kept_falls_back_to_container_scope(self):
+        # No "Reviewed in <Country>" → only reachable from #localTopReviewsList → keep.
+        assert parse._is_egypt_review(None) is True
+        assert parse._is_egypt_review("12 May 2026") is True
 
 
 # ---------------------------------------------------------------------------

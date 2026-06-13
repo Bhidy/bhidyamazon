@@ -125,6 +125,29 @@ function leafBsr(asin: string): { rank: number; category: string } | null {
   return b?.length ? b[b.length - 1] : null;
 }
 
+/**
+ * Egypt-only guardrail (last line of defence behind the scraper's own filter).
+ * amazon.eg dp pages also carry a "Top reviews from other countries" block; a
+ * foreign review's date line reads "Reviewed in <Country> on …" (the Arabic UI
+ * uses "مصر" for Egypt). This is an Egypt-only platform, so any review whose
+ * origin is parseable and NOT Egypt is excluded before it can ever render or
+ * feed sentiment/complaint math. A review with no parseable origin is kept
+ * (it can only have come from the local block).
+ */
+function isEgyptReview(r: Any): boolean {
+  const date: string = r?.date ?? r?.reviewedAt ?? "";
+  const m = /Reviewed in (.+?) on/i.exec(date);
+  if (!m) return true; // no country marker → local block → keep
+  const country = m[1].toLowerCase();
+  return country.includes("egypt") || country.includes("مصر");
+}
+
+/** Raw scraped reviews for an ASIN, foreign reviews already stripped. */
+function egyptReviewsRaw(asin: string): Any[] {
+  const list: Any[] = store().pr?.products?.[asin]?.reviews_list ?? [];
+  return list.filter(isEgyptReview);
+}
+
 /** Count reviews in the scraped sample whose text matches any token (EN + AR).
  *  Returns undefined when there is no sample (so the engine falls back to a
  *  material-only baseline rather than treating absence as zero complaints). */
@@ -141,6 +164,7 @@ function countComplaints(reviews: Any[] | undefined, tokens: string[]): number |
 function rowToProduct(row: Any): Product {
   const enr = store().pr?.products?.[row.asin];
   const leaf = leafBsr(row.asin);
+  const egReviews = egyptReviewsRaw(row.asin); // Egypt-only; foreign reviews excluded
   return {
     asin: row.asin,
     titleEn: row.title ?? row.asin,
@@ -169,9 +193,9 @@ function rowToProduct(row: Any): Product {
     featureBulletCount: enr?.feature_bullet_count ?? undefined,
     offerCount: enr?.offer_count ?? undefined,
     bsrLeafCategory: leaf?.category ?? undefined,
-    reviewSampleSize: enr?.reviews_list?.length ?? undefined,
-    breakComplaintCount: countComplaints(enr?.reviews_list, BREAK_TOKENS),
-    fitComplaintCount: countComplaints(enr?.reviews_list, FIT_TOKENS),
+    reviewSampleSize: egReviews.length || undefined,
+    breakComplaintCount: countComplaints(egReviews, BREAK_TOKENS),
+    fitComplaintCount: countComplaints(egReviews, FIT_TOKENS),
     provenance: prov(
       "amazon_html_bestsellers",
       "high",
@@ -335,7 +359,7 @@ export function bsrHistory(asin: string): BsrHistory {
 }
 
 export function reviews(asin: string): Review[] {
-  const list: Any[] = store().pr?.products?.[asin]?.reviews_list ?? [];
+  const list: Any[] = egyptReviewsRaw(asin); // Egypt-only platform: no foreign reviews
   return list.map((r, i) => ({
     reviewId: r.review_id ?? `${asin}-r${i}`,
     asin,

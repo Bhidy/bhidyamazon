@@ -21,7 +21,22 @@ const FILES: Record<string, unknown> = {
       { asin: "A2", rank: 8, price_egp: 50, category: "electronics", title: "Faller" },
     ],
   },
-  "products.json": { schema_version: 3, products: {} },
+  "products.json": {
+    schema_version: 3,
+    products: {
+      // A1 carries a mix of Egypt + foreign reviews (as the dp page does): the
+      // Egypt-only guardrail must surface ONLY the Egypt ones.
+      A1: {
+        asin: "A1",
+        reviews_list: [
+          { review_id: "EG1", rating: 5, title: "ممتاز", body: "حلو", date: "Reviewed in Egypt on 12 May 2026", lang: "ar" },
+          { review_id: "EG2", rating: 2, title: "broke", body: "fragile broken", date: "Reviewed in Egypt on 3 May 2026", lang: "en" },
+          { review_id: "UAE1", rating: 5, title: "great", body: "fast to dubai", date: "Reviewed in the United Arab Emirates on 1 May 2026", lang: "en" },
+          { review_id: "US1", rating: 1, title: "bad", body: "overseas", date: "Reviewed in the United States on 3 April 2026", lang: "en" },
+        ],
+      },
+    },
+  },
   "keywords.json": { keywords: [] },
   "snapshots.json": {
     schema_version: 1,
@@ -71,5 +86,23 @@ describe("real-store · snapshot-driven bsrHistory", () => {
     const h = store.bsrHistory("A1");
     expect(h.points.map((p) => p.value)).toEqual([9, 3]);
     expect(h.pricePoints.map((p) => p.value)).toEqual([110, 100]);
+  });
+});
+
+describe("real-store · Egypt-only review guardrail", () => {
+  it("reviews() excludes non-Egypt reviews", () => {
+    const rl = store.reviews("A1");
+    expect(rl.map((r) => r.reviewId)).toEqual(["EG1", "EG2"]); // UAE1, US1 dropped
+    for (const r of rl) expect(r.reviewedAt).toContain("Egypt");
+  });
+
+  it("sentimentSummary() analyses only the Egypt sample", () => {
+    const s = store.sentimentSummary("A1");
+    expect(s.analysedCount).toBe(2); // not 4 — foreign reviews never counted
+    // EG1 (5★ positive) + EG2 (2★ negative) → 50/0/50, foreign US 1★ excluded.
+    expect(s.positivePct).toBe(50);
+    expect(s.negativePct).toBe(50);
+    expect(s.langMix.ar).toBe(1);
+    expect(s.langMix.en).toBe(1);
   });
 });

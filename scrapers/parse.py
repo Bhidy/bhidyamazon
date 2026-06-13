@@ -11,6 +11,36 @@ BASE = "https://www.amazon.eg"
 _ASIN_RE = re.compile(r"/dp/([A-Z0-9]{10})")
 _NUM_RE = re.compile(r"([\d,]+\.?\d*)")
 _ARABIC_RE = re.compile(r"[؀-ۿ]")
+# Egypt-only guardrail: the dp page carries a local reviews block AND, lower down,
+# a "Top reviews from other countries" block — both use data-hook='review'. The
+# /-/en/ fetch renders the date line as "Reviewed in <Country> on <date>", so the
+# country word is the authoritative origin signal. Reviews from Egypt say
+# "Reviewed in Egypt"; the Arabic equivalent is "مصر". Anything else (India, the
+# United Arab Emirates, Saudi Arabia, the United States, Canada, …) is a foreign
+# review and must never reach this Egypt-only platform.
+_REVIEW_COUNTRY_RE = re.compile(r"Reviewed in (.+?) on", re.I)
+
+
+def _review_country(date_text: str | None) -> str | None:
+    """Origin country from a review's date line, or None if not parseable."""
+    if not date_text:
+        return None
+    m = _REVIEW_COUNTRY_RE.search(date_text)
+    return m.group(1).strip() if m else None
+
+
+def _is_egypt_review(date_text: str | None) -> bool:
+    """True only for reviews whose date line confirms an Egypt origin.
+
+    Egypt reviews are kept; foreign reviews are dropped. A review with no
+    parseable country falls back to the container scope (it is only reached when
+    it already came from the local reviews list), so it is treated as Egypt.
+    """
+    country = _review_country(date_text)
+    if country is None:
+        return True  # unknown origin, but sourced from the local block → keep
+    cl = country.lower()
+    return "egypt" in cl or "مصر" in country
 
 
 def _num(text: str | None):
@@ -210,9 +240,19 @@ def parse_product(html: str, asin: str) -> dict:
             raw = node.parent.get_text(" ", strip=True)
         for rank, cat in re.findall(r"#([\d,]+)\s+in\s+(.+?)(?=\s*\(|\s*#[\d]|$)", raw):
             bsr.append({"rank": int(rank.replace(",", "")), "category": cat.strip()})
-    # 8 embedded reviews (camelCase data-hooks on .eg)
+    # 8 embedded reviews (camelCase data-hooks on .eg). Scope to the LOCAL reviews
+    # list (#localTopReviewsList) so we never reach into the "Top reviews from other
+    # countries" block lower on the page, then defensively drop any non-Egypt review
+    # by its "Reviewed in <Country>" date line — Egypt-only platform, Egypt-only reviews.
     reviews_list: list[dict] = []
-    for rv in soup.select("div[data-hook='review']")[:8]:
+    local_block = soup.select_one("#localTopReviewsList") or soup
+    for rv in local_block.select("div[data-hook='review']"):
+        if len(reviews_list) >= 8:
+            break
+        dt = rv.select_one("span[data-hook='review-date']")
+        date_text = dt.get_text(strip=True) if dt else None
+        if not _is_egypt_review(date_text):
+            continue  # foreign review (India, UAE, KSA, US, …) — excluded at ingest
         rt = rv.select_one("[data-hook='review-star-rating'] span.a-icon-alt")
         r_rating = _num(rt.get_text()) if rt else None  # tolerant float parse
         rti = rv.select_one("[data-hook='reviewTitle']")
@@ -226,8 +266,6 @@ def parse_product(html: str, asin: str) -> dict:
             flags=re.I,
         )
         body = re.sub(r"\bRead more\b|\bRead less\b", "", body).strip()
-        au = rv.select_one("span.a-profile-name")
-        dt = rv.select_one("span[data-hook='review-date']")
         hv = rv.select_one("span[data-hook='helpful-vote-statement']")
         helpful = 0
         if hv:
@@ -240,7 +278,7 @@ def parse_product(html: str, asin: str) -> dict:
                 "title": r_title,
                 "body": body,
                 "author": None,  # PII guardrail: reviewer display names dropped at ingest
-                "date": dt.get_text(strip=True) if dt else None,
+                "date": date_text,
                 "verified": bool(rv.select_one("span[data-hook='avp-badge']")),
                 "helpful": helpful,
                 "lang": "ar" if _ARABIC_RE.search((r_title or "") + body) else "en",
