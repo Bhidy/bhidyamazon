@@ -54,6 +54,30 @@ describe("committed real-data files validate against the schema contract", () =>
     expect(validateKeywords(j)).toBeNull();
   });
 
+  // Egypt-only platform gate: amazon.eg dp pages embed a "Top reviews from other
+  // countries" block sharing data-hook='review'. A scraper regression that ingests
+  // them must FAIL here (in ci.yml and in scrape-and-deploy BEFORE the data commit)
+  // rather than leak foreign reviews into production. A foreign review's date line
+  // reads "Reviewed in <Country> on …"; Egypt reads "Reviewed in Egypt" / "مصر".
+  it("products.json contains ONLY Egypt-origin reviews", () => {
+    const j = readIfPresent("products.json") as {
+      products?: Record<string, { reviews_list?: { date?: string | null }[] }>;
+    } | null;
+    if (j === null) return;
+    const foreign: string[] = [];
+    for (const [asin, p] of Object.entries(j.products ?? {})) {
+      for (const r of p.reviews_list ?? []) {
+        const m = /Reviewed in (.+?) on/i.exec(r.date ?? "");
+        if (!m) continue; // no country marker → local block → allowed
+        const country = m[1].toLowerCase();
+        if (!country.includes("egypt") && !country.includes("مصر")) {
+          foreign.push(`${asin}: "${r.date}"`);
+        }
+      }
+    }
+    expect(foreign, `Non-Egypt reviews must never be committed:\n${foreign.join("\n")}`).toEqual([]);
+  });
+
   it("meta.json agrees with bestsellers.json (count + categories)", () => {
     const meta = readIfPresent("meta.json") as {
       product_count?: number;
