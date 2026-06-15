@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-06-14T09:56:59.778974+00:00",
+  "scraped_at": "2026-06-15T12:43:49.416675+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -89,7 +89,7 @@
       "health": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
