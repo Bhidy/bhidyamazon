@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-06-18T10:49:21.334552+00:00",
+  "scraped_at": "2026-06-19T10:57:50.533847+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -25,15 +25,15 @@
       "automotive": {
         "parsed_count": 30,
         "title_fill": 100.0,
-        "price_fill": 100.0,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
+        "price_fill": 96.7,
+        "rating_fill": 96.7,
+        "reviews_fill": 96.7,
         "degraded": false
       },
       "electronics": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 93.3,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -57,7 +57,7 @@
       "fashion": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 93.3,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -66,14 +66,14 @@
         "parsed_count": 15,
         "title_fill": 100.0,
         "price_fill": 100.0,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
+        "rating_fill": 93.3,
+        "reviews_fill": 93.3,
         "degraded": false
       },
       "grocery": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 93.3,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
