@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-06-20T09:43:02.756912+00:00",
+  "updated_at": "2026-06-21T10:05:51.608507+00:00",
   "keep_days": 120,
   "snapshots": {
     "B0CPC8JMCW": [
@@ -72,6 +72,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 1,
+        "price": 56.5,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 1,
         "price": 56.5,
         "category": "electronics"
@@ -149,6 +155,12 @@
         "rank": 3,
         "price": 65.0,
         "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 3,
+        "price": 65.0,
+        "category": "electronics"
       }
     ],
     "B0DRDPSKQH": [
@@ -220,6 +232,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 4,
+        "price": 99.0,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 4,
         "price": 99.0,
         "category": "electronics"
@@ -297,6 +315,12 @@
         "rank": 2,
         "price": 59.0,
         "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": 59.0,
+        "category": "electronics"
       }
     ],
     "B0DRDQZBC5": [
@@ -369,6 +393,12 @@
       {
         "date": "2026-06-20",
         "rank": 10,
+        "price": 99.0,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 8,
         "price": 99.0,
         "category": "electronics"
       }
@@ -445,6 +475,12 @@
         "rank": 8,
         "price": 66.0,
         "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
+        "price": 66.0,
+        "category": "electronics"
       }
     ],
     "B08D11MN1M": [
@@ -518,6 +554,12 @@
         "date": "2026-06-20",
         "rank": 6,
         "price": 99.0,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
+        "price": 98.5,
         "category": "electronics"
       }
     ],
@@ -593,6 +635,12 @@
         "rank": 5,
         "price": 115.0,
         "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
+        "price": 114.8,
+        "category": "electronics"
       }
     ],
     "B0CLKQKFL3": [
@@ -649,6 +697,12 @@
       {
         "date": "2026-06-18",
         "rank": 12,
+        "price": 57.0,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 14,
         "price": 57.0,
         "category": "electronics"
       }
@@ -799,6 +853,12 @@
       {
         "date": "2026-06-18",
         "rank": 13,
+        "price": 844.98,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
         "price": 844.98,
         "category": "electronics"
       }
@@ -981,6 +1041,12 @@
         "rank": 2,
         "price": 49.9,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 1,
+        "price": 49.9,
+        "category": "beauty"
       }
     ],
     "B0B74JS567": [
@@ -1052,6 +1118,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 3,
+        "price": 63.0,
+        "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 3,
         "price": 63.0,
         "category": "beauty"
@@ -1129,6 +1201,12 @@
         "rank": 9,
         "price": 55.0,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 8,
+        "price": 55.0,
+        "category": "beauty"
       }
     ],
     "B08WJL45KJ": [
@@ -1201,6 +1279,12 @@
       {
         "date": "2026-06-20",
         "rank": 10,
+        "price": 32.5,
+        "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
         "price": 32.5,
         "category": "beauty"
       }
@@ -1339,6 +1423,12 @@
         "rank": 1,
         "price": 82.62,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": 82.62,
+        "category": "beauty"
       }
     ],
     "B00XAH0406": [
@@ -1413,6 +1503,12 @@
         "rank": 5,
         "price": 94.99,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
+        "price": 94.99,
+        "category": "beauty"
       }
     ],
     "B0FM8CRZHN": [
@@ -1470,6 +1566,12 @@
         "date": "2026-06-20",
         "rank": 15,
         "price": 117.88,
+        "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 13,
+        "price": 99.0,
         "category": "beauty"
       }
     ],
@@ -1551,6 +1653,12 @@
       {
         "date": "2026-06-20",
         "rank": 11,
+        "price": 67.5,
+        "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
         "price": 67.5,
         "category": "beauty"
       }
@@ -1665,6 +1773,12 @@
         "rank": 3,
         "price": 123.0,
         "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 3,
+        "price": 121.5,
+        "category": "home"
       }
     ],
     "B0B9KWZGG8": [
@@ -1771,6 +1885,12 @@
         "rank": 2,
         "price": 109.33,
         "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": 109.33,
+        "category": "home"
       }
     ],
     "B09H6LZR7Y": [
@@ -1844,6 +1964,12 @@
         "date": "2026-06-20",
         "rank": 10,
         "price": 32.0,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 14,
+        "price": 34.0,
         "category": "home"
       }
     ],
@@ -1919,6 +2045,12 @@
         "rank": 1,
         "price": 45.0,
         "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 1,
+        "price": 19.0,
+        "category": "home"
       }
     ],
     "B0848Y82N8": [
@@ -1990,6 +2122,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 6,
+        "price": 197.49,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 6,
         "price": 197.49,
         "category": "home"
@@ -2072,6 +2210,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 9,
+        "price": 103.0,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 9,
         "price": 103.0,
         "category": "home"
@@ -2269,6 +2413,12 @@
         "rank": 5,
         "price": 27.0,
         "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
+        "price": 27.0,
+        "category": "home"
       }
     ],
     "B0B7G3HBYV": [
@@ -2412,6 +2562,12 @@
         "date": "2026-06-20",
         "rank": 12,
         "price": 174.0,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 13,
+        "price": 173.0,
         "category": "home"
       }
     ],
@@ -2561,6 +2717,12 @@
         "rank": 2,
         "price": 19.0,
         "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": 19.0,
+        "category": "fashion"
       }
     ],
     "B0CH5GF552": [
@@ -2609,6 +2771,12 @@
       {
         "date": "2026-06-20",
         "rank": 5,
+        "price": 233.99,
+        "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
         "price": 233.99,
         "category": "fashion"
       }
@@ -2685,6 +2853,12 @@
         "rank": 6,
         "price": 92.0,
         "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
+        "price": 92.0,
+        "category": "fashion"
       }
     ],
     "B09MFLRNLG": [
@@ -2756,6 +2930,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 3,
+        "price": 69.99,
+        "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 3,
         "price": 69.99,
         "category": "fashion"
@@ -2833,6 +3013,12 @@
         "rank": 7,
         "price": 89.0,
         "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
+        "price": 89.0,
+        "category": "fashion"
       }
     ],
     "B0BVRQ3FSJ": [
@@ -2862,6 +3048,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 4,
+        "price": 127.21,
+        "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 4,
         "price": 127.21,
         "category": "fashion"
@@ -2935,6 +3127,12 @@
       {
         "date": "2026-06-20",
         "rank": 12,
+        "price": 53.99,
+        "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
         "price": 53.99,
         "category": "fashion"
       }
@@ -3045,6 +3243,12 @@
         "rank": 1,
         "price": 129.19,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 1,
+        "price": 124.18,
+        "category": "toys"
       }
     ],
     "B094D42LRN": [
@@ -3119,6 +3323,12 @@
         "rank": 2,
         "price": 74.4,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": 75.0,
+        "category": "toys"
       }
     ],
     "B0CDHKJM39": [
@@ -3191,6 +3401,12 @@
       {
         "date": "2026-06-20",
         "rank": 8,
+        "price": 41.0,
+        "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
         "price": 41.0,
         "category": "toys"
       }
@@ -3267,6 +3483,12 @@
       {
         "date": "2026-06-20",
         "rank": 6,
+        "price": 95.0,
+        "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 8,
         "price": 95.0,
         "category": "toys"
       }
@@ -3439,6 +3661,12 @@
         "rank": 5,
         "price": 150.0,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 14,
+        "price": 250.0,
+        "category": "toys"
       }
     ],
     "B0GKX5JJNK": [
@@ -3513,6 +3741,12 @@
         "rank": 7,
         "price": 77.5,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
+        "price": 78.0,
+        "category": "toys"
       }
     ],
     "B091CZJK32": [
@@ -3565,6 +3799,12 @@
       {
         "date": "2026-06-20",
         "rank": 13,
+        "price": 56.6,
+        "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
         "price": 56.6,
         "category": "toys"
       }
@@ -3741,6 +3981,12 @@
         "rank": 2,
         "price": 279.95,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": 279.95,
+        "category": "grocery"
       }
     ],
     "B08Z7G7FMJ": [
@@ -3813,6 +4059,12 @@
       {
         "date": "2026-06-20",
         "rank": 3,
+        "price": 23.99,
+        "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 4,
         "price": 23.99,
         "category": "grocery"
       }
@@ -3889,6 +4141,12 @@
         "rank": 1,
         "price": 105.0,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 1,
+        "price": 105.0,
+        "category": "grocery"
       }
     ],
     "B0842HKTMQ": [
@@ -3961,6 +4219,12 @@
       {
         "date": "2026-06-20",
         "rank": 4,
+        "price": 48.99,
+        "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
         "price": 48.99,
         "category": "grocery"
       }
@@ -4045,6 +4309,12 @@
         "rank": 6,
         "price": 215.0,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
+        "price": 349.0,
+        "category": "grocery"
       }
     ],
     "B00FFE8TDG": [
@@ -4119,6 +4389,12 @@
         "rank": 5,
         "price": 44.0,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 3,
+        "price": 34.95,
+        "category": "grocery"
       }
     ],
     "B0893KRNGQ": [
@@ -4191,6 +4467,12 @@
       {
         "date": "2026-06-20",
         "rank": 10,
+        "price": 48.99,
+        "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
         "price": 48.99,
         "category": "grocery"
       }
@@ -4267,6 +4549,12 @@
         "rank": 8,
         "price": 15.0,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
+        "price": 22.7,
+        "category": "grocery"
       }
     ],
     "B07PDTP1TP": [
@@ -4339,6 +4627,12 @@
       {
         "date": "2026-06-20",
         "rank": 9,
+        "price": null,
+        "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
         "price": null,
         "category": "grocery"
       }
@@ -4629,6 +4923,12 @@
         "rank": 6,
         "price": 49.0,
         "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
+        "price": 67.85,
+        "category": "baby"
       }
     ],
     "B07F3QHP22": [
@@ -4678,6 +4978,12 @@
         "date": "2026-06-20",
         "rank": 5,
         "price": 94.17,
+        "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
+        "price": 94.95,
         "category": "baby"
       }
     ],
@@ -4751,6 +5057,12 @@
       {
         "date": "2026-06-20",
         "rank": 7,
+        "price": 469.0,
+        "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
         "price": 469.0,
         "category": "baby"
       }
@@ -4827,6 +5139,12 @@
         "rank": 12,
         "price": 459.0,
         "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 12,
+        "price": 459.0,
+        "category": "baby"
       }
     ],
     "B0CCSK85XZ": [
@@ -4899,6 +5217,12 @@
       {
         "date": "2026-06-20",
         "rank": 8,
+        "price": 483.0,
+        "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
         "price": 483.0,
         "category": "baby"
       }
@@ -5037,6 +5361,12 @@
         "rank": 11,
         "price": 95.25,
         "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
+        "price": 96.0,
+        "category": "baby"
       }
     ],
     "B0BH51J7YP": [
@@ -5111,6 +5441,12 @@
         "rank": 3,
         "price": 491.86,
         "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 4,
+        "price": 699.99,
+        "category": "baby"
       }
     ],
     "B0BSXTWVVF": [
@@ -5164,6 +5500,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 13,
+        "price": 422.51,
+        "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 13,
         "price": 422.51,
         "category": "baby"
@@ -5409,6 +5751,12 @@
         "rank": 1,
         "price": 155.0,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 1,
+        "price": null,
+        "category": "health"
       }
     ],
     "B0D49ZSBFV": [
@@ -5481,6 +5829,12 @@
       {
         "date": "2026-06-20",
         "rank": 11,
+        "price": 499.0,
+        "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
         "price": 499.0,
         "category": "health"
       }
@@ -5557,6 +5911,12 @@
         "rank": 2,
         "price": 112.48,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": null,
+        "category": "health"
       }
     ],
     "B0DR8H372W": [
@@ -5629,6 +5989,12 @@
       {
         "date": "2026-06-20",
         "rank": 6,
+        "price": 245.95,
+        "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 3,
         "price": 245.95,
         "category": "health"
       }
@@ -5705,6 +6071,12 @@
         "rank": 7,
         "price": 290.0,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
+        "price": 290.0,
+        "category": "health"
       }
     ],
     "B0CTMTVCW7": [
@@ -5766,6 +6138,12 @@
         "date": "2026-06-18",
         "rank": 9,
         "price": 61.15,
+        "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 14,
+        "price": 156.95,
         "category": "health"
       }
     ],
@@ -5891,6 +6269,12 @@
         "rank": 9,
         "price": 125.0,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
+        "price": 125.0,
+        "category": "health"
       }
     ],
     "B08WJJMXQ1": [
@@ -5965,6 +6349,12 @@
         "rank": 10,
         "price": 134.99,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 8,
+        "price": 134.99,
+        "category": "health"
       }
     ],
     "B0CR1FR4CT": [
@@ -6025,6 +6415,12 @@
       {
         "date": "2026-06-20",
         "rank": 13,
+        "price": 99.0,
+        "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
         "price": 99.0,
         "category": "health"
       }
@@ -6101,6 +6497,12 @@
         "rank": 12,
         "price": 45.0,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
+        "price": 45.0,
+        "category": "health"
       }
     ],
     "B09NDY755K": [
@@ -6175,6 +6577,12 @@
         "rank": 4,
         "price": 205.0,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 4,
+        "price": 205.0,
+        "category": "health"
       }
     ],
     "B09Z33Q7YV": [
@@ -6205,6 +6613,12 @@
       {
         "date": "2026-06-20",
         "rank": 14,
+        "price": 110.0,
+        "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 13,
         "price": 110.0,
         "category": "health"
       }
@@ -6262,6 +6676,12 @@
         "date": "2026-06-20",
         "rank": 15,
         "price": 429.95,
+        "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
+        "price": 419.0,
         "category": "health"
       }
     ],
@@ -6345,6 +6765,12 @@
         "rank": 3,
         "price": 80.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 2,
+        "price": 78.0,
+        "category": "automotive"
       }
     ],
     "B0BGPLGQKQ": [
@@ -6417,6 +6843,12 @@
       {
         "date": "2026-06-20",
         "rank": 2,
+        "price": 57.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 3,
         "price": 57.0,
         "category": "automotive"
       }
@@ -6493,6 +6925,12 @@
         "rank": 4,
         "price": 162.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 4,
+        "price": 148.1,
+        "category": "automotive"
       }
     ],
     "B0CXPDG6KV": [
@@ -6564,6 +7002,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 5,
+        "price": 59.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 5,
         "price": 59.0,
         "category": "automotive"
@@ -6640,6 +7084,12 @@
         "date": "2026-06-20",
         "rank": 6,
         "price": 72.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
+        "price": 64.41,
         "category": "automotive"
       }
     ],
@@ -6747,6 +7197,12 @@
         "rank": 17,
         "price": 139.98,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 20,
+        "price": 139.98,
+        "category": "automotive"
       }
     ],
     "B0BKWXJB29": [
@@ -6819,6 +7275,12 @@
       {
         "date": "2026-06-20",
         "rank": 7,
+        "price": 1199.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
         "price": 1199.0,
         "category": "automotive"
       }
@@ -6895,6 +7357,12 @@
         "rank": 15,
         "price": 57.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 21,
+        "price": 57.0,
+        "category": "automotive"
       }
     ],
     "B096L7LCRY": [
@@ -6967,6 +7435,12 @@
       {
         "date": "2026-06-20",
         "rank": 23,
+        "price": 24.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 22,
         "price": 24.0,
         "category": "automotive"
       }
@@ -7043,6 +7517,12 @@
         "rank": 12,
         "price": 39.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
+        "price": 39.0,
+        "category": "automotive"
       }
     ],
     "B0CCY38RGC": [
@@ -7114,6 +7594,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 1,
+        "price": 85.86,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 1,
         "price": 85.86,
         "category": "automotive"
@@ -7191,6 +7677,12 @@
         "rank": 10,
         "price": 255.62,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
+        "price": 255.62,
+        "category": "automotive"
       }
     ],
     "B091J64SNB": [
@@ -7262,6 +7754,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 29,
+        "price": 1651.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 29,
         "price": 1651.0,
         "category": "automotive"
@@ -7339,6 +7837,12 @@
         "rank": 8,
         "price": 150.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 8,
+        "price": 152.0,
+        "category": "automotive"
       }
     ],
     "B074DLLGQ2": [
@@ -7413,6 +7917,12 @@
         "rank": 16,
         "price": 140.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 18,
+        "price": 140.0,
+        "category": "automotive"
       }
     ],
     "B0CCXZ8NXN": [
@@ -7485,6 +7995,12 @@
       {
         "date": "2026-06-20",
         "rank": 9,
+        "price": 85.86,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
         "price": 85.86,
         "category": "automotive"
       }
@@ -7575,6 +8091,12 @@
         "rank": 20,
         "price": 25.69,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 13,
+        "price": 29.44,
+        "category": "automotive"
       }
     ],
     "B0CMV9DC3L": [
@@ -7647,6 +8169,12 @@
       {
         "date": "2026-06-20",
         "rank": 14,
+        "price": 41.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
         "price": 41.0,
         "category": "automotive"
       }
@@ -7723,6 +8251,12 @@
         "rank": 18,
         "price": 65.95,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 16,
+        "price": 65.95,
+        "category": "automotive"
       }
     ],
     "B0BW93ZWKP": [
@@ -7784,6 +8318,12 @@
         "date": "2026-06-20",
         "rank": 25,
         "price": 248.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 12,
+        "price": 163.5,
         "category": "automotive"
       }
     ],
@@ -7947,6 +8487,12 @@
         "rank": 27,
         "price": 59.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 24,
+        "price": 61.0,
+        "category": "automotive"
       }
     ],
     "B09NCVS7V4": [
@@ -8018,6 +8564,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 19,
+        "price": 99.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 19,
         "price": 99.0,
         "category": "automotive"
@@ -8093,6 +8645,12 @@
       {
         "date": "2026-06-20",
         "rank": 11,
+        "price": 369.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 14,
         "price": 369.0,
         "category": "automotive"
       }
@@ -8213,6 +8771,12 @@
         "rank": 26,
         "price": 88.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 28,
+        "price": 85.0,
+        "category": "automotive"
       }
     ],
     "B0FSTHYSFR": [
@@ -8231,6 +8795,12 @@
       {
         "date": "2026-06-18",
         "rank": 30,
+        "price": 135.66,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 23,
         "price": 135.66,
         "category": "automotive"
       }
@@ -8305,6 +8875,12 @@
       {
         "date": "2026-06-20",
         "rank": 9,
+        "price": 147.93,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 7,
         "price": 147.93,
         "category": "electronics"
       }
@@ -8473,6 +9049,12 @@
         "rank": 4,
         "price": 64.0,
         "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 4,
+        "price": 64.0,
+        "category": "home"
       }
     ],
     "B09MTGGJY7": [
@@ -8544,6 +9126,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 7,
+        "price": 68.0,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 7,
         "price": 68.0,
         "category": "home"
@@ -8735,6 +9323,12 @@
         "rank": 15,
         "price": 152.0,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 12,
+        "price": 152.38,
+        "category": "toys"
       }
     ],
     "B07THCFJMZ": [
@@ -8788,6 +9382,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 3,
+        "price": 95.0,
+        "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 3,
         "price": 95.0,
         "category": "toys"
@@ -8865,6 +9465,12 @@
         "rank": 7,
         "price": 33.5,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 8,
+        "price": 33.5,
+        "category": "grocery"
       }
     ],
     "B0DZX9BXTN": [
@@ -8937,6 +9543,12 @@
       {
         "date": "2026-06-20",
         "rank": 14,
+        "price": 347.0,
+        "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 13,
         "price": 347.0,
         "category": "grocery"
       }
@@ -9013,6 +9625,12 @@
         "rank": 11,
         "price": 27.75,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
+        "price": 27.75,
+        "category": "grocery"
       }
     ],
     "B08Y8Z8BGG": [
@@ -9020,6 +9638,12 @@
         "date": "2026-06-08",
         "rank": 14,
         "price": 129.95,
+        "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
+        "price": 154.94,
         "category": "baby"
       }
     ],
@@ -9087,6 +9711,12 @@
       {
         "date": "2026-06-20",
         "rank": 5,
+        "price": 504.95,
+        "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
         "price": 504.95,
         "category": "health"
       }
@@ -9435,6 +10065,12 @@
         "rank": 4,
         "price": 46.0,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
+        "price": 46.0,
+        "category": "toys"
       }
     ],
     "B09MBWKLWG": [
@@ -9490,6 +10126,12 @@
         "date": "2026-06-20",
         "rank": 13,
         "price": 9.99,
+        "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 12,
+        "price": 10.0,
         "category": "grocery"
       }
     ],
@@ -9587,6 +10229,12 @@
         "rank": 21,
         "price": 107.0,
         "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 17,
+        "price": 107.0,
+        "category": "automotive"
       }
     ],
     "B0DHRY1YL5": [
@@ -9624,6 +10272,12 @@
         "date": "2026-06-20",
         "rank": 24,
         "price": 102.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 30,
+        "price": 101.0,
         "category": "automotive"
       }
     ],
@@ -9726,6 +10380,12 @@
         "date": "2026-06-20",
         "rank": 8,
         "price": 69.99,
+        "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 6,
+        "price": 69.0,
         "category": "beauty"
       }
     ],
@@ -9833,6 +10493,12 @@
         "rank": 11,
         "price": 103.0,
         "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 13,
+        "price": 103.0,
+        "category": "fashion"
       }
     ],
     "B0G8KT3NGZ": [
@@ -9847,6 +10513,12 @@
       {
         "date": "2026-06-10",
         "rank": 15,
+        "price": 540.0,
+        "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
         "price": 540.0,
         "category": "fashion"
       }
@@ -9924,6 +10596,12 @@
       },
       {
         "date": "2026-06-20",
+        "rank": 2,
+        "price": 496.17,
+        "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
         "rank": 2,
         "price": 496.17,
         "category": "baby"
@@ -10009,6 +10687,12 @@
         "rank": 3,
         "price": 223.95,
         "category": "health"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 12,
+        "price": 223.95,
+        "category": "health"
       }
     ],
     "B08Y8YKVJ7": [
@@ -10022,6 +10706,12 @@
         "date": "2026-06-12",
         "rank": 10,
         "price": 149.0,
+        "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
+        "price": 176.7,
         "category": "electronics"
       }
     ],
@@ -10079,6 +10769,12 @@
         "rank": 11,
         "price": 648.0,
         "category": "electronics"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 10,
+        "price": 650.0,
+        "category": "electronics"
       }
     ],
     "B07ZYD7FLT": [
@@ -10123,6 +10819,12 @@
         "rank": 13,
         "price": 124.99,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 14,
+        "price": 124.99,
+        "category": "beauty"
       }
     ],
     "B0FXXP6WFX": [
@@ -10153,6 +10855,12 @@
       {
         "date": "2026-06-16",
         "rank": 13,
+        "price": null,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
         "price": null,
         "category": "home"
       }
@@ -10517,6 +11225,12 @@
         "rank": 15,
         "price": 64.99,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
+        "price": 54.99,
+        "category": "beauty"
       }
     ],
     "B07PRZ8HXY": [
@@ -10725,6 +11439,12 @@
         "rank": 15,
         "price": 28.5,
         "category": "grocery"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
+        "price": 28.5,
+        "category": "grocery"
       }
     ],
     "B0B3H2DG2D": [
@@ -10781,6 +11501,12 @@
         "rank": 12,
         "price": 366.99,
         "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 5,
+        "price": 498.0,
+        "category": "baby"
       }
     ],
     "B084HJXLZF": [
@@ -10825,6 +11551,12 @@
       {
         "date": "2026-06-20",
         "rank": 4,
+        "price": 395.0,
+        "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 12,
         "price": 395.0,
         "category": "beauty"
       }
@@ -10953,6 +11685,12 @@
         "rank": 14,
         "price": 84.0,
         "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
+        "price": 84.0,
+        "category": "fashion"
       }
     ],
     "B0GDDXRSTC": [
@@ -11047,6 +11785,12 @@
         "rank": 7,
         "price": 129.95,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 4,
+        "price": 129.95,
+        "category": "beauty"
       }
     ],
     "B0G228WM6P": [
@@ -11071,6 +11815,12 @@
       {
         "date": "2026-06-20",
         "rank": 8,
+        "price": 39.99,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 12,
         "price": 39.99,
         "category": "home"
       }
@@ -11125,6 +11875,12 @@
         "rank": 9,
         "price": 73.0,
         "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
+        "price": 73.0,
+        "category": "fashion"
       }
     ],
     "B0CVZ4YSCJ": [
@@ -11167,6 +11923,12 @@
         "rank": 14,
         "price": 175.0,
         "category": "fashion"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 14,
+        "price": 115.3,
+        "category": "fashion"
       }
     ],
     "B092FYWR2M": [
@@ -11206,6 +11968,12 @@
         "date": "2026-06-20",
         "rank": 10,
         "price": 223.0,
+        "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
+        "price": 197.0,
         "category": "toys"
       }
     ],
@@ -11247,6 +12015,12 @@
         "rank": 9,
         "price": 459.0,
         "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 8,
+        "price": 459.0,
+        "category": "baby"
       }
     ],
     "B0DLL3ZYDR": [
@@ -11274,6 +12048,12 @@
         "date": "2026-06-20",
         "rank": 27,
         "price": 43.0,
+        "category": "automotive"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 25,
+        "price": 57.75,
         "category": "automotive"
       }
     ],
@@ -11331,6 +12111,12 @@
         "rank": 6,
         "price": 190.0,
         "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 9,
+        "price": 190.0,
+        "category": "beauty"
       }
     ],
     "B08WJQ45WP": [
@@ -11343,6 +12129,12 @@
       {
         "date": "2026-06-20",
         "rank": 12,
+        "price": 80.0,
+        "category": "beauty"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
         "price": 80.0,
         "category": "beauty"
       }
@@ -11371,6 +12163,12 @@
       {
         "date": "2026-06-20",
         "rank": 14,
+        "price": 117.4,
+        "category": "home"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 15,
         "price": 117.4,
         "category": "home"
       }
@@ -11443,6 +12241,12 @@
         "rank": 12,
         "price": 265.0,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 11,
+        "price": 265.0,
+        "category": "toys"
       }
     ],
     "B004X0XLFO": [
@@ -11457,6 +12261,12 @@
         "rank": 15,
         "price": 58.0,
         "category": "toys"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 13,
+        "price": 58.0,
+        "category": "toys"
       }
     ],
     "B07FPHFVMM": [
@@ -11469,6 +12279,12 @@
       {
         "date": "2026-06-20",
         "rank": 4,
+        "price": 461.0,
+        "category": "baby"
+      },
+      {
+        "date": "2026-06-21",
+        "rank": 3,
         "price": 461.0,
         "category": "baby"
       }
@@ -11499,6 +12315,118 @@
         "rank": 8,
         "price": 169.99,
         "category": "health"
+      }
+    ],
+    "B0BB4NWBPC": [
+      {
+        "date": "2026-06-21",
+        "rank": 26,
+        "price": 385.0,
+        "category": "automotive"
+      }
+    ],
+    "B08BLRGWGY": [
+      {
+        "date": "2026-06-21",
+        "rank": 27,
+        "price": 145.0,
+        "category": "automotive"
+      }
+    ],
+    "B0DH8LFHP7": [
+      {
+        "date": "2026-06-21",
+        "rank": 12,
+        "price": 159.0,
+        "category": "electronics"
+      }
+    ],
+    "B0DTGFN2FQ": [
+      {
+        "date": "2026-06-21",
+        "rank": 13,
+        "price": 84.95,
+        "category": "electronics"
+      }
+    ],
+    "B0BRV61DPY": [
+      {
+        "date": "2026-06-21",
+        "rank": 8,
+        "price": 230.0,
+        "category": "home"
+      }
+    ],
+    "B09R7WS86K": [
+      {
+        "date": "2026-06-21",
+        "rank": 10,
+        "price": 64.99,
+        "category": "home"
+      }
+    ],
+    "B091J7WXH7": [
+      {
+        "date": "2026-06-21",
+        "rank": 1,
+        "price": 414.0,
+        "category": "fashion"
+      }
+    ],
+    "B0DVCGGSGG": [
+      {
+        "date": "2026-06-21",
+        "rank": 8,
+        "price": 323.99,
+        "category": "fashion"
+      }
+    ],
+    "B0CVZB5B6Y": [
+      {
+        "date": "2026-06-21",
+        "rank": 12,
+        "price": 194.65,
+        "category": "fashion"
+      }
+    ],
+    "B0H4D92KR3": [
+      {
+        "date": "2026-06-21",
+        "rank": 4,
+        "price": 169.0,
+        "category": "toys"
+      }
+    ],
+    "B09K6NTX9L": [
+      {
+        "date": "2026-06-21",
+        "rank": 15,
+        "price": 114.95,
+        "category": "toys"
+      }
+    ],
+    "B08WJKZF75": [
+      {
+        "date": "2026-06-21",
+        "rank": 14,
+        "price": 232.99,
+        "category": "grocery"
+      }
+    ],
+    "B0BF5BVRZC": [
+      {
+        "date": "2026-06-21",
+        "rank": 1,
+        "price": 489.99,
+        "category": "baby"
+      }
+    ],
+    "B0FBX9FN6B": [
+      {
+        "date": "2026-06-21",
+        "rank": 14,
+        "price": 148.0,
+        "category": "baby"
       }
     ]
   }
