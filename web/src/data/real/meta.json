@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-06-21T10:05:51.608507+00:00",
+  "scraped_at": "2026-06-22T12:27:06.491421+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -20,7 +20,7 @@
     "categories_degraded": [],
     "min_title_fill": 100.0,
     "total_products": 150,
-    "firecrawl_calls": 33,
+    "firecrawl_calls": 31,
     "per_category": {
       "automotive": {
         "parsed_count": 30,
@@ -49,7 +49,7 @@
       "home": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 86.7,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -57,7 +57,7 @@
       "fashion": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 86.7,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -65,7 +65,7 @@
       "toys": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 93.3,
         "rating_fill": 93.3,
         "reviews_fill": 93.3,
         "degraded": false
@@ -89,7 +89,7 @@
       "health": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 86.7,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false

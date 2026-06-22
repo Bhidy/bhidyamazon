@@ -1,15 +1,15 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-06-21T10:05:51.608507+00:00",
+  "scraped_at": "2026-06-22T12:27:06.491421+00:00",
   "products": {
     "B0CCY38RGC": {
       "asin": "B0CCY38RGC",
       "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Musk After Smoke (7.5g)",
       "brand": "Godrej aer",
-      "price_egp": 85.86,
+      "price_egp": 120.0,
       "currency": "EGP",
       "rating": 4.2,
-      "reviews": 9509,
+      "reviews": 9523,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -23,34 +23,16 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 2,
-      "offers": [
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 85.86,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "ECIFegy",
-          "seller_id": "A314KOZ4T1PJDZ",
-          "price_egp": 120.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "offer_count": null
     },
     "B09NRNLTZV": {
       "asin": "B09NRNLTZV",
       "title": "Micro fiber towel - 4 pieces, 35cmx40cm",
       "brand": "Spaceshoop",
-      "price_egp": 78.0,
+      "price_egp": 76.99,
       "currency": "EGP",
       "rating": 3.6,
-      "reviews": 1319,
+      "reviews": 1321,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -64,58 +46,16 @@
       "item_dims_cm": null,
       "image_count": 5,
       "feature_bullet_count": 4,
-      "offer_count": 5,
-      "offers": [
-        {
-          "seller_name": "King trade1",
-          "seller_id": "AYU1U564QFKUB",
-          "price_egp": 78.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "Es-ho",
-          "seller_id": "APU3P1PNBYDUN",
-          "price_egp": 78.9,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Spaceshoop_October",
-          "seller_id": "ASCKB7YHANFEH",
-          "price_egp": 82.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "CGS.Store",
-          "seller_id": "A2U9GRN68MWONK",
-          "price_egp": 110.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "momnto",
-          "seller_id": "A5J1W009US788",
-          "price_egp": 130.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "offer_count": 5
     },
     "B0BGPLGQKQ": {
       "asin": "B0BGPLGQKQ",
       "title": "Miytsya 1 PC Car Trash Can with Lid, Multifunctional Folding Car Dustbin Garbage Organizer Holder, Leak-Proof Hanging Mini Trash Can Containers, Suitable for Cars, Homes, Offices (Black)",
       "brand": "Wonka",
-      "price_egp": 57.0,
+      "price_egp": 60.0,
       "currency": "EGP",
       "rating": 3.4,
-      "reviews": 709,
+      "reviews": 712,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -129,107 +69,17 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 20,
-      "offers": [
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 57.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "Hema_STORE",
-          "seller_id": "A39P92WEHA5PKC",
-          "price_egp": 57.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "زوايد",
-          "seller_id": "A1R4YVFWL3G6RO",
-          "price_egp": 57.5,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "اير ماكس",
-          "seller_id": "A3LCDE8LV68D7T",
-          "price_egp": 60.5,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "PrimeHubb",
-          "seller_id": "ALHOX5C4ZV3KA",
-          "price_egp": 61.75,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Ebeid 2024",
-          "seller_id": "A1CV158K9868SH",
-          "price_egp": 73.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Mazmaza",
-          "seller_id": "A2EBCJRJM8IQU3",
-          "price_egp": 73.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Blue_bird",
-          "seller_id": "A2UBE9MBSIT7QJ",
-          "price_egp": 74.4,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "ElFairouz",
-          "seller_id": "A1W81VDO4RBW1I",
-          "price_egp": 75.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Es-ho",
-          "seller_id": "APU3P1PNBYDUN",
-          "price_egp": 103.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "m.y.m store",
-          "seller_id": "A3O4ZTQALSLTR",
-          "price_egp": 105.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "offer_count": 21
     },
     "B09V27R871": {
       "asin": "B09V27R871",
       "title": "NC Car Windshield Sun Shade Foldable car Sun Umbrella,Blocks UV Rays Sun Visor for car[48 25.6 inches (122 * 65 cm)] Fit Most Vehicle",
       "brand": "Spaceshoop",
-      "price_egp": 148.1,
+      "price_egp": 143.0,
       "currency": "EGP",
       "rating": 3.5,
-      "reviews": 1791,
-      "availability": "Only 3 left in stock - order soon.",
+      "reviews": 1793,
+      "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
       "material": null,
@@ -242,30 +92,7 @@
       "item_dims_cm": null,
       "image_count": 5,
       "feature_bullet_count": 1,
-      "offer_count": 38
-    },
-    "B0CXPDG6KV": {
-      "asin": "B0CXPDG6KV",
-      "title": "Amrules 2PCS Car Interior Detailing Brush, Auto Car Detailing Brush Dusting Brush, Soft Bristles Car Interior Cleaning Tool for Dashboard Interior, Exterior, Skylight, Leather, Dust Brush Without Cap",
-      "brand": "Amrules",
-      "price_egp": 59.0,
-      "currency": "EGP",
-      "rating": 3.6,
-      "reviews": 1429,
-      "availability": "In Stock",
-      "bsr": [],
-      "reviews_list": [],
-      "material": null,
-      "manufacturer": null,
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": 7,
-      "feature_bullet_count": 6,
-      "offer_count": 14
+      "offer_count": 36
     },
     "B096L5ZB2L": {
       "asin": "B096L5ZB2L",
@@ -290,11 +117,57 @@
       "feature_bullet_count": 4,
       "offer_count": 2
     },
+    "B0CXPDG6KV": {
+      "asin": "B0CXPDG6KV",
+      "title": "Amrules 2PCS Car Interior Detailing Brush, Auto Car Detailing Brush Dusting Brush, Soft Bristles Car Interior Cleaning Tool for Dashboard Interior, Exterior, Skylight, Leather, Dust Brush Without Cap",
+      "brand": "Amrules",
+      "price_egp": 59.0,
+      "currency": "EGP",
+      "rating": 3.6,
+      "reviews": 1432,
+      "availability": "In Stock",
+      "bsr": [],
+      "reviews_list": [],
+      "material": null,
+      "manufacturer": null,
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": null,
+      "item_weight_kg": null,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 7,
+      "feature_bullet_count": 6,
+      "offer_count": 14
+    },
+    "B0DMF1DHF3": {
+      "asin": "B0DMF1DHF3",
+      "title": "Car Windshield Cleaning Degreasing Cleaning Window Rainproof Cleaning Car Glass Cleaning Brush 120ml Car Windshield Cleaner Liquid Hydrophobic Coating for Car Glass Car Cleaning Accessories",
+      "brand": "SELLERFLOR",
+      "price_egp": 39.0,
+      "currency": "EGP",
+      "rating": 2.6,
+      "reviews": 245,
+      "availability": "In Stock",
+      "bsr": [],
+      "reviews_list": [],
+      "material": null,
+      "manufacturer": null,
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": null,
+      "item_weight_kg": null,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 7,
+      "feature_bullet_count": 1,
+      "offer_count": 15
+    },
     "B0CCXZ8NXN": {
       "asin": "B0CCXZ8NXN",
       "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Rose Blossom (7.5g)",
       "brand": "by Godrej aer Format: Health and Beauty",
-      "price_egp": 85.86,
+      "price_egp": null,
       "currency": "EGP",
       "rating": 4.0,
       "reviews": 982,
@@ -313,29 +186,6 @@
       "feature_bullet_count": null,
       "offer_count": 3
     },
-    "B0CLD3RNMG": {
-      "asin": "B0CLD3RNMG",
-      "title": "COSTAR Car Sun Shade Protector, Foldable Windshield Insulation Car Sun Shade for UV Protection Reflective Sunblocker Car Accessories for Pickup, Sedans, Trucks, SUVs, and More (Large Size)",
-      "brand": "COSTAR",
-      "price_egp": 152.0,
-      "currency": "EGP",
-      "rating": 3.4,
-      "reviews": 1103,
-      "availability": "In Stock",
-      "bsr": [],
-      "reviews_list": [],
-      "material": null,
-      "manufacturer": null,
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": 7,
-      "feature_bullet_count": 1,
-      "offer_count": 17
-    },
     "B0BKWXJB29": {
       "asin": "B0BKWXJB29",
       "title": "TotalEnergies QUARTZ 7000 10W-40 Synthetic Technology Engine oil for Passenger Car - 5 Liters",
@@ -343,7 +193,7 @@
       "price_egp": 1199.0,
       "currency": "EGP",
       "rating": 4.4,
-      "reviews": 1240,
+      "reviews": 1244,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -366,7 +216,7 @@
       "price_egp": 255.62,
       "currency": "EGP",
       "rating": 4.6,
-      "reviews": 12521,
+      "reviews": 12527,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -386,7 +236,7 @@
       "asin": "B0CPC8JMCW",
       "title": "Joyroom S-UC027A9 USB-A to Type-C 3A Fast Charging & Data Cable, 1M – Black High-Speed Charging & Reliable Data Transfer Durable Build | 12 Months Warranty",
       "brand": "Joyroom",
-      "price_egp": 56.5,
+      "price_egp": 65.55,
       "currency": "EGP",
       "rating": 4.4,
       "reviews": 356,
@@ -409,10 +259,10 @@
       "asin": "B0CZ94NRQW",
       "title": "White 80 round cotton pads",
       "brand": "White",
-      "price_egp": 49.9,
+      "price_egp": 71.25,
       "currency": "EGP",
       "rating": 4.7,
-      "reviews": 897,
+      "reviews": 900,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
