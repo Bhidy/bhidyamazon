@@ -1,15 +1,56 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-07-04T09:01:22.343846+00:00",
+  "scraped_at": "2026-07-05T09:23:00.805505+00:00",
   "products": {
+    "B0CCXZRDV7": {
+      "asin": "B0CCXZRDV7",
+      "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Cool Aqua (7.5g)",
+      "brand": "Godrej aer",
+      "price_egp": 95.21,
+      "currency": "EGP",
+      "rating": 4.1,
+      "reviews": 9324,
+      "availability": "In Stock",
+      "bsr": [],
+      "reviews_list": [],
+      "material": null,
+      "manufacturer": null,
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": null,
+      "item_weight_kg": null,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 4,
+      "feature_bullet_count": 1,
+      "offer_count": 2,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 95.21,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "ECIFegy",
+          "seller_id": "A314KOZ4T1PJDZ",
+          "price_egp": 95.11,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
+    },
     "B09NRNLTZV": {
       "asin": "B09NRNLTZV",
       "title": "Micro fiber towel - 4 pieces, 35cmx40cm",
       "brand": "Spaceshoop",
-      "price_egp": 64.44,
+      "price_egp": 61.0,
       "currency": "EGP",
       "rating": 3.6,
-      "reviews": 1354,
+      "reviews": 1363,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -23,132 +64,81 @@
       "item_dims_cm": null,
       "image_count": 5,
       "feature_bullet_count": 4,
-      "offer_count": 8
-    },
-    "B0CCXZRDV7": {
-      "asin": "B0CCXZRDV7",
-      "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Cool Aqua (7.5g)",
-      "brand": "Godrej aer",
-      "price_egp": 85.86,
-      "currency": "EGP",
-      "rating": 4.2,
-      "reviews": 9287,
-      "availability": "In Stock",
-      "bsr": [
+      "offer_count": 9,
+      "offers": [
         {
-          "rank": 2,
-          "category": "Automotive"
+          "seller_name": "Bynona",
+          "seller_id": "A2WTWA6GH5UAMV",
+          "price_egp": 61.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
         },
         {
-          "rank": 1,
-          "category": "Automotive Air Fresheners"
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 67.46,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "EL-Captain.CGS",
+          "seller_id": "A3C6DQMZ338AD7",
+          "price_egp": 68.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Es-ho",
+          "seller_id": "APU3P1PNBYDUN",
+          "price_egp": 69.9,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Spaceshoop_October",
+          "seller_id": "ASCKB7YHANFEH",
+          "price_egp": 74.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "King trade1",
+          "seller_id": "AYU1U564QFKUB",
+          "price_egp": 75.99,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "XR STORE",
+          "seller_id": "A3R6QGBNC92DN6",
+          "price_egp": 79.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "CGS.Store",
+          "seller_id": "A2U9GRN68MWONK",
+          "price_egp": 110.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "momnto",
+          "seller_id": "A5J1W009US788",
+          "price_egp": 130.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
         }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R1TJTNR3JZK7S6",
-          "rating": 5.0,
-          "title": "Very good",
-          "body": "Long lasting and very good scent",
-          "author": null,
-          "date": "Reviewed in Egypt on 16 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R2LBDI8RGIZ4QC",
-          "rating": 4.0,
-          "title": "مناسب",
-          "body": "كويس قيمه مقابل سعر",
-          "author": null,
-          "date": "Reviewed in Egypt on 22 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R13VN398ZTT3QB",
-          "rating": 5.0,
-          "title": "I really liked this bathroom freshener",
-          "body": "I really liked this bathroom freshener. As soon as we opened the package, the scent filled the room. It's a fresh, pleasant scent, and it comes with a holder for easy use. I'm not sure how long the scent will last, but it's been over a week, and the scent hasn't faded. It works perfectly. I recommend it.",
-          "author": null,
-          "date": "Reviewed in Egypt on 30 May 2026",
-          "verified": true,
-          "helpful": 7,
-          "lang": "en"
-        },
-        {
-          "review_id": "R23G980MMF3OTU",
-          "rating": 5.0,
-          "title": "Very good",
-          "body": "Very good smell and longstanding",
-          "author": null,
-          "date": "Reviewed in Egypt on 12 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "RZ33IMHK86BDB",
-          "rating": 3.0,
-          "title": "الرائحة قوية",
-          "body": "الرائحة قوية لكن آخرها ١٠ أيام وبتخلص للأسف",
-          "author": null,
-          "date": "Reviewed in Egypt on 14 June 2026",
-          "verified": true,
-          "helpful": 4,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1AA8GFL4W25JZ",
-          "rating": 5.0,
-          "title": "ممتازة",
-          "body": "ريحتها جميلة بقالها معايا اسبوعين ولسة ريحتها واضحة",
-          "author": null,
-          "date": "Reviewed in Egypt on 25 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R14YDQ2XPC45DB",
-          "rating": 1.0,
-          "title": "حجمها كبير اوي",
-          "body": "حجمها كبير جدا علي انها تتعلق في عربية وريحتها بتروح بعدها بأسبوعين",
-          "author": null,
-          "date": "Reviewed in Egypt on 29 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3702XZELA0NLB",
-          "rating": 4.0,
-          "title": "معطر حمام",
-          "body": "غالية قوي ، كأنو كاتبين هستلم ٦",
-          "author": null,
-          "date": "Reviewed in Egypt on 26 May 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        }
-      ],
-      "material": null,
-      "manufacturer": "Godrej Consumer Products Limited",
-      "color": "Aqua",
-      "number_of_items": 4,
-      "item_weight_raw": "8 Grams",
-      "item_weight_kg": 0.008,
-      "item_dims_raw": "9.2 x 0.4 x 2 centimeters",
-      "item_dims_cm": {
-        "l": 9.2,
-        "w": 0.4,
-        "h": 2.0
-      },
-      "image_count": 4,
-      "feature_bullet_count": 1,
-      "offer_count": 2
+      ]
     },
     "B09V27R871": {
       "asin": "B09V27R871",
@@ -157,7 +147,7 @@
       "price_egp": 139.0,
       "currency": "EGP",
       "rating": 3.5,
-      "reviews": 1813,
+      "reviews": 1816,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -171,30 +161,97 @@
       "item_dims_cm": null,
       "image_count": 5,
       "feature_bullet_count": 1,
-      "offer_count": 37
-    },
-    "B0CMV9DC3L": {
-      "asin": "B0CMV9DC3L",
-      "title": "Fogg Air Freshener - Ice",
-      "brand": "Fogg",
-      "price_egp": 34.2,
-      "currency": "EGP",
-      "rating": 3.8,
-      "reviews": 433,
-      "availability": "In Stock",
-      "bsr": [],
-      "reviews_list": [],
-      "material": null,
-      "manufacturer": null,
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": 3,
-      "feature_bullet_count": 3,
-      "offer_count": null
+      "offer_count": 37,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 139.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "AL TOP",
+          "seller_id": "AY5C6K213AW5F",
+          "price_egp": 145.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "xxDiscountxx",
+          "seller_id": "A3HBJVIC14OEWA",
+          "price_egp": 146.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Telda Shop",
+          "seller_id": "A2EV3TTHZA0UJG",
+          "price_egp": 147.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Nour-Commerce",
+          "seller_id": "A371X7XSBF320S",
+          "price_egp": 150.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "H&A Beauty 1",
+          "seller_id": "A2SOOHY1YCXHJL",
+          "price_egp": 160.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Domix Store",
+          "seller_id": "A25I6O7746CKOY",
+          "price_egp": 160.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "سوق كادو1",
+          "seller_id": "AS7YKHQNZZ2EB",
+          "price_egp": 162.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ZEKRALLA",
+          "seller_id": "A3OUVIE0AY1TZ7",
+          "price_egp": 170.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Ebaskt",
+          "seller_id": "A19I0J9SEXYVB",
+          "price_egp": 170.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "LOKYBOY",
+          "seller_id": "A2U96IT6K9NZMH",
+          "price_egp": 188.5,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0CXPDG6KV": {
       "asin": "B0CXPDG6KV",
@@ -203,7 +260,7 @@
       "price_egp": 36.0,
       "currency": "EGP",
       "rating": 3.6,
-      "reviews": 1469,
+      "reviews": 1485,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -217,16 +274,16 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 6,
-      "offer_count": 15
+      "offer_count": 17
     },
     "B0BGPLGQKQ": {
       "asin": "B0BGPLGQKQ",
       "title": "Miytsya 1 PC Car Trash Can with Lid, Multifunctional Folding Car Dustbin Garbage Organizer Holder, Leak-Proof Hanging Mini Trash Can Containers, Suitable for Cars, Homes, Offices (Black)",
       "brand": "Wonka",
-      "price_egp": 59.0,
+      "price_egp": 56.75,
       "currency": "EGP",
       "rating": 3.4,
-      "reviews": 733,
+      "reviews": 738,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -242,6 +299,29 @@
       "feature_bullet_count": 1,
       "offer_count": 20
     },
+    "B0CMV9DC3L": {
+      "asin": "B0CMV9DC3L",
+      "title": "Fogg Air Freshener - Ice",
+      "brand": "Fogg",
+      "price_egp": 34.2,
+      "currency": "EGP",
+      "rating": 3.8,
+      "reviews": 435,
+      "availability": "In Stock",
+      "bsr": [],
+      "reviews_list": [],
+      "material": null,
+      "manufacturer": null,
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": null,
+      "item_weight_kg": null,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 3,
+      "feature_bullet_count": 3,
+      "offer_count": null
+    },
     "B07MX3F36F": {
       "asin": "B07MX3F36F",
       "title": "WD-40 Rust Remover, 330ml",
@@ -249,7 +329,7 @@
       "price_egp": 217.0,
       "currency": "EGP",
       "rating": 4.6,
-      "reviews": 12525,
+      "reviews": 12540,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -265,29 +345,6 @@
       "feature_bullet_count": 1,
       "offer_count": 16
     },
-    "B0DCTMX6N4": {
-      "asin": "B0DCTMX6N4",
-      "title": "TotalEnergies Cooltech Plus (-7°C) Coolant 5 - Liter - Antifreeze and Coolants",
-      "brand": "TotalEnergies",
-      "price_egp": 590.0,
-      "currency": "EGP",
-      "rating": 4.6,
-      "reviews": 111,
-      "availability": "Currently unavailable. We don't know when or if this item will be back in stock.",
-      "bsr": [],
-      "reviews_list": [],
-      "material": null,
-      "manufacturer": null,
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": 3,
-      "feature_bullet_count": 5,
-      "offer_count": null
-    },
     "B08WJNDTZZ": {
       "asin": "B08WJNDTZZ",
       "title": "Frida Car Polish and cleaner3 in 1, Raspberry Icecream - 300 ml",
@@ -295,7 +352,7 @@
       "price_egp": 65.95,
       "currency": "EGP",
       "rating": 4.4,
-      "reviews": 185,
+      "reviews": 187,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -311,6 +368,29 @@
       "feature_bullet_count": 2,
       "offer_count": null
     },
+    "B09NCVS7V4": {
+      "asin": "B09NCVS7V4",
+      "title": "Singaro car cup coaster, 4pcs universal non-slip cup holders embedded in ornaments coaster, car interior accessories, black",
+      "brand": "SINGARO",
+      "price_egp": 99.0,
+      "currency": "EGP",
+      "rating": 4.4,
+      "reviews": 36782,
+      "availability": "In Stock",
+      "bsr": [],
+      "reviews_list": [],
+      "material": null,
+      "manufacturer": null,
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": null,
+      "item_weight_kg": null,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 6,
+      "feature_bullet_count": 5,
+      "offer_count": 2
+    },
     "B0CCXZ8NXN": {
       "asin": "B0CCXZ8NXN",
       "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Rose Blossom (7.5g)",
@@ -318,7 +398,7 @@
       "price_egp": null,
       "currency": "EGP",
       "rating": 4.0,
-      "reviews": 991,
+      "reviews": 992,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -341,7 +421,7 @@
       "price_egp": 65.0,
       "currency": "EGP",
       "rating": 4.4,
-      "reviews": 224,
+      "reviews": 228,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -355,16 +435,16 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 5,
-      "offer_count": 7
+      "offer_count": 8
     },
-    "B0C7YKP9HM": {
-      "asin": "B0C7YKP9HM",
-      "title": "Camay Bar Soap Romantique 165G",
-      "brand": "Camay",
-      "price_egp": 26.5,
+    "B07MMFCTCX": {
+      "asin": "B07MMFCTCX",
+      "title": "Garnier SkinActive Micellar Cleansing Water Classic 100ml",
+      "brand": "Garnier",
+      "price_egp": 80.68,
       "currency": "EGP",
       "rating": 4.5,
-      "reviews": 678,
+      "reviews": 7747,
       "availability": "In Stock",
       "bsr": [],
       "reviews_list": [],
@@ -376,9 +456,9 @@
       "item_weight_kg": null,
       "item_dims_raw": null,
       "item_dims_cm": null,
-      "image_count": 7,
-      "feature_bullet_count": 1,
-      "offer_count": 2
+      "image_count": 2,
+      "feature_bullet_count": 4,
+      "offer_count": 11
     }
   }
 }
