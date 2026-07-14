@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-13T09:50:30.841257+00:00",
+  "scraped_at": "2026-07-14T08:30:48.524314+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -74,7 +74,7 @@
       "appearances": 1
     },
     {
-      "query": "baby",
+      "query": "baby oil",
       "lang": "en",
       "demandScore": 100,
       "trend": "flat",
@@ -130,7 +130,7 @@
       "appearances": 1
     },
     {
-      "query": "oraimo earbuds",
+      "query": "soundcore earbuds",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -193,14 +193,14 @@
       "appearances": 1
     },
     {
-      "query": "bluetooth speaker with mic",
+      "query": "bluetooth speaker jbl",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "baby oil",
+      "query": "baby",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -235,7 +235,7 @@
       "appearances": 1
     },
     {
-      "query": "ساعة ذكية للأطفال",
+      "query": "ساعة ذكية شاومي",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
@@ -256,7 +256,7 @@
       "appearances": 1
     },
     {
-      "query": "soundcore earbuds",
+      "query": "oraimo earbuds",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
