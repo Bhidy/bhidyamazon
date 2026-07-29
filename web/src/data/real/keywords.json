@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-28T09:10:45.578840+00:00",
+  "scraped_at": "2026-07-29T09:09:44.766227+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -193,7 +193,7 @@
       "appearances": 1
     },
     {
-      "query": "bluetooth speaker with mic",
+      "query": "portable bluetooth speaker",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -235,7 +235,7 @@
       "appearances": 1
     },
     {
-      "query": "ساعة ذكية هواوي",
+      "query": "ساعة ذكية شاومي",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
