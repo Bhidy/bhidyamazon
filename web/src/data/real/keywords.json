@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-29T09:09:44.766227+00:00",
+  "scraped_at": "2026-07-30T09:08:47.776921+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -116,7 +116,7 @@
       "appearances": 1
     },
     {
-      "query": "قلاية هوائية",
+      "query": "قلاية زيت كهربائية",
       "lang": "ar",
       "demandScore": 100,
       "trend": "flat",
@@ -137,7 +137,7 @@
       "appearances": 1
     },
     {
-      "query": "wireless charger iphone",
+      "query": "anker wireless charger",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -242,7 +242,7 @@
       "appearances": 1
     },
     {
-      "query": "قلاية زيت كهربائية",
+      "query": "قلاية هوائية بلاك اند ديكر",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
@@ -263,7 +263,7 @@
       "appearances": 1
     },
     {
-      "query": "wireless charger samsung",
+      "query": "wireless charger iphone",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
