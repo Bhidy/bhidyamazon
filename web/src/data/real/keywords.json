@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-07-30T09:08:47.776921+00:00",
+  "scraped_at": "2026-07-31T09:24:50.253219+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -109,7 +109,7 @@
       "appearances": 1
     },
     {
-      "query": "ساعة ذكية",
+      "query": "ساعة ذكية شاومي",
       "lang": "ar",
       "demandScore": 100,
       "trend": "flat",
@@ -137,7 +137,7 @@
       "appearances": 1
     },
     {
-      "query": "anker wireless charger",
+      "query": "wireless charger iphone",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -235,7 +235,7 @@
       "appearances": 1
     },
     {
-      "query": "ساعة ذكية شاومي",
+      "query": "ساعة ذكية هواوي",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
@@ -263,7 +263,7 @@
       "appearances": 1
     },
     {
-      "query": "wireless charger iphone",
+      "query": "wireless charger samsung",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
