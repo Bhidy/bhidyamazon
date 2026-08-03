@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-02T08:51:24.342057+00:00",
+  "scraped_at": "2026-08-03T10:10:57.903063+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -109,14 +109,14 @@
       "appearances": 1
     },
     {
-      "query": "ساعة ذكية شاومي",
+      "query": "ساعة ذكية",
       "lang": "ar",
       "demandScore": 100,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "قلاية زيت كهربائية",
+      "query": "قلاية هوائية",
       "lang": "ar",
       "demandScore": 100,
       "trend": "flat",
@@ -193,7 +193,7 @@
       "appearances": 1
     },
     {
-      "query": "portable bluetooth speaker",
+      "query": "bluetooth speaker with mic",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -235,14 +235,14 @@
       "appearances": 1
     },
     {
-      "query": "ساعة ذكية هواوي",
+      "query": "ساعة ذكية شاومي",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "قلاية هوائية بلاك اند ديكر",
+      "query": "قلاية زيت كهربائية",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
