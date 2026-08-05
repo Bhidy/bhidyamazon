@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-04T09:21:35.650537+00:00",
+  "scraped_at": "2026-08-05T09:23:17.084898+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -144,7 +144,7 @@
       "appearances": 1
     },
     {
-      "query": "power bank 20000mah",
+      "query": "power bank anker",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -207,7 +207,7 @@
       "appearances": 1
     },
     {
-      "query": "perfume for men",
+      "query": "perfume for women",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -270,7 +270,7 @@
       "appearances": 1
     },
     {
-      "query": "power bank anker",
+      "query": "power bank 20000mah",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
