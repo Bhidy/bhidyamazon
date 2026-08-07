@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-08-06T09:06:46.907517+00:00",
+  "scraped_at": "2026-08-07T07:41:57.586729+00:00",
   "products": {
     "B0CCXZRDV7": {
       "asin": "B0CCXZRDV7",
@@ -125,383 +125,7 @@
       },
       "image_count": 4,
       "feature_bullet_count": 1,
-      "offer_count": 2,
-      "offers": [
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 90.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "ECIFegy",
-          "seller_id": "A314KOZ4T1PJDZ",
-          "price_egp": 95.11,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
-    },
-    "B09V27R871": {
-      "asin": "B09V27R871",
-      "title": "NC Car Windshield Sun Shade Foldable car Sun Umbrella,Blocks UV Rays Sun Visor for car[48 25.6 inches (122 * 65 cm)] Fit Most Vehicle",
-      "brand": "Spaceshoop",
-      "price_egp": 128.0,
-      "currency": "EGP",
-      "rating": 3.5,
-      "reviews": 1877,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 3,
-          "category": "Automotive"
-        },
-        {
-          "rank": 1,
-          "category": "Car Front Window Sunshades"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R3MQDY77ZQWZ3X",
-          "rating": 5.0,
-          "title": "جيد",
-          "body": "كويسة بالنسبة لسعرها",
-          "author": null,
-          "date": "Reviewed in Egypt on 10 April 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2JG9M6O8C4260",
-          "rating": 1.0,
-          "title": "Very bad quality - broke in less than 2 months",
-          "body": "Used for less than 2 months and already broken, I wouldn’t recommend buying!",
-          "author": null,
-          "date": "Reviewed in Egypt on 25 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R11OEHQG9ZRLAP",
-          "rating": 4.0,
-          "title": "A little bit better",
-          "body": "Useful but weak",
-          "author": null,
-          "date": "Reviewed in Egypt on 30 April 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "en"
-        },
-        {
-          "review_id": "R2W58TVHYLGNY5",
-          "rating": 3.0,
-          "title": "مظلة سيارة",
-          "body": "بتعكس الشمس و تخفف حرارة السيارة بس خامة متوسطه",
-          "author": null,
-          "date": "Reviewed in Egypt on 28 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "RFH2HXTA3UGGX",
-          "rating": 5.0,
-          "title": "ممتازة",
-          "body": "كويسه جدا وبتحجب الشمس",
-          "author": null,
-          "date": "Reviewed in Egypt on 24 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3KJ3QUEGCLNLJ",
-          "rating": 5.0,
-          "title": "V. Good",
-          "body": "V. Good",
-          "author": null,
-          "date": "Reviewed in Egypt on 26 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R10TGC9MJ60O3M",
-          "rating": 2.0,
-          "title": "ضعيفه و سيئة جدا",
-          "body": "خامات سيئة و رديئة جدا لا انصح و شكلها هتتقطع او تتكسر بسهوله اوي",
-          "author": null,
-          "date": "Reviewed in Egypt on 9 July 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1TMM3FJ64MTWC",
-          "rating": 1.0,
-          "title": "سيئة جدا",
-          "body": "سيئة جدا و ضعيفة جدا اللوك بقى سايب و مش بيقفل و كذا دراع اتكسر لوحده غير ان خامتها ورق",
-          "author": null,
-          "date": "Reviewed in Egypt on 29 June 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        }
-      ],
-      "material": "Leather",
-      "manufacturer": "N\\C",
-      "color": "black",
-      "number_of_items": 1,
-      "item_weight_raw": "500 Grams",
-      "item_weight_kg": 0.5,
-      "item_dims_raw": "110L x 60W centimeters",
-      "item_dims_cm": {
-        "l": 110.0,
-        "w": 60.0,
-        "h": 0.0
-      },
-      "image_count": 5,
-      "feature_bullet_count": 1,
-      "offer_count": 44,
-      "offers": [
-        {
-          "seller_name": "Tranatula",
-          "seller_id": "AP25QM9KNMKPL",
-          "price_egp": 128.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 128.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "TRX Store",
-          "seller_id": "A3USZ6ECH4YNN0",
-          "price_egp": 129.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "xxDiscountxx",
-          "seller_id": "A3HBJVIC14OEWA",
-          "price_egp": 129.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "AL TOP",
-          "seller_id": "AY5C6K213AW5F",
-          "price_egp": 130.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "S_M_Store",
-          "seller_id": "A1YERW7MSNSZEZ",
-          "price_egp": 134.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Donald-Duck",
-          "seller_id": "A2T2FUOUMBGNCU",
-          "price_egp": 137.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Nour-Commerce",
-          "seller_id": "A371X7XSBF320S",
-          "price_egp": 150.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "S&M-Store",
-          "seller_id": "A24L91U83A8RCR",
-          "price_egp": 150.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "H&A Beauty 1",
-          "seller_id": "A2SOOHY1YCXHJL",
-          "price_egp": 155.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "hawary",
-          "seller_id": "A2PZQ7HMG7V8V0",
-          "price_egp": 129.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
-    },
-    "B0BTSHHWQM": {
-      "asin": "B0BTSHHWQM",
-      "title": "Frida Aqua chicka dee 460ml",
-      "brand": "Frida",
-      "price_egp": 77.95,
-      "currency": "EGP",
-      "rating": 4.4,
-      "reviews": 267,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 4,
-          "category": "Automotive"
-        },
-        {
-          "rank": 2,
-          "category": "Automotive Air Fresheners"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R2PUS4VXTK8810",
-          "rating": 5.0,
-          "title": "ريحه روعه و ثابت كويس جدا",
-          "body": "ريحته جميلة جداا و افضل معطر فريدا يليه بهجه",
-          "author": null,
-          "date": "Reviewed in Egypt on 8 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3J5HFPPUIAA25",
-          "rating": 5.0,
-          "title": "رائعة",
-          "body": "ممتازة احلي واحدة فيهم وخفيفة وواضحة ومش تقيلة انها تخنق الثبات ممكن مش كتير بس كويس يقضي الغرض",
-          "author": null,
-          "date": "Reviewed in Egypt on 3 June 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R7YJLPD9ZS3IM",
-          "rating": 5.0,
-          "title": "جميلة",
-          "body": "روعة",
-          "author": null,
-          "date": "Reviewed in Egypt on 12 June 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "RI2P21DJVZDB7",
-          "rating": 4.0,
-          "title": "Refreshing and Stylish: A Must-Try Beverage",
-          "body": "I recently tried the Frida Aqua Chicka Dee 460ml, and I must say, it exceeded my expectations in several ways. Firstly, the packaging is both sleek and functional. The 460ml bottle is perfectly sized for on-the-go hydration, and the design is modern and eye-catching. It's easy to carry and fits nicely in a car cup holder or backpack. The taste is where Frida Aqua Chicka Dee shines. The flavor is refreshingly crisp with just the right balance of sweetness and tartness. It's a great alternative to sugary soft drinks and provides a satisfying, clean, refreshing, and hydrating taste. I appreciate that it doesn’t have an artificial aftertaste, which is often a downside with flavored waters. In terms of quality, this beverage stands out. The ingredients list is straightforward and natural, which is always a plus. It feels like a healthier choice compared to other options on the market. Additionally, the 460ml size is ideal for quenching thirst without being overly large or bulky. My only minor critique would be that it could benefit from a slightly lower price point. However, considering the quality and taste, it’s worthwhile for those who appreciate a premium flavored water experience. The Frida Aqua Chicka Dee 460ml is a refreshing, stylish, and high-quality beverage worth trying. It’s perfect for those looking for a sophisticated drink option that doesn’t compromise flavor or health.",
-          "author": null,
-          "date": "Reviewed in Egypt on 11 August 2024",
-          "verified": true,
-          "helpful": 6,
-          "lang": "en"
-        },
-        {
-          "review_id": "R1BEKIWUTNWZXJ",
-          "rating": 5.0,
-          "title": "ريحته رائعة",
-          "body": "ريحته تحفة جدا",
-          "author": null,
-          "date": "Reviewed in Egypt on 11 April 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1S03Q4ET102S2",
-          "rating": 1.0,
-          "title": "وصلني رائحه مختلفه والصدمه لما فتحت الزجاجه لقيتها ملانه مياه مش معطر",
-          "body": "اسوأ تجربه على الاطلاق وصلتني ريحه مختلفه اسمها روز جولد بعدين رشيت منها لاحظت ان الريحه ضعيفه جدا جدا فقلت افتح الزجاجه فلقيتها متعبايه مياه شفافه لدرجة تقدر تشربها على عكس منتجات فريده الي بتبقى مميزه مادتها انها تقيله وبيضاء ورلئحتها فواحه فعرفت ان فيه غش تجاري وقمت بارجاعها وسأتقدم بشكوى غش تجاري",
-          "author": null,
-          "date": "Reviewed in Egypt on 6 June 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1AWXNWRA2HRE8",
-          "rating": 5.0,
-          "title": "🙏🙏",
-          "body": "👍👍👍👍👌👌👌👌👍🙏",
-          "author": null,
-          "date": "Reviewed in Egypt on 3 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R1UW1CJVE41FGS",
-          "rating": 5.0,
-          "title": "جميل ورائع",
-          "body": "جميل",
-          "author": null,
-          "date": "Reviewed in Egypt on 26 June 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
-        }
-      ],
-      "material": null,
-      "manufacturer": "Frida",
-      "color": "multicolour",
-      "number_of_items": 1,
-      "item_weight_raw": "0.21 Kilograms",
-      "item_weight_kg": 0.21,
-      "item_dims_raw": "10 x 20 x 37 centimeters",
-      "item_dims_cm": {
-        "l": 10.0,
-        "w": 20.0,
-        "h": 37.0
-      },
-      "image_count": 2,
-      "feature_bullet_count": 3,
-      "offer_count": 2,
-      "offers": [
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 77.95,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "tnzycompany",
-          "seller_id": "A2U3WMLF7LAIUJ",
-          "price_egp": 297.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "offer_count": 2
     },
     "B096L5ZB2L": {
       "asin": "B096L5ZB2L",
@@ -622,7 +246,17 @@
       "item_dims_cm": null,
       "image_count": 4,
       "feature_bullet_count": 4,
-      "offer_count": null
+      "offer_count": null,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 72.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        }
+      ]
     },
     "B0BGPLGQKQ": {
       "asin": "B0BGPLGQKQ",
@@ -747,7 +381,97 @@
       },
       "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 15
+      "offer_count": 15,
+      "offers": [
+        {
+          "seller_name": "اير ماكس",
+          "seller_id": "A3LCDE8LV68D7T",
+          "price_egp": 70.75,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "Blue_bird",
+          "seller_id": "A2UBE9MBSIT7QJ",
+          "price_egp": 74.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "xxDiscountxx",
+          "seller_id": "A3HBJVIC14OEWA",
+          "price_egp": 80.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Es-ho",
+          "seller_id": "APU3P1PNBYDUN",
+          "price_egp": 97.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 98.8,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "m.y.m store",
+          "seller_id": "A3O4ZTQALSLTR",
+          "price_egp": 105.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "LOKYBOY",
+          "seller_id": "A2U96IT6K9NZMH",
+          "price_egp": 110.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "EL-Captain.CGS",
+          "seller_id": "A3C6DQMZ338AD7",
+          "price_egp": 120.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Home&Kitchen2",
+          "seller_id": "AJUVNJ6XUGKVI",
+          "price_egp": 129.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Kiko's Boutique",
+          "seller_id": "AAN88RYW3OUW0",
+          "price_egp": 110.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "تربو turbo",
+          "seller_id": "A13Y40X6UBG18H",
+          "price_egp": 139.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0CXPDG6KV": {
       "asin": "B0CXPDG6KV",
@@ -756,11 +480,11 @@
       "price_egp": 45.0,
       "currency": "EGP",
       "rating": 3.5,
-      "reviews": 1576,
+      "reviews": 1586,
       "availability": "In Stock",
       "bsr": [
         {
-          "rank": 7,
+          "rank": 5,
           "category": "Automotive"
         },
         {
@@ -872,132 +596,7 @@
       },
       "image_count": 7,
       "feature_bullet_count": 6,
-      "offer_count": 17
-    },
-    "B07MX3F36F": {
-      "asin": "B07MX3F36F",
-      "title": "WD-40 Rust Remover, 330ml",
-      "brand": "WD-40",
-      "price_egp": 244.0,
-      "currency": "EGP",
-      "rating": 4.6,
-      "reviews": 12658,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 8,
-          "category": "Automotive"
-        },
-        {
-          "rank": 1,
-          "category": "Automotive Cleaners"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R3QTNN4B2FFMZO",
-          "rating": 5.0,
-          "title": "منتج ممتاز للتزييت و متعدد الاستخدامات",
-          "body": "منتج ممتاز و حديث الصلاحية",
-          "author": null,
-          "date": "Reviewed in Egypt on 22 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R335AJJYNVPSRF",
-          "rating": 5.0,
-          "title": "تحفة جدا",
-          "body": "تحفة جدا استخدمته في كل حاجة تقريبا أبواب شبابيك مراوح حتى مسامير مصدية كل حاجة ممتاز",
-          "author": null,
-          "date": "Reviewed in Egypt on 24 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3SA6I7V0I09PK",
-          "rating": 5.0,
-          "title": "ممتاز و اصلي",
-          "body": "ممتاز",
-          "author": null,
-          "date": "Reviewed in Egypt on 22 May 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1MFVLAH89OCDZ",
-          "rating": 4.0,
-          "title": "جيد جدا",
-          "body": "جيد جدا",
-          "author": null,
-          "date": "Reviewed in Egypt on 18 June 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1DB643E8K3LVC",
-          "rating": 5.0,
-          "title": "اصلى",
-          "body": "غنى عن التعريف مجرد رشه وكله بيفك مفصلات باب تلاجه فريزر كوالين اقفال وصل بالغطا والشفاط وغير مستخدم بتعرفها ان مش بتلاقي ريحه على المكان اللى بيبخ منه مقاس ٣٣٠ سعر وقت الشراء ٢٢٠ البائع امازون",
-          "author": null,
-          "date": "Reviewed in Egypt on 3 July 2026",
-          "verified": true,
-          "helpful": 3,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3B0KEWYW68SX0",
-          "rating": 5.0,
-          "title": "ش",
-          "body": "مكنتش مصدق الكلام بس بجد رشه واحده الباب ضبط",
-          "author": null,
-          "date": "Reviewed in Egypt on 25 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1S7TSQK4G46OP",
-          "rating": 5.0,
-          "title": "جيد جدا",
-          "body": "كما بالوصف",
-          "author": null,
-          "date": "Reviewed in Egypt on 27 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R13O8YC1IP4FWR",
-          "rating": 5.0,
-          "title": "فعال",
-          "body": "ممتاز",
-          "author": null,
-          "date": "Reviewed in Egypt on 26 July 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        }
-      ],
-      "material": null,
-      "manufacturer": "‎WD-40",
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": "‎8.2 x 21.4 x 18.6 cm; 330 g",
-      "item_dims_cm": {
-        "l": 8.2,
-        "w": 21.4,
-        "h": 18.6
-      },
-      "image_count": 7,
-      "feature_bullet_count": 1,
-      "offer_count": 17
+      "offer_count": 15
     },
     "B0CCXZ8NXN": {
       "asin": "B0CCXZ8NXN",
