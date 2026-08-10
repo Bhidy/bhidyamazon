@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-09T07:34:59.120566+00:00",
+  "scraped_at": "2026-08-10T08:20:18.195908+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -235,7 +235,7 @@
       "appearances": 1
     },
     {
-      "query": "ساعة ذكية شاومي",
+      "query": "ساعة ذكية نسائية",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
