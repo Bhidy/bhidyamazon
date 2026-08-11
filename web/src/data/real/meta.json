@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-08-10T08:04:43.633894+00:00",
+  "scraped_at": "2026-08-11T07:37:56.222504+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -13,7 +13,7 @@
     "health"
   ],
   "product_count": 150,
-  "enriched": 5,
+  "enriched": 6,
   "source": "amazon.eg via firecrawl",
   "health": {
     "categories_ok": 9,
