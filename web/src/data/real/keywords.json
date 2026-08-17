@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-16T07:17:34.496709+00:00",
+  "scraped_at": "2026-08-17T07:19:09.484895+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -186,7 +186,7 @@
       "appearances": 1
     },
     {
-      "query": "rhode phone case",
+      "query": "waterproof phone case",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
