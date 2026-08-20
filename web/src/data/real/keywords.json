@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-19T07:06:04.963045+00:00",
+  "scraped_at": "2026-08-20T07:06:58.981024+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -123,7 +123,7 @@
       "appearances": 1
     },
     {
-      "query": "عطر رجالي",
+      "query": "فواحه عطريه للمنزل",
       "lang": "ar",
       "demandScore": 100,
       "trend": "flat",
@@ -193,7 +193,7 @@
       "appearances": 1
     },
     {
-      "query": "portable bluetooth speaker",
+      "query": "bluetooth speaker jbl",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -249,7 +249,7 @@
       "appearances": 1
     },
     {
-      "query": "فواحه عطريه للمنزل",
+      "query": "عطر رجالي",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
