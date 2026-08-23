@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-22T06:59:59.928827+00:00",
+  "scraped_at": "2026-08-23T07:01:54.994410+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -186,21 +186,21 @@
       "appearances": 1
     },
     {
-      "query": "rhode phone case",
+      "query": "waterproof phone case",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "bluetooth speaker jbl",
+      "query": "portable bluetooth speaker",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "baby",
+      "query": "baby toys",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
