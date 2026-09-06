@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-05T10:50:36.910243+00:00",
+  "scraped_at": "2026-09-06T11:16:00.459878+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
