@@ -1,140 +1,15 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-09-08T11:21:27.011289+00:00",
+  "scraped_at": "2026-09-09T11:25:26.748532+00:00",
   "products": {
-    "B0CCXZRDV7": {
-      "asin": "B0CCXZRDV7",
-      "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Cool Aqua (7.5g)",
-      "brand": "Godrej aer",
-      "price_egp": 90.0,
+    "B096L5ZB2L": {
+      "asin": "B096L5ZB2L",
+      "title": "Water For Glass Wipers 2 Liter",
+      "brand": "Offine Auto",
+      "price_egp": 72.0,
       "currency": "EGP",
-      "rating": 3.7,
-      "reviews": 9754,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 1,
-          "category": "Automotive"
-        },
-        {
-          "rank": 1,
-          "category": "Automotive Air Fresheners"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R2T1IC67VAY6O5",
-          "rating": 5.0,
-          "title": "تجربة فاجأتني بصراحة 💜",
-          "body": "أول تجربة ليا مع المنتج وبعد ما قرأت تقييمات سلبية كتير قررت أجربه بنفسي والحقيقة فاجئني جدًا 👌🏻✨ بقاله 5 أيام عندي في الدولاب ولسه الريحة ثابتة وواضحة وكل ما أدخل الأوضة بشمها 🌿💜 اللافندر شيك جدًا وبيعمل فايبس جميلة وهادية بالنسبة لي ممتاز جدًا كقيمة مقابل السعر 💯 وأنصح بيه خصوصًا للي بيحب الروائح الثابتة والموجودة طول الوقت لكن لو بتحب الروائح الهادية جدًا أو بتتضايق من الروائح النفاذة فمش هيكون مناسب ليك ⚠️ تجربة ممتازة وأنصح بيه جدًا 👌🏻🔥",
-          "author": null,
-          "date": "Reviewed in Egypt on 29 August 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2NWEPFITP2OQS",
-          "rating": 1.0,
-          "title": "Useless",
-          "body": "No smell at all, I don’t even notice any smell",
-          "author": null,
-          "date": "Reviewed in Egypt on 12 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "RROVAO1GBLDNF",
-          "rating": 5.0,
-          "title": "Good",
-          "body": "حلو جدا",
-          "author": null,
-          "date": "Reviewed in Egypt on 29 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3QVPZRJ82RH6H",
-          "rating": 3.0,
-          "title": "Smells like prill",
-          "body": "Blue smells like prill",
-          "author": null,
-          "date": "Reviewed in Egypt on 19 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R10WMHXIFGWXBS",
-          "rating": 4.0,
-          "title": "جيد جدا",
-          "body": "العطر كويس وعملي بس الرائحة مش مسك اوي يعني",
-          "author": null,
-          "date": "Reviewed in Egypt on 27 July 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1H9DCW1BRXYZS",
-          "rating": 5.0,
-          "title": "الاخضر ضعيف الانتشار بالنسبة لبقية الروائح من نفس النوع",
-          "body": "الاخضر ضعيف الانتشار بالنسبة لبقية الروائح من نفس النوع الازرق والموف روعة",
-          "author": null,
-          "date": "Reviewed in Egypt on 22 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2RYACUUK5KFNF",
-          "rating": 5.0,
-          "title": "جميل جدا",
-          "body": "تحفه فعلا بتدوم لشهر واكتر",
-          "author": null,
-          "date": "Reviewed in Egypt on 16 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "RC1FJK2Q6U550",
-          "rating": 1.0,
-          "title": "مش احسن حاجة",
-          "body": "انا جربت اللى بريحة الليمون واللى بريحة اللافندر ولكن كثبات واستمرارية فاللى بالليمون احسن بكتير يعني اللى باللافندر قعد يومين بالعدد وكمان اللافندر ريحته مش لافندر صريح وحلو ولكنه زى البرفانات اللى بريحة اللافندر المضروبة",
-          "author": null,
-          "date": "Reviewed in Egypt on 31 July 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
-        }
-      ],
-      "material": null,
-      "manufacturer": "Godrej Aer",
-      "color": "Aqua",
-      "number_of_items": 4,
-      "item_weight_raw": "8 Grams",
-      "item_weight_kg": 0.008,
-      "item_dims_raw": "9.2 x 0.4 x 2 centimeters",
-      "item_dims_cm": {
-        "l": 9.2,
-        "w": 0.4,
-        "h": 2.0
-      },
-      "image_count": 4,
-      "feature_bullet_count": 1,
-      "offer_count": 2
-    },
-    "B0BKWXJB29": {
-      "asin": "B0BKWXJB29",
-      "title": "TotalEnergies QUARTZ 7000 10W-40 Synthetic Technology Engine oil for Passenger Car - 5 Liters",
-      "brand": "TotalEnergies",
-      "price_egp": 1299.0,
-      "currency": "EGP",
-      "rating": 4.4,
-      "reviews": 1252,
+      "rating": 4.2,
+      "reviews": 991,
       "availability": "In Stock",
       "bsr": [
         {
@@ -143,48 +18,201 @@
         },
         {
           "rank": 1,
-          "category": "Car Engine Oils"
+          "category": "Automotive Window Care"
         }
       ],
       "reviews_list": [
         {
-          "review_id": "R37KEG0UY4RCBE",
+          "review_id": "R3TJ9DWFXE7ZWA",
           "rating": 5.0,
-          "title": "أصلى",
-          "body": "منتج أصلى",
+          "title": "فعلاً ممتاز",
+          "body": "جميل جدا متخففوش باي مياه خالص و هو كميته على قد تانك المياه ومش بيسيب اي علامات او جير على القزاز و بينشف بسرعه جدا ممتاز و على سعره كمان كنت جايبه بحوالي ٥٥ جنيه او ٥٠",
           "author": null,
-          "date": "Reviewed in Egypt on 31 August 2026",
+          "date": "Reviewed in Egypt on 20 May 2026",
           "verified": true,
-          "helpful": 0,
+          "helpful": 4,
           "lang": "ar"
         },
         {
-          "review_id": "RYNAAS2G359OM",
-          "rating": 5.0,
-          "title": "أصلي",
-          "body": "أصلي",
-          "author": null,
-          "date": "Reviewed in Egypt on 1 September 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R30RDSQ811W68J",
+          "review_id": "R15RM8KDS28X9Y",
           "rating": 4.0,
-          "title": "اصلي",
-          "body": "ممتاز",
+          "title": "amazing",
+          "body": "amazing liquid for cleaning all the dirty glass or mirrors all over the house, not only the car",
           "author": null,
-          "date": "Reviewed in Egypt on 6 August 2026",
+          "date": "Reviewed in Egypt on 20 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "R1Y6B02KSS65PZ",
+          "rating": 5.0,
+          "title": "Value for money",
+          "body": "جميل جدا و بينضف الزجاج فعلا و بيفرق جدا عن استخدام المياه",
+          "author": null,
+          "date": "Reviewed in Egypt on 14 August 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "R9W90BXOX8IOK",
+          "review_id": "RHYFXF6L7IA4L",
           "rating": 5.0,
-          "title": "اصلي",
-          "body": "منتج اصلي ممتاز",
+          "title": "منتج محترم جدا",
+          "body": "فعلا بنينضف زجاج العربية و بيبقى Clear بدون بقع او تبقى مجيرة",
+          "author": null,
+          "date": "Reviewed in Egypt on 30 May 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3ODU3RFW0488B",
+          "rating": 3.0,
+          "title": "جيدة",
+          "body": "جيدة",
+          "author": null,
+          "date": "Reviewed in Egypt on 5 June 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "RUJQ3FTQDKWEW",
+          "rating": 5.0,
+          "title": "ممتازة",
+          "body": "كويسة جدا",
+          "author": null,
+          "date": "Reviewed in Egypt on 24 March 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3CLK4RXXAJU5J",
+          "rating": 1.0,
+          "title": "المياه فيها شوائب",
+          "body": "المياه مش نظيفه",
+          "author": null,
+          "date": "Reviewed in Egypt on 1 August 2026",
+          "verified": true,
+          "helpful": 2,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R2MJQGRV9VC9UR",
+          "rating": 4.0,
+          "title": "كويس مش بيجير لسائل مساحات العربية",
+          "body": "كويس جدا لمساحات العربية مبيجيرش وبيلمع كويس",
+          "author": null,
+          "date": "Reviewed in Egypt on 17 June 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        }
+      ],
+      "material": "Non-Toxic",
+      "manufacturer": "Offine Auto",
+      "color": null,
+      "number_of_items": 1,
+      "item_weight_raw": "1.8 Kilograms",
+      "item_weight_kg": 1.8,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 4,
+      "feature_bullet_count": 4,
+      "offer_count": null,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 72.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        }
+      ]
+    },
+    "B0CXPDG6KV": {
+      "asin": "B0CXPDG6KV",
+      "title": "Amrules 2PCS Car Interior Detailing Brush, Auto Car Detailing Brush Dusting Brush, Soft Bristles Car Interior Cleaning Tool for Dashboard Interior, Exterior, Skylight, Leather, Dust Brush Without Cap",
+      "brand": "Amrules",
+      "price_egp": 45.0,
+      "currency": "EGP",
+      "rating": 3.4,
+      "reviews": 1668,
+      "availability": "In Stock",
+      "bsr": [
+        {
+          "rank": 4,
+          "category": "Automotive"
+        },
+        {
+          "rank": 1,
+          "category": "Automotive Brushes"
+        }
+      ],
+      "reviews_list": [
+        {
+          "review_id": "R28YB7LKYL9DAF",
+          "rating": 5.0,
+          "title": "ناعم جدا",
+          "body": "حلوين اوى لتنضيف الاسطح الصغيرة العربية والكمبيوتر بس طبعا حجمهم صغير نص كف الايد لكن عمليين اوى وشعرهم ناعم",
+          "author": null,
+          "date": "Reviewed in Egypt on 27 April 2026",
+          "verified": true,
+          "helpful": 1,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R17ZKYOP3Y4B5H",
+          "rating": 1.0,
+          "title": "سئ جدا و غير مطابق",
+          "body": "غير مطابق للوصف صغيره جدا و ليست بجراب او اي حمايه ، داخل كيس بلاستيك",
+          "author": null,
+          "date": "Reviewed in Egypt on 3 September 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R2DRX2C4FHCJMM",
+          "rating": 3.0,
+          "title": "غير كفئ",
+          "body": "حجمها صغير و بدون غطاء",
+          "author": null,
+          "date": "Reviewed in Egypt on 30 August 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3VQJ1C80XS4KW",
+          "rating": 4.0,
+          "title": "جيد",
+          "body": "الخامة جيده و ناعمة لكن الحجم صغير أكثر مما توقعت تنفع لاستخدامات دقيقة",
+          "author": null,
+          "date": "Reviewed in Egypt on 27 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R39KZ0ALJ8T16J",
+          "rating": 5.0,
+          "title": "جيدة",
+          "body": "صغيرة الحجم جدا لكن تفي بالغرض",
+          "author": null,
+          "date": "Reviewed in Egypt on 4 September 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R2VW19XAB2HJNC",
+          "rating": 2.0,
+          "title": "عاديه",
+          "body": "عاديه",
           "author": null,
           "date": "Reviewed in Egypt on 27 August 2026",
           "verified": true,
@@ -192,335 +220,52 @@
           "lang": "ar"
         },
         {
-          "review_id": "R2F50CS2H04Q04",
+          "review_id": "R1TF60KVLNN08U",
           "rating": 5.0,
-          "title": "اصلي ١٠٠٪؜",
-          "body": "طلع اصلي ١٠٠٪؜ شيكت عليه من ال qr علي تطبيق توتال و طلع اصلي شكراا امازون",
+          "title": "إنه يستخدم في تنظيف اجزاء داخليه من العربيه",
+          "body": "رائع جدا",
           "author": null,
-          "date": "Reviewed in Egypt on 29 July 2026",
+          "date": "Reviewed in Egypt on 31 August 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "R3PTN1A5JW9RSS",
-          "rating": 5.0,
-          "title": "وسريع",
-          "body": "ممتازة",
-          "author": null,
-          "date": "Reviewed in Egypt on 16 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "RZIAYHBS2D8MR",
+          "review_id": "R6Q0YRQMQEJYF",
           "rating": 1.0,
-          "title": "فى حاجه غلاط",
-          "body": "ازاي الزيت بيتباع فى البنزينه 2800ج وهنا ب1133 اكيد في حاجه غلاط",
+          "title": "Horrible",
+          "body": "Smaller than it looks The brush is so soft so doesn't clean well",
           "author": null,
-          "date": "Reviewed in Egypt on 29 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R16Q61G6ZK68C6",
-          "rating": 5.0,
-          "title": "اصلى",
-          "body": "منتج اصلى",
-          "author": null,
-          "date": "Reviewed in Egypt on 6 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        }
-      ],
-      "material": null,
-      "manufacturer": "Total Energies",
-      "color": null,
-      "number_of_items": 50,
-      "item_weight_raw": "5 Kilograms",
-      "item_weight_kg": 5.0,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": 4,
-      "feature_bullet_count": 5,
-      "offer_count": 6,
-      "offers": [
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 1299.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "A-M Motors",
-          "seller_id": "A1GXIJR5ECINB9",
-          "price_egp": 1579.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Trust Automotive ™®",
-          "seller_id": "A3MOLW4FBXJG9N",
-          "price_egp": 1599.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Amjmasn",
-          "seller_id": "ALONLDV38T00A",
-          "price_egp": 1750.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "EraBox",
-          "seller_id": "A2YP0DFQ542VHE",
-          "price_egp": 1999.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "MW Group01",
-          "seller_id": "A2UIGMSVDLWTMX",
-          "price_egp": 2200.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
-    },
-    "B09V27R871": {
-      "asin": "B09V27R871",
-      "title": "NC Car Windshield Sun Shade Foldable car Sun Umbrella,Blocks UV Rays Sun Visor for car[48 25.6 inches (122 * 65 cm)] Fit Most Vehicle",
-      "brand": "Spaceshoop",
-      "price_egp": 127.0,
-      "currency": "EGP",
-      "rating": 3.4,
-      "reviews": 1917,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 7,
-          "category": "Automotive"
-        },
-        {
-          "rank": 1,
-          "category": "Car Front Window Sunshades"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R3MQDY77ZQWZ3X",
-          "rating": 5.0,
-          "title": "جيد",
-          "body": "كويسة بالنسبة لسعرها",
-          "author": null,
-          "date": "Reviewed in Egypt on 10 April 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1CHBA9B230N0V",
-          "rating": 1.0,
-          "title": "Good in theory, awful in practice",
-          "body": "I placed the shade in the car, and next morning I found it broken. A plastic piece broke because of the heat.",
-          "author": null,
-          "date": "Reviewed in Egypt on 28 August 2026",
+          "date": "Reviewed in Egypt on 2 August 2026",
           "verified": true,
           "helpful": 0,
           "lang": "en"
-        },
-        {
-          "review_id": "R1OY2KMC72YFF9",
-          "rating": 4.0,
-          "title": "جيد",
-          "body": "ضعيفة شوية بس شغال كويس محتاج مخافظة فقط",
-          "author": null,
-          "date": "Reviewed in Egypt on 1 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2980NBWT143CG",
-          "rating": 3.0,
-          "title": "الحجم صغير",
-          "body": "حجمها صغير تنفع مع العربيات الهاتشباك",
-          "author": null,
-          "date": "Reviewed in Egypt on 14 May 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R24YB0E8FQEOLU",
-          "rating": 5.0,
-          "title": "سلعة جيدة ومفيدة",
-          "body": "الحقيقة نوعها جيد ومفيدة جدا ارشحها",
-          "author": null,
-          "date": "Reviewed in Egypt on 31 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R10TGC9MJ60O3M",
-          "rating": 2.0,
-          "title": "ضعيفه و سيئة جدا",
-          "body": "خامات سيئة و رديئة جدا لا انصح و شكلها هتتقطع او تتكسر بسهوله اوي",
-          "author": null,
-          "date": "Reviewed in Egypt on 9 July 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "RFH2HXTA3UGGX",
-          "rating": 5.0,
-          "title": "ممتازة",
-          "body": "كويسه جدا وبتحجب الشمس",
-          "author": null,
-          "date": "Reviewed in Egypt on 24 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1X2TMZ44DOU8Q",
-          "rating": 1.0,
-          "title": "خفيفة جداً",
-          "body": "خفيفة جداً و بتتكسر بسرعه",
-          "author": null,
-          "date": "Reviewed in Egypt on 28 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
         }
       ],
-      "material": "Leather",
-      "manufacturer": "N\\C",
-      "color": "black",
-      "number_of_items": 1,
-      "item_weight_raw": "500 Grams",
-      "item_weight_kg": 0.5,
-      "item_dims_raw": "110L x 60W centimeters",
+      "material": null,
+      "manufacturer": "‎Amrules",
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": "‎13.6 g",
+      "item_weight_kg": 0.0136,
+      "item_dims_raw": "‎9.65 x 5.08 x 1.02 cm; 13.61 g",
       "item_dims_cm": {
-        "l": 110.0,
-        "w": 60.0,
-        "h": 0.0
+        "l": 9.65,
+        "w": 5.08,
+        "h": 1.02
       },
-      "image_count": 5,
-      "feature_bullet_count": 1,
-      "offer_count": 42,
-      "offers": [
-        {
-          "seller_name": "Donald-Duck",
-          "seller_id": "A2T2FUOUMBGNCU",
-          "price_egp": 125.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 125.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "TRX Store",
-          "seller_id": "A3USZ6ECH4YNN0",
-          "price_egp": 127.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "AL TOP",
-          "seller_id": "AY5C6K213AW5F",
-          "price_egp": 128.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "S_M_Store",
-          "seller_id": "A1YERW7MSNSZEZ",
-          "price_egp": 134.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Nour-Commerce",
-          "seller_id": "A371X7XSBF320S",
-          "price_egp": 150.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "S&M-Store",
-          "seller_id": "A24L91U83A8RCR",
-          "price_egp": 150.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "hawary",
-          "seller_id": "A2PZQ7HMG7V8V0",
-          "price_egp": 130.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Telda Shop",
-          "seller_id": "A2EV3TTHZA0UJG",
-          "price_egp": 157.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "ZEKRALLA",
-          "seller_id": "A3OUVIE0AY1TZ7",
-          "price_egp": 158.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Ebaskt",
-          "seller_id": "A19I0J9SEXYVB",
-          "price_egp": 169.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "image_count": 7,
+      "feature_bullet_count": 6,
+      "offer_count": 15
     },
-    "B0BTSHHWQM": {
-      "asin": "B0BTSHHWQM",
-      "title": "Frida Aqua chicka dee 460ml",
-      "brand": "Frida",
-      "price_egp": 81.25,
+    "B07MX3F36F": {
+      "asin": "B07MX3F36F",
+      "title": "WD-40 Rust Remover, 330ml",
+      "brand": "WD-40",
+      "price_egp": 244.0,
       "currency": "EGP",
-      "rating": 4.3,
-      "reviews": 286,
+      "rating": 4.6,
+      "reviews": 12761,
       "availability": "In Stock",
       "bsr": [
         {
@@ -528,249 +273,326 @@
           "category": "Automotive"
         },
         {
-          "rank": 3,
-          "category": "Automotive Air Fresheners"
+          "rank": 1,
+          "category": "Automotive Cleaners"
         }
       ],
       "reviews_list": [
         {
-          "review_id": "R2PUS4VXTK8810",
+          "review_id": "R1ZK3ATUUBWJ0C",
           "rating": 5.0,
-          "title": "ريحه روعه و ثابت كويس جدا",
-          "body": "ريحته جميلة جداا و افضل معطر فريدا يليه بهجه",
+          "title": "Good product, works as expected",
+          "body": "Works great. WD-40 does the job every time — loosens stuck parts, stops squeaks, and the spray can makes it easy to apply exactly where you need it. Reliable and good value. Happy with it — recommend.",
           "author": null,
-          "date": "Reviewed in Egypt on 8 July 2026",
+          "date": "Reviewed in Egypt on 4 August 2026",
           "verified": true,
-          "helpful": 1,
+          "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "R2SWWTTZR2QY9S",
+          "rating": 5.0,
+          "title": "ممتاز",
+          "body": "سعر جيد وعبوه اصليه",
+          "author": null,
+          "date": "Reviewed in Egypt on 28 August 2026",
+          "verified": true,
+          "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "R2T7JSERXMJC7K",
+          "review_id": "R1LC18RCLXGA3U",
+          "rating": 5.0,
+          "title": "جيد",
+          "body": "جيد",
+          "author": null,
+          "date": "Reviewed in Egypt on 4 September 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "RUBEOCE9I23Q7",
+          "rating": 4.0,
+          "title": "ممتاز",
+          "body": "ممتاز اصلى",
+          "author": null,
+          "date": "Reviewed in Egypt on 13 August 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3HMZYRSJOMD7C",
+          "rating": 5.0,
+          "title": "Originial product",
+          "body": "Its originial",
+          "author": null,
+          "date": "Reviewed in Egypt on 1 August 2026",
+          "verified": true,
+          "helpful": 1,
+          "lang": "en"
+        },
+        {
+          "review_id": "R3EOQXWEL3U2ZH",
           "rating": 5.0,
           "title": "Perfect",
-          "body": "Perfect",
+          "body": "I got it for my chair since it was making sounds, now no sounds at all Perfect",
           "author": null,
-          "date": "Reviewed in Egypt on 30 August 2026",
+          "date": "Reviewed in Egypt on 22 August 2026",
           "verified": true,
           "helpful": 0,
           "lang": "en"
         },
         {
-          "review_id": "R3VSBDWBOLU65J",
+          "review_id": "R1DB643E8K3LVC",
           "rating": 5.0,
-          "title": "رائحة مميزة",
-          "body": "الأفضل ما بين روائح فريدا الأخرى وبيستمر لفترة طويلة",
+          "title": "اصلى",
+          "body": "غنى عن التعريف مجرد رشه وكله بيفك مفصلات باب تلاجه فريزر كوالين اقفال وصل بالغطا والشفاط وغير مستخدم بتعرفها ان مش بتلاقي ريحه على المكان اللى بيبخ منه مقاس ٣٣٠ سعر وقت الشراء ٢٢٠ البائع امازون",
           "author": null,
-          "date": "Reviewed in Egypt on 23 April 2026",
+          "date": "Reviewed in Egypt on 3 July 2026",
+          "verified": true,
+          "helpful": 6,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3QTNN4B2FFMZO",
+          "rating": 5.0,
+          "title": "منتج ممتاز للتزييت و متعدد الاستخدامات",
+          "body": "منتج ممتاز و حديث الصلاحية",
+          "author": null,
+          "date": "Reviewed in Egypt on 22 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        }
+      ],
+      "material": null,
+      "manufacturer": "‎WD-40",
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": null,
+      "item_weight_kg": null,
+      "item_dims_raw": "‎8.2 x 21.4 x 18.6 cm; 330 g",
+      "item_dims_cm": {
+        "l": 8.2,
+        "w": 21.4,
+        "h": 18.6
+      },
+      "image_count": 7,
+      "feature_bullet_count": 1,
+      "offer_count": 17,
+      "offers": [
+        {
+          "seller_name": "Nour-Commerce",
+          "seller_id": "A371X7XSBF320S",
+          "price_egp": 244.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "ميلانو تولز",
+          "seller_id": "A1X4JBCR3H072N",
+          "price_egp": 214.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 244.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Energypt",
+          "seller_id": "A1IGZEE65RL93S",
+          "price_egp": 255.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "autoshico",
+          "seller_id": "A22QSE0E87ALE0",
+          "price_egp": 257.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Bans Auto Store",
+          "seller_id": "A1E948S0EJKF99",
+          "price_egp": 274.99,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "MAKEOVER_egy",
+          "seller_id": "A35YNN45MFPEGB",
+          "price_egp": 282.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Zain Electric",
+          "seller_id": "A206AX7MERE9W",
+          "price_egp": 290.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ELMASRIA 2000",
+          "seller_id": "AU1Z1XTB2CRPZ",
+          "price_egp": 290.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "MaaZZaaR",
+          "seller_id": "A3FIDVG7TF3EOU",
+          "price_egp": 299.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "انكو مصر",
+          "seller_id": "A191ZHWLHM756T",
+          "price_egp": 325.0,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
+    },
+    "B0CCXZ8NXN": {
+      "asin": "B0CCXZ8NXN",
+      "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Rose Blossom (7.5g)",
+      "brand": "by Godrej aer Format: Health and Beauty",
+      "price_egp": 90.0,
+      "currency": "EGP",
+      "rating": 3.9,
+      "reviews": 996,
+      "availability": "In Stock",
+      "bsr": [],
+      "reviews_list": [
+        {
+          "review_id": "R3YZ4NCO8AEGL",
+          "rating": 5.0,
+          "title": "ممتاز",
+          "body": "ممتاز",
+          "author": null,
+          "date": "Reviewed in Egypt on 7 August 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "RI2P21DJVZDB7",
+          "review_id": "R1RWFM7J86EOLI",
           "rating": 4.0,
-          "title": "Refreshing and Stylish: A Must-Try Beverage",
-          "body": "I recently tried the Frida Aqua Chicka Dee 460ml, and I must say, it exceeded my expectations in several ways. Firstly, the packaging is both sleek and functional. The 460ml bottle is perfectly sized for on-the-go hydration, and the design is modern and eye-catching. It's easy to carry and fits nicely in a car cup holder or backpack. The taste is where Frida Aqua Chicka Dee shines. The flavor is refreshingly crisp with just the right balance of sweetness and tartness. It's a great alternative to sugary soft drinks and provides a satisfying, clean, refreshing, and hydrating taste. I appreciate that it doesn’t have an artificial aftertaste, which is often a downside with flavored waters. In terms of quality, this beverage stands out. The ingredients list is straightforward and natural, which is always a plus. It feels like a healthier choice compared to other options on the market. Additionally, the 460ml size is ideal for quenching thirst without being overly large or bulky. My only minor critique would be that it could benefit from a slightly lower price point. However, considering the quality and taste, it’s worthwhile for those who appreciate a premium flavored water experience. The Frida Aqua Chicka Dee 460ml is a refreshing, stylish, and high-quality beverage worth trying. It’s perfect for those looking for a sophisticated drink option that doesn’t compromise flavor or health.",
+          "title": "التغليف مش احسن حاجة بس الفواحة نفسها قوية جدًا وتستاهل",
+          "body": "حلوة جدًا بس وصلت مخرومة.. برجاء الاهتمام بالتغليف",
           "author": null,
-          "date": "Reviewed in Egypt on 11 August 2024",
-          "verified": true,
-          "helpful": 7,
-          "lang": "en"
-        },
-        {
-          "review_id": "R1UW1CJVE41FGS",
-          "rating": 5.0,
-          "title": "جميل ورائع",
-          "body": "جميل",
-          "author": null,
-          "date": "Reviewed in Egypt on 26 June 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1S03Q4ET102S2",
-          "rating": 1.0,
-          "title": "وصلني رائحه مختلفه والصدمه لما فتحت الزجاجه لقيتها ملانه مياه مش معطر",
-          "body": "اسوأ تجربه على الاطلاق وصلتني ريحه مختلفه اسمها روز جولد بعدين رشيت منها لاحظت ان الريحه ضعيفه جدا جدا فقلت افتح الزجاجه فلقيتها متعبايه مياه شفافه لدرجة تقدر تشربها على عكس منتجات فريده الي بتبقى مميزه مادتها انها تقيله وبيضاء ورلئحتها فواحه فعرفت ان فيه غش تجاري وقمت بارجاعها وسأتقدم بشكوى غش تجاري",
-          "author": null,
-          "date": "Reviewed in Egypt on 6 June 2026",
-          "verified": true,
-          "helpful": 3,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3RBOC0B1W6V3R",
-          "rating": 5.0,
-          "title": "رائحة حلوة وثبات مدة طويلة",
-          "body": "تحفه",
-          "author": null,
-          "date": "Reviewed in Egypt on 6 April 2026",
+          "date": "Reviewed in Egypt on 17 July 2026",
           "verified": true,
           "helpful": 1,
           "lang": "ar"
         },
         {
-          "review_id": "R1AWXNWRA2HRE8",
+          "review_id": "R1TUBAMURFJ84F",
           "rating": 5.0,
-          "title": "🙏🙏",
-          "body": "👍👍👍👍👌👌👌👌👍🙏",
+          "title": "Good",
+          "body": "Good",
           "author": null,
-          "date": "Reviewed in Egypt on 3 July 2026",
+          "date": "Reviewed in Egypt on 25 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "R1KAC3IHUC87Q0",
+          "rating": 1.0,
+          "title": "سيء جداً",
+          "body": "مانصحش اي حد يشتريه مهما كان عليه عروض لانه فاشل و ماشمتش ريحته غير اول مافتحته و كانت مش حلوك اصلاً و بعد ساعة بالظبط الريحة اختفت و بيطير و مافيش في أي ريحة",
+          "author": null,
+          "date": "Reviewed in Egypt on 22 June 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "RUWYS0RSBMV8J",
+          "rating": 3.0,
+          "title": "الخامه رديئه ولكن الرائحه جيده",
+          "body": "معقول",
+          "author": null,
+          "date": "Reviewed in Egypt on 22 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R2JZT38KJLPPFQ",
+          "rating": 5.0,
+          "title": "So good",
+          "body": "Scent is nice but not so special",
+          "author": null,
+          "date": "Reviewed in Egypt on 7 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "R2LBTCDBVNZM8W",
+          "rating": 5.0,
+          "title": "معطر",
+          "body": "جميل جدا",
+          "author": null,
+          "date": "Reviewed in Egypt on 28 June 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3JY2Q86OEXA7C",
+          "rating": 4.0,
+          "title": "Good smell, but not long lasting",
+          "body": "Didn’t last very long",
+          "author": null,
+          "date": "Reviewed in Egypt on 1 September 2026",
           "verified": true,
           "helpful": 0,
           "lang": "en"
         }
       ],
       "material": null,
-      "manufacturer": "Frida",
-      "color": "multicolour",
-      "number_of_items": 1,
-      "item_weight_raw": "0.21 Kilograms",
-      "item_weight_kg": 0.21,
-      "item_dims_raw": "10 x 20 x 37 centimeters",
-      "item_dims_cm": {
-        "l": 10.0,
-        "w": 20.0,
-        "h": 37.0
-      },
-      "image_count": 2,
-      "feature_bullet_count": 3,
-      "offer_count": 3
-    },
-    "B096L7LCRY": {
-      "asin": "B096L7LCRY",
-      "title": "Other Microfiber Towel for Cars, 30Ã—40 cm - Assorted Color-Small",
-      "brand": "Generic",
-      "price_egp": 34.0,
-      "currency": "EGP",
-      "rating": 3.4,
-      "reviews": 2302,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 9,
-          "category": "Automotive"
-        },
-        {
-          "rank": 2,
-          "category": "Exterior Car Care Microfiber Cloths"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R1HBUTVBDPTBKW",
-          "rating": 5.0,
-          "title": "good product",
-          "body": "just what you'd expect",
-          "author": null,
-          "date": "Reviewed in Egypt on 25 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "REVZGS1PLYTDK",
-          "rating": 1.0,
-          "title": "تقرف فوطة قد كف الايد و خامتها متجبش ٢ جنية",
-          "body": "وحشة بشعة و غير مطابقة للمواصفات و مش ميكروفايبر و قد كف الايد و موبرة مش مفيدة للأستخدام منصحش حد يشتريها و خامتها قرففففف مشتريها لو ب ٥ جنية حتى",
-          "author": null,
-          "date": "Reviewed in Egypt on 25 June 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2KL1C1XQIWCU6",
-          "rating": 4.0,
-          "title": "Cheap and cheerful (when you get the good ones so read the edit)",
-          "body": "A lot of contrasting reviews for these towels. I wasn't expecting much for the price, but honestly, they exceeded my expectations. First, I don't know about other reviews complaining about the size or weight, but the ones I received are exactly as described and pictured. The weave is heavy, 600 gsm, probably 2 300 gsm layers stuck together as the sides are different colors, but I am not so sure to be honest, there isn't any play between layers. The pile is very low however, so they're more suited for buffing an already clean surface, but there isn't much depth to trap the dirt and you could end up scratching the surface if very dirty. Label says 80/20 polyester/polyamide but I am going to take that with a grain of salt, they feel more like 100% polyester to me. Haven't washed them yet but I have no reason to believe they will fall apart, they look well made. I doubt I'll be using them on my paint, but I'll definitely be using them for the wheels, interior, leather, etc if the lint isn't excessive. If you are looking for high quality microfibers, you should definitely look elsewhere but if you are looking for something cheap for simple jobs, these are definitely ok. EDIT: It's very frustrating when you order the same items 3 times and receive different items each time depending on stock and seller (All 3 times the items were fulfilled by Amazon). My first two orders of these towels I received very similar towels (though not identical as the tags were different). Today I received my third order and the towels are completely different this time. They are a LOT thinner and are a cheap almost waterproof polyester blend that has nothing to do with microfiber. I am glad I only ordered 2 this time because these will end up in the kitchen or around the house if not in garbage (they are THAT bad). I could return them of course, but I wouldn't be bothered over 30 pounds. I know it's hard for Amazon to control generic items but I am sure they have the means to weigh the items they fulfill before accepting the stock. Avoid the towels sold by عبدالرحمن الشيمى when you order and keep in mind you will receive different towels depending on the seller and their stock which also explains the contrasting reviews you'll find for these towels.",
-          "author": null,
-          "date": "Reviewed in Egypt on 9 December 2021",
-          "verified": true,
-          "helpful": 60,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2S770O6QGMFXI",
-          "rating": 3.0,
-          "title": "اقل من المتوقع",
-          "body": "جودة متوسطة اقل من المتوقع",
-          "author": null,
-          "date": "Reviewed in Egypt on 16 July 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2EY55SC55LRN6",
-          "rating": 5.0,
-          "title": "Perfect",
-          "body": "Perfect",
-          "author": null,
-          "date": "Reviewed in Egypt on 16 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R2NSJPNUEH1Q90",
-          "rating": 5.0,
-          "title": "جيد جدا",
-          "body": "زي الصور بالظبط وناعمة والسعر مناسب جدا ارخص",
-          "author": null,
-          "date": "Reviewed in Egypt on 12 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R13C32B3DE3TUZ",
-          "rating": 1.0,
-          "title": "سيء جداً لا أنصح شراءه",
-          "body": "المنتج غير مطابق الصورة،  المكتوب في الوصف مقاس كبير 30*40 ، والمنتج الذي يصل مقاس 15*20، والخامة خفيفة جداً",
-          "author": null,
-          "date": "Reviewed in Egypt on 22 June 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1PHY13V90TMFJ",
-          "rating": 2.0,
-          "title": "صغبرة جدا",
-          "body": "صغيرة جدا والخامة سيئه",
-          "author": null,
-          "date": "Reviewed in Egypt on 5 April 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        }
-      ],
-      "material": "Microfiber",
-      "manufacturer": "Generic",
-      "color": "Assorted Color",
-      "number_of_items": 1,
-      "item_weight_raw": "70 Grams",
-      "item_weight_kg": 0.07,
-      "item_dims_raw": "40L x 30W centimeters",
-      "item_dims_cm": {
-        "l": 40.0,
-        "w": 30.0,
-        "h": 0.0
-      },
-      "image_count": 3,
-      "feature_bullet_count": 5,
-      "offer_count": 16
+      "manufacturer": null,
+      "color": null,
+      "number_of_items": null,
+      "item_weight_raw": null,
+      "item_weight_kg": null,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 7,
+      "feature_bullet_count": null,
+      "offer_count": 4
     },
     "B0DH8LFHP7": {
       "asin": "B0DH8LFHP7",
       "title": "Anker USB-C to USB A 2.0 cable (6ft/1.8m), High Durability Long life Strong Fast Type C Braided Charging Cable Compatible with All Android Devices Samsung S24, S23 And iPhone 16 And more",
       "brand": "Anker",
-      "price_egp": 169.3,
+      "price_egp": 218.97,
       "currency": "EGP",
       "rating": 4.5,
-      "reviews": 974,
+      "reviews": 979,
       "availability": "In Stock",
       "bsr": [
         {
@@ -784,23 +606,23 @@
       ],
       "reviews_list": [
         {
+          "review_id": "R1AW505BOZRR1O",
+          "rating": 5.0,
+          "title": "الكابل طوله ممتاز وسريع في الشحن",
+          "body": "ممتاز وشحن سريع",
+          "author": null,
+          "date": "Reviewed in Egypt on 4 September 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
           "review_id": "R3CHHQMAOB2YT",
           "rating": 5.0,
           "title": "وصله شاحن انكر",
           "body": "شركه ممتازه يدعم الشحن السريع والمتريال وخامات التصنيع ممتازه",
           "author": null,
           "date": "Reviewed in Egypt on 17 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R335VX5SXAP0X8",
-          "rating": 5.0,
-          "title": "طول الكابل ممتاز",
-          "body": "ممتاز",
-          "author": null,
-          "date": "Reviewed in Egypt on 26 August 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
@@ -839,15 +661,15 @@
           "lang": "ar"
         },
         {
-          "review_id": "R3I4M9CZXZ5ITF",
+          "review_id": "R29KDR8MA1VAV4",
           "rating": 5.0,
-          "title": "ممتاز",
-          "body": "ممتاز",
+          "title": "Best",
+          "body": "Best strong durability and fast charging",
           "author": null,
-          "date": "Reviewed in Egypt on 2 September 2026",
+          "date": "Reviewed in Egypt on 4 September 2026",
           "verified": true,
           "helpful": 0,
-          "lang": "ar"
+          "lang": "en"
         },
         {
           "review_id": "R2GRJC79IDS2OX",
@@ -861,15 +683,15 @@
           "lang": "ar"
         },
         {
-          "review_id": "R1WT8R4UPBDJW3",
+          "review_id": "R335VX5SXAP0X8",
           "rating": 5.0,
-          "title": "Cable USB A to C",
-          "body": "Amazing and as described.",
+          "title": "طول الكابل ممتاز",
+          "body": "ممتاز",
           "author": null,
-          "date": "Reviewed in Egypt on 30 August 2026",
+          "date": "Reviewed in Egypt on 26 August 2026",
           "verified": true,
           "helpful": 0,
-          "lang": "en"
+          "lang": "ar"
         }
       ],
       "material": "Nylon",
@@ -882,7 +704,7 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 3,
-      "offer_count": 8
+      "offer_count": 7
     }
   }
 }
