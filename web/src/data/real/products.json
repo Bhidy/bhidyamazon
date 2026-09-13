@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-09-12T10:49:26.649359+00:00",
+  "scraped_at": "2026-09-13T11:54:53.421803+00:00",
   "products": {
     "B0CCXZRDV7": {
       "asin": "B0CCXZRDV7",
@@ -9,7 +9,7 @@
       "price_egp": 95.0,
       "currency": "EGP",
       "rating": 3.7,
-      "reviews": 9801,
+      "reviews": 9817,
       "availability": "In Stock",
       "bsr": [
         {
@@ -34,17 +34,6 @@
           "lang": "ar"
         },
         {
-          "review_id": "R2NWEPFITP2OQS",
-          "rating": 1.0,
-          "title": "Useless",
-          "body": "No smell at all, I don’t even notice any smell",
-          "author": null,
-          "date": "Reviewed in Egypt on 12 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
           "review_id": "R2RYACUUK5KFNF",
           "rating": 5.0,
           "title": "جميل جدا",
@@ -54,6 +43,17 @@
           "verified": true,
           "helpful": 0,
           "lang": "ar"
+        },
+        {
+          "review_id": "R2NWEPFITP2OQS",
+          "rating": 1.0,
+          "title": "Useless",
+          "body": "No smell at all, I don’t even notice any smell",
+          "author": null,
+          "date": "Reviewed in Egypt on 12 August 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "en"
         },
         {
           "review_id": "R3QVPZRJ82RH6H",
@@ -100,15 +100,15 @@
           "lang": "ar"
         },
         {
-          "review_id": "RC1FJK2Q6U550",
-          "rating": 1.0,
-          "title": "مش احسن حاجة",
-          "body": "انا جربت اللى بريحة الليمون واللى بريحة اللافندر ولكن كثبات واستمرارية فاللى بالليمون احسن بكتير يعني اللى باللافندر قعد يومين بالعدد وكمان اللافندر ريحته مش لافندر صريح وحلو ولكنه زى البرفانات اللى بريحة اللافندر المضروبة",
+          "review_id": "R3KONU8VBLSR0C",
+          "rating": 2.0,
+          "title": "Misleading Product",
+          "body": "Product doesnt last more than 1 week, quality and material is very weak that it melts when left in sunlight in the car. Smells like dishsoap.",
           "author": null,
-          "date": "Reviewed in Egypt on 31 July 2026",
+          "date": "Reviewed in Egypt on 20 August 2026",
           "verified": true,
-          "helpful": 4,
-          "lang": "ar"
+          "helpful": 0,
+          "lang": "en"
         }
       ],
       "material": null,
@@ -127,143 +127,264 @@
       "feature_bullet_count": 1,
       "offer_count": 2
     },
-    "B09V27R871": {
-      "asin": "B09V27R871",
-      "title": "NC Car Windshield Sun Shade Foldable car Sun Umbrella,Blocks UV Rays Sun Visor for car[48 25.6 inches (122 * 65 cm)] Fit Most Vehicle",
-      "brand": "Spaceshoop",
-      "price_egp": 125.0,
+    "B096L5ZB2L": {
+      "asin": "B096L5ZB2L",
+      "title": "Water For Glass Wipers 2 Liter",
+      "brand": "Offine Auto",
+      "price_egp": 72.0,
       "currency": "EGP",
-      "rating": 3.4,
-      "reviews": 1920,
+      "rating": 4.2,
+      "reviews": 995,
       "availability": "In Stock",
       "bsr": [
         {
-          "rank": 6,
+          "rank": 5,
           "category": "Automotive"
         },
         {
           "rank": 1,
-          "category": "Car Front Window Sunshades"
+          "category": "Automotive Window Care"
         }
       ],
       "reviews_list": [
         {
-          "review_id": "R3MQDY77ZQWZ3X",
+          "review_id": "R3TJ9DWFXE7ZWA",
           "rating": 5.0,
-          "title": "جيد",
-          "body": "كويسة بالنسبة لسعرها",
+          "title": "فعلاً ممتاز",
+          "body": "جميل جدا متخففوش باي مياه خالص و هو كميته على قد تانك المياه ومش بيسيب اي علامات او جير على القزاز و بينشف بسرعه جدا ممتاز و على سعره كمان كنت جايبه بحوالي ٥٥ جنيه او ٥٠",
           "author": null,
-          "date": "Reviewed in Egypt on 10 April 2026",
+          "date": "Reviewed in Egypt on 20 May 2026",
           "verified": true,
-          "helpful": 2,
+          "helpful": 4,
           "lang": "ar"
         },
         {
-          "review_id": "R1CHBA9B230N0V",
-          "rating": 1.0,
-          "title": "Good in theory, awful in practice",
-          "body": "I placed the shade in the car, and next morning I found it broken. A plastic piece broke because of the heat.",
+          "review_id": "R15RM8KDS28X9Y",
+          "rating": 4.0,
+          "title": "amazing",
+          "body": "amazing liquid for cleaning all the dirty glass or mirrors all over the house, not only the car",
           "author": null,
-          "date": "Reviewed in Egypt on 28 August 2026",
+          "date": "Reviewed in Egypt on 20 July 2026",
           "verified": true,
           "helpful": 0,
           "lang": "en"
         },
         {
-          "review_id": "R1OY2KMC72YFF9",
-          "rating": 4.0,
-          "title": "جيد",
-          "body": "ضعيفة شوية بس شغال كويس محتاج مخافظة فقط",
+          "review_id": "R1Y6B02KSS65PZ",
+          "rating": 5.0,
+          "title": "Value for money",
+          "body": "جميل جدا و بينضف الزجاج فعلا و بيفرق جدا عن استخدام المياه",
+          "author": null,
+          "date": "Reviewed in Egypt on 14 August 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "RHYFXF6L7IA4L",
+          "rating": 5.0,
+          "title": "منتج محترم جدا",
+          "body": "فعلا بنينضف زجاج العربية و بيبقى Clear بدون بقع او تبقى مجيرة",
+          "author": null,
+          "date": "Reviewed in Egypt on 30 May 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3ODU3RFW0488B",
+          "rating": 3.0,
+          "title": "جيدة",
+          "body": "جيدة",
+          "author": null,
+          "date": "Reviewed in Egypt on 5 June 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "RUJQ3FTQDKWEW",
+          "rating": 5.0,
+          "title": "ممتازة",
+          "body": "كويسة جدا",
+          "author": null,
+          "date": "Reviewed in Egypt on 24 March 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3CLK4RXXAJU5J",
+          "rating": 1.0,
+          "title": "المياه فيها شوائب",
+          "body": "المياه مش نظيفه",
           "author": null,
           "date": "Reviewed in Egypt on 1 August 2026",
           "verified": true,
+          "helpful": 2,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R2MJQGRV9VC9UR",
+          "rating": 4.0,
+          "title": "كويس مش بيجير لسائل مساحات العربية",
+          "body": "كويس جدا لمساحات العربية مبيجيرش وبيلمع كويس",
+          "author": null,
+          "date": "Reviewed in Egypt on 17 June 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        }
+      ],
+      "material": "Non-Toxic",
+      "manufacturer": "Offine Auto",
+      "color": null,
+      "number_of_items": 1,
+      "item_weight_raw": "1.8 Kilograms",
+      "item_weight_kg": 1.8,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 4,
+      "feature_bullet_count": 4,
+      "offer_count": 2
+    },
+    "B0BGPLGQKQ": {
+      "asin": "B0BGPLGQKQ",
+      "title": "Miytsya 1 PC Car Trash Can with Lid, Multifunctional Folding Car Dustbin Garbage Organizer Holder, Leak-Proof Hanging Mini Trash Can Containers, Suitable for Cars, Homes, Offices (Black)",
+      "brand": "Wonka",
+      "price_egp": 61.0,
+      "currency": "EGP",
+      "rating": 3.3,
+      "reviews": 828,
+      "availability": "In Stock",
+      "bsr": [
+        {
+          "rank": 8,
+          "category": "Automotive"
+        },
+        {
+          "rank": 1,
+          "category": "Garbage Cans"
+        }
+      ],
+      "reviews_list": [
+        {
+          "review_id": "R27SSMSNDMCYW6",
+          "rating": 5.0,
+          "title": "حلوة",
+          "body": "تحفة و شيك و عملى و صغير اوى",
+          "author": null,
+          "date": "Reviewed in Egypt on 31 August 2026",
+          "verified": true,
           "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "R2980NBWT143CG",
+          "review_id": "R2KMBJOKUOXH3R",
           "rating": 3.0,
-          "title": "الحجم صغير",
-          "body": "حجمها صغير تنفع مع العربيات الهاتشباك",
+          "title": "Quality vs Price",
+          "body": "Very low quality, almost broken But it is normal on this price",
           "author": null,
-          "date": "Reviewed in Egypt on 14 May 2026",
+          "date": "Reviewed in Egypt on 17 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "R1QTT2CXUYK397",
+          "rating": 1.0,
+          "title": "غير مناسب بسيارتي",
+          "body": "جيد ولكن لا يلبي احتياجاتي",
+          "author": null,
+          "date": "Reviewed in Egypt on 10 August 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "R24YB0E8FQEOLU",
-          "rating": 5.0,
-          "title": "سلعة جيدة ومفيدة",
-          "body": "الحقيقة نوعها جيد ومفيدة جدا ارشحها",
-          "author": null,
-          "date": "Reviewed in Egypt on 31 July 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "RFH2HXTA3UGGX",
-          "rating": 5.0,
-          "title": "ممتازة",
-          "body": "كويسه جدا وبتحجب الشمس",
+          "review_id": "R1O637JD5AV3VE",
+          "rating": 4.0,
+          "title": "nice but too small",
+          "body": "cute, but small",
           "author": null,
           "date": "Reviewed in Egypt on 24 July 2026",
           "verified": true,
           "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "RD6D89SZUKXSW",
+          "rating": 5.0,
+          "title": "جيدة لنوعية معينه من المخلفات ولا تصلح لنوعيات اخري",
+          "body": "هي حلوة جداً وخامتها كويسة نوعاً ما، حجمها صغير يعني ممكن تكون مناسبة لحاجات صغيرة، منديل او ورقة صغيرة او حتي علبه عصير كرتون صغيرة، لكنها ممكن تكون غير مناسبة لزجاجة مياه معدنية مثلا حجم ال ٦٠٠ مللي مش هتدخل فيها ليها كلبس بيشبك فيها من ناحية ومن الناحية الثانية بيشبك في باب العربية في رايي حجمها الصغير دة مناسب لباب العربية لانه لو اكبر من كدة ممكن يضايق اللي قاعد ممكن تشتري واحدة لكل باب عشان تبقي عمليه اكتر وكل المخلفات تتوزع عليهم",
+          "author": null,
+          "date": "Reviewed in Egypt on 13 June 2026",
+          "verified": true,
+          "helpful": 15,
           "lang": "ar"
         },
         {
-          "review_id": "R1X2TMZ44DOU8Q",
-          "rating": 1.0,
-          "title": "خفيفة جداً",
-          "body": "خفيفة جداً و بتتكسر بسرعه",
+          "review_id": "R32IZWVMBRQNVR",
+          "rating": 2.0,
+          "title": "Quality",
+          "body": "Quality issues",
           "author": null,
-          "date": "Reviewed in Egypt on 28 August 2026",
+          "date": "Reviewed in Egypt on 20 April 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "R8S7V5K7JGTU1",
+          "rating": 5.0,
+          "title": "لطيفة.",
+          "body": "لطيفة",
+          "author": null,
+          "date": "Reviewed in Egypt on 5 September 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "R10TGC9MJ60O3M",
-          "rating": 2.0,
-          "title": "ضعيفه و سيئة جدا",
-          "body": "خامات سيئة و رديئة جدا لا انصح و شكلها هتتقطع او تتكسر بسهوله اوي",
+          "review_id": "R35AWR7FHHY4DP",
+          "rating": 3.0,
+          "title": "مضغيف",
+          "body": "ضعيف اتكسر بسهوله",
           "author": null,
-          "date": "Reviewed in Egypt on 9 July 2026",
+          "date": "Reviewed in Egypt on 20 May 2026",
           "verified": true,
-          "helpful": 1,
+          "helpful": 0,
           "lang": "ar"
         }
       ],
-      "material": "Leather",
-      "manufacturer": "N\\C",
-      "color": "black",
+      "material": "Plastic",
+      "manufacturer": "Miytsya",
+      "color": "Black",
       "number_of_items": 1,
-      "item_weight_raw": "500 Grams",
-      "item_weight_kg": 0.5,
-      "item_dims_raw": "110L x 60W centimeters",
+      "item_weight_raw": "0.21 Kilograms",
+      "item_weight_kg": 0.21,
+      "item_dims_raw": "14.2L x 8.5W x 16H centimeters",
       "item_dims_cm": {
-        "l": 110.0,
-        "w": 60.0,
-        "h": 0.0
+        "l": 14.2,
+        "w": 8.5,
+        "h": 16.0
       },
-      "image_count": 5,
+      "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 41
+      "offer_count": 16
     },
     "B0931ZQ9Q6": {
       "asin": "B0931ZQ9Q6",
       "title": "RABIGALA Balaclava Face Mask Ski Mask for Men Women UV Protection Neck Gaiter for Skiing Motorcycle",
       "brand": "RABIGALA",
-      "price_egp": 54.0,
+      "price_egp": 56.0,
       "currency": "EGP",
       "rating": 3.6,
-      "reviews": 2088,
+      "reviews": 2092,
       "availability": "In Stock",
       "bsr": [
         {
-          "rank": 8,
+          "rank": 9,
           "category": "Automotive"
         },
         {
@@ -375,33 +496,7 @@
       },
       "image_count": 7,
       "feature_bullet_count": null,
-      "offer_count": 3,
-      "offers": [
-        {
-          "seller_name": "KARPITA",
-          "seller_id": "A1U754R6LXC3R7",
-          "price_egp": 56.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "TISHTA",
-          "seller_id": "A3369V4QJ1ZOE9",
-          "price_egp": 56.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 57.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "offer_count": null
     }
   }
 }
