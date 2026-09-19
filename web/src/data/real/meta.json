@@ -1,10 +1,8 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-09-16T11:37:20.455267+00:00",
+  "scraped_at": "2026-09-19T11:01:45.430043+00:00",
   "categories": [
     "automotive",
-    "electronics",
-    "beauty",
     "home",
     "fashion",
     "toys",
@@ -12,34 +10,18 @@
     "baby",
     "health"
   ],
-  "product_count": 150,
-  "enriched": 8,
+  "product_count": 120,
+  "enriched": 9,
   "source": "amazon.eg via firecrawl",
   "health": {
-    "categories_ok": 9,
+    "categories_ok": 7,
     "categories_degraded": [],
     "min_title_fill": 100.0,
-    "total_products": 150,
-    "firecrawl_calls": 33,
+    "total_products": 120,
+    "firecrawl_calls": 31,
     "per_category": {
       "automotive": {
         "parsed_count": 30,
-        "title_fill": 100.0,
-        "price_fill": 96.7,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
-        "degraded": false
-      },
-      "electronics": {
-        "parsed_count": 15,
-        "title_fill": 100.0,
-        "price_fill": 100.0,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
-        "degraded": false
-      },
-      "beauty": {
-        "parsed_count": 15,
         "title_fill": 100.0,
         "price_fill": 100.0,
         "rating_fill": 100.0,
