@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-10-12T15:29:05.927649+00:00",
+  "scraped_at": "2026-10-13T14:14:17.889142+00:00",
   "products": {
     "B09NRNLTZV": {
       "asin": "B09NRNLTZV",
@@ -23,120 +23,7 @@
       "item_dims_cm": null,
       "image_count": null,
       "feature_bullet_count": null,
-      "offer_count": null,
-      "offers": [
-        {
-          "seller_name": "Es-ho",
-          "seller_id": "APU3P1PNBYDUN",
-          "price_egp": 60.85,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "Bynona",
-          "seller_id": "A2WTWA6GH5UAMV",
-          "price_egp": 59.85,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "CGS_AUTO",
-          "seller_id": "A2U9GRN68MWONK",
-          "price_egp": 63.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "اير ماكس",
-          "seller_id": "A3LCDE8LV68D7T",
-          "price_egp": 64.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "XR STORE",
-          "seller_id": "A3R6QGBNC92DN6",
-          "price_egp": 69.99,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 74.29,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "EL-Captain.CGS",
-          "seller_id": "A3C6DQMZ338AD7",
-          "price_egp": 75.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Spaceshoop_October",
-          "seller_id": "ASCKB7YHANFEH",
-          "price_egp": 88.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Spaceshoop_October",
-          "seller_id": "ASCKB7YHANFEH",
-          "price_egp": 93.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "EL-Captain.CGS",
-          "seller_id": "A3C6DQMZ338AD7",
-          "price_egp": 110.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Forsaa-Store",
-          "seller_id": "A1482XK2G6Z639",
-          "price_egp": 88.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
-    },
-    "B0CCXZRDV7": {
-      "asin": "B0CCXZRDV7",
-      "title": "Godrej aer O – Hanging Car Air Freshener | Car Accessories | Cool Aqua (7.5g)",
-      "brand": "Godrej aer",
-      "price_egp": 94.53,
-      "currency": "EGP",
-      "rating": 3.8,
-      "reviews": 10475,
-      "availability": "In Stock",
-      "bsr": [],
-      "reviews_list": [],
-      "material": null,
-      "manufacturer": null,
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": 4,
-      "feature_bullet_count": 1,
-      "offer_count": 5
+      "offer_count": null
     },
     "B0DMF1DHF3": {
       "asin": "B0DMF1DHF3",
@@ -159,57 +46,7 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 1,
-      "offer_count": 8,
-      "offers": [
-        {
-          "seller_name": "PrimeHubb",
-          "seller_id": "ALHOX5C4ZV3KA",
-          "price_egp": 39.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "Zoba stores",
-          "seller_id": "A7ZLHQHEYMNNR",
-          "price_egp": 36.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "GamilaStore1",
-          "seller_id": "A3NEB5CXJGEPL2",
-          "price_egp": 36.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "TRX Store EG",
-          "seller_id": "A3USZ6ECH4YNN0",
-          "price_egp": 47.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Es-ho",
-          "seller_id": "APU3P1PNBYDUN",
-          "price_egp": 58.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Joker-99",
-          "seller_id": "A28H7B2UO84588",
-          "price_egp": 60.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "offer_count": 8
     },
     "B0CXPDG6KV": {
       "asin": "B0CXPDG6KV",
@@ -394,29 +231,6 @@
       "image_count": null,
       "feature_bullet_count": null,
       "offer_count": null
-    },
-    "B07MMFCTCX": {
-      "asin": "B07MMFCTCX",
-      "title": "Garnier SkinActive Micellar Cleansing Water Classic 100ml",
-      "brand": "Garnier",
-      "price_egp": 80.68,
-      "currency": "EGP",
-      "rating": 4.5,
-      "reviews": 8197,
-      "availability": "In Stock",
-      "bsr": [],
-      "reviews_list": [],
-      "material": null,
-      "manufacturer": null,
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": 2,
-      "feature_bullet_count": 4,
-      "offer_count": 8
     }
   }
 }
