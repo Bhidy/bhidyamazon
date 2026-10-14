@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-13T14:27:43.227709+00:00",
+  "scraped_at": "2026-10-14T12:07:21.910739+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -81,7 +81,7 @@
       "appearances": 1
     },
     {
-      "query": "perfume",
+      "query": "perfume for women",
       "lang": "en",
       "demandScore": 100,
       "trend": "flat",
@@ -207,7 +207,7 @@
       "appearances": 1
     },
     {
-      "query": "perfume for women",
+      "query": "perfume",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
