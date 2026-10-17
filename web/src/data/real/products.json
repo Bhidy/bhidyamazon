@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-10-16T11:26:50.817659+00:00",
+  "scraped_at": "2026-10-17T10:47:01.010442+00:00",
   "products": {
     "B09NRNLTZV": {
       "asin": "B09NRNLTZV",
@@ -23,7 +23,89 @@
       "item_dims_cm": null,
       "image_count": 5,
       "feature_bullet_count": 4,
-      "offer_count": 10
+      "offer_count": 10,
+      "offers": [
+        {
+          "seller_name": "Bynona",
+          "seller_id": "A2WTWA6GH5UAMV",
+          "price_egp": 59.85,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "CGS_AUTO",
+          "seller_id": "A2U9GRN68MWONK",
+          "price_egp": 63.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "اير ماكس",
+          "seller_id": "A3LCDE8LV68D7T",
+          "price_egp": 64.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Es-ho",
+          "seller_id": "APU3P1PNBYDUN",
+          "price_egp": 67.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "XR STORE",
+          "seller_id": "A3R6QGBNC92DN6",
+          "price_egp": 69.99,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "EL-Captain.CGS",
+          "seller_id": "A3C6DQMZ338AD7",
+          "price_egp": 75.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 75.62,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Spaceshoop_October",
+          "seller_id": "ASCKB7YHANFEH",
+          "price_egp": 88.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Spaceshoop_October",
+          "seller_id": "ASCKB7YHANFEH",
+          "price_egp": 93.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "EL-Captain.CGS",
+          "seller_id": "A3C6DQMZ338AD7",
+          "price_egp": 110.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0CCXZRDV7": {
       "asin": "B0CCXZRDV7",
@@ -46,77 +128,130 @@
       "item_dims_cm": null,
       "image_count": null,
       "feature_bullet_count": null,
-      "offer_count": null
+      "offer_count": null,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 94.51,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "She market",
+          "seller_id": "A3T8BPPZSV9JXO",
+          "price_egp": 93.58,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "ECIFegy",
+          "seller_id": "A314KOZ4T1PJDZ",
+          "price_egp": 93.63,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Pink'nGreen",
+          "seller_id": "A365H21I40S7UP",
+          "price_egp": 95.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "zerostore.app",
+          "seller_id": "A3F09WVSFW1BYX",
+          "price_egp": 100.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
-    "B0BTSHHWQM": {
-      "asin": "B0BTSHHWQM",
-      "title": "Frida Aqua chicka dee 460ml",
-      "brand": "Frida",
-      "price_egp": 54.0,
+    "B0931ZQ9Q6": {
+      "asin": "B0931ZQ9Q6",
+      "title": "RABIGALA Balaclava Face Mask Ski Mask for Men Women UV Protection Neck Gaiter for Skiing Motorcycle",
+      "brand": "RABIGALA",
+      "price_egp": 56.0,
       "currency": "EGP",
-      "rating": 4.3,
-      "reviews": 298,
+      "rating": 3.5,
+      "reviews": 2139,
       "availability": "In Stock",
       "bsr": [
         {
-          "rank": 7,
+          "rank": 3,
           "category": "Automotive"
         },
         {
-          "rank": 3,
-          "category": "Automotive Air Fresheners"
+          "rank": 1,
+          "category": "Motorcycle Face Masks"
         }
       ],
       "reviews_list": [
         {
-          "review_id": "R2PUS4VXTK8810",
+          "review_id": "R2S7O1JILZUAKK",
           "rating": 5.0,
-          "title": "ريحه روعه و ثابت كويس جدا",
-          "body": "ريحته جميلة جداا و افضل معطر فريدا يليه بهجه",
+          "title": "جميل بس مش مريح ك ماسك للموتوسيكل",
+          "body": "حلو جدا بس كا ماسك للموتوسكل مينفعش خالص هيحرر و مش حلو انا عن نفسي شارية عشان اتمرن بيه و يضغط الحرارة ف وشي و يستهدف دهون وشي و ده من رايي افضل غرض تستخدمه فيه",
           "author": null,
-          "date": "Reviewed in Egypt on 8 July 2026",
+          "date": "Reviewed in Egypt on 14 September 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R2OR3IYRT15JGU",
+          "rating": 1.0,
+          "title": "خارا",
+          "body": "خامه زفت و انقتع",
+          "author": null,
+          "date": "Reviewed in Egypt on 13 September 2026",
           "verified": true,
           "helpful": 1,
           "lang": "ar"
         },
         {
-          "review_id": "R2T7JSERXMJC7K",
-          "rating": 5.0,
-          "title": "Perfect",
-          "body": "Perfect",
+          "review_id": "R3FJ4MHG9WS0MY",
+          "rating": 3.0,
+          "title": "مقبول تقفيله مش كويس",
+          "body": "مقبول التفصيل غير مضبوط تقفيل مش قوي وفتحة العين واسعة وخامته متوسطة قماش صناعي كما بالوصف",
           "author": null,
-          "date": "Reviewed in Egypt on 30 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R3QQ2LCZ62AGO2",
-          "rating": 5.0,
-          "title": "تمام زى الفل",
-          "body": "تمام زى الفل",
-          "author": null,
-          "date": "Reviewed in Egypt on 18 September 2026",
+          "date": "Reviewed in Egypt on 18 July 2026",
           "verified": true,
           "helpful": 0,
           "lang": "ar"
         },
         {
-          "review_id": "RI2P21DJVZDB7",
-          "rating": 4.0,
-          "title": "Refreshing and Stylish: A Must-Try Beverage",
-          "body": "I recently tried the Frida Aqua Chicka Dee 460ml, and I must say, it exceeded my expectations in several ways. Firstly, the packaging is both sleek and functional. The 460ml bottle is perfectly sized for on-the-go hydration, and the design is modern and eye-catching. It's easy to carry and fits nicely in a car cup holder or backpack. The taste is where Frida Aqua Chicka Dee shines. The flavor is refreshingly crisp with just the right balance of sweetness and tartness. It's a great alternative to sugary soft drinks and provides a satisfying, clean, refreshing, and hydrating taste. I appreciate that it doesn’t have an artificial aftertaste, which is often a downside with flavored waters. In terms of quality, this beverage stands out. The ingredients list is straightforward and natural, which is always a plus. It feels like a healthier choice compared to other options on the market. Additionally, the 460ml size is ideal for quenching thirst without being overly large or bulky. My only minor critique would be that it could benefit from a slightly lower price point. However, considering the quality and taste, it’s worthwhile for those who appreciate a premium flavored water experience. The Frida Aqua Chicka Dee 460ml is a refreshing, stylish, and high-quality beverage worth trying. It’s perfect for those looking for a sophisticated drink option that doesn’t compromise flavor or health.",
+          "review_id": "R39QYNO8Q4216J",
+          "rating": 5.0,
+          "title": "Nice",
+          "body": "Not cotton, but quality is good",
           "author": null,
-          "date": "Reviewed in Egypt on 11 August 2024",
+          "date": "Reviewed in Egypt on 26 September 2026",
           "verified": true,
-          "helpful": 8,
+          "helpful": 0,
           "lang": "en"
         },
         {
-          "review_id": "R2E8TBDYVDBCW1",
+          "review_id": "R12QT6ACBG691M",
+          "rating": 4.0,
+          "title": "كويس بس لازم يكون في مقاسات",
+          "body": "كويس بس لازم يكون في مقاسات",
+          "author": null,
+          "date": "Reviewed in Egypt on 10 October 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R1LS7ZGQH5CDA3",
           "rating": 5.0,
-          "title": "جميل جدا",
-          "body": "ريحتو جميله جدا وبتقعد فتره طويله",
+          "title": "جيد جدا",
+          "body": "رائع للغايه",
           "author": null,
           "date": "Reviewed in Egypt on 12 October 2026",
           "verified": true,
@@ -124,80 +259,43 @@
           "lang": "ar"
         },
         {
-          "review_id": "R2L5JTKMY0URF2",
+          "review_id": "R3I810LDN5M3M1",
+          "rating": 2.0,
+          "title": "They should pay attention to the product's appearance.",
+          "body": "The mask's material is nice, but the shape isn't what I expected because the eye opening is very small.",
+          "author": null,
+          "date": "Reviewed in Egypt on 25 July 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "en"
+        },
+        {
+          "review_id": "R1SOT9L1JDRIID",
           "rating": 1.0,
-          "title": "مش اد كده",
-          "body": "ريحته معجبتنيش اوى",
+          "title": "Bad",
+          "body": "Very bad this is not a mask…!!!! It has two openings ..Don’t buy",
           "author": null,
-          "date": "Reviewed in Egypt on 24 August 2026",
+          "date": "Reviewed in Egypt on 14 September 2026",
           "verified": true,
           "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R3J5HFPPUIAA25",
-          "rating": 5.0,
-          "title": "رائعة",
-          "body": "ممتازة احلي واحدة فيهم وخفيفة وواضحة ومش تقيلة انها تخنق الثبات ممكن مش كتير بس كويس يقضي الغرض",
-          "author": null,
-          "date": "Reviewed in Egypt on 3 June 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R1UW1CJVE41FGS",
-          "rating": 5.0,
-          "title": "جميل ورائع",
-          "body": "جميل",
-          "author": null,
-          "date": "Reviewed in Egypt on 26 June 2026",
-          "verified": true,
-          "helpful": 2,
-          "lang": "ar"
+          "lang": "en"
         }
       ],
-      "material": null,
-      "manufacturer": "Frida",
-      "color": "multicolour",
+      "material": "Polyester",
+      "manufacturer": "RABIGALA",
+      "color": "Black",
       "number_of_items": 1,
-      "item_weight_raw": "0.21 Kilograms",
-      "item_weight_kg": 0.21,
-      "item_dims_raw": "10 x 20 x 37 centimeters",
+      "item_weight_raw": "0.08 Kilograms",
+      "item_weight_kg": 0.08,
+      "item_dims_raw": "15 x 10 x 2 centimeters",
       "item_dims_cm": {
-        "l": 10.0,
-        "w": 20.0,
-        "h": 37.0
+        "l": 15.0,
+        "w": 10.0,
+        "h": 2.0
       },
-      "image_count": 2,
-      "feature_bullet_count": 3,
-      "offer_count": 3,
-      "offers": [
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 54.0,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "tnzycompany",
-          "seller_id": "A2U3WMLF7LAIUJ",
-          "price_egp": 297.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Amazon Now",
-          "seller_id": "A31TYDXOWA7X1E",
-          "price_egp": 56.7,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "image_count": 7,
+      "feature_bullet_count": null,
+      "offer_count": 4
     },
     "B0CXPDG6KV": {
       "asin": "B0CXPDG6KV",
@@ -243,6 +341,127 @@
       "item_dims_cm": null,
       "image_count": 1,
       "feature_bullet_count": 3,
+      "offer_count": 2
+    },
+    "B08WJN65HC": {
+      "asin": "B08WJN65HC",
+      "title": "Maxell Magic Sprays Air Freshener with Anti Tubacco Scent , 475 ml",
+      "brand": "Maxell Magic",
+      "price_egp": 36.22,
+      "currency": "EGP",
+      "rating": 4.2,
+      "reviews": 210,
+      "availability": "In Stock",
+      "bsr": [
+        {
+          "rank": 8,
+          "category": "Automotive"
+        },
+        {
+          "rank": 4,
+          "category": "Automotive Air Fresheners"
+        }
+      ],
+      "reviews_list": [
+        {
+          "review_id": "R87ZGDW9Q2O2V",
+          "rating": 5.0,
+          "title": "إزالة روائح الدخان ممتاز",
+          "body": "الخيار الأمثل للمدخنين",
+          "author": null,
+          "date": "Reviewed in Egypt on 8 August 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R4YXWEARRBDBI",
+          "rating": 4.0,
+          "title": "جيد",
+          "body": "رائحتها جميلة ومنعشة ولكن لا تدوم",
+          "author": null,
+          "date": "Reviewed in Egypt on 14 August 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R23BQS8HH4CMGF",
+          "rating": 5.0,
+          "title": "جيد",
+          "body": "ممتاز في ازالة الروائح لكنه غير ثابت",
+          "author": null,
+          "date": "Reviewed in Egypt on 21 August 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "RTOFB48IUNLMP",
+          "rating": 5.0,
+          "title": "Highly recommended",
+          "body": "ممتاز جدا وريحته حلوه جدا .هشتري منه تاني اكيد",
+          "author": null,
+          "date": "Reviewed in Egypt on 16 December 2025",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3FGSCKG1QRXMR",
+          "rating": 3.0,
+          "title": "بيطر بسرعه",
+          "body": "ريحته حلوه بس الريحه بروح بسرعه",
+          "author": null,
+          "date": "Reviewed in Egypt on 9 May 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "RKPPGNMPHA8MV",
+          "rating": 1.0,
+          "title": "يمشى",
+          "body": "ريحته لا تدوم كثيرا لكن حلوه",
+          "author": null,
+          "date": "Reviewed in Egypt on 9 October 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R3EJQ635HYEJQ9",
+          "rating": 5.0,
+          "title": "رائحه جميله جدا",
+          "body": "رائحته ممتازه و قويه",
+          "author": null,
+          "date": "Reviewed in Egypt on 30 June 2026",
+          "verified": true,
+          "helpful": 0,
+          "lang": "ar"
+        },
+        {
+          "review_id": "R2JQCNMN98CCLD",
+          "rating": 4.0,
+          "title": "الحجم والجودة كويسين",
+          "body": "تحفه كنت جايبها في عرض ب ٣٥ كميته كبيره وثباته وفوحانه جميل ومش بيخنق خالص",
+          "author": null,
+          "date": "Reviewed in Egypt on 5 March 2026",
+          "verified": true,
+          "helpful": 1,
+          "lang": "ar"
+        }
+      ],
+      "material": null,
+      "manufacturer": "Maxell Magic",
+      "color": "Yellow",
+      "number_of_items": 1,
+      "item_weight_raw": "0.52 Kilograms",
+      "item_weight_kg": 0.52,
+      "item_dims_raw": null,
+      "item_dims_cm": null,
+      "image_count": 1,
+      "feature_bullet_count": 2,
       "offer_count": 2
     },
     "B0DMF1DHF3": {
@@ -313,131 +532,6 @@
       "image_count": null,
       "feature_bullet_count": null,
       "offer_count": null
-    },
-    "B09GKBV77S": {
-      "asin": "B09GKBV77S",
-      "title": "Fresh Keeping Bags, Elastic Food Storage Covers Stretchy Pla",
-      "brand": "ReaJoys",
-      "price_egp": 18.62,
-      "currency": "EGP",
-      "rating": 4.0,
-      "reviews": 4645,
-      "availability": "In Stock",
-      "bsr": [
-        {
-          "rank": 2,
-          "category": "Home & Kitchen"
-        },
-        {
-          "rank": 1,
-          "category": "Food Covers"
-        }
-      ],
-      "reviews_list": [
-        {
-          "review_id": "R1OZPLTAO8HNM0",
-          "rating": 5.0,
-          "title": "ممتازة",
-          "body": "ممتازة جدا",
-          "author": null,
-          "date": "Reviewed in Egypt on 8 September 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2GXKJUSFB15HE",
-          "rating": 5.0,
-          "title": "جميلة ومتينة",
-          "body": "حلوة اوى",
-          "author": null,
-          "date": "Reviewed in Egypt on 9 October 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2G9DJ5KDLG6VR",
-          "rating": 4.0,
-          "title": "حجمه صغير لكن ممتاز",
-          "body": "حلو اوي لتغطية الطعام في التلاجة لكن حجم الكيس صغير مايصلحش للاطباق الكبيرة لكن ممتاز مع البدلات والاطباق الصغيرة",
-          "author": null,
-          "date": "Reviewed in Egypt on 22 March 2026",
-          "verified": true,
-          "helpful": 1,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R2LMSZR0A8PY1I",
-          "rating": 3.0,
-          "title": "ضعيف",
-          "body": "ضعيفة",
-          "author": null,
-          "date": "Reviewed in Egypt on 6 October 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R25TAQ71VA25PA",
-          "rating": 5.0,
-          "title": "خطيرة",
-          "body": "مفيدة",
-          "author": null,
-          "date": "Reviewed in Egypt on 2 August 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "R26G59DIQ65DMS",
-          "rating": 5.0,
-          "title": "ممتازة",
-          "body": "مفيدة جدا وعملية هطلبها كل ما تخلص مافيش غني عنها",
-          "author": null,
-          "date": "Reviewed in Egypt on 11 October 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        },
-        {
-          "review_id": "RXGDIO5TFVTSK",
-          "rating": 5.0,
-          "title": "Acceptable",
-          "body": "Very useful for protection of food in fridge or outside, average quality",
-          "author": null,
-          "date": "Reviewed in Egypt on 25 April 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "en"
-        },
-        {
-          "review_id": "R3F56SUOIW7UCO",
-          "rating": 4.0,
-          "title": "جيد",
-          "body": "حلو",
-          "author": null,
-          "date": "Reviewed in Egypt on 27 September 2026",
-          "verified": true,
-          "helpful": 0,
-          "lang": "ar"
-        }
-      ],
-      "material": "Polyethylene (PE)",
-      "manufacturer": "Other",
-      "color": "Clear",
-      "number_of_items": 1,
-      "item_weight_raw": "0.1 Kilograms",
-      "item_weight_kg": 0.1,
-      "item_dims_raw": "15W x 0.5H centimeters",
-      "item_dims_cm": {
-        "l": 15.0,
-        "w": 0.5,
-        "h": 0.0
-      },
-      "image_count": 7,
-      "feature_bullet_count": 3,
-      "offer_count": 22
     }
   }
 }
