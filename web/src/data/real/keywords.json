@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-10-21T12:00:12.301904+00:00",
+  "scraped_at": "2026-10-22T12:14:21.583501+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -263,7 +263,7 @@
       "appearances": 1
     },
     {
-      "query": "ugreen wireless charger",
+      "query": "wireless charger samsung",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
@@ -277,7 +277,7 @@
       "appearances": 1
     },
     {
-      "query": "laptop sleeve",
+      "query": "laptop bag",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
