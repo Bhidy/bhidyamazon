@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-10-26T13:06:41.472199+00:00",
+  "scraped_at": "2026-10-27T12:14:43.612101+00:00",
   "products": {
     "B0DH8JZ2Z4": {
       "asin": "B0DH8JZ2Z4",
@@ -23,65 +23,7 @@
       "item_dims_cm": null,
       "image_count": null,
       "feature_bullet_count": null,
-      "offer_count": null,
-      "offers": [
-        {
-          "seller_name": "Amazon",
-          "seller_id": null,
-          "price_egp": 199.5,
-          "fba": false,
-          "condition": "New",
-          "is_buybox": true
-        },
-        {
-          "seller_name": "SCD-HUB",
-          "seller_id": "A2E2NRMR0RV8WE",
-          "price_egp": 230.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "فرندز",
-          "seller_id": "A2L6CS9TW1640Y",
-          "price_egp": 234.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "EL-SHABORY",
-          "seller_id": "A2BSH2A7XCWF0Y",
-          "price_egp": 234.33,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "فرندز",
-          "seller_id": "A2L6CS9TW1640Y",
-          "price_egp": 273.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "El Hamed Store",
-          "seller_id": "A3SPPASCDKBQJT",
-          "price_egp": 299.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        },
-        {
-          "seller_name": "Mobile Magic 74",
-          "seller_id": "A223BLGGSAX7PC",
-          "price_egp": 305.0,
-          "fba": true,
-          "condition": "New",
-          "is_buybox": false
-        }
-      ]
+      "offer_count": null
     },
     "B091D3D723": {
       "asin": "B091D3D723",
@@ -202,7 +144,97 @@
       "item_dims_cm": null,
       "image_count": 6,
       "feature_bullet_count": 3,
-      "offer_count": 16
+      "offer_count": 16,
+      "offers": [
+        {
+          "seller_name": "Amazon",
+          "seller_id": null,
+          "price_egp": 19.74,
+          "fba": false,
+          "condition": "New",
+          "is_buybox": true
+        },
+        {
+          "seller_name": "S&M-Store",
+          "seller_id": "A24L91U83A8RCR",
+          "price_egp": 32.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "xxDiscountxx",
+          "seller_id": "A3HBJVIC14OEWA",
+          "price_egp": 37.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Donald-Duck",
+          "seller_id": "A2T2FUOUMBGNCU",
+          "price_egp": 37.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "TRX Store EG",
+          "seller_id": "A3USZ6ECH4YNN0",
+          "price_egp": 37.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "H&A Beauty 1",
+          "seller_id": "A2SOOHY1YCXHJL",
+          "price_egp": 37.0,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "القصر للتوريدات العمومية",
+          "seller_id": "A284J8PEI9UAHM",
+          "price_egp": 38.5,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Es-ho",
+          "seller_id": "APU3P1PNBYDUN",
+          "price_egp": 38.9,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Nar-Store",
+          "seller_id": "A2T3ESIZA4EBXS",
+          "price_egp": 39.99,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Spaceshoop_October",
+          "seller_id": "ASCKB7YHANFEH",
+          "price_egp": 58.9,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        },
+        {
+          "seller_name": "Modern.Gadgets",
+          "seller_id": "A12KEW23FMB4HW",
+          "price_egp": 73.65,
+          "fba": true,
+          "condition": "New",
+          "is_buybox": false
+        }
+      ]
     },
     "B0C2CYJWY2": {
       "asin": "B0C2CYJWY2",
@@ -225,30 +257,8 @@
       "item_dims_cm": null,
       "image_count": 7,
       "feature_bullet_count": 3,
-      "offer_count": 3
-    },
-    "B00XHWTK36": {
-      "asin": "B00XHWTK36",
-      "title": null,
-      "brand": null,
-      "price_egp": null,
-      "currency": "EGP",
-      "rating": null,
-      "reviews": null,
-      "availability": null,
-      "bsr": [],
-      "reviews_list": [],
-      "material": null,
-      "manufacturer": null,
-      "color": null,
-      "number_of_items": null,
-      "item_weight_raw": null,
-      "item_weight_kg": null,
-      "item_dims_raw": null,
-      "item_dims_cm": null,
-      "image_count": null,
-      "feature_bullet_count": null,
-      "offer_count": null
+      "offer_count": 3,
+      "offers": []
     },
     "B0DM9M1ZLX": {
       "asin": "B0DM9M1ZLX",
