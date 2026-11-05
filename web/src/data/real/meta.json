@@ -1,29 +1,31 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-11-04T14:35:05.151631+00:00",
+  "scraped_at": "2026-11-05T14:41:12.988156+00:00",
   "categories": [
     "automotive",
     "electronics",
     "beauty",
     "home",
     "fashion",
+    "toys",
     "grocery",
-    "baby"
+    "baby",
+    "health"
   ],
-  "product_count": 120,
+  "product_count": 150,
   "enriched": 11,
   "source": "amazon.eg via firecrawl",
   "health": {
-    "categories_ok": 7,
+    "categories_ok": 9,
     "categories_degraded": [],
     "min_title_fill": 100.0,
-    "total_products": 120,
-    "firecrawl_calls": 31,
+    "total_products": 150,
+    "firecrawl_calls": 33,
     "per_category": {
       "automotive": {
         "parsed_count": 30,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 96.7,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -39,7 +41,7 @@
       "beauty": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 60.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -60,10 +62,18 @@
         "reviews_fill": 100.0,
         "degraded": false
       },
+      "toys": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
+        "rating_fill": 93.3,
+        "reviews_fill": 93.3,
+        "degraded": false
+      },
       "grocery": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 73.3,
+        "price_fill": 80.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -71,7 +81,15 @@
       "baby": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 86.7,
+        "price_fill": 100.0,
+        "rating_fill": 100.0,
+        "reviews_fill": 100.0,
+        "degraded": false
+      },
+      "health": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
