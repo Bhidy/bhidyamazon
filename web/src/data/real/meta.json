@@ -1,31 +1,28 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-11-06T14:18:33.285305+00:00",
+  "scraped_at": "2026-11-07T13:04:42.117820+00:00",
   "categories": [
     "automotive",
     "electronics",
-    "beauty",
     "home",
     "fashion",
     "toys",
-    "grocery",
-    "baby",
-    "health"
+    "baby"
   ],
-  "product_count": 150,
-  "enriched": 7,
+  "product_count": 105,
+  "enriched": 5,
   "source": "amazon.eg via firecrawl",
   "health": {
-    "categories_ok": 9,
+    "categories_ok": 6,
     "categories_degraded": [],
     "min_title_fill": 100.0,
-    "total_products": 150,
-    "firecrawl_calls": 33,
+    "total_products": 105,
+    "firecrawl_calls": 30,
     "per_category": {
       "automotive": {
         "parsed_count": 30,
         "title_fill": 100.0,
-        "price_fill": 96.7,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -38,18 +35,10 @@
         "reviews_fill": 100.0,
         "degraded": false
       },
-      "beauty": {
-        "parsed_count": 15,
-        "title_fill": 100.0,
-        "price_fill": 60.0,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
-        "degraded": false
-      },
       "home": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -57,7 +46,7 @@
       "fashion": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 80.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -66,27 +55,11 @@
         "parsed_count": 15,
         "title_fill": 100.0,
         "price_fill": 100.0,
-        "rating_fill": 93.3,
-        "reviews_fill": 93.3,
-        "degraded": false
-      },
-      "grocery": {
-        "parsed_count": 15,
-        "title_fill": 100.0,
-        "price_fill": 80.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
       },
       "baby": {
-        "parsed_count": 15,
-        "title_fill": 100.0,
-        "price_fill": 100.0,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
-        "degraded": false
-      },
-      "health": {
         "parsed_count": 15,
         "title_fill": 100.0,
         "price_fill": 100.0,
