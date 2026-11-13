@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-12T15:36:32.755175+00:00",
+  "scraped_at": "2026-11-13T14:56:16.306858+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -186,28 +186,28 @@
       "appearances": 1
     },
     {
-      "query": "samsung a24 phone case",
+      "query": "phone case iphone 13",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "bluetooth speaker with mic",
+      "query": "bluetooth speaker jbl",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "baby toys",
+      "query": "babyliss",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
       "appearances": 1
     },
     {
-      "query": "perfume for women",
+      "query": "perfume for men",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -228,7 +228,7 @@
       "appearances": 1
     },
     {
-      "query": "حامل لابتوب",
+      "query": "لاب توب",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
