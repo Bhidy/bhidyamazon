@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-13T14:56:16.306858+00:00",
+  "scraped_at": "2026-11-14T13:46:06.027373+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -81,7 +81,7 @@
       "appearances": 1
     },
     {
-      "query": "perfume",
+      "query": "perfume for men",
       "lang": "en",
       "demandScore": 100,
       "trend": "flat",
@@ -116,7 +116,7 @@
       "appearances": 1
     },
     {
-      "query": "قلاية هوائية",
+      "query": "قلاية زيت كهربائية",
       "lang": "ar",
       "demandScore": 100,
       "trend": "flat",
@@ -193,7 +193,7 @@
       "appearances": 1
     },
     {
-      "query": "bluetooth speaker jbl",
+      "query": "portable bluetooth speaker",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -207,7 +207,7 @@
       "appearances": 1
     },
     {
-      "query": "perfume for men",
+      "query": "perfume",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -228,7 +228,7 @@
       "appearances": 1
     },
     {
-      "query": "لاب توب",
+      "query": "حامل لابتوب",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
@@ -242,7 +242,7 @@
       "appearances": 1
     },
     {
-      "query": "قلاية زيت كهربائية",
+      "query": "قلاية هوائية بلاك اند ديكر",
       "lang": "ar",
       "demandScore": 92,
       "trend": "flat",
