@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-14T13:46:06.027373+00:00",
+  "scraped_at": "2026-11-15T14:10:05.871586+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -130,7 +130,7 @@
       "appearances": 1
     },
     {
-      "query": "soundcore earbuds",
+      "query": "oraimo earbuds",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -158,7 +158,7 @@
       "appearances": 1
     },
     {
-      "query": "air fryer paper",
+      "query": "air fryer philips",
       "lang": "en",
       "demandScore": 92,
       "trend": "flat",
@@ -256,7 +256,7 @@
       "appearances": 1
     },
     {
-      "query": "oraimo earbuds",
+      "query": "soundcore earbuds",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
