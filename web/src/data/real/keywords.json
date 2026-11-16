@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-11-15T14:10:05.871586+00:00",
+  "scraped_at": "2026-11-16T15:58:48.274011+00:00",
   "source": "amazon_eg_autocomplete (completion.amazon.co.uk) + google_trends",
   "signal": "autocomplete_prominence_ordinal",
   "keywords": [
@@ -270,7 +270,7 @@
       "appearances": 1
     },
     {
-      "query": "power bank 20000mah",
+      "query": "ugreen power bank",
       "lang": "en",
       "demandScore": 84,
       "trend": "flat",
