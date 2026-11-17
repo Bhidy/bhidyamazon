@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-11-16T15:49:57.119489+00:00",
+  "scraped_at": "2026-11-17T16:01:43.137313+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -9,23 +9,22 @@
     "fashion",
     "toys",
     "grocery",
-    "baby",
     "health"
   ],
-  "product_count": 150,
-  "enriched": 1,
+  "product_count": 135,
+  "enriched": 7,
   "source": "amazon.eg via firecrawl",
   "health": {
-    "categories_ok": 9,
+    "categories_ok": 8,
     "categories_degraded": [],
     "min_title_fill": 100.0,
-    "total_products": 150,
-    "firecrawl_calls": 23,
+    "total_products": 135,
+    "firecrawl_calls": 32,
     "per_category": {
       "automotive": {
         "parsed_count": 30,
         "title_fill": 100.0,
-        "price_fill": 96.7,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -41,7 +40,7 @@
       "beauty": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 66.7,
+        "price_fill": 73.3,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -73,15 +72,7 @@
       "grocery": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 73.3,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
-        "degraded": false
-      },
-      "baby": {
-        "parsed_count": 15,
-        "title_fill": 100.0,
-        "price_fill": 80.0,
+        "price_fill": 60.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
