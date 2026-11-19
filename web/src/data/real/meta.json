@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-11-18T15:41:37.606695+00:00",
+  "scraped_at": "2026-11-19T15:46:33.650914+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -9,32 +9,33 @@
     "fashion",
     "toys",
     "grocery",
+    "baby",
     "health"
   ],
-  "product_count": 135,
-  "enriched": 3,
+  "product_count": 150,
+  "enriched": 7,
   "source": "amazon.eg via firecrawl",
   "health": {
-    "categories_ok": 8,
+    "categories_ok": 9,
     "categories_degraded": [],
     "min_title_fill": 100.0,
-    "total_products": 135,
-    "firecrawl_calls": 32,
+    "total_products": 150,
+    "firecrawl_calls": 33,
     "per_category": {
       "automotive": {
         "parsed_count": 30,
         "title_fill": 100.0,
-        "price_fill": 100.0,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
+        "price_fill": 96.7,
+        "rating_fill": 90.0,
+        "reviews_fill": 90.0,
         "degraded": false
       },
       "electronics": {
         "parsed_count": 15,
         "title_fill": 100.0,
         "price_fill": 100.0,
-        "rating_fill": 100.0,
-        "reviews_fill": 100.0,
+        "rating_fill": 93.3,
+        "reviews_fill": 93.3,
         "degraded": false
       },
       "beauty": {
@@ -64,7 +65,7 @@
       "toys": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 100.0,
+        "price_fill": 86.7,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -72,7 +73,15 @@
       "grocery": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 60.0,
+        "price_fill": 80.0,
+        "rating_fill": 100.0,
+        "reviews_fill": 100.0,
+        "degraded": false
+      },
+      "baby": {
+        "parsed_count": 15,
+        "title_fill": 100.0,
+        "price_fill": 93.3,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
@@ -80,7 +89,7 @@
       "health": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
