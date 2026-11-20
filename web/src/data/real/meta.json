@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-11-19T15:46:33.650914+00:00",
+  "scraped_at": "2026-11-20T15:28:50.690431+00:00",
   "categories": [
     "automotive",
     "electronics",
@@ -13,7 +13,7 @@
     "health"
   ],
   "product_count": 150,
-  "enriched": 7,
+  "enriched": 6,
   "source": "amazon.eg via firecrawl",
   "health": {
     "categories_ok": 9,
@@ -81,7 +81,7 @@
       "baby": {
         "parsed_count": 15,
         "title_fill": 100.0,
-        "price_fill": 93.3,
+        "price_fill": 100.0,
         "rating_fill": 100.0,
         "reviews_fill": 100.0,
         "degraded": false
