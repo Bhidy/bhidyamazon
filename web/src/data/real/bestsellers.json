@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scraped_at": "2026-11-23T18:13:00.154364+00:00",
+  "scraped_at": "2026-11-24T17:47:57.516974+00:00",
   "categories": {
     "automotive": [
       {
@@ -733,7 +733,7 @@
         "reviews": 735,
         "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51Sgk7QTHJL._AC_UL300_SR300,200_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0C7YKP9HM",
-        "title_ar": "قالب صابون رومانتيك من كاماي، 165 جرام"
+        "title_ar": null
       },
       {
         "category": "beauty",
@@ -772,7 +772,7 @@
         "reviews": 672,
         "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51X5WF+zdiL._AC_UL300_SR300,200_.jpg",
         "product_url": "https://www.amazon.eg/-/en/dp/B0C7YBYCM6",
-        "title_ar": "قالب صابون سوفيستيك من كاماي، 165 جرام"
+        "title_ar": null
       },
       {
         "category": "beauty",
@@ -2698,7 +2698,7 @@
       "reviews": 735,
       "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51Sgk7QTHJL._AC_UL300_SR300,200_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0C7YKP9HM",
-      "title_ar": "قالب صابون رومانتيك من كاماي، 165 جرام"
+      "title_ar": null
     },
     {
       "category": "beauty",
@@ -2737,7 +2737,7 @@
       "reviews": 672,
       "image_url": "https://images-eu.ssl-images-amazon.com/images/I/51X5WF+zdiL._AC_UL300_SR300,200_.jpg",
       "product_url": "https://www.amazon.eg/-/en/dp/B0C7YBYCM6",
-      "title_ar": "قالب صابون سوفيستيك من كاماي، 165 جرام"
+      "title_ar": null
     },
     {
       "category": "beauty",
